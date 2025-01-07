@@ -17,6 +17,7 @@ public class StudentManager {
 		Student tmp[] = new Student[std.length + 5];
 		//복사 
 		System.arraycopy(std, 0, tmp, 0, std.length);
+		std = tmp;
 	}
 	
 	public void insertStudent(String name, int score) {
