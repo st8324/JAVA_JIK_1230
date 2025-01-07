@@ -86,22 +86,30 @@ public class Ex09_ProgramScore {
 	
 	private static int insertStudent(Student[] std, int count) {
 		//학생 정보를 입력(이름과 성적)
+		System.out.print("이름 : ");
+		scan.nextLine();//앞에 남아있는 엔터를 처리
+		String name = scan.nextLine();
+		
+		System.out.print("성적 : ");
+		int score = scan.nextInt();
 		
 		//학생 정보를 이용해서 Student의 객체를 생성
-		
+		Student student = new Student(name, score);
 		//배열에 추가 
-		
+		std[count] = student;
 		return count+1;
 	}
 
 
 	private static void printStudent(Student[] std, int count) {
-		
+		int sum = 0;
 		for(int i = 0; i<count; i++) {
 			//학생 정보를 출력
-			
+			std[i].print();
+			sum += std[i].getScore();
 		}
-		
+		double avg = sum / (double)count;
+		System.out.println("평균 : " + avg);
 	}
 
 
@@ -125,6 +133,17 @@ public class Ex09_ProgramScore {
 class Student{
 	private String name;
 	private int score;
+
+	public Student(String name, int score) {
+		this.name = name;
+		this.score = score;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void print() {
+		System.out.println(name + " : " + score);
+	}
 }
 
 
