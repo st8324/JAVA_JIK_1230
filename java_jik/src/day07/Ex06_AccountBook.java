@@ -95,7 +95,7 @@ public class Ex06_AccountBook {
 			//선택한 메뉴에 따른 기능 실행
 			System.out.println("---------------------");
 			switch(menu) {
-			case 1:
+			case 1:{
 				//내역 정보들을 입력
 				System.out.print("수입/지출 : ");
 				String income = scan.next();
@@ -113,27 +113,56 @@ public class Ex06_AccountBook {
 				list[count] = new Item(income, type, content, money, date);
 				count++;
 				break;
-			case 2:
+			}
+			case 2:{
+				//내역이 없는 경우 안내문 출력 후 메뉴로 돌아감
+				if(count == 0) {
+					System.out.println("등록된 내역이 없습니다.");
+					break;
+				}
 				//내역들을 출력
-				
+				for(int i = 0; i < count; i++) {
+					list[i].print(i+1);
+				}
 				//수정할 내역의 숫자를 입력
-				
+				System.out.print("수정할 내역의 번호를 선택하세요 : ");
+				int num = scan.nextInt();
+				//int index = scan.nextInt() - 1;
 				//금액을 입력
-				
+				System.out.print("금액 : ");
+				int money = scan.nextInt();
 				//입력받은 숫자 - 1번지에 있는 금액을 수정
-				
+				list[num - 1].setMoney(money);
+				//list[index].setMoney(money);
+				System.out.println("내역이 수정되었습니다.");
 				break;
-			case 3:
+			}
+			case 3:{
+				//내역이 없는 경우 안내문 출력 후 메뉴로 돌아감
+				if(count == 0) {
+					System.out.println("등록된 내역이 없습니다.");
+					break;
+				}
 				//내역들을 출력
-				
+				for(int i = 0; i < count; i++) {
+					list[i].print(i+1);
+				}
 				//삭제할 내역의 숫자를 입력
-				
-				//입력받은 숫자 번지부터 앞으로 한칸씩 당김
-				
+				System.out.print("삭제할 내역의 번호를 선택하세요 : ");
+				int index = scan.nextInt() - 1;
+				//입력받은 숫자 번지+1부터 앞으로 한칸씩 당김
+				for(int i = index + 1; i < count; i++) {
+					list[i-1] = list[i];
+				}
 				//개수를 1감소
-				
-				break;
+				count--;
+				System.out.println("내역을 삭제했습니다.");
+			}
 			case 4:
+				if(count == 0) {
+					System.out.println("등록된 내역이 없습니다.");
+					break;
+				}
 				//반복문을 이용하여 저장된 내역들을 숫자와 함께 출력. 숫자는 1부터 시작
 				for(int i = 0; i < count; i++) {
 					list[i].print(i+1);
