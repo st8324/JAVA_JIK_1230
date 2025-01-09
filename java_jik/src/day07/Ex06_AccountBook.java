@@ -157,6 +157,7 @@ public class Ex06_AccountBook {
 				//개수를 1감소
 				count--;
 				System.out.println("내역을 삭제했습니다.");
+				break;
 			}
 			case 4:
 				if(count == 0) {
