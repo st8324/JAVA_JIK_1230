@@ -11,4 +11,6 @@ public class Student {
 	
 	//학생 개인의 성적을 담고 있는 배열
 	public Subject [] list;
+	
+	//equals를 오버라이딩, 학년, 반, 번호를 이용
 }
