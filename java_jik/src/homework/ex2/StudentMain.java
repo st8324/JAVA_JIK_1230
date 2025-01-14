@@ -96,13 +96,13 @@ public class StudentMain {
 
 		switch(menu) {
 		case 1:
-			System.out.println("학생 등록 기능 구현 예정");
+			insertStudent();
 			break;
 		case 2:
-			System.out.println("학생 수정 기능 구현 예정");
+			updateStudent();
 			break;
 		case 3:
-			System.out.println("학생 삭제 기능 구현 예정");
+			deleteStudent();
 			break;
 		case 4:
 			System.out.println("과목 등록 기능 구현 예정");
@@ -138,6 +138,47 @@ public class StudentMain {
 			System.out.println("올바른 메뉴가 아닙니다.");
 			break;
 		}
+		
+	}
+
+	private static void deleteStudent() {
+		//학년, 반, 번호를 입력
+		
+		//입력받은 정보로 객체 생성
+		
+		//생성한 객체를 이용하여 리스트에서 삭제
+		
+		//삭제에 성공하면 성공알림문구
+		
+		//실패하면 실패 알림문구 출력
+		
+	}
+
+	private static void updateStudent() {
+		//학년, 반, 번호 입력
+		
+		//입력한 학생 정보를 객체 생성
+		
+		//생성한 객체가 리스트에 있으면 번지를 가져옴
+		
+		//번지가 음수이면 안내문구 출력 후 종료
+		
+		//아니면 수정할 학년, 반, 번호, 이름을 입력
+		
+		//입력받은 정보로 객체를 생성
+		
+		//번지에 있는 객체를 위에서 생성한 객체로 변경
+		
+	}
+
+	private static void insertStudent() {
+		//학년, 반, 번호, 이름 입력
+		
+		//입력 받은 학년, 반, 번호, 이름을 이용하여 객체 생성
+		
+		//생성한 객체가 리스트에 있는지 확인하여 있으면 종료
+		
+		//없으면 리스트에 추가 후 안내 문구
 		
 	}
 }
