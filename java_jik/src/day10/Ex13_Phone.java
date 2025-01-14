@@ -103,37 +103,101 @@ public class Ex13_Phone {
 	}
 
 	private static void updatePhoneNumber() {
+		//이름을 입력 받음
+		System.out.print("이름 : ");
+		String name = scan.nextLine();
 		
+		//이름과 일치하는 전화번호 목록을 숫자와 함께 출력
+		//이름과 일치하는 전화번호 리스트를 가져옴
+		ArrayList<PhoneNumber> tmpList = searchPhoneNumberList(name); 
 		
+		//검색 결과가 없으면 종료
+		if(!printPhoneNumberList(tmpList, true)) {
+			return;
+		}
+				
+		//수정할 번호를 입력
+		System.out.print("수정할 번호 선택 : ");
+		int index = scan.nextInt() - 1;
+		scan.nextLine();
+		//선택한 전화번호를 삭제
+		//선택한 번호-1번지에 있는 객체를 새로운 리스트에서 가져옴
+		PhoneNumber pn = tmpList.get(index);
+		
+		//새 이름과 번호를 입력
+		System.out.print("이름 : ");
+		String newName = scan.nextLine();
+		System.out.print("번호(예:010-1234-5678) : ");
+		String phoneNumber = scan.nextLine();
+		
+		pn.update(newName, phoneNumber);
+		System.out.println("수정이 완료됐습니다.");
 	}
 
 	private static void deletePhoneNumber() {
 		//이름을 입력 받음
 		System.out.print("이름 : ");
+		String name = scan.nextLine();
+		
 		//이름과 일치하는 전화번호 목록을 숫자와 함께 출력
 		//이름과 일치하는 전화번호 리스트를 가져옴
+		ArrayList<PhoneNumber> tmpList = searchPhoneNumberList(name); 
 		
-		//새로 만든 리스트를 이용하여 출력
+		//검색 결과가 없으면 종료
+		if(!printPhoneNumberList(tmpList, true)) {
+			return;
+		}
 		
 		//삭제할 번호를 입력
-		
+		System.out.print("삭제할 번호 선택 : ");
+		int index = scan.nextInt() - 1;
 		//선택한 전화번호를 삭제
 		//선택한 번호-1번지에 있는 객체를 새로운 리스트에서 가져옴
-		
+		PhoneNumber pn = tmpList.get(index);
 		//가져온 객체를 기존 리스트에서 제거
+		list.remove(pn);//Objects.equals() => Object.equals
+		System.out.println("전화번호가 삭제 되었습니다.");
 		
+	}
+
+	private static ArrayList<PhoneNumber> searchPhoneNumberList(String name) {
+
+		ArrayList<PhoneNumber> tmpList = new ArrayList<PhoneNumber>();
+		
+		for(PhoneNumber pn : list) {
+			if(pn.getName().contains(name)) {
+				tmpList.add(pn);
+			}
+		}
+		
+		return tmpList;
 	}
 
 	private static void searchPhoneNumber() {
 		System.out.print("이름 : ");
 		String name = scan.nextLine();
 		
-		for(PhoneNumber pn : list) {
+		ArrayList<PhoneNumber> pList = searchPhoneNumberList(name);
+		printPhoneNumberList(pList, false);
+		/*for(PhoneNumber pn : list) {
 			if(pn.getName().contains(name)) {
 				System.out.println(pn);
 			}
+		}*/
+	}
+	private static boolean printPhoneNumberList(ArrayList<PhoneNumber> pList, 
+			boolean isNumber) {
+		if(pList == null || pList.size() == 0) {
+			System.out.println("결과가 없습니다.");
+			return false;
 		}
-		
+		for(int i = 0; i<pList.size(); i++) {
+			if(isNumber) {
+				System.out.print(i+1+". ");
+			}
+			System.out.println(pList.get(i));
+		}
+		return true;
 	}
 }
 @Getter
@@ -147,6 +211,12 @@ class PhoneNumber{
 	@Override
 	public String toString() {
 		return name + " : " + phoneNumber;
+	}
+
+	public void update(String newName, String phoneNumber) {
+		this.name = newName;
+		this.phoneNumber = phoneNumber;
+		
 	}
 	
 	
