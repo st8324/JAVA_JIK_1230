@@ -53,6 +53,10 @@ public class StudentMain {
 		
 		int menu = 0; //예외처리 때문에 초기화를 해야 함.
 		final int EXIT = 13;
+		
+		//불러오기
+		
+		
 		do {
 			//메뉴 출력
 			printMenu();
@@ -74,6 +78,8 @@ public class StudentMain {
 			}
 			
 		}while(menu != EXIT);
+		
+		//저장하기
 
 	}
 	//입력 버퍼에 남아 있는 문자열(엔터)을 제거하는 메소드
