@@ -129,7 +129,6 @@ public class StudentProgram implements ConsoleProgram {
 		//학생을 추가하고 결과를 알림
 		if(studentManager.insertStudent(student)) {
 			System.out.println("학생을 추가했습니다.");
-			System.out.println(studentManager.getList());
 			return;
 		}
 		System.out.println("학생을 추가하지 못했습니다.");
@@ -158,6 +157,8 @@ public class StudentProgram implements ConsoleProgram {
 				
 				//앞에서 입력한 엔터를 처리
 				removeBuffer();
+				
+				System.out.println("---------------------");
 				
 				//메뉴 실행
 				runMenu(menu);
