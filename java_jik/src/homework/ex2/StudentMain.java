@@ -178,6 +178,13 @@ public class StudentMain {
 		
 	}
 	private static void updateSubject() {
+		/* 
+		 * 1 1 국어
+		 * 1 2 국어
+		 * 2 1 영어
+		 * 2 2 영어
+		 * 1 3 국어 
+		 * */
 		//학년, 학기, 과목명을 입력
 		
 		//등록된 과목이 아니면 알림 후 종료 => indexOf로 번지를 가져와서 사용
@@ -185,6 +192,7 @@ public class StudentMain {
 		//새 과목 정보를 입력(학년, 학기, 과목)
 		
 		//등록된 과목이면 알림 후 종료
+		//리스트에서 index 번지에 있는 값을 제거 후 제거된 객체를 저장
 		
 		//아니면 수정
 		
