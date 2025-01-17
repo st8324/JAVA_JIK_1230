@@ -52,7 +52,7 @@ public class StudentMain {
 	public static void main(String[] args) {
 		
 		int menu = 0; //예외처리 때문에 초기화를 해야 함.
-		
+		final int EXIT = 13;
 		do {
 			//메뉴 출력
 			printMenu();
@@ -60,17 +60,25 @@ public class StudentMain {
 			try {
 				//메뉴 선택
 				menu = scan.nextInt();
+				
+				//앞에서 입력한 엔터를 처리
+				removeBuffer();
+				
 				//메뉴 실행
 				runMenu(menu);
 			}
-			//입력 타입이 안 맞는 경우
+			//잘못된 타입의 메뉴를 입력한 경우
 			catch(InputMismatchException e) {
 				System.out.println("올바른 입력이 아닙니다!");
-				scan.nextLine();//잘못 입력한 값을 입력 버퍼에서 지우기 위함
+				removeBuffer();
 			}
 			
-		}while(menu != 13);
+		}while(menu != EXIT);
 
+	}
+	//입력 버퍼에 남아 있는 문자열(엔터)을 제거하는 메소드
+	private static void removeBuffer() {
+		scan.nextLine();
 	}
 
 	private static void printMenu() {
@@ -105,31 +113,31 @@ public class StudentMain {
 			deleteStudent();
 			break;
 		case 4:
-			System.out.println("과목 등록 기능 구현 예정");
+			insertSubject();
 			break;
 		case 5:
-			System.out.println("과목 수정 기능 구현 예정");
+			updateSubject();
 			break;
 		case 6:
-			System.out.println("과목 삭제 기능 구현 예정");
+			deleteSubject();
 			break;
 		case 7:
-			System.out.println("성적 등록 기능 구현 예정");
+			insertScore();
 			break;
 		case 8:
-			System.out.println("성적 수정 기능 구현 예정");
+			updateScore();
 			break;
 		case 9:
-			System.out.println("성적 삭제 기능 구현 예정");
+			deleteScore();
 			break;
 		case 10:
-			System.out.println("학생 조회 기능 구현 예정");
+			searchStudent();
 			break;
 		case 11:
-			System.out.println("과목 조회 기능 구현 예정");
+			searchSubject();
 			break;
 		case 12:
-			System.out.println("과목 사제 기능 구현 예정");
+			searchScore();
 			break;
 		case 13:
 			System.out.println("프로그램 종료");
@@ -141,14 +149,62 @@ public class StudentMain {
 		
 	}
 
+	private static void searchScore() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void searchSubject() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void searchStudent() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void deleteScore() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void updateScore() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void insertScore() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void deleteSubject() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void updateSubject() {
+		//학년, 학기, 과목명을 입력
+		
+		//등록된 과목이 아니면 알림 후 종료 => indexOf로 번지를 가져와서 사용
+		
+		//새 과목 정보를 입력(학년, 학기, 과목)
+		
+		//등록된 과목이면 알림 후 종료
+		
+		//아니면 수정
+		
+	}
+	private static void insertSubject() {
+		//학년, 학기, 과목명을 입력
+		
+		//이미 등록된 과목이면 알림 후 종료 => Subject클래스의 equals를 오버라이딩
+		
+		//과목을 추가 후 알림
+		
+	}
 	private static void deleteStudent() {
 		//학년, 반, 번호를 입력
 		
 		//입력받은 정보로 객체 생성
 		
 		//생성한 객체를 이용하여 리스트에서 삭제
-		
 		//삭제에 성공하면 성공알림문구
+		
 		
 		//실패하면 실패 알림문구 출력
 		
@@ -161,9 +217,9 @@ public class StudentMain {
 		
 		//생성한 객체가 리스트에 있으면 번지를 가져옴
 		
-		//번지가 음수이면 안내문구 출력 후 종료
+		//번지가 음수이면(없으면) 안내문구 출력 후 종료
 		
-		//아니면 수정할 학년, 반, 번호, 이름을 입력
+		//아니면(학생이 있으면) 수정할 학년, 반, 번호, 이름을 입력
 		
 		//입력받은 정보로 객체를 생성
 		
@@ -174,11 +230,19 @@ public class StudentMain {
 	private static void insertStudent() {
 		//학년, 반, 번호, 이름 입력
 		
-		//입력 받은 학년, 반, 번호, 이름을 이용하여 객체 생성
+		//입력 받은 학년, 반, 번호, 이름을 이용하여 객체 생성 => 리스트에 있는 기능을 활용하기 위해
 		
-		//생성한 객체가 리스트에 있는지 확인하여 있으면 종료
+		//생성한 객체가 리스트에 있는지 확인하여 있으면 종료 => Student클래스의 equals를 오버라이딩
+		//리스트.indexOf(객체2) => Objects.equals(객체1, 객체2) => 객체1.equals(객체2)
 		
 		//없으면 리스트에 추가 후 안내 문구
 		
 	}
 }
+
+
+
+
+
+
+
