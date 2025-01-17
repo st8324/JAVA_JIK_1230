@@ -32,19 +32,6 @@ public class StudentProgram implements ConsoleProgram {
 		this.fileName = getDownloadPath() + "/students.txt";
 	}
 	
-	//윈도우의 다운로드 폴더 경로를 가져오는 메소드
-	private String getDownloadPath() {
-		// 환경 변수 USERPROFILE 가져오기
-        String userProfile = System.getenv("USERPROFILE");
-
-        if (userProfile != null) {
-            // 다운로드 폴더 경로 생성
-            Path downloadPath = Paths.get(userProfile, "Downloads");
-            return downloadPath.toString();
-        } 
-
-		return null;
-	}
 	@Override
 	public void printMenu() {
 

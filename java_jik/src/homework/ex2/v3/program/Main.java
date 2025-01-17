@@ -9,6 +9,7 @@ public class Main {
 		
 		Program program = new Program();
 		//StudentProgram program = new StudentProgram();
+		//SubjectProgram program = new SubjectProgram();
 		program.run();
 	}
 }
