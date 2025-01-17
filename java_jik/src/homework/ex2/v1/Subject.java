@@ -1,4 +1,4 @@
-package homework.ex2;
+package homework.ex2.v1;
 
 public class Subject {
 

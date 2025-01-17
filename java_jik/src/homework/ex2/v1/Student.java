@@ -1,4 +1,4 @@
-package homework.ex2;
+package homework.ex2.v1;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class Student {
 	private String name;
 	
 	//학생 개인의 성적을 담고 있는 배열
-	public List<SubjectScore>  list;
+	public List<SubjectScore> list;
 	
 	//equals를 오버라이딩, 학년, 반, 번호를 이용
 }

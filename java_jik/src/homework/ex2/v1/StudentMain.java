@@ -1,4 +1,4 @@
-package homework.ex2;
+package homework.ex2.v1;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -150,31 +150,114 @@ public class StudentMain {
 	}
 
 	private static void searchScore() {
-		// TODO Auto-generated method stub
+		//학년, 반, 번호를 입력
+		
+		//입력한 정보를 이용해서 객체를 생성
+		
+		//리스트에 학생이 없으면 알림 후 종료 => indexOf
+		
+		//학년, 학기, 과목명을 입력
+		
+		//과목정보로 객체를 생성
+		
+		//리스트에서 학생을 선택
+		
+		//선택한 학생에게 과목정보를 주면서 성적을 출력하고 요청
 		
 	}
 	private static void searchSubject() {
-		// TODO Auto-generated method stub
+		//등록된 과목 전체 출력
 		
 	}
 	private static void searchStudent() {
-		// TODO Auto-generated method stub
+		//학년, 반, 번호를 입력
+		
+		//입력한 정보를 이용해서 객체를 생성
+		
+		//리스트에서 일치하는 학생이 있으면 정보를 출력
+		
+		//없으면 없다고 알림 출력
 		
 	}
 	private static void deleteScore() {
-		// TODO Auto-generated method stub
+		//학년, 반, 번호를 입력
+		
+		//입력한 정보로 객체를 생성(Student)
+		
+		//리스트에 있는지 확인해서 없으면 알림 후 종료 => indexOf
+		
+		//학년, 학기, 과목을 입력
+		
+		//입력한 정보로 객체를 생성(Subject)
+		
+		//과목리스트에 등록된 과목인지 확인 후 아니면 알림 후 종료
+		
+		//학생에게 과목 정보를 주면서 성적을 삭제하라고 요청 하고 성공하면 성공 알림
+		
+		//실패하면 실패 알림
 		
 	}
 	private static void updateScore() {
-		// TODO Auto-generated method stub
+		//학년, 반, 번호를 입력
+		
+		//입력한 정보로 객체를 생성(Student)
+		
+		//리스트에 있는지 확인해서 없으면 알림 후 종료 => indexOf
+		
+		//학년, 학기, 과목을 입력
+		
+		//입력한 정보로 객체를 생성(Subject)
+		
+		//과목리스트에 등록된 과목인지 확인 후 아니면 알림 후 종료
+		
+		//새 과목 정보를 입력(학년, 학기, 과목)을 입력
+		
+		//과목 리스트에 등록된 과목인지 확인 후 아니면 알림 후 종료
+		
+		//성적을 입력
+		
+		//새 과목 정보와 성적을 이용하여 성적 객체를 생성
+		
+		//학생에게 기존 과목 정보와 성적 정보를 주면서 수정하라고 요청한 후 성공하면 알림
+		
+		//실패하면 알림
+		
 		
 	}
 	private static void insertScore() {
-		// TODO Auto-generated method stub
+		//학년, 반, 번호를 입력
 		
+		//입력한 정보로 객체를 생성(Student)
+		
+		//리스트에 있는지 확인해서 없으면 알림 후 종료 => indexOf
+		
+		//학년, 학기, 과목을 입력
+		
+		//입력한 정보로 객체를 생성(Subject)
+		
+		//과목리스트에 등록된 과목인 확인 후 아니면 알림 후 종료
+		
+		//성적을 입력해서 과목 정보와 성적을 이용하여 객체를 생성(Score)
+		
+		//학생을 선택하여 객체 저장 list.get(xx).update() => tmp.update()
+		
+		
+		{
+		//학생 성적에 새 성적이 있는지 확인해서 없으면 추가후 알림
+		//있으면 추가 안하고 알림
+		
+		//학생에게 새 성적을 주고 추가 하라고 시킨 후 추가 여부를 이용하여 추가했으면 성공 알림
+		//실패했으면 실패 알림
+		}
 	}
 	private static void deleteSubject() {
-		// TODO Auto-generated method stub
+		//학년, 학기, 과목명을 입력
+		
+		//입력한 정보로 객체를 생성 
+		
+		//리스트에서 생성한 객체를 제거해서 성공하면 성공 알림
+		
+		//실패하면 실패 알림
 		
 	}
 	private static void updateSubject() {
@@ -183,18 +266,29 @@ public class StudentMain {
 		 * 1 2 국어
 		 * 2 1 영어
 		 * 2 2 영어
-		 * 1 3 국어 
+		 * 1 1 수학
+		 * 
+		 * tmp : 1 3 국어 
+		 * 
+		 * 1 3 국어 => 1 1 국어 X
+		 * 1 3 국어 => 1 3 국어 O
+		 * 1 3 국어 => 1 1 수학 O
 		 * */
 		//학년, 학기, 과목명을 입력
+		
+		//입력한 정보로 객체를 생성 
 		
 		//등록된 과목이 아니면 알림 후 종료 => indexOf로 번지를 가져와서 사용
 		
 		//새 과목 정보를 입력(학년, 학기, 과목)
 		
 		//등록된 과목이면 알림 후 종료
-		//리스트에서 index 번지에 있는 값을 제거 후 제거된 객체를 저장
+			//리스트에서 index 번지에 있는 값을 제거 후 제거된 객체를 저장
+		
+			//제거된 리스트에 새 과목정보와 일치하는 과목이 있으면 제거된 객체를 다시 추가
 		
 		//아니면 수정
+			//새 객체를 추가
 		
 	}
 	private static void insertSubject() {
@@ -238,6 +332,7 @@ public class StudentMain {
 	private static void insertStudent() {
 		//학년, 반, 번호, 이름 입력
 		
+		//주의 : 학생 객체 생성시 성적 리스트를 생성
 		//입력 받은 학년, 반, 번호, 이름을 이용하여 객체 생성 => 리스트에 있는 기능을 활용하기 위해
 		
 		//생성한 객체가 리스트에 있는지 확인하여 있으면 종료 => Student클래스의 equals를 오버라이딩
