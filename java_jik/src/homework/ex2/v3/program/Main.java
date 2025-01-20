@@ -7,8 +7,8 @@ public class Main {
 	 * */
 	public static void main(String[] args) {
 		
-		Program program = new Program();
-		//StudentProgram program = new StudentProgram();
+		//Program program = new Program();
+		StudentProgram program = new StudentProgram();
 		//SubjectProgram program = new SubjectProgram();
 		program.run();
 	}
