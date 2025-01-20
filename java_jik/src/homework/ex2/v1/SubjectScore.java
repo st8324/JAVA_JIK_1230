@@ -1,5 +1,6 @@
 package homework.ex2.v1;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import lombok.AllArgsConstructor;
@@ -7,8 +8,10 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class SubjectScore {
+public class SubjectScore implements Serializable {
 
+	private static final long serialVersionUID = 5589823857268140091L;
+	
 	private Subject subject;
 	private int score;
 	

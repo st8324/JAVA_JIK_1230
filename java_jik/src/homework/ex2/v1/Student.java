@@ -1,5 +1,6 @@
 package homework.ex2.v1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,10 @@ import lombok.RequiredArgsConstructor;
 //getter, setter, toString, equals등을 제공
 @Data
 @RequiredArgsConstructor //상수나 @NonNull이 붙은 필드만을 이용한 생성자를 추가
-public class Student {
+public class Student implements Serializable {
 
+	private static final long serialVersionUID = 5521587507723517094L;
+	
 	@NonNull
 	private int grade, classNum, num;
 	@NonNull
@@ -55,5 +58,52 @@ public class Student {
 		classNum = newStd.classNum;
 		num = newStd.num;
 		name = newStd.name;
+	}
+
+	public boolean insertScore(SubjectScore subjectScore) {
+		if(list.contains(subjectScore)) {
+			return false;
+		}
+		list.add(subjectScore);
+		return true;
+	}
+
+	public void printScore(Subject subject) {
+		int index = list.indexOf(new SubjectScore(subject, 0));
+		if(index < 0) {
+			System.out.println("일치하는 성적이 없습니다.");
+			return;
+		}
+		System.out.println(list.get(index));
+		
+	}
+
+	public boolean updateScore(Subject subject, SubjectScore subjectScore) {
+		if(subject == null || subjectScore == null) {
+			return false;
+		}
+		//등록된 성적이 아니면
+		if(!list.contains(new SubjectScore(subject, 0))) {
+			return false;
+		}
+		//같은 과목을 수정하면
+		if(subject.equals(subjectScore.getSubject())) {
+			list.remove(subjectScore);
+			list.add(subjectScore);
+			return true;
+		}
+		//다른 과목을 수정하면
+		//새 성적이 등록된 성적인지 확인
+		if(list.contains(subjectScore)) {
+			return false;
+		}
+		list.remove(new SubjectScore(subject, 0));
+		list.add(subjectScore);
+		return true;
+	}
+
+	public boolean deleteScore(Subject subject) {
+
+		return list.remove(new SubjectScore(subject, 0));
 	}
 }

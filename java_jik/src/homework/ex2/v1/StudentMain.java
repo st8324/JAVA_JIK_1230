@@ -1,9 +1,12 @@
 package homework.ex2.v1;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class StudentMain {
 
@@ -54,8 +57,19 @@ public class StudentMain {
 		int menu = 0; //예외처리 때문에 초기화를 해야 함.
 		final int EXIT = 13;
 		
-		//불러오기
+		String stdFileName = "src/homework/ex2/v1/student.txt";
+		String subjectFileName = "src/homework/ex2/v1/subject.txt";
 		
+		//불러오기
+		studentList = (ArrayList<Student>) load(stdFileName);
+		if(studentList == null) {
+			studentList = new ArrayList<Student>();
+		}
+		
+		subjectList = (ArrayList<Subject>) load(subjectFileName);
+		if(subjectList == null) {
+			subjectList = new ArrayList<Subject>();
+		}
 		
 		do {
 			//메뉴 출력
@@ -80,8 +94,36 @@ public class StudentMain {
 		}while(menu != EXIT);
 		
 		//저장하기
-
+		save(stdFileName, studentList);
+		save(subjectFileName, subjectList);
 	}
+	private static void save(String fileName, Object obj) {
+		try(FileOutputStream fos = new FileOutputStream(fileName);
+			ObjectOutputStream oos = new ObjectOutputStream(fos)){
+			
+			oos.writeObject(obj);
+			
+		} catch (Exception e) {
+			System.out.println("-----------------");
+			System.out.println("저장하기 실패");
+			System.out.println("-----------------");
+		}
+		
+	}
+	private static Object load(String fileName) {
+		try(FileInputStream fis = new FileInputStream(fileName);
+			ObjectInputStream ois = new ObjectInputStream(fis)){
+			
+			return ois.readObject();
+			
+		} catch (Exception e) {
+			System.out.println("-----------------");
+			System.out.println("불러오기 실패");
+			System.out.println("-----------------");
+		}
+		return null;
+	}
+	
 	//입력 버퍼에 남아 있는 문자열(엔터)을 제거하는 메소드
 	private static void removeBuffer() {
 		scan.nextLine();
@@ -157,20 +199,35 @@ public class StudentMain {
 	}
 
 	private static void searchScore() {
-		//학년, 반, 번호를 입력
+
+		System.out.println("-----------------");
+		System.out.println("조회하려는 학생 정보를 입력하세요.");
+		System.out.println("-----------------");
 		
+		//학년, 반, 번호를 입력
 		//입력한 정보를 이용해서 객체를 생성
+		Student std = inputBaseStudent();
 		
 		//리스트에 학생이 없으면 알림 후 종료 => indexOf
+		int index = studentList.indexOf(std);
+		if(index < 0) {
+			System.out.println("일치하는 학생이 없습니다.");
+			return;
+		}
 		
+		System.out.println("-----------------");
+		System.out.println("조회하려는 과목 정보를 입력하세요.");
+		System.out.println("-----------------");
+
 		//학년, 학기, 과목명을 입력
-		
 		//과목정보로 객체를 생성
+		Subject subject = inputSubject();
 		
 		//리스트에서 학생을 선택
+		Student selectStd = studentList.get(index);
 		
 		//선택한 학생에게 과목정보를 주면서 성적을 출력하고 요청
-		
+		selectStd.printScore(subject);
 	}
 	private static void searchSubject() {
 		if(subjectList.size() == 0) {
@@ -200,52 +257,10 @@ public class StudentMain {
 	}
 	private static void deleteScore() {
 		//학년, 반, 번호를 입력
-		
 		//입력한 정보로 객체를 생성(Student)
-		
-		//리스트에 있는지 확인해서 없으면 알림 후 종료 => indexOf
-		
-		//학년, 학기, 과목을 입력
-		
-		//입력한 정보로 객체를 생성(Subject)
-		
-		//과목리스트에 등록된 과목인지 확인 후 아니면 알림 후 종료
-		
-		//학생에게 과목 정보를 주면서 성적을 삭제하라고 요청 하고 성공하면 성공 알림
-		
-		//실패하면 실패 알림
-		
-	}
-	private static void updateScore() {
-		//학년, 반, 번호를 입력
-		
-		//입력한 정보로 객체를 생성(Student)
-		
-		//리스트에 있는지 확인해서 없으면 알림 후 종료 => indexOf
-		
-		//학년, 학기, 과목을 입력
-		
-		//입력한 정보로 객체를 생성(Subject)
-		
-		//과목리스트에 등록된 과목인지 확인 후 아니면 알림 후 종료
-		
-		//새 과목 정보를 입력(학년, 학기, 과목)을 입력
-		
-		//과목 리스트에 등록된 과목인지 확인 후 아니면 알림 후 종료
-		
-		//성적을 입력
-		
-		//새 과목 정보와 성적을 이용하여 성적 객체를 생성
-		
-		//학생에게 기존 과목 정보와 성적 정보를 주면서 수정하라고 요청한 후 성공하면 알림
-		
-		//실패하면 알림
-		
-		
-	}
-	private static void insertScore() {
-		//학년, 반, 번호를 입력
-		//입력한 정보로 객체를 생성(Student)
+		System.out.println("-----------------");
+		System.out.println("학생 정보를 입력하세요.");
+		System.out.println("-----------------");
 		Student std = inputBaseStudent();
 		
 		//리스트에 있는지 확인해서 없으면 알림 후 종료 => indexOf
@@ -254,7 +269,97 @@ public class StudentMain {
 			System.out.println("일치하는 학생이 없습니다.");
 			return;
 		}
+		System.out.println("-----------------");
+		System.out.println("성적 정보를 입력하세요.");
+		System.out.println("-----------------");
+		//학년, 학기, 과목을 입력
+		//입력한 정보로 객체를 생성(Subject)
+		Subject subject = inputSubject();
 		
+		//과목리스트에 등록된 과목인 확인 후 아니면 알림 후 종료
+		if(!subjectList.contains(subject)){
+			System.out.println("일치하는 과목이 없습니다.");
+			return;
+		}
+		
+		//학생에게 과목 정보를 주면서 성적을 삭제하라고 요청 하고 성공하면 성공 알림
+		if(studentList.get(index).deleteScore(subject)) {
+			System.out.println("성적을 삭제했습니다.");
+			return;
+		}
+		//실패하면 실패 알림
+		System.out.println("일치하는 성적이 없습니다.");
+	}
+	private static void updateScore() {
+		//학년, 반, 번호를 입력
+		//입력한 정보로 객체를 생성(Student)
+		System.out.println("-----------------");
+		System.out.println("학생 정보를 입력하세요.");
+		System.out.println("-----------------");
+		Student std = inputBaseStudent();
+		
+		//리스트에 있는지 확인해서 없으면 알림 후 종료 => indexOf
+		int index = studentList.indexOf(std);
+		if(index < 0 ){
+			System.out.println("일치하는 학생이 없습니다.");
+			return;
+		}
+		System.out.println("-----------------");
+		System.out.println("성적 정보를 입력하세요.");
+		System.out.println("-----------------");
+		//학년, 학기, 과목을 입력
+		//입력한 정보로 객체를 생성(Subject)
+		Subject subject = inputSubject();
+		
+		//과목리스트에 등록된 과목인 확인 후 아니면 알림 후 종료
+		if(!subjectList.contains(subject)){
+			System.out.println("일치하는 과목이 없습니다.");
+			return;
+		}
+		
+		System.out.println("-----------------");
+		System.out.println("새 성적 정보를 입력하세요.");
+		System.out.println("-----------------");
+		
+		//새 과목 정보를 입력(학년, 학기, 과목)을 입력
+		Subject newSubject = inputSubject();
+		
+		//과목 리스트에 등록된 과목인지 확인 후 아니면 알림 후 종료
+		if(!subjectList.contains(newSubject)){
+			System.out.println("일치하는 과목이 없습니다.");
+			return;
+		}
+		//성적을 입력
+		System.out.print("성적 : ");
+		int score = scan.nextInt();
+		//새 과목 정보와 성적을 이용하여 성적 객체를 생성
+		SubjectScore subjectScore = new SubjectScore(newSubject, score);
+		//학생에게 기존 과목 정보와 성적 정보를 주면서 수정하라고 요청한 후 성공하면 알림
+		if(studentList.get(index).updateScore(subject, subjectScore)) {
+			System.out.println("성적을 수정했습니다.");
+			return;
+		}
+		//실패하면 알림
+		System.out.println("이미 등록된 성적입니다.");
+		
+	}
+	private static void insertScore() {
+		//학년, 반, 번호를 입력
+		//입력한 정보로 객체를 생성(Student)
+		System.out.println("-----------------");
+		System.out.println("학생 정보를 입력하세요.");
+		System.out.println("-----------------");
+		Student std = inputBaseStudent();
+		
+		//리스트에 있는지 확인해서 없으면 알림 후 종료 => indexOf
+		int index = studentList.indexOf(std);
+		if(index < 0 ){
+			System.out.println("일치하는 학생이 없습니다.");
+			return;
+		}
+		System.out.println("-----------------");
+		System.out.println("성적 정보를 입력하세요.");
+		System.out.println("-----------------");
 		//학년, 학기, 과목을 입력
 		//입력한 정보로 객체를 생성(Subject)
 		Subject subject = inputSubject();
@@ -265,17 +370,17 @@ public class StudentMain {
 			return;
 		}
 		//성적을 입력해서 과목 정보와 성적을 이용하여 객체를 생성(Score)
+		System.out.print("성적 : ");
+		int score = scan.nextInt();
+		
+		SubjectScore subjectScore = new SubjectScore(subject, score);
 		
 		//학생을 선택하여 객체 저장 list.get(xx).update() => tmp.update()
-		
-		
-		{
-		//학생 성적에 새 성적이 있는지 확인해서 없으면 추가후 알림
-		//있으면 추가 안하고 알림
-		
-		//학생에게 새 성적을 주고 추가 하라고 시킨 후 추가 여부를 이용하여 추가했으면 성공 알림
-		//실패했으면 실패 알림
+		if(studentList.get(index).insertScore(subjectScore)){
+			System.out.println("성적을 추가했습니다.");
+			return;
 		}
+		System.out.println("이미 등록된 성적입니다.");
 	}
 	private static void deleteSubject() {
 		//학년, 학기, 과목명을 입력
