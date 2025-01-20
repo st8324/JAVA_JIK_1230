@@ -88,7 +88,7 @@ public class StudentMain {
 	}
 
 	private static void printMenu() {
-
+		System.out.println("-----------------");
 		System.out.println("1. 학생 등록");
 		System.out.println("2. 학생 수정");
 		System.out.println("3. 학생 삭제");
@@ -97,11 +97,12 @@ public class StudentMain {
 		System.out.println("6. 과목 삭제");
 		System.out.println("7. 성적 등록");
 		System.out.println("8. 성적 수정");
-		System.out.println("9. 성적 석제");
+		System.out.println("9. 성적 삭제");
 		System.out.println("10.학생 조회");
 		System.out.println("11.과목 조회");
 		System.out.println("12.성적 조회");
 		System.out.println("13.종료");
+		System.out.println("-----------------");
 		System.out.print("메뉴 선택 : ");
 		
 	}
@@ -177,12 +178,17 @@ public class StudentMain {
 	}
 	private static void searchStudent() {
 		//학년, 반, 번호를 입력
-		
 		//입력한 정보를 이용해서 객체를 생성
+		Student std = inputBaseStudent();
 		
 		//리스트에서 일치하는 학생이 있으면 정보를 출력
-		
+		int index = studentList.indexOf(std);
+		if(index >= 0) {
+			std.print();
+			return;
+		}
 		//없으면 없다고 알림 출력
+		System.out.println("일치하는 학생이 없습니다.");
 		
 	}
 	private static void deleteScore() {
@@ -320,32 +326,66 @@ public class StudentMain {
 
 	private static void updateStudent() {
 		//학년, 반, 번호 입력
-		
 		//입력한 학생 정보를 객체 생성
+		Student std = inputBaseStudent();
 		
 		//생성한 객체가 리스트에 있으면 번지를 가져옴
+		int index = studentList.indexOf(std);
 		
 		//번지가 음수이면(없으면) 안내문구 출력 후 종료
+		if(index < 0) {
+			System.out.println("일치하는 학생이 없습니다.");
+			return;
+		}
 		
 		//아니면(학생이 있으면) 수정할 학년, 반, 번호, 이름을 입력
-		
 		//입력받은 정보로 객체를 생성
+		Student newStd = inputStudent();
+		
 		
 		//번지에 있는 객체를 위에서 생성한 객체로 변경
 		
 	}
 
 	private static void insertStudent() {
-		//학년, 반, 번호, 이름 입력
 		
+		//학년, 반, 번호, 이름 입력
 		//주의 : 학생 객체 생성시 성적 리스트를 생성
 		//입력 받은 학년, 반, 번호, 이름을 이용하여 객체 생성 => 리스트에 있는 기능을 활용하기 위해
+		Student std = inputStudent();
 		
 		//생성한 객체가 리스트에 있는지 확인하여 있으면 종료 => Student클래스의 equals를 오버라이딩
 		//리스트.indexOf(객체2) => Objects.equals(객체1, 객체2) => 객체1.equals(객체2)
-		
+		if(studentList.contains(std)) {
+			System.out.println("이미 등록된 학생입니다.");
+			return;
+		}
 		//없으면 리스트에 추가 후 안내 문구
+		studentList.add(std);
+		System.out.println("학생을 등록했습니다.");
+	}
+	
+	/** 학년, 반, 번호를 입력하면 객체를 반환하는 메소드 */
+	public static Student inputBaseStudent() {
+		System.out.print("학년 : ");
+		int grade = scan.nextInt();
+		System.out.print("학급 : ");
+		int classNum = scan.nextInt();
+		System.out.print("번호 : ");
+		int num = scan.nextInt();
+		return new Student(grade, classNum, num, "");
+	}
+	/** 학년, 반, 번호, 이름을 입력하면 객체를 반환하는 메소드 */
+	public static Student inputStudent() {
+		Student tmp = inputBaseStudent();
+
+		removeBuffer();
 		
+		System.out.print("이름 : ");
+		String name = scan.nextLine();
+		
+		tmp.setName(name);
+		return tmp;
 	}
 }
 
