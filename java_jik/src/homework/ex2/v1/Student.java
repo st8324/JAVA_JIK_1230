@@ -45,4 +45,15 @@ public class Student {
 			System.out.println(score);
 		}
 	}
+
+	public void update(Student newStd) {
+		if(newStd == null) {
+			return;
+		}
+		
+		grade = newStd.grade;
+		classNum = newStd.classNum;
+		num = newStd.num;
+		name = newStd.name;
+	}
 }
