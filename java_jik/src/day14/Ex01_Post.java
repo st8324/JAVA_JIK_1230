@@ -1,5 +1,10 @@
 package day14;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +32,20 @@ public class Ex01_Post {
 		 * */
 		int menu;
 		
+		String fileName = "src/day14/post.txt";
+		
+		list = (ArrayList<Post>)load(fileName);
+		
+		if(list == null || list.size() == 0) {
+			list = new ArrayList<Post>();
+		}
+		else {
+			int lastIndex = list.size()-1;
+			Post lastPost = list.get(lastIndex);
+			int lastNum = lastPost.getNum();
+			Post.setCount(lastNum + 1);
+		}
+		
 		do {
 			
 			printMenu();
@@ -38,6 +57,34 @@ public class Ex01_Post {
 			runMenu(menu);
 			
 		}while(menu != 5);
+		save(fileName, list);
+	}
+
+	private static void save(String fileName, Object obj) {
+		try(FileOutputStream fos = new FileOutputStream(fileName);
+			ObjectOutputStream oos = new ObjectOutputStream(fos)){
+			
+			oos.writeObject(obj);
+			
+		} catch (Exception e) {
+			System.out.println("-----------------");
+			System.out.println("저장하기 실패");
+			System.out.println("-----------------");
+		}
+		
+	}
+	private static Object load(String fileName) {
+		try(FileInputStream fis = new FileInputStream(fileName);
+			ObjectInputStream ois = new ObjectInputStream(fis)){
+			
+			return ois.readObject();
+			
+		} catch (Exception e) {
+			System.out.println("-----------------");
+			System.out.println("불러오기 실패");
+			System.out.println("-----------------");
+		}
+		return null;
 	}
 
 	private static void printMenu() {
@@ -123,19 +170,47 @@ public class Ex01_Post {
 	}
 
 	private static void delete() {
-		// TODO Auto-generated method stub
+		//번호를 입력
+		System.out.print("번호 : ");
+		int num = scan.nextInt();
+		scan.nextLine();
+		
+		if(list.remove(new Post(num))) {
+			System.out.println("게시글을 삭제 했습니다.");
+			return;
+		}
+		System.out.println("등록되지 않거나 삭제된 게시글입니다.");
 		
 	}
 
 	private static void view() {
-		// TODO Auto-generated method stub
+		//번호를 입력
+		System.out.print("번호 : ");
+		int num = scan.nextInt();
+		scan.nextLine();
+		
+		//번호와 일치하는 게시글이 있는지 확인해서 없으면 알림 후 종료
+		//Objects.equals(o1, o2) => o1과 o2가 다른 클래스이면 무조건 false
+		int index = list.indexOf(new Post(num)); 
+		
+		if(index < 0) {
+			System.out.println("등록되지 않거나 삭제된 게시글입니다.");
+			return;
+		}
+		//해당 게시글이 있으면 조회수 증가 후 출력
+		Post post = list.get(index);
+		post.view();
+		//post.setView(post.getView()+1);
+		post.print();
 		
 	}
 
 }
 
 @Data
-class Post{
+class Post implements Serializable{
+	
+	private static final long serialVersionUID = 7950467669298764591L;
 	
 	private static int count;
 	private int num;
@@ -153,6 +228,10 @@ class Post{
 			return false;
 		Post other = (Post) obj;
 		return num == other.num;
+	}
+
+	public void view() {
+		view++;
 	}
 
 	public Post(String title, String content, String writer) {
@@ -186,6 +265,12 @@ class Post{
 		return format.format(date);
 	}
 	
+	public static int getCount() {
+		return count;
+	}
+	public static void setCount(int count) {
+		Post.count = count;
+	}
 }
 
 
