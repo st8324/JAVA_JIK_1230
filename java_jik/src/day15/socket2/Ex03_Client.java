@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Ex03_Client {
 
+	//쓰레드를 이용하여 문자열을 서버에 보내고, 서버에서 문자열을 받아 출력하는 예제
 	public static void main(String[] args) {
 		int port = 5001;
 		String ip = "127.0.0.1";

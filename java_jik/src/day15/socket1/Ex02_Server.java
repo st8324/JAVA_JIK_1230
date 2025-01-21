@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class Ex02_Server {
 
+	//클라이언트와 연결하고, 연결된 클라이언트에서 문자열을 받아 출력하고, 클라이언트에 문자열을 보내는 예제
 	public static void main(String[] args) {
 		
 		//서버 포트를 지정

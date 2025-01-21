@@ -1,6 +1,5 @@
 package day15.socket2;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -9,6 +8,7 @@ import java.util.Scanner;
 
 public class Ex03_Server {
 
+	//쓰레드를 이용하여 문자열을 클라이언트에 보내고, 클라이언트에서 문자열을 받아 출력하는 예제
 	public static void main(String[] args) {
 		
 		int port = 5001;

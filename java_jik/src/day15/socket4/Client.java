@@ -1,4 +1,4 @@
-package day15.socket3;
+package day15.socket4;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -7,11 +7,10 @@ import java.util.Scanner;
 
 import lombok.AllArgsConstructor;
 
-//Client 클래스를 이용하여 서버와 클라이언트가 문자열을 주고 받는 예제
-//Client 클래스를 이용한 1대1 채팅
 @AllArgsConstructor
 public class Client {
 	
+	private String id;
 	private Socket socket;
 	
 	private final static String EXIT = "EXIT";
@@ -23,11 +22,12 @@ public class Client {
 			try {
 				ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 				while(true) {
-					String str = ois.readUTF();
-					System.out.println("수신 : " + str);
-					if(str.equals(EXIT)) {
+					String id = ois.readUTF();
+					String chat = ois.readUTF();
+					if(chat.equals(EXIT)) {
 						break;
 					}
+					System.out.println(id + " : " + chat);
 				}
 				System.out.println("[수신 기능을 종료합니다.]");
 			} catch (Exception e) {
@@ -47,12 +47,13 @@ public class Client {
 			try {
 				ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
+				System.out.println("종료하려면 " + EXIT + "를 입력하세요.");
 				while(true) {
-					System.out.print("입력(종료 : "+ EXIT +") : ");
-					String str = scan.nextLine();
-					oos.writeUTF(str);
+					String chat = scan.nextLine();
+					oos.writeUTF(id);
+					oos.writeUTF(chat);
 					oos.flush();
-					if(str.equals(EXIT)) {
+					if(chat.equals(EXIT)) {
 						break;
 					}
 				}
