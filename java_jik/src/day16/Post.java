@@ -45,6 +45,10 @@ public class Post implements Serializable {
 		this.num = num;
 	}
 
+	public Post(Post p) {
+		this(p.title, p.content, p.writer);
+	}
+
 	public void print() {
 		System.out.println("------------------------");
 		System.out.println("번호 : " + num);
@@ -70,4 +74,11 @@ public class Post implements Serializable {
 	public static void setCount(int count) {
 		Post.count = count;
 	}
+
+	@Override
+	public String toString() {
+		return num + " | " + title + " | " + writer + " | " + getDateStr() + " | " + view;
+	}
+	
+	
 }

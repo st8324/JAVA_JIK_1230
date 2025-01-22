@@ -114,6 +114,21 @@ public class Ex01_Client2 {
 		System.out.println("--------------------");
 		System.out.print("메뉴 선택 : ");
 	}
+	
+	private static Post input(boolean isWriter) {
+		System.out.print("제목 : ");
+		String title = scan.nextLine();
+		System.out.print("내용 : ");
+		String content = scan.nextLine();
+		
+		String writer = "";
+		if(isWriter) {
+			System.out.print("작성자 : ");
+			writer = scan.next();
+			scan.nextLine();
+		}
+		return new Post(title, content, writer);
+	}
 }
 
 class MenuException extends RuntimeException{
