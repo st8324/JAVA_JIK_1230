@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.List;
 import java.util.Scanner;
 
 public class Ex06_Client {
@@ -20,6 +21,7 @@ public class Ex06_Client {
 		
 		int menu;
 		
+		//프로그램 시작전 서버와 연결 요청 후 연결이 실패하면 종료. 연결이 성공하면 프로그램 실행
 		try {
 			Socket socket = new Socket(ip, port);
 			System.out.println("[프로그램을 시작합니다.]");
@@ -118,17 +120,87 @@ public class Ex06_Client {
 	}
 
 	private static void update() {
-		// TODO Auto-generated method stub
-		
+		try {
+			//학생 기본 정보를 입력
+			System.out.println("학생 정보를 입력하세요.");
+			Student std = inputBase();
+			
+			//수정할 학생 정보를 입력
+			System.out.println("새 학생 정보를 입력하세요.");
+			Student newStd = input();
+			
+			//메뉴를 전송
+			oos.writeInt(2);
+			//서버에 학생 기본 정보와 수정할 학생 정보를 전송
+			oos.writeObject(std);
+			oos.writeObject(newStd);
+			oos.flush();
+			
+			//서버에서 결과를 받아서 true면 수정 성공,
+			//false면 수정 실패를 알림
+			boolean res = ois.readBoolean();
+			if(res) {
+				System.out.println("학생을 수정했습니다.");
+			}else {
+				System.out.println("학생을 수정하지 못했습니다.");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void delete() {
-		// TODO Auto-generated method stub
-		
+		try {
+			//학생정보 입력
+			Student std = inputBase();
+			
+			//서버에 메뉴와 학생정보를 전송
+			oos.writeInt(3);
+			oos.writeObject(std);
+			oos.flush();
+			
+			//결과를 서버에서 받아 알림문구 출력
+			boolean res = ois.readBoolean();
+			if(res) {
+				System.out.println("학생을 삭제했습니다.");
+			}
+			else {
+				System.out.println("학생을 삭제하지 못했습니다.");
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void search() {
-		// TODO Auto-generated method stub
+		
+		try {
+			//메뉴를 서버에 전송 : 4
+			oos.writeInt(4);
+
+			//학생 정보를 입력
+			Student std = inputBase();
+			
+			//서버에게 학생 정보를 전송 후 학생 정보를 받아 옴
+			oos.writeObject(std);
+			oos.flush();
+			Student receiveStd 
+				= (Student) ois.readObject();
+			
+			//학생 정보가 있으면 출력, 없으면 안내문구
+			if(receiveStd != null) {
+				System.out.println(receiveStd);
+				return;
+			}
+			System.out.println("일치하는 학생이 없습니다.");
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		
+		
+		
 		
 	}
 

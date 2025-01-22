@@ -31,6 +31,7 @@ public class Ex06_Server {
 			ServerSocket serverSocket = new ServerSocket(port);
 			
 			while(true) {
+				save(fileName, list);
 				Socket socket = serverSocket.accept();
 				System.out.println("[연결 성공]");
 				
