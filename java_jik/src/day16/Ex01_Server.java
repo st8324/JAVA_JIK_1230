@@ -17,15 +17,15 @@ public class Ex01_Server {
 		
 		int port = 5001;
 		String fileName = "src/day16/data.txt";
-		
+		String fileName2 = "src/day16/count.txt";
 		try {
 			list = (List<Post>) load(fileName);
+			Integer count = (Integer) load(fileName2);
+			count = count == null ? 0 : count;
+			Post.setCount(count);
 			
 			if(list == null) {
 				list = new ArrayList<Post>();
-			}else if(!list.isEmpty()) {
-				int count = list.get(list.size() - 1).getNum(); //가장 마지막글 게시글 번호를 가져옴
-				Post.setCount(count);
 			}
 			
 			ServerSocket serverSocket = new ServerSocket(port);
@@ -49,6 +49,7 @@ public class Ex01_Server {
 				}catch (Exception e) {
 					System.out.println("[연결 종료]");
 					save(fileName, list);
+					save(fileName2, Post.getCount());
 					//e.printStackTrace();
 				}
 			}
@@ -56,6 +57,7 @@ public class Ex01_Server {
 			e.printStackTrace();
 		}finally {
 			save(fileName, list);
+			save(fileName2, Post.getCount());
 		}
 		
 	}
