@@ -7,7 +7,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class Post implements Serializable {
+public class Post implements Serializable, Cloneable {
 	
 	private static final long serialVersionUID = 7950467669298764591L;
 	
@@ -80,5 +80,8 @@ public class Post implements Serializable {
 		return num + " | " + title + " | " + writer + " | " + getDateStr() + " | " + view;
 	}
 	
-	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }
