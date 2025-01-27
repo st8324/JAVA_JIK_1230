@@ -16,7 +16,7 @@ public class Account implements Serializable, Cloneable{
 	private String num;//계좌번호
 	private String name;//이름
 	private String pw;//비번
-	private int money;//잔액
+	private long money;//잔액
 	
 	List<Item> list;//입출금 내역
 
@@ -48,5 +48,18 @@ public class Account implements Serializable, Cloneable{
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
+	}
+
+	public boolean deposit(long money) {
+		if(money <= 0) {
+			return false;
+		}
+		this.money += money;
+		
+		//입출금 내역을 추가
+		Item item = new Item(Type.입금, money);
+		list.add(item);
+		
+		return true;
 	}
 }

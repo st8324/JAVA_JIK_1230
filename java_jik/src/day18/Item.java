@@ -13,6 +13,11 @@ public class Item implements Serializable {
 	
 	private Date date;//입출금 날짜
 	private Type type; //입금 또는 출금
-	private int money; //금액
+	private long money; //금액
 	
+	public Item(Type type, long money) {
+		this.type = type;
+		this.money = money;
+		this.date = new Date();
+	}
 }

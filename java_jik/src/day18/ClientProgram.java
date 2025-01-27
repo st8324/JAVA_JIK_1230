@@ -111,7 +111,7 @@ public class ClientProgram {
 				runLoginMenu(menu, account2);
 			}catch (InputMismatchException e) {
 				//숫자가 아닌 메뉴를 입력하면
-				System.out.println("[메뉴는 수자입니다.]");
+				System.out.println("[메뉴는 숫자입니다.]");
 				scan.nextLine();
 			}catch (Exception e) {
 				
@@ -168,7 +168,36 @@ public class ClientProgram {
 	}
 
 	private void deposit(Account account) {
-		// TODO Auto-generated method stub
+		//예금액을 입력
+		System.out.println("예금액 : ");
+		long money = scan.nextLong(); 
+		scan.nextLine();
+		
+		//예금액 예외 처리
+		if(money <= 0) {
+			System.out.println("[0원보다 큰 금액을 예금하세요.]");
+			return;
+		}
+		//메뉴, 예금액과 계정 정보를 서버에 전송
+		try {
+			oos.writeInt(2); //메뉴
+			oos.writeLong(money); //예금액
+			oos.writeObject(account); //계좌 정보
+			oos.flush();
+			
+			//결과를 입력받아 알림
+			long res = ois.readLong();
+			if( res >= 0) {
+				System.out.println("[예금했습니다.]");
+				System.out.println("[잔액 : " + res + "]");
+			}else {
+				System.out.println("[예금에 실패했습니다.]");
+			}
+		}catch (Exception e) {
+			System.out.println("[예금 전송 중 예외 발생]");
+			e.printStackTrace();
+		}
+		
 		
 	}
 

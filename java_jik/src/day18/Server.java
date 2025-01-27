@@ -113,8 +113,37 @@ public class Server {
 	}
 
 	private void deposit() {
-		// TODO Auto-generated method stub
-		
+		try {
+			//계좌 정보와 예금을 클라이언트에게 전달 받음
+			long money = ois.readLong();
+			Account account = (Account)ois.readObject();
+			
+			long res = -1;
+			
+			int index = list.indexOf(account);
+			//예금 정보도 올바른지 확인, //계좌 정보가 있는지 확인
+			if(money <= 0 || index < 0) {
+				//클라이언트에게 결과를 전송
+				oos.writeLong(res);
+				oos.flush();
+				return;
+			}
+			//계좌에 예금을 추가하여, 입출금 내역이 추가되도록 함.
+			
+			Account tmp = list.get(index);
+			synchronized (tmp) {
+				res = tmp.deposit(money) ? tmp.getMoney() : -1;
+				
+				//클라이언트에게 결과를 전송
+				oos.writeLong(res);
+				oos.flush();
+				Thread.sleep(500);
+			}
+			
+		}catch (Exception e) {
+			System.out.println("[입금 하는 중에 예외가 발생했습니다.]");
+			e.printStackTrace();
+		}
 	}
 
 	private void withdrawal() {
