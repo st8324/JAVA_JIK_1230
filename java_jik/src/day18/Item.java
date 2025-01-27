@@ -1,6 +1,7 @@
 package day18;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lombok.Data;
@@ -20,4 +21,16 @@ public class Item implements Serializable {
 		this.money = money;
 		this.date = new Date();
 	}
+
+	public String getDateStr() {
+		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return f.format(date);
+	}
+	
+	@Override
+	public String toString() {
+		return getDateStr() + " " + type + " " + money +"원";
+	}
+	
+	
 }

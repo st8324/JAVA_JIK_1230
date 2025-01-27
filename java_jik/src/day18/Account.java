@@ -47,7 +47,14 @@ public class Account implements Serializable, Cloneable{
 	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
+		Account account = (Account)super.clone();
+		
+		//입출금 내역도 복사본을 만들어서 복제
+		List<Item> tmpList = new ArrayList<Item>();
+		tmpList.addAll(account.getList());
+		account.setList(tmpList);
+		
+		return account;
 	}
 
 	public boolean deposit(long money) {
@@ -61,5 +68,60 @@ public class Account implements Serializable, Cloneable{
 		list.add(item);
 		
 		return true;
+	}
+
+	public boolean withdrawal(long money) {
+		if(money <= 0) {
+			return false;
+		}
+		money = -money;
+		if(this.money + money < 0) {
+			return false;
+		}
+		this.money += money;
+		
+		//입출금 내역을 추가
+		Item item = new Item(Type.출금, money);
+		list.add(item);
+		
+		return true;
+	}
+
+	public boolean depositAndWithdrawal(long money, Type type) {
+		if(money <= 0) {
+			return false;
+		}
+		money = type == Type.입금 ? money : -money;
+		if(this.money + money < 0) {
+			return false;
+		}
+		this.money += money;
+		
+		//입출금 내역을 추가
+		Item item = new Item(type, money);
+		list.add(item);
+		
+		return true;
+	}
+
+	public void print() {
+		System.out.println("-----------------");
+		System.out.println("은행 : " + bank);
+		System.out.println("계좌 : " + num);
+		System.out.println("이름 : " + name);
+		System.out.println("잔액 : " + money);
+		System.out.println("-----------------");
+		
+		if(list == null || list.isEmpty()) {
+			System.out.println("입출금 내역이 없습니다.");
+			System.out.println("-----------------");
+			return;
+		}
+		for(Item item : list) {
+			System.out.println(item);
+		}
+		System.out.println("-----------------");
+		
+		
 	}
 }
