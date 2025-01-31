@@ -1,5 +1,8 @@
 package day20;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ex01_Client {
 
 	/* 쇼핑몰을 구현하세요.
@@ -60,14 +63,21 @@ public class Ex01_Client {
 	 * 4. 가전 조회
 	 * 5. 기타 조회
 	 * 6. 전체 조회
+	 * 7. 이전으로
 	 * 
 	 * 제품 상세 
 	 * 제품 정보를 출력
 	 * 1. 제품 구매
 	 * 2. 이전으로
 	 * */
+	private static List<Product> list = new ArrayList<Product>();
+	
 	public static void main(String[] args) {
-
+		/*
+		List<Product1> list = new ArrayList<Product1>();
+		list.add(new StationeryProduct());
+		list.add(new ClothingProduct());
+		*/
 	}
 
 }
