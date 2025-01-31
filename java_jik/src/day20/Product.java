@@ -68,5 +68,16 @@ public class Product {
 		}
 	}
 
+	public void update(String name, String option, int price) {
+		this.name = name;
+		this.option = option;
+		this.price = price;
+	}
+
+	public void store(int amount) {
+		this.amount += amount;
+		
+	}
+
 	
 }

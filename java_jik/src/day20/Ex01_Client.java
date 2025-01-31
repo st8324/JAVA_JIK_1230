@@ -173,7 +173,7 @@ public class Ex01_Client {
 		
 	}
 
-	private static void runUserMenu(int menu) {
+	private static void runUserMenu(int menu, Member user) {
 		System.out.println("------------------");
 		switch(menu) {
 		case 1:
@@ -195,10 +195,13 @@ public class Ex01_Client {
 			insertProduct();
 			break;
 		case 2:
+			updateProduct();
 			break;
 		case 3:
+			deleteProduct();
 			break;
 		case 4:
+			storeProduct();
 			break;
 		case 5:
 			System.out.println("[이전으로 돌아갑니다.]");
@@ -316,7 +319,7 @@ public class Ex01_Client {
 		
 		switch(authority) {
 		case "사용자":
-			runUser();
+			runUser(user);
 			break;
 		case "관리자":
 			runAdmin();
@@ -348,14 +351,14 @@ public class Ex01_Client {
 		return null;
 	}
 
-	private static void runUser() {
+	private static void runUser(Member user) {
 
 		int menu;
 		do {
 			printUserMenu();
 			menu = scan.nextInt();
 			
-			runUserMenu(menu);
+			runUserMenu(menu, user);
 			
 		}while(menu != 2);
 		
@@ -428,6 +431,76 @@ public class Ex01_Client {
 		list.add(product);
 		System.out.println("[제품을 등록했습니다.]");
 		System.out.println(list);
+	}
+
+	private static void updateProduct() {
+
+		//제품 코드를 입력
+		System.out.print("제품 코드 : ");
+		String code = scan.next();
+		scan.nextLine();
+		
+		//일치하는 제품이 없으면 알림 후 종료
+		int index = list.indexOf(new Product(code, "", "", "", 0));  
+		if(index < 0) {
+			System.out.println("[일치하는 제품이 없습니다.]");
+			return;
+		}
+		
+		//수정할 정보를 입력(제품명, 옵션, 가격)
+		System.out.print("제품명 : ");
+		String name = scan.nextLine();
+		
+		System.out.print("옵션 : ");
+		String option = scan.nextLine();
+		
+		System.out.print("가격 : ");
+		int price = scan.nextInt();
+		
+		//수정 후 알림 출력
+		Product product = list.get(index);
+		product.update(name, option, price);
+		
+		System.out.println("[제품을 수정했습니다.]");
+	}
+
+	private static void deleteProduct() {
+		//제품 코드를 입력
+		System.out.print("제품 코드 : ");
+		String code = scan.next();
+		scan.nextLine();
+		
+		if(list.remove(new Product(code, "", "", "", 0))) {
+			System.out.println("[제품을 삭제했습니다.]");
+		}else {
+			System.out.println("[일치하는 제품이 없습니다.]");
+		}
+		
+	}
+
+	private static void storeProduct() {
+		//제품 코드를 입력
+		System.out.print("제품 코드 : ");
+		String code = scan.next();
+		scan.nextLine();
+		
+		//일치하는 제품이 없으면 알림 후 종료
+		int index = list.indexOf(new Product(code, "", "", "", 0));  
+		if(index < 0) {
+			System.out.println("[일치하는 제품이 없습니다.]");
+			return;
+		}
+		
+		//입고할 수량을 입력
+		System.out.print("수량 : ");
+		int amount = scan.nextInt();
+		
+		//입고 후 알림 출력
+		Product product = list.get(index);
+		product.store(amount);
+		
+		System.out.println("[제품을 입고했습니다.]");
+		
 	}
 
 	private static int getLastNum(List<Product> list, String codePrefix) {
