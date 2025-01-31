@@ -2,6 +2,7 @@ package day20;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Ex01_Client {
 
@@ -71,6 +72,7 @@ public class Ex01_Client {
 	 * 2. 이전으로
 	 * */
 	private static List<Product> list = new ArrayList<Product>();
+	private static Scanner scan = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		/*
@@ -78,6 +80,234 @@ public class Ex01_Client {
 		list.add(new StationeryProduct());
 		list.add(new ClothingProduct());
 		*/
+		int menu;
+		do {
+			printMainMenu();
+			menu = scan.nextInt();
+			
+			runMainMenu(menu);
+			
+		}while(menu != 3);
+	}
+
+	private static void printMainMenu() {
+		System.out.println("------------------");
+		System.out.println("1. 로그인");
+		System.out.println("2. 회원가입");
+		System.out.println("3. 종료");
+		System.out.println("------------------");
+		System.out.print("메뉴 선택 : ");
+		
+	}
+
+	private static void printUserMenu() {
+		System.out.println("------------------");
+		System.out.println("1. 제품 조회");
+		System.out.println("2. 로그 아웃");
+		System.out.println("------------------");
+		System.out.print("메뉴 선택 : ");
+		
+	}
+
+	private static void printAdminMenu() {
+		System.out.println("------------------");
+		System.out.println("1. 제품 등록");
+		System.out.println("2. 제품 수정");
+		System.out.println("3. 제품 삭제");
+		System.out.println("4. 제품 입고");
+		System.out.println("5. 로그 아웃");
+		System.out.println("------------------");
+		System.out.print("메뉴 선택 : ");
+		
+	}
+
+	private static void printCheckMenu() {
+		System.out.println("------------------");
+		System.out.println("1. 문구 조회");
+		System.out.println("2. 의류 조회");
+		System.out.println("3. 식품 조회");
+		System.out.println("4. 가전 조회");
+		System.out.println("5. 기타 조회");
+		System.out.println("6. 전체 조회");
+		System.out.println("7. 이전으로");
+		System.out.println("------------------");
+		System.out.print("메뉴 선택 : ");
+		
+	}
+
+	private static void printCheckDetailMenu() {
+		System.out.println("------------------");
+		System.out.println("1. 제품 구매");
+		System.out.println("2. 이전으로");
+		System.out.println("------------------");
+		System.out.print("메뉴 선택 : ");
+		
+		
+	}
+
+	private static void runMainMenu(int menu) {
+		System.out.println("------------------");
+		switch (menu) {
+		case 1: 
+			login();
+			break;
+		case 2:
+			signup();
+			break;
+		case 3:
+			System.out.println("[프로그램을 종료합니다.]");
+			break;
+		default:
+			System.out.println("[잘못된 메뉴입니다.]");
+		}
+		System.out.println("------------------");
+		
+	}
+
+	private static void runUserMenu(int menu) {
+		System.out.println("------------------");
+		switch(menu) {
+		case 1:
+			checkProduct();
+			break;
+		case 2:
+			System.out.println("[이전으로 돌아갑니다.]");
+			break;
+		default:
+			System.out.println("[잘못된 메뉴입니다.]");
+		}
+		System.out.println("------------------");
+	}
+
+	private static void runAdminMenu(int menu) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void runCheckDetailMenu(int menu) {
+		
+		switch (menu) {
+		case 1:
+			break;
+		case 2:
+			System.out.println("[이전으로 돌아갑니다.]");
+			break;
+		default:
+			System.out.println("[잘못된 메뉴입니다.]");
+		}
+	}
+
+	private static void runCheckMenu(int menu) {
+		
+		switch (menu) {
+		case 1,2,3,4,5:
+			check(menu);
+			break;
+		case 6:
+			check();
+			break;
+		case 7:
+			System.out.println("[이전으로 돌아갑니다.]");
+			break;
+		default:
+			System.out.println("[잘못된 메뉴입니다.]");
+		}
+		
+	}
+
+	private static void check() {
+		//제품 목록 조회
+		
+		//제품을 선택
+		
+		//선택된 제품을 출력(예외 처리)
+		
+		int menu;
+		do {
+			printCheckDetailMenu();
+			menu = scan.nextInt();
+			
+			runCheckDetailMenu(menu);
+			
+		}while(menu != 2);
+		
+	}
+
+	private static void check(int categoryNum) {
+		//제품 목록 조회
+		
+		//제품을 선택
+		
+		//선택된 제품을 출력(예외 처리)
+		
+		int menu;
+		do {
+			printCheckDetailMenu();
+			menu = scan.nextInt();
+			
+			runCheckDetailMenu(menu);
+			
+		}while(menu != 2);
+		
+	}
+	
+
+	private static void checkProduct() {
+		System.out.println("[제품을 조회합니다.]");
+		
+		int menu;
+		do {
+			printCheckMenu();
+			menu = scan.nextInt();
+			
+			runCheckMenu(menu);
+			
+		}while(menu != 7);
+	}
+
+	private static void login() {
+		String authority = "관리자";
+		
+		switch(authority) {
+		case "사용자":
+			runUser();
+			break;
+		case "관리자":
+			runAdmin();
+			break;
+		default:
+			System.out.println("[로그인을 실패 했습니다.]");
+		}
+		
+	}
+
+	private static void runUser() {
+
+		int menu;
+		do {
+			printUserMenu();
+			menu = scan.nextInt();
+			
+			runUserMenu(menu);
+			
+		}while(menu != 2);
+		
+	}
+
+	private static void runAdmin() {
+		int menu;
+		do {
+			printAdminMenu();
+			menu = scan.nextInt();
+			
+			runAdminMenu(menu);
+			
+		}while(menu != 5);
+		
+	}
+
+	private static void signup() {
+		
 	}
 
 }
