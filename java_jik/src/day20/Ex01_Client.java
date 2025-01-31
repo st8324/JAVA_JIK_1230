@@ -273,17 +273,24 @@ public class Ex01_Client {
 	private static void login() {
 		//로그인 기능
 		//아이디, 비번을 입력 받음
+		System.out.print("아이디 : ");
+		String id = scan.next();
 		
+		System.out.print("비번 : ");
+		String pw = scan.next();
 		//객체를 생성
+		Member member = new Member(id, pw);
 		
 		//객체 정보와 일치하는 회원 정보(아이디,비번)가 있는지 확인해서 있으면 회원 정보를 가져옴
-		
-		Member member = new Member(null, null);
+		Member user = getMember(members, member);
 		
 		//가져온 회원 정보가 없으면 안내문구 출력 후 종료 : 아이디 or 비번이 틀림
+		if(user == null) {
+			System.out.println("[아이디 또는 비번이 일치하지 않습니다.]");
+			return;
+		}
 		
-		
-		String authority = member.getAuthority();
+		String authority = user.getAuthority();
 		
 		switch(authority) {
 		case "사용자":
@@ -296,6 +303,27 @@ public class Ex01_Client {
 			System.out.println("[로그인을 실패 했습니다.]");
 		}
 		
+	}
+
+	private static Member getMember(List<Member> members, Member member) {
+		if(members == null || members.isEmpty()) {
+			return null;
+		}
+		if(member == null) {
+			return null;
+		}
+		int index = members.indexOf(member);
+		//아이디가 일치하지 않은 경우
+		if(index < 0) {
+			return null;
+		}
+		Member user = members.get(index);
+		//비번이 일치하면
+		if(user.getPw().equals(member.getPw())) {
+			return user;
+		}
+		//일치하지 않으면
+		return null;
 	}
 
 	private static void runUser() {
