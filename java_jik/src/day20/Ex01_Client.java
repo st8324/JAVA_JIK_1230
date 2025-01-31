@@ -72,6 +72,8 @@ public class Ex01_Client {
 	 * 2. 이전으로
 	 * */
 	private static List<Product> list = new ArrayList<Product>();
+	private static List<Member> members = new ArrayList<Member>();
+	
 	private static Scanner scan = new Scanner(System.in);
 	
 	public static void main(String[] args) {
@@ -80,6 +82,9 @@ public class Ex01_Client {
 		list.add(new StationeryProduct());
 		list.add(new ClothingProduct());
 		*/
+		//관라지 샘플 데이터
+		members.add(new Member("admin", "admin", "관리자"));
+		
 		int menu;
 		do {
 			printMainMenu();
