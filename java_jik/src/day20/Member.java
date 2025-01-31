@@ -1,5 +1,7 @@
 package day20;
 
+import java.util.Objects;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -16,6 +18,17 @@ public class Member {
 		this.pw = pw;
 		this.authority = "사용자";
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Member other = (Member) obj;
+		return Objects.equals(id, other.id);
+	}
 	
 }

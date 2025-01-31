@@ -271,7 +271,19 @@ public class Ex01_Client {
 	}
 
 	private static void login() {
-		String authority = "관리자";
+		//로그인 기능
+		//아이디, 비번을 입력 받음
+		
+		//객체를 생성
+		
+		//객체 정보와 일치하는 회원 정보(아이디,비번)가 있는지 확인해서 있으면 회원 정보를 가져옴
+		
+		Member member = new Member(null, null);
+		
+		//가져온 회원 정보가 없으면 안내문구 출력 후 종료 : 아이디 or 비번이 틀림
+		
+		
+		String authority = member.getAuthority();
 		
 		switch(authority) {
 		case "사용자":
@@ -312,7 +324,33 @@ public class Ex01_Client {
 	}
 
 	private static void signup() {
+		//회원 가입 정보를 입력(아이디, 비번, 비번확인)
+		System.out.print("아이디 : ");
+		String id = scan.next();
 		
+		System.out.print("비번 : ");
+		String pw = scan.next();
+		
+		System.out.print("비번 확인: ");
+		String pw2 = scan.next();
+		
+		//비번과 비번 확인이 일치하지 않으면 알림 후 종료
+		if(!pw.equals(pw2)) {
+			System.out.println("[비번과 비번 확인이 일치하지 않습니다.]");
+			return;
+		}
+		//입력받은 정보를 이용하여 객체를 생성
+		Member member = new Member(id, pw);
+		
+		//생성한 객체가 등록되었는지 확인 후 없으면 추가 후 알림
+		if(!members.contains(member)) {
+			members.add(member);
+			System.out.println("[회원 가입이 완료됐습니다.]");
+			return;
+		}
+		
+		//있으면 알림
+		System.out.println("[이미 가입된 아이디입니다.]");
 	}
 
 }
