@@ -22,7 +22,11 @@ public class Ex01_Client {
 	 *	  - 각 분류마다 분류코드가 지정
 	 *	    - 문구 : ABC, 의류 : DEF, 식품 : XYZ, 가전 : ELC, 기타 : ETC
 	 *	  - 제품 코드는 분규 코드에 등록된 순서 3자리를 만들어서 총 6자리로 고정  
-	 *	제품 입고
+	 * 제품 수정
+	 *  - 제품 코드를 입력하여 제품명, 옵션, 가격을 수정
+	 * 제품 삭제
+	 *  - 제품 코드를 입력하여 삭제 
+	 * 제품 입고
 	 *	  - 제품 코드, 수량을 입력해서 제품을 입고    
 	 * - 제품 구매
 	 * 	- 등록된 제품을 선택 후 수량을 선택해서 구매
@@ -185,7 +189,25 @@ public class Ex01_Client {
 	}
 
 	private static void runAdminMenu(int menu) {
-		// TODO Auto-generated method stub
+		System.out.println("------------------");
+		switch(menu) {
+		case 1:
+			insertProduct();
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			System.out.println("[이전으로 돌아갑니다.]");
+			break;
+		default:
+			System.out.println("[잘못된 메뉴입니다.]");
+		}
+		System.out.println("------------------");
+		System.out.println("------------------");
 		
 	}
 
@@ -379,6 +401,55 @@ public class Ex01_Client {
 		
 		//있으면 알림
 		System.out.println("[이미 가입된 아이디입니다.]");
+	}
+
+	private static void insertProduct() {
+		//제품 정보 입력(분류, 제품명, 옵션, 가격)
+		System.out.print("분류(문구, 의류, 식품, 가전, 기타) : ");
+		String category = scan.next();
+		scan.nextLine();
+		
+		System.out.print("제품명 : ");
+		String name = scan.nextLine();
+		
+		System.out.print("옵션 : ");
+		String option = scan.nextLine();
+		
+		System.out.print("가격 : ");
+		int price = scan.nextInt();
+		
+		//제품 정보로 객체를 생성
+		//문구 : ABC, 의류 : DEF, 식품 : XYZ, 가전 : ELC, 기타 : ETC
+		String codePrefix = Product.getCodePrefix(category);
+		int count = getLastNum(list, codePrefix);
+		Product product = new Product(count, category, name, option, price);
+		
+		//제품 목록에 추가하고 알림
+		list.add(product);
+		System.out.println("[제품을 등록했습니다.]");
+		System.out.println(list);
+	}
+
+	private static int getLastNum(List<Product> list, String codePrefix) {
+		if(list == null) {
+			return -1;
+		}
+		int max = 0;
+		
+		for(Product product : list) {
+			//ABC001에서 ABC는 prefix, 001은 suffix
+			String productCodePrefix = product.getCode().substring(0,3);
+			String productCodeSuffix = product.getCode().substring(3);
+			if(productCodePrefix.equals(codePrefix)) {
+				//"001" => 1로 변환
+				int num = Integer.parseInt(productCodeSuffix);
+				if(max < num) {
+					max = num;
+				}
+			}
+		}
+		
+		return max;
 	}
 
 }
