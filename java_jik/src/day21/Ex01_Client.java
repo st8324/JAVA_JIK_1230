@@ -1,5 +1,8 @@
 package day21;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -68,18 +71,30 @@ public class Ex01_Client {
 		int port = 3001;
 		
 		//아이디 입력
-		
+		System.out.print("아이디 : ");
+		String id = scan.next();
 		//소켓 객체 생성(ip와 port 이용)
-		
-		//ChatClient 객체 생성
-		ChatClient cc = new ChatClient("아이디", null, list);
-		//객체를 실행해서 채팅
-		cc.run();
+		try(Socket socket = new Socket(ip, port);) {
+
+			//ChatClient 객체 생성
+			ChatClient cc = new ChatClient(id, socket, list);
+			//객체를 실행해서 채팅
+			cc.run();
+			
+		} catch (Exception e) {
+			//e.printStackTrace();
+		}
 	}
 
 	private static void log() {
 		//기록된 채팅 리스트를 출력
-		
+		if(list.isEmpty()) {
+			System.out.println("채팅 기록이 없습니다.");
+			return;
+		}
+		for(Chat chat : list) {
+			System.out.println(chat);
+		}
 	}
 
 }

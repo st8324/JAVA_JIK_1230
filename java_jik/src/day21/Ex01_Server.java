@@ -1,5 +1,8 @@
 package day21;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -67,19 +70,49 @@ public class Ex01_Server {
 		int port = 3001;
 		
 		//아이디 입력
-		
+		System.out.print("아이디 : ");
+		String id = scan.next();
 		//서버 소켓 객체 생성(port 이용)
+		ServerSocket serverSocket;
+		try {
+			serverSocket = new ServerSocket(port);
+		} catch (IOException e) {
+			System.out.println("[서버 소켓 생성에 실패했습니다.]");
+			//e.printStackTrace();
+			return;
+		}
 		
 		//연결을 기다리다 연결이 성공하면 소켓 객체를 생성
+		try(Socket socket = serverSocket.accept();) {
+
+			//ChatClient 객체 생성
+			ChatClient cc = new ChatClient(id, socket, list);
+			//객체를 실행해서 채팅
+			cc.run();
+			
+		} catch (Exception e) {
+			//e.printStackTrace();
+		} finally {
+			if(serverSocket != null && !serverSocket.isClosed()) {
+				try {
+					serverSocket.close();
+				}catch (Exception e) {
+
+				}
+			}
+		}
 		
-		//ChatClient 객체 생성
-		ChatClient cc = new ChatClient("아이디", null, list);
-		//객체를 실행해서 채팅
-		cc.run();
 	}
 
 	private static void log() {
 		//기록된 채팅 리스트를 출력
+		if(list.isEmpty()) {
+			System.out.println("채팅 기록이 없습니다.");
+			return;
+		}
+		for(Chat chat : list) {
+			System.out.println(chat);
+		}
 		
 	}
 
