@@ -79,5 +79,18 @@ public class Product {
 		
 	}
 
+	public static String getCategory(int categoryNum) {
+		switch (categoryNum) {
+		case 1:	return "문구";
+		case 2:	return "의류";
+		case 3:	return "식품";
+		case 4:	return "가전";
+		case 5:	return "기타";
+		case 6: return "전체";
+		default:
+			return null;
+		}
+	}
+
 	
 }
