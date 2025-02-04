@@ -1,6 +1,6 @@
-package day21;
+package day22;
 
-public class Ex02_Main {
+public class Ex01_Main {
 	
 	/* 단어장 프로그램을 구현하세요.
 	 * - 관리자
@@ -30,7 +30,9 @@ public class Ex02_Main {
 	 * 
 	 * */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		WordNoteProgram program = new WordNoteProgram();
+		program.run();
 
 	}
 
