@@ -6,18 +6,18 @@ import java.util.Map;
 
 public class MyWordManager {
 
-	private Map<String, List<String>> myWords;
+	private Map<String, List<Word>> myWords;
 	
-	public MyWordManager(Map<String, List<String>> myWords) {
+	public MyWordManager(Map<String, List<Word>> myWords) {
 		this.myWords = myWords;
 	}
 
-	public void add(String id, String word) {
+	public void add(String id, Word word) {
 		
-		List<String> list = myWords.get(id);
+		List<Word> list = myWords.get(id);
 		//단어 검색어를 처음 등록할 때
 		if(list == null) {
-			list = new ArrayList<String>();
+			list = new ArrayList<Word>();
 			list.add(word);
 			myWords.put(id, list);
 			return;
@@ -29,7 +29,7 @@ public class MyWordManager {
 	}
 	
 	public void print(String id) {
-		List<String> list = myWords.get(id);
+		List<Word> list = myWords.get(id);
 		//단어 검색어가 없는 경우
 		if(list == null) {
 			System.out.println("[검색 기록이 없습니다.]");

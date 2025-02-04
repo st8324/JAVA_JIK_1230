@@ -11,7 +11,7 @@ public class WordNoteProgram implements ConsoleProgram{
 	private Scanner scan = new Scanner(System.in);
 	private String id;
 	private List<Word> words;
-	private Map<String, List<String>> myWords;
+	private Map<String, List<Word>> myWords;
 	
 	@Override
 	public void run() {
@@ -21,19 +21,14 @@ public class WordNoteProgram implements ConsoleProgram{
 		
 		//불러오기
 		words = (List<Word>) load(wordsFileName);
-		myWords = (Map<String, List<String>>)load(myWordsFileName);
+		myWords = (Map<String, List<Word>>)load(myWordsFileName);
 		
 		//불러오기 실패 처리
 		if(words == null) {
 			words = new ArrayList<Word>();
-			words.add(new Word("apple", "명", "사과"));
-			words.add(new Word("banana", "명", "바나나"));
 		}
 		if(myWords == null) {
-			myWords = new HashMap<String, List<String>>();
-			List<String> list = new ArrayList<String>();
-			list.add("test");
-			myWords.put("abc", list);
+			myWords = new HashMap<String, List<Word>>();
 		}
 		
 

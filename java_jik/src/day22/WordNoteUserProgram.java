@@ -11,7 +11,7 @@ public class WordNoteUserProgram implements ConsoleProgram {
 	private MyWordManager mm;
 	private String id;
 	
-	public WordNoteUserProgram(Scanner scan, List<Word> words, Map<String, List<String>> myWords, String id) {
+	public WordNoteUserProgram(Scanner scan, List<Word> words, Map<String, List<Word>> myWords, String id) {
 		this.scan = scan;
 		this.wm = new WordManager(words);
 		this.mm = new MyWordManager(myWords);
@@ -22,6 +22,8 @@ public class WordNoteUserProgram implements ConsoleProgram {
 	public void run() {
 		int menu;
 		final int EXIT = 3;
+		
+		wm.print();
 		
 		do {
 		
@@ -70,9 +72,29 @@ public class WordNoteUserProgram implements ConsoleProgram {
 		System.out.print("단어 : ");
 		String word = scan.nextLine();
 		
-		wm.print(word);
+		List<Word> tmpList = wm.getWordList(word);
 		
-		mm.add(id, word);
+		if(tmpList.isEmpty()) {
+			System.out.println("[일치하는 단어가 없습니다.]");
+			return;
+		}
+		
+		wm.print(tmpList);
+		
+		System.out.print("번호 : ");
+		
+		int index = scan.nextInt() - 1;
+		scan.nextLine();
+		
+		if(index < 0 || index >= tmpList.size()) {
+			System.out.println("[잘못 선택했습니다.]");
+			return;
+		}
+		System.out.println("----------------");
+		System.out.println(tmpList.get(index));
+		System.out.println("----------------");
+		
+		mm.add(id, tmpList.get(index));
 		
 	}
 
