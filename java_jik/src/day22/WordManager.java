@@ -59,6 +59,44 @@ public class WordManager {
 		}
 		
 	}
+
+	public boolean update(Word word, Word wordObj) {
+		if(word == null || wordObj == null) {
+			return false;
+		}
+		word.update(wordObj);
+		return true;
+	}
+
+	public boolean delete(Word word) {
+		return list.remove(word);
+	}
+
+	public void print() {
+
+		System.out.println(list);
+		
+	}
+
+	public void sort() {
+
+		list.sort((o1, o2)->{
+			return o1.getWord().compareTo(o2.getWord());
+		});
+	}
+
+	public void print(String word) {
+
+		List<Word> tmpList = 
+			list.stream()
+				.filter(w->w.getWord().contains(word))
+				.collect(Collectors.toList());
+		if(tmpList.isEmpty()) {
+			System.out.println("[일치하는 단어가 없습니다.]");
+			return;
+		}
+		tmpList.stream().forEach(w->System.out.println(w));
+	}
 	
 	
 }

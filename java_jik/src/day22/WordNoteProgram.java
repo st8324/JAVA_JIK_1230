@@ -46,7 +46,7 @@ public class WordNoteProgram implements ConsoleProgram{
 			WordNoteAdminProgram adminProgram = new WordNoteAdminProgram(scan, words);
 			adminProgram.run();
 		}else {
-			WordNoteUserProgram userProgram = new WordNoteUserProgram();
+			WordNoteUserProgram userProgram = new WordNoteUserProgram(scan, words, myWords, id);
 			userProgram.run();
 		}
 		

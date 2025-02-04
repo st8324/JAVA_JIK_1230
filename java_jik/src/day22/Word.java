@@ -19,6 +19,14 @@ public class Word implements Serializable {
 	public String toString() {
 		return word + " [" + partsOfSpeech + "] " + meaning;
 	}
+
+	public void update(Word word) {
+
+		this.word = word.word;
+		this.partsOfSpeech = word.partsOfSpeech;
+		this.meaning = word.meaning;
+		
+	}
 	
 	
 }

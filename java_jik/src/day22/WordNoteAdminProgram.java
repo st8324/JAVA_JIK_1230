@@ -28,6 +28,9 @@ public class WordNoteAdminProgram implements ConsoleProgram {
 			
 			runMenu(menu);
 			
+			wm.sort();
+			//wm.print();
+			
 		}while(menu != EXIT);
 		
 	}
@@ -107,15 +110,58 @@ public class WordNoteAdminProgram implements ConsoleProgram {
 		}
 		
 		//수정할 단어를 선택
+		int index = scan.nextInt() - 1;
+		scan.nextLine();
+		
+		if(index < 0 || index >= tmpList.size()) {
+			System.out.println("[잘못 선택했습니다.]");
+			return;
+		}
 		
 		//수정할 단어, 품사, 뜻을 입력
+		Word wordObj = input();
 		
 		//수정
+		if(wm.update(tmpList.get(index), wordObj)) {
+			System.out.println("[단어를 수정했습니다.]");
+		}else {
+			System.out.println("[단어를 수정하지 못했습니다.]");
+		}
 		
 	}
 
 	private void delete() {
+		//삭제할 단어를 입력
+		System.out.print("단어 : ");
+		String word = scan.nextLine();
 		
+		//삭제할 단어를 검색해서 출력
+		//word와 일치하는 단어들의 리스트를 반환
+		List<Word> tmpList = wm.getWordList(word);
+		
+		
+		//단어 리스트를 출력
+		wm.print(tmpList);
+
+		if(tmpList.isEmpty()) {
+			return;
+		}
+		
+		//삭제할 단어를 선택
+		int index = scan.nextInt() - 1;
+		scan.nextLine();
+		
+		if(index < 0 || index >= tmpList.size()) {
+			System.out.println("[잘못 선택했습니다.]");
+			return;
+		}
+		
+		//삭제
+		if(wm.delete(tmpList.get(index))) {
+			System.out.println("[단어를 삭제했습니다.]");
+		}else {
+			System.out.println("[단어를 삭제하지 못했습니다.]");
+		}
 		
 	}
 
