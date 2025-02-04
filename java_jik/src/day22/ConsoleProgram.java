@@ -9,9 +9,9 @@ public interface ConsoleProgram {
 	
 	void run();
 
-	void printMenu();
+	default void printMenu() {}
 	
-	void runMenu(int menu);
+	default void runMenu(int menu) {}
 	
 	default Object load(String fileName) {
 		try(FileInputStream fis = new FileInputStream(fileName);

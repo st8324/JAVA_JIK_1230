@@ -31,14 +31,19 @@ public class WordNoteProgram implements ConsoleProgram{
 		}
 		if(myWords == null) {
 			myWords = new HashMap<String, List<String>>();
+			List<String> list = new ArrayList<String>();
+			list.add("test");
+			myWords.put("abc", list);
 		}
+		
+
 		
 		//아이디 입력
 		System.out.print("아이디 : ");
 		id = scan.next();
 
 		if("admin".equals(id)) {
-			WordNoteAdminProgram adminProgram = new WordNoteAdminProgram();
+			WordNoteAdminProgram adminProgram = new WordNoteAdminProgram(scan, words);
 			adminProgram.run();
 		}else {
 			WordNoteUserProgram userProgram = new WordNoteUserProgram();
@@ -46,33 +51,19 @@ public class WordNoteProgram implements ConsoleProgram{
 		}
 		
 		//저장하기
-		
+		save(wordsFileName, words);
+		save(myWordsFileName, myWords);
 	}
 
 	@Override
 	public void printMenu() {
-		if("admin".equals(id)) {
-			System.out.println("----------------");
-			System.out.println("1. 단어 등록");
-			System.out.println("2. 단어 수정");
-			System.out.println("3. 단어 삭제");
-			System.out.println("4. 종료");
-			System.out.println("----------------");
-			System.out.print("메뉴 선택 : ");
-		}else {
+
 			System.out.println("----------------");
 			System.out.println("1. 단어 검색");
 			System.out.println("2. 내 검색 단어 보기");
 			System.out.println("3. 종료");
 			System.out.println("----------------");
 			System.out.print("메뉴 선택 : ");
-		}
-		
-	}
-
-	@Override
-	public void runMenu(int menu) {
-
 		
 	}
 
