@@ -255,8 +255,6 @@ class Student{
 	public String toString() {
 		return grade+"학년 " + classNum + "반 " + num + "번 " + name ;
 	}
-	
-	
 }
 
 
