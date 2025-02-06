@@ -1,0 +1,42 @@
+<!-- !DOCTYPE html : HTML5 표준 문서임을 나타냄 -->
+<!DOCTYPE html>
+<!-- html 태그 : html 문서의 시작과 끝 -->
+<html lang="ko">
+<head>
+	<!-- 
+	meta 태그 : 문서와 관련된 정보를 나타내는 태그
+		- charset : 문자 인코딩을 설정
+		- name="viewport" : 화면 크기를 설정.
+		-->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- title 태그 : 브라우저 좌측 상단에 나오는 문구 -->
+	<title>html 개요 예제</title>
+</head>
+<body>
+	<!-- html에서는 여러개의 공백이 1개로 처리 -->
+	123
+
+	456                              789
+	123 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;456
+	<pre>
+		123123
+
+
+		456                  789  123
+	</pre>
+	<!-- 
+	태그 구성
+	<태그 속성명=값 속성명="값" 속성명='값' 속성명>
+	- 태그명
+	- 속성
+	- 속성 값
+	  - 값은 "", ''로 감싸며 값이 공백이 없는 경우 생략할 수 있다
+	  - 값이 "", ''로 감싸여져 있는 경우는 = 앞뒤로 공백이 상관 없음
+		- 값이 "", ''로 감싸여져 있지 않은 경우는 값은 공백을 포함할 수 없음. 
+		  공백 뒤에 있는 값이 속성으로 인식
+	-->
+	<pre class=abc def class1 = "abc def" class2 = 'abc def' class3 ></pre>
+	<div class="abc" id="def"></div>
+</body>
+</html>
