@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>시맨틱 태그</title>
+</head>
+<body>
+	<!-- 
+	시맨틱 태그
+	- 기능은 div와 같음
+	- 페이지 구조를 특정 기능에 맞는 태그를 사용하여 구분하기 위해
+	- 페이지 구조를 쉽게 파악
+	- 검색 엔진에서 쉽게 문서 내용을 검색
+	- 어느 장치에서나 똑같이 문서 해석이 가능
+
+	header
+	- 말머리로, 주로 메뉴를 넣음
+	nav
+	- 네이비게이션 역할는 하는 태그들을 모아놓음. 주로 메뉴에 사용
+	section
+	- 컨텐츠가 들어가는 영역
+	- section 태그안에 section 태그를 배치해도 됨
+	- 주로 article 태그로 구성
+	article
+	- 내용이 들어가는 태그
+	- 검색 로봇이 이 태그가 사용된 컨테츠는 배포할 수 있는 컨텐츠로 인식
+	aside
+	- 사이드 바
+	- 주로 광고나 링크를 모아 둠
+	footer
+	- 웹페이지 하단에 위치
+	- 회사 소개, 저작권, 연락처 등의 정보를 표시
+	-->
+	<div>
+		<div>
+			헤더
+			<div>메뉴</div>
+		</div>
+		<div>내용
+			<div>기사</div>
+			<div>기사</div>
+		</div>
+		<div>사이드 메뉴</div>
+		<div>푸터</div>
+	</div>
+	<hr>
+	<div>
+		<header>헤더
+			<nav>메뉴</nav>
+		</header>
+		<section>
+			<article>기사</article>
+			<article>기사</article>
+		</section>
+		<aside>사이드 메뉴</aside>
+		<footer>푸터</footer>
+	</div>
+</body>
+</html>

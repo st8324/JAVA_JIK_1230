@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>영역 관련 태그</title>
+</head>
+<body>
+	<!-- 
+	div 태그
+	- 기능은 없음
+	- 대표적인 block 태그
+	- 새 라인에서 시작
+	span 태그
+	- 기능은 없음
+	- 대표적인 inlie 태그
+	- 현재 위치에서 시작
+
+	block 태그
+	- 태그명이 아닌 분류
+	- 새 라인에서 시작
+	- 크기 변경이 가능
+	- div, ul 등
+	inline 태그
+	- 현재 위치에서 시작
+	- 크기 변경이 불가능
+	- b, i, span 등
+	inline-block 태그
+	- 현재 위치에서 시작
+	- 크기 변경이 가능
+	- img, input 등
+	-->
+	안녕하세요. 제 이름은 <b>홍길동</b> 입니다.
+	<span>만나서 반갑습니다.</span>
+	<ul>
+		<li>목록1</li>
+	</ul>
+	안녕하세요. 
+	<div>제 이름은 임꺽정입니다.</div>
+
+	<!-- 
+	p 태그
+	- 문단을 나눌 때 사용하는 태그
+	- 위아래 여백이 자동으로 들어감
+	-->
+	안녕하세요. 
+	<div>만나서 반갑습니다.</div>
+	제 이름은 홍길동입니다. 
+	<br><br>
+	안녕하세요. 
+	<p>만나서 반갑습니다.</p>
+	제 이름은 홍길동입니다. 
+	<br>
+	<!-- 
+	iframe 태그
+	- 다른 문서를 가져와서 배치하는 태그
+	- 네이버 광고, 유튜브 퍼가기에서 사용
+	- src 속성 : 가져올 문서를 지정
+	- width/height 속성 : 너비 높이를 지정
+	- name 속성 : 프레임의 이름을 지정
+	
+	경로 지정 방식
+	절대 경로
+	- 최상위 폴더를 기준으로 경로를 잡음
+	- /로 시작
+	- vs code에서 어떤 폴더를 여느냐에 따라 결과가
+	  달라질 수 있음
+	- 현재 파일 위치가 달라져도 경로를 수정하지 않아도
+	  됨
+
+	상대 경로
+	- 현재 파일을 기준으로 경로를 잡음
+	- ./나 ../로 시작
+	- ./ : 현재 폴더, ../ : 상위 폴더
+	- vs code에서 어떤 폴더를 열어도 결과가 같음
+	- 현재 파일 위치가 변경되면 경로도 변경되어야 함
+	-->
+	<iframe width="300" height="300" src="/html/01_html 개요.html" frameborder="1"></iframe>
+	<iframe width="300" height="300" src="01_html 개요.html" frameborder="1"></iframe>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/SK8Ts9P0fJM?si=wPBIo6iQ-F56Y6ce" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</body>
+</html>

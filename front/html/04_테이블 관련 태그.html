@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>테이블 관련 태그</title>
+</head>
+<body>
+
+	<!-- 
+	table 태그
+	- 테이블을 만들기 위해 필요한 태그
+	- border 속성
+		- 테이블의 테두리를 추가 및 두께를 설정
+		- 비추천. css를 사용
+	tr 태그
+	- 한 행을 나타내는 태그
+	- 한 행에는 여러 열이 들어가기 때문에 
+	  tr 태그 안에 td/th 태그를 사용
+	td 태그
+	- 한 열을 나타내는 태그
+	td,tr태그
+	- colspan
+		- 열을 합침
+		- 숫자로 몇개를 합칠지 결정
+	- rowspan
+		- 행을 합침
+		- 숫자로 몇개를 합칠지 결정
+	th 태그
+	- 한 열을 나타내는 태그
+	- 글자가 가운데 정렬, 굵은 글씨
+	- 보통 테이블 상단에 각 열의 제목을 표시할 때 사용
+
+	thead 태그
+	- 필수 구성 요소는 아님
+	- 테이블의 제목 행을 표시할 때 사용
+	tbody 태그
+	- 필수 구성 요소는 아님
+	- 테이블의 대부분의 행들이 여기에 속함
+	tfoot 태그
+	- 필수 구성 요소는 아님
+	- 테이블의 끝
+	- 보통 마지막에 평균이나 내용을 종합할 때 사용
+	thead, tbody, tfoot
+	- 코드 구성 순서에 상관 없이 화면에서는	
+	  thead, tbody, tfoot 순서로 출력
+	- tr 태그를 포함
+
+	figure 태그
+	- 요소를 설명하기 위한 태그
+	- figcaption 태그와 함게 사용
+	figcaption 태그
+	- 요소 앞에 있으면 요소 위에 설명을 작성
+	- 요소 뒤에 있으면 요소 뒤에 설명을 작성
+	caption 태그
+	- 표를 설명하는 태그
+	- 상단 가운데 정렬
+	colgroup 태그
+	- col 태그들을 모아 놓은 태그
+	- 열에 스타일을 적용하지 않아도 열 개수만큼 col 태그를 추가해야함
+	col 태그
+	- 열의 스타일을 적용하는 태그
+	 -->
+	<table border="1">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>조회수</th>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>공지사항1</td>
+			<td>관리자</td>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>게시판 오픈</td>
+			<td>관리자</td>
+			<td>10</td>
+		</tr>
+	</table>
+	<figure>
+		<table border="1">
+			<colgroup>
+				<col style="background-color: yellow;">
+				<col>
+				<col>
+				<col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>테스트</td>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr>
+					<td>2</td>
+					<td>공지사항1</td>
+					<td>관리자</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>게시판 오픈</td>
+					<td>관리자</td>
+					<td>10</td>
+				</tr>
+			</tbody>
+			<caption>표2</caption>
+		</table>
+		<figcaption>표2입니다.</figcaption>
+	</figure>
+
+	<table border="1">
+		<tr>
+			<th>과목</th>
+			<th>이름</th>
+			<th>성적</th>
+		</tr>
+		<tr>
+			<td rowspan="2">HTML</td>
+			<td>홍길동</td>
+			<td>100</td>
+		</tr>
+		<tr>
+			<td>임꺽정</td>
+			<td>90</td>
+		</tr>
+		<tr>
+			<td>평균</td>
+			<td colspan="2">95</td>
+		</tr>
+	</table>
+</body>
+</html>

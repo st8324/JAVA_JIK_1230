@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>form 관련 태그</title>
+</head>
+<body>
+	<!-- 
+	form 태그
+	- 서버로 데이터를 전송할 때 사용하는 태그
+	- 속성
+	  - action
+		  - 정보를 보낼 서버 주소
+		- method
+		  - 데이터 전송 방식
+			- get
+			  - 기본값
+				- url에 보낼 데이터를 추가해서 전송
+				  => 데이터가 노출
+					=> 중요하지 않은 데이터를 전송할 때 사용
+					- 카페 게시글 목록
+					- 뉴스 목록
+			- post
+			  - Request Header에 데이터를 추가해서 전송
+				  => URL에 노출 X
+				- 파일을 서버에 업로드하는 경우 반드시 post로 사용
+		- enctype
+		  - method 속성이 post인 경우에만 설정
+			- application/x-www-form-urlencoded
+			  - 기본값, 서버로 보내기전 모두 인코딩
+			- multipart/form-data
+			  - 모든 문자들을 인코딩하지 않음
+				- 서버에 파일을 전송할 때 사용
+			- text/plain
+			  - 공백 문자는 +로 변환, 나머지는 인코딩하지 않음
+	-->
+	<!-- 
+	fieldset 태그
+	- form태그 안에 요소들을 묶어서 테두리를 표시
+	legend 태그
+	- fieldset 태그 안에서 묶인 요소들의 대표 이름을 지정
+	-->
+	<!-- 
+	input 태그
+	- form태그 안에서 정보를 입력받은 태그
+	- 속성
+	  - value 
+		  - 초기 값을 설정
+		- name 
+		  - 입력된 값을 서버로 보내기 위해서 반드시 지정해야 하는 속성
+		  - 지정하지 않으면 서버로 데이터 전송이 안됨
+			- 서버에서는 name을 변수이름으로 사용
+		- readonly
+		  - 읽기 전용
+			- 서버로 데이터는 전송 됨
+		- disabled
+		  - 값을 변경할 수 없음
+			- 서버로 데이터 전송이 안됨
+		- required
+		  - 필수 항목에 지정
+			- 입력하지 않고 전송하려고 하면 해당 input창에 알림이 표시되고 전송이 안됨
+		- placeholder 
+		  - 입력하기전 안내 문구를 표시
+			- value를 지정하는 경우와 다른 점은 클릭 했을 때 placeholder는 빈 칸이 됨
+		- autofocus
+		  - 페이지가 로딩 됐을 때 커서를 자동으로 활성화 시킬지 말지를 결정하는 속성
+		- accept
+		  - [type=file]인 경우 파일의 확장자를 제한하는 속성
+			- audio/* : 모든 음원 파일
+			- video/* : 모든 비디오 파일
+			- image/* : 모든 이미지 파일
+			- *.pdf : 모든 pdf 파일
+			- image/*, *.pdf : 모든 이미지와 모든 pdf 파일
+		- checked
+		  - [type=radio] 또는 [type=checkbox]인 경우 초기 체크 상태를 결정하는 속성
+		- src
+		  - [type=image]인 경우 이미지 파일 위치를 지정
+			- img 태그와 비슷한 결과
+		- type 
+			- input 태그의 종류를 결정하는 속성
+			- text : 한 줄 입력창
+			- password : 한 줄 비밀번호 입력창
+			- hidden : 서버에 보내야 하지만 사용자가 볼 필요가 없는 정보일 때 사용
+			- button : 일반 버튼
+			- submit : 모양은 일반 버튼과 동일. form태그안에서 서버로 데이터를 전송할 때 사용
+			- reset : 같은 form태그 안에 있는 모든 input 태그들을 초기화
+			- checkbox : 체크 박스, 다중 선택, name을 동일하게 지정하여 활용
+			- radio : 여러개 중에 한개만 선택할 때 사용. name을 동일하게 지정하여 활용
+			- file : 첨부파일을 선택할 때 사용.
+			- image : 이미지를 가져올 때 사용
+			- color : 색상 정보를 가져올 때 사용
+			- date/datetime/datetime-local/time/month/week : 날짜 관련 정보를 선택할 때 사용
+			- number : 숫자만 입력할 때 사용. 위/아래 화살표를 통해 선택할 수 잇음
+			- range : 슬라이드 막대를 통해 숫자를 조절할 때 사용
+			- search : 검색창. text와 다른 점은 우측에 x버튼이 생김
+			- tel : 전화번호로 인식
+			- email/url : 이메일/url을 입력할 때 사용. 이메일/url 형식에 맞지 않으면 알림
+	-->
+	<h1>회원 가입</h1>
+	<form action="">
+		<fieldset>
+			<legend>필수 정보</legend>
+			<input type="text" name="id" placeholder="아이디를 입력하세요." required> <br>
+			<input type="button" value="아이디 중복 확인"> <br>
+			<input type="password" name="pw" placeholder="비번을 입력하세요." required> <br>
+			<input type="password" name="pw2" placeholder="비번을 입력하세요." required> <br>
+		</fieldset>
+		<fieldset>
+			<legend>선택 정보</legend>
+			<input type="number" name="age" placeholder="나이를 입력하세요."> <br>
+			<input type="email" name="email" placeholder="이메일을 입력하세요."> <br>
+			<div>성별</div>
+			<input type="radio" name="gender" value="남성" checked> 남성
+			<input type="radio" name="gender" value="여성"> 여성 <br>
+			<div>취미</div>
+			<input type="checkbox" name="hobby" value="운동" checked> 운동
+			<input type="checkbox" name="hobby" value="독서"> 독서
+			<input type="checkbox" name="hobby" value="음악감상"> 음악감상
+			<br>
+			<input type="tel" name="phone" placeholder="전화 번호를 입력하세요."> <br>
+		</fieldset>
+		<input type="reset" value="초기화"> <br>
+		<input type="submit" value="전송">
+	</form>
+	<h1>기타</h1>
+	<form action="">
+		<input type="file" name="file"> <br>
+		<input type="file" name="file" accept="image/*"> <br>
+		<input type="color" name="color"> <br>
+		<input type="date" name="date"> <br>
+		<input type="search" name="search" placeholder="검색어를 입력하세요."> <br>
+		1<input type="range" name="range" min="1" max="10" step="1">10 <br>
+		<input type="submit" value="전송">
+	</form>
+
+	<img src="../img/강아지.jpg" alt="강아지" width="100" height="100"> <br>
+	<input type="image" src="../img/강아지.jpg" alt="강아지" width="100" height="100"> <br>
+	<!-- 
+	label 태그
+	- 요소에 레이블을 붙이는 태그
+	- 레이블을 클릭했을 때 해당 레이블과 연결된 입력창을 선택할 때 사용 
+	- 사용 방법
+	  1. label 태그 안에 input 태그를 배치
+		2. input 태그에 id를 지정하고, label 태그에 for 속성 값으로 id명을 추가 -->
+	<div>성별</div>
+	<label>
+		<input type="radio" name="gender" value="남성" checked> 남성
+	</label>
+	<input type="radio" name="gender" value="여성" id="female">
+	<label for="female">여성</label>
+</body>
+</html>

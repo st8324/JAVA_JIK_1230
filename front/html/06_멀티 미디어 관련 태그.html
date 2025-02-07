@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>멀티 미디어 관련 태그</title>
+</head>
+<body>
+	<!-- 
+	img 태그
+	- img를 가져오는 태그
+	- 크기를 지정하지 않으면 원본 이미지 크기를 가져옴
+	- 속성
+		- src : 이미지가 있는 주소
+		- alt : 이미지 불러오기 실패 시 보여줄 문자열. 없으면 웹 표준 검사에 걸림
+		- width/height : 너비/높이. 단위를 안쓰면 px, auto로 지정하면 비율에 맞게 배치 -->
+	<img width="100" height="100" src="../img/강아지.jpg" alt="강아지">
+	<img width="100" height="auto" src="../img/강아지.jpg" alt="강아지">
+	<img width="100" height="auto" src="../img/강아지.jpg" alt="강아지">
+	<img width="50%" height="50%" src="../img/강아지.jpg" alt="강아지">
+	<!-- 
+	map 태그
+	- 요소의 영역을 분할해서 링크를 걸 때 사용
+	- 영역을 분할 요소에 usemap 속성을 이용해서 지정.
+	  - 값으로 #map의 name속성명으로 지정
+	area 태그
+	- 영역을 지정
+	- 속성
+	  - shape
+		  - 도형의 종류를 선택
+			- rect, circle, poly
+		- coords
+		  - 좌표
+			- 도형에 맞게 좌표를 입력
+			- x좌표, y좌표 순
+			- rect : 좌상 좌표, 우하좌표를 지정
+			- circle : 중심점, 반지름을 지정
+			- poly : 여러개의 좌표. 처음 좌표와 마지막 좌표가 동일.
+			  같지 않으면 처음 좌표를 마지막에 자동으로 추가
+	-->
+	<br>
+	<img usemap="#map1" width="100" height="100" src="../img/강아지.jpg" alt="강아지">
+	<map name="map1">
+		<area shape="rect" coords="0,0,50,50" href="https://google.com" alt="구글">
+		<area shape="circle" coords="75,25,25" href="https://naver.com" alt="네이버">
+		<area shape="poly" coords="0,50,50,50,50,100,0,100" href="https://daum.net" alt="다음">
+		<area shape="poly" coords="75,50,100,100,50,100" href="https://google.com" alt="구글">
+	</map>
+	<!-- 
+	audio 태그
+	- 소리를 재생하는 태그
+	- 속성
+	  - control : 컨트롤러를 보여줌
+		- autoplay : 자동 재생, 브라우저 설정에 따라 자동 재생을 설정해도 재생이 안될 수 있음
+		- loop : 반복
+		- preload : 재생 전 다운로드를 할지 말지를 결정
+		  - none : 미리 받지 않음
+			- metadata : 메타데이터만 미리 받음
+			- auto : 미리 받음
+
+	video 태그
+	- 영상을 재생하는 캐그
+	- audio 태그 속성들을 그대로 사용할 수 있음
+	- 속성
+	  - poster : 재생 시작전의 보여줄 이미지를 지정
+		- width/height : 너비/ 높이를 지정
+	-->
+	<video width="300" height="300" controls src="../img/video.mp4"
+		preload="metadata" autoplay></video>
+</body>
+</html>

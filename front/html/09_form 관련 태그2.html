@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>form 관련 태그</title>
+</head>
+<body>
+	<!-- 
+	select 태그
+	- 미리 지정된 값들 중 하나를 선택할 때 사용
+	- option태그와 함께 사용(필수)
+	- optgroup 태그와 함게 사용(선택)
+	- 속성
+	  - multiple : 다중 선택
+		
+	
+	option 태그
+	- value 속성이 있으면 선택 되었을 때 value값을 전송하고, 
+	  없으면 option태그 안에 있는 문자열을 전송
+	- selected 속성 : 초기 선택할 값이 있는 option 태그에 추가
+	
+	optgroup 태그
+	- option 태그를 묶어서 그룹으로 만들 때 사용
+	- label 속성을 이용하여 목록 이름을 지정
+	-->
+	<form action="">
+		<h1>당신의 생일은?</h1>
+		<select name="year">
+			<option value="">선택안함</option>
+			<optgroup label="90년대">
+				<option>1998</option>
+				<option selected>1999</option>
+			</optgroup>
+			<optgroup label="00년대">
+				<option value="2000">2000</option>
+				<option>2001</option>
+			</optgroup>
+		</select>
+		<br>
+		<button type="submit">전송</button>
+	</form>
+	<!-- 
+	datalist 태그
+	- 지정된 값들 중에서 입력할 때 사용
+	- option태그, input 태그와 함께 사용
+	- datalist 태그에 id를 지정하고 list 태그에 list 속성 값으로 datalist 태그의 id 값을 지정
+	-->
+	<!-- 
+	button 태그
+	- 버튼 태그
+	- type 속성
+	  - button : 일반 보튼
+		- submit : 기본값, 전송할 때 사용
+		- reset : 값을 초기화할 때 사용
+	-->
+	<form action="">
+		<h1>거주중인 도시는?</h1>
+		<input type="text" list="cities"> <br>
+		<datalist id="cities">
+			<option>서울</option>
+			<option>대전</option>
+			<option>대구</option>
+			<option>부산</option>
+			<option>서산</option>
+			<option>울산</option>
+		</datalist>
+		<button>전송</button>
+	</form>
+	<!-- 
+	textarea 태그
+	- 여러 행의 문자열을 입력할 때 사용. 쌍 태그
+	- value에 값을 지정하지 않고 태그 안에 넣어줌
+	- rows, cols 속성을 이용하여 행과 열의 개수를 지정 -->
+	<textarea name="content" rows="10" cols="100">123</textarea>
+</body>
+</html>
