@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>선택자</title>
+	<!-- 
+	style 태그 또는 css 파일에서 스타일 적용 방법
+	선택자{
+		속성명 : 값;
+		속성명 : 값;
+	}
+	
+	선택자 종류
+	- 전체 선택자 
+	  - 모든 요소를 선택
+		- *
+	- 태그 선택자
+	  - 특정 태그를 선택
+		- 태그명
+	- 클래스 선택자
+	  - 특정 클래스를 가진 요소를 선택
+		- .클래스명
+	- 아이디 선택자
+	  - 특정 아이디를 가진 요소를 선택
+		- #아이디명
+	- 속성 선택자
+	  - 특정 속성을 가지거나 특정 속성의 값이 일치하는 요소를 선택
+		- [속성명]
+		- [속성명=값]
+	-->
+		<style>
+			*{color: red;}
+			a{text-decoration: none;}
+			.first{font-size: 30px;}
+			#center{background-color: yellow;}
+			[id]{border: 1px solid black;}
+			[id=center]{border-color: skyblue;}
+		</style>
+</head>
+<body>
+	<a href="#" class="first" id="one">링크1</a>
+	<a href="#">링크2</a>
+	<a href="#" id="center">링크3</a>
+	<a href="#">링크4</a>
+	<a href="#">링크5</a>
+	<span>링크6</span>
+</body>
+</html>
