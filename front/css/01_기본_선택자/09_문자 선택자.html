@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>문자 선택자</title>
+	<style>
+		/* 
+		선택자::first-letter
+		  - 첫번째 글자를 선택
+		
+		선택자::first-line
+		  - 첫번째 줄을 선택
+		
+		선택자::selection
+		  - 드래그한 글자를 선택
+		
+		선택자::before
+		  - 요소 앞에 공간을 선택
+			- content 속성을 반드시 추가
+		
+		선택자::after
+		  - 요소 뒤에 공간을 선택
+			- content 속성을 반드시 추가
+		*/
+		p::first-letter{ font-size: 30px;}
+		p::first-line{color: red;}
+		p::selection{ background-color: yellow;}
+		.name::before{ content: "제 이름은 ";}
+		.name::after{ content: "입니다.";}
+		.bar{ 
+			padding-left: 10px; position: relative;
+			float: left;
+		}
+		.bar~.bar::before{
+			content: ''; width: 4px; height: 4px;
+			position: absolute; background-color: red;
+			top: 8px; left: 4px; border-radius: 50%;
+		}
+		.bar::after{
+			content: ''; height: 14px; width: 1px;
+			position: absolute; background-color: red;
+			top: 4px; right: -5px;
+		}
+	</style>
+</head>
+<body>
+	<p>안녕하세요. 제이름은 홍길동입니다. 안녕하세요. 제이름은 홍길동입니다. 안녕하세요. 제이름은 홍길동입니다. 안녕하세요. 제이름은 홍길동입니다. 안녕하세요. 제이름은 홍길동입니다. 안녕하세요. 제이름은 홍길동입니다. 안녕하세요. 제이름은 홍길동입니다. </p>
+	<div class="name">홍길동</div>
+	<div class="bar">테스트</div>
+	<div class="bar">테스트</div>
+	<div class="bar">테스트</div>
+</body>
+</html>
