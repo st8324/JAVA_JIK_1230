@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>문단 스타일</title>
+	<style>
+		/* 
+		direction 
+		- 글자 쓰기 방향
+		- ltr : 기본 값. 왼쪽에서 오른쪽으로
+		- rtl : 오른쪽에서 왼쪽으로
+
+		text-align
+		- 자식 요소(inline 또는 inline-block)의 위치를 조절
+		- 보통은 글자 정렬
+		- center : 가운데 정렬
+		- right : 우측 정렬
+		- left : 좌측 정렬
+		- justify : 양쪽 정렬
+
+		text-indent
+		- 들여쓰기(양수). 내어쓰기(음수)
+		
+		text-overflow
+		- 영역을 벗어난 텍스트 속성을 표시하는 방법을 설정
+		- clip : 자름
+		- ellipsis : 말줄임(...)
+		*/
+		.direction{ direction: ltr;}
+		.direction-rtl{ direction: rtl;}
+		.text-align-left{ text-align: left;}
+		.text-align-right{ text-align: right;}
+		.text-align-center{ text-align: center;}
+		.text-align-justify{ text-align: justify;}
+		.text-indent1{ text-indent: 20px;}
+		.text-indent2{ text-indent: -10px;}
+		.text-overflow-clip{ text-overflow: clip; white-space: nowrap; overflow: hidden;}
+		.text-overflow-ellipsis{ text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+	</style>
+</head>
+<body>
+	<div>
+		<div class="direction">
+			안녕하세요. 제 이름은 홍길동입니다.
+		</div>
+		<div class="direction-rtl">
+			안녕하세요. 제 이름은 홍길동입니다.
+		</div>
+	</div>
+	<hr>
+	<div>
+		<div class="text-align-left">
+			안녕하세요. 제 이름은 홍길동입니다. 만나서 반갑습니다.
+		</div>
+		<div class="text-align-right">
+			안녕하세요. 제 이름은 홍길동입니다. 만나서 반갑습니다.
+		</div>
+		<div class="text-align-center">
+			안녕하세요. 제 이름은 홍길동입니다. 만나서 반갑습니다.
+		</div>
+		<div class="text-align-justify">
+			안녕하세요. 제 이름은 홍길동입니다. 만나서 반갑습니다.
+		</div>
+	</div>
+	<hr>
+	<div>
+		<div class="text-indent1">
+			안녕하세요. 제 이름은 홍길동입니다. 만나서 반갑습니다.
+		</div>
+		<div class="text-indent2">
+			안녕하세요. 제 이름은 홍길동입니다. 만나서 반갑습니다.
+		</div>
+	</div>
+	<hr>
+	<div>
+		<div class="text-overflow-clip">안녕하세요. 제 이름은 홍길동입니다. 만나서 반갑습니다.</div>
+		<div class="text-overflow-ellipsis">안녕하세요. 제 이름은 홍길동입니다. 만나서 반갑습니다.</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>목록 스타일</title>
+	<style>
+		/* 
+		ol, ul 태그 관련 스타일
+
+		list-style-type
+		- 마커 종류를 선택
+		- ul 태그
+		  - disc(기본값), circle, square, none
+		- ol 태그
+		  - decimal(기본값), decimal-leading-zero
+			- lower-roman/upper-roman
+			- lower-alpha/upper-alpha
+			- lower-latin/upper-latin
+
+		list-style-image
+		- 마커를 이미지로 대체
+		- url 함수를 이용해서 이미지를 가져옴
+
+		list-style-position
+		- 마커의 위치를 조절
+		- inside : li 태그 안쪽
+		- outside : li 태그 바깥쪽(기본값)
+
+		list-style
+		- list-style-type list-style-postion list-style-image를
+		  한 번에 적용하는 속성
+		- list-style-type:none; 대신 list-style : none; 으로 마커를 제거
+		*/
+		.list{
+			/* list-style-type: square;
+			list-style-image: url(../../img/마커.png); */
+			list-style: square url(../../img/마커.png);
+		}
+		.list2{
+			list-style-position: inside;
+			/* list-style: none; */
+		}
+	</style>
+</head>
+<body>
+	<ul class="list">
+		<li>메뉴1</li>
+		<li>메뉴2</li>
+		<li>메뉴3</li>
+	</ul>
+	<ul class="list2">
+		<li>메뉴1</li>
+		<li>메뉴2</li>
+		<li>메뉴3</li>
+	</ul>
+</body>
+</html>

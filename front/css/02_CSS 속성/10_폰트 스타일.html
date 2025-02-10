@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>폰트 관련 속성</title>
+	<style>
+		/* 
+		단위
+		- px : 고정 픽셀
+		- % : 기본 값의 %, 100% 기본 값
+		- em : 부모 요소의 배수
+		- rem : 최상위 요소의 배수
+		- vh : view height. 브라우저 높이를 100으로 나눈 값. 100vh가 현재 브라우저 높이
+		- vw : view width. 브라우저 너비를 100으로 나눈 값. 100vw가 현재 브라우저 너비
+		- vmin/vmax : vh와 vw 중 작은값/큰값
+		- deg : 각도
+
+		font-family
+		- 글자 폰트를 지정
+		- 여러 글자 폰트를 ,를 이용해서 추가
+		  - 왼쪽에 있는 폰트가 없는 경우 옆에 있는 폰트가 적용
+			- 보통은 가장 오른쪽에 기본 폰트를 작성
+		- 폰트명에 공백이 없으면 '' 나 ""를 생략가능
+		- 폰트명에 공백이 있으면 '' 나 ""를 반드시 붙여야 함
+		- 폰트명이 한글인 경우 한글명, 영문명 모두 작성
+		font-family : "폰트1", "폰트2", "기본 폰트"
+
+		font-size 
+		- 폰트 크기
+		- 숫자와 단위를 함께 입력
+
+		font-weight
+		- 글자 두께
+		- 100~900사이의 값을 입력
+		  - 100단위로 입력
+		- normal : 400
+		- bold : 700
+		- border : 기본보다 더 굵게
+		- lighter : 기본보다 더 가늘게
+
+		font-variant
+		- 영어를 작은 대문자로 표시
+		- normal, small-caps
+		*/
+		* { font-family: 'Times New Roman', Times, serif;}
+		h1{ font-size: 20px; font-weight: 900;}
+		h2{ font-variant: small-caps;}
+	</style>
+</head>
+<body>
+	<h1>안녕하세요.</h1>
+	<h2>Hello world</h2>
+</body>
+</html>
