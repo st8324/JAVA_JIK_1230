@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>크기 스타일</title>
+	<style>
+		/*
+		box 모델
+		- margin, border, padding, content로 구성
+		- margin은 여백으로 요소의 시작 위치를 결정. 
+		- border는 테두리
+		- padding은 테두리 안쪽의 여백
+		- content는 컨텐츠
+		
+		box-sizing
+		- width/height 속성의 계산 방식을 설정하는 속성
+		- content-box
+		  - 기본값
+			- width/height를 컨텐츠의 너비/높이로 계산
+		- border-box
+		  - width/height를 컨텐츠 + 패딩 + 테두리를 합한 값으로 계산
+
+		width
+		- box-sizing 값에 따라 달라짐
+		- 기본값 : auto. 태그 종류에 따라 크기가 달라짐
+			- block 태그는 부모의 100%, inline-block 태그는 컨텐츠의 크기
+		
+		height
+		- box-sizing 값에 따라 달라짐
+		- 기본값은 자식 요소들의 높이가 있으면 자식 요소 높이, 없으면 0
+		*/
+		.box{ width: 100px; height: 100px; border: 10px solid black; padding: 10px;}
+		/* 
+		.box1은 컨텐츠의 너비만 100px. 좌우 패딩이 각각 10px.
+		좌우 테두리가 각가 10px. 그래서 실제 총 크기는? 140px
+		*/
+		.box1{ box-sizing: content-box;}
+		/* 
+		.box2는 좌우 테두리 + 좌우 패딩 + 컨텐츠 크기가 합쳐서 100px
+		컨텐츠 크기는 60px
+		*/
+		.box2{ box-sizing: border-box;}
+	</style>
+</head>
+<body>
+	<div class="box box1">1</div>
+	<div class="box box2">2</div>
+</body>
+</html>

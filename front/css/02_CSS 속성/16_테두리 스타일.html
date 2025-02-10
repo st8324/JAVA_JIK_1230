@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>테두리 스타일</title>
+	<style>
+		/* 
+		border-??-style
+		- 테두리의 종류를 지정하는 속성
+		- ?? : top, right, bottom, left가 들어감
+		border-style
+		- border-top-style border-right-style border-bottom-style border-left-style을 한번에 
+		  적용하는 속성
+		- border-style : a b c d
+		  - top은 a, right는 b, bottom은 c, left는 d를 설정
+		- border-style : a b c
+		  - top은 a, right, left는 b, bottom은 c
+		- border-style : a b
+		  - top, bottom은 a, right, left는 b
+		- border-style : a
+		  - 모두 a
+
+		border-??-width
+		- 테두리 두께 지정.
+		- ?? : top, right, bottom, left가 들어감
+		border-width
+		- 테두리 두께를 한번에 지정하는 속성
+		- border-style 속성 설명을 참고
+
+		border-??-color
+		- 테두리 색상을 지정
+		- ?? : top, right, bottom, left가 들어감
+		border-color
+		- 테두리 색상을 한번에 지정하는 속성
+		- border-style 속성 설명을 참고
+
+		border-??
+		- 테두리 두께 종류 색상을 한번에 지정하는 속성
+		- ?? : top, right, bottom, left가 들어감
+		
+		border
+		- 모든 테두리의 종류를 한번에 지정하는 속성
+
+		border-a-b-radius
+		- 둥근 테두리를 만드는 속성
+		- (a,b) : (left, top), (right, top), (right, bottom), (left,bottom)
+		
+		border-radius
+		- 위 border-a-b-radius를 합친 속성
+
+		*/
+		.box{ 
+			width: 100px; height: 100px; 
+			background-color: yellow; 
+			margin-bottom: 10px;
+		}
+		.box1{
+			border-top-style: solid;
+			border-top-width: 2px;
+			border-top-color: red;
+			border-right: 3px solid blue;
+			border-bottom: 4px solid green;
+			border-left: 5px solid black;
+		}
+		.box2{
+			border-style: solid;
+			border-width: 2px;
+			border-color: red;
+		}
+		.box3{ border: 2px solid red;}
+		.box4{ 
+			border: 2px solid red;
+			border-width: 2px 3px 4px 5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box box1"></div>
+	<div class="box box2"></div>
+	<div class="box box3"></div>
+	<div class="box box4"></div>
+</body>
+</html>
