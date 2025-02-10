@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>테두리 예제</title>
+	<style>
+		.box{
+			width: 300px; height: 300px; 
+			border: 2px solid red;
+			border-bottom: 0; /* 두께를 0으로 */
+			border-bottom: none; /* 선을 없음으로 */
+			border-width: 2px 2px 0;
+		}
+	</style>
+</head>
+<body>
+	<!-- 
+	너비, 높이가 300px 사각형을 만들고, 테두리를 다음과 같이 적용되도록 구성하세요.
+	상,좌,우 : 두께 2px, 색상 red, 종류 : 실선
+	하 : 없음
+	-->
+	<div class="box"></div>
+</body>
+</html>
