@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>위로 가기</title>
+	<style>
+		/* 
+		위로가기 버튼을 추가한 후 버튼을 클릭하면 제일 위로 올라가도록 작성 
+		- 버튼은 너비/높이가 100px인 원 버튼으로 구성
+		*/
+		.up-box{
+			bottom: 10px; right: 10px;
+			width: 100px; height: 100px; border: 1px solid black;
+			text-align: center;	line-height: 100px; font-size: 30px; font-weight: bold; 
+			
+			color: black;
+			text-decoration: none;
+			position: fixed; border-radius: 50%; 
+		}
+	</style>
+</head>
+<body style="height: 1000px;" id="top">
+	<a href="#top" class="up-box">위로</a>
+</body>
+</html>
