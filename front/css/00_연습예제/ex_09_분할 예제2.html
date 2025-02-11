@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>분할 예제</title>
+	<style>
+		.container{ border: 3px solid red; padding: 10px;}
+		.box{
+			height: 200px; width: calc( ( 100% - 10px) / 2);
+			border: 3px solid blue; box-sizing: border-box;
+			float: left;
+		}
+		/* .container :nth-child(2){ float: right;} */
+		.box+.box{ margin-left: 10px;}
+		.inner-container::after{ clear: both; content: ''; display: block;}
+
+		.container > :nth-child(2) .box{
+			width: calc( ( 100% - 2 * 10px) / 3);;
+		}
+		.inner-container+.inner-container{ margin-top: 10px;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="inner-container">
+			<div class="box"></div>
+			<div class="box"></div>
+		</div>
+		<div class="inner-container">
+			<div class="box"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>calc 함수</title>
+	<style>
+		/* 
+		calc() 함수
+		- 단위가 다른 값들을 계산할 때 사용
+		- 연산자 앞 뒤로 공백을 반드시 추가
+		*/
+		.box{
+			height: 100px; width: calc(50% - 5px); float: left;
+			border: 1px solid black; box-sizing: border-box;
+		}
+		div:nth-of-type(2){ float: right;}
+	</style>
+</head>
+<body>
+	<div class="box">1</div>
+	<div class="box">2</div>
+</body>
+</html>
