@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>overflow</title>
+	<style>
+		/* 
+		overflow
+		- 요소 안에 있는 컨텐츠가 요소 크기를 벗어났을 때 처리 방법을 설정
+		- auto : 범위를 넘어가면 scroll, 없으면 hidden
+		- hidden : 범위를 넘어가는 요소를 안보이게 감춤
+		- scroll : 스크롤을 추가해서 넘어가는 요소를 확인 
+		  - 범위가 넘어가는 요소가 없어도 스크롤을 추가
+		- visible : 넘어가는 부분을 보여줌. 기본값 */
+		.box{ 
+			width: 100px; height: 100px; border: 1px solid black;
+			margin-bottom: 100px;
+		}
+		.box1{ overflow: visible;}
+		.box2{ overflow: auto;}
+		.box3{ overflow: auto;}
+		.box4{ overflow: scroll;}
+		.box5{ overflow: scroll;}
+		.box6{ overflow: hidden;}
+
+		/* 스크롤바를 안보이게 감춤 */
+		.box7{ 
+			overflow: auto; 
+			scrollbar-width: none;
+		}
+
+		.box7::-webkit-scrollbar{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="box box1">안녕하세요. 제 이름은... 안녕하세요. 제 이름은... 안녕하세요. 제 이름은... 안녕하세요. 제 이름은... </div>
+	<div class="box box2">안녕하세요. 제 이름은... 안녕하세요. 제 이름은... 안녕하세요. 제 이름은... 안녕하세요. 제 이름은... </div>
+	<div class="box box3">안녕하세요. 제 이름은..</div>
+	<div class="box box4">안녕하세요. 제 이름은... 안녕하세요. 제 이름은... 안녕하세요. 제 이름은... 안녕하세요. 제 이름은... </div>
+	<div class="box box5">안녕하세요. 제 이름은...</div>
+	<div class="box box6">안녕하세요. 제 이름은... 안녕하세요. 제 이름은... 안녕하세요. 제 이름은... 안녕하세요. 제 이름은... </div>
+	<div class="box box7">안녕하세요. 제 이름은... 안녕하세요. 제 이름은... 안녕하세요. 제 이름은... 안녕하세요. 제 이름은... </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>배경 스타일</title>
+	<style>
+		/* 
+		background-color
+		- 배경색을 지정
+
+		background-clip
+		- 박스 모델에서 어디까지를 배경으로 할지 배경 범위를 설정
+		- border-box : 테두리까지 배경으로
+		- padding-box : 패딩까지 배경으로
+		- content-box : 컨텐츠만 배경으로
+
+		background-image
+		- 배경 이미지를 설정
+		- url 함수와 함께 사용
+
+		background-size
+		- 배경 이미지 크기를 설정
+		- auto : 배경 이미지의 원본 크기
+		- contain : 이미지가 요소 안으로 들어갈 수 있게 확대/축소. 여백이 생길 수 있음
+		- cover : 요소를 이미지가 덮을수 있도록 확대/축소
+		- px, % : 지정된 값만큼 확대 또는 축소. width height 순으로 입력
+
+		background-repeat
+		- 배경 이미지를 반복해서 보여줄지 만지를 결정하는 속성
+		- 배경 이미지보다 요소가 큰 경우
+		- repeat : 수평/수직 반복
+		- repeat-x : 수평 반복
+		- repeat-y : 수직 반복
+		- no-repeat : 반복 X
+
+		background-position
+		- 배경 이미지 위치를 조절
+		- 수평 수직 순으로 입력
+		- left/center/right : 수평 위치를 조절
+		- top/center/bottom : 수직 위치를 조절
+		- px, % : px, %로 수평/수직 위치를 조절
+
+		background-origin
+		- 배경 이미지를 배치할 때 기준을 정하는 속성
+		- border-box : 테두리 기준으로 배치
+		- padding-box : 패딩 기준으로 배치
+		- content-box : 컨텐츠 기준으로 배치
+
+		background-attachment
+		- 웹페이지가 위아래로 움직여도 배경은 움직이지 않게 고정하는 속성
+		- scroll : 기본값, 배경 이미지가 움직임
+		- fixed : 배경 이미지가 움직이지 않게 고정
+		*/
+		[class^=box]~div{ margin-top: 50px;}
+		.box1{
+			width: 300px; height: 300px; padding: 50px; border: 10px solid transparent;
+			background-color: gray;
+			background-clip: content-box;
+		}
+		.box2{
+			width: 300px; height: 300px;
+			background-color: yellow; 
+			background-image: url(../../img/강아지.jpg);
+			background-size: 150px 150px;
+			/* background-size: contain;
+			background-position: center; */
+			background-repeat: repeat-y;
+		}
+		.box3{
+			width: 300px; height: 300px;
+			background-color: yellow; 
+			background-image: url(../../img/강아지.jpg);
+			background-repeat: no-repeat;
+			/* background-position: -100px -100px; */
+			border: 20px solid transparent; padding: 20px;
+			background-origin: content-box;
+		}
+		.box4{
+			height: 1000px;
+			background-color: yellow; 
+			background-image: url(../../img/강아지.jpg);
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+		.box5{
+			height: 1000px;
+			background: yellow url(../../img/강아지.jpg) no-repeat fixed;
+		}
+		/* 
+		background
+		- color image reapeat attachment position clip oring size를 
+		  한번에 적용하는 단축 속성
+		*/
+	</style>
+</head>
+<body>
+	<div class="box1"></div>
+	<div class="box2"></div>
+	<div class="box3"></div>
+	<div class="box4"></div>
+	<div class="box5"></div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>opacity</title>
+	<style>
+		/* 
+		opacity
+		- 투명도를 설정하는 속성
+		- 0~1사이의 실수
+		- 0이면 투명, 1이면 불투명
+		- 부모 요소가 투명도가 적용되면 자식 요소도 따라 감
+		  - 자식 요소의 투명도를 1로 해도 흐릿하게 보임
+		*/
+		.box{ background-color: gray; padding: 30px; opacity: 0.5;}
+		.inner-box{ background-color: red; height: 100px; opacity: 1;}
+		.box2{ opacity: 1; background-color: rgba(128,128,128,0.5);}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="inner-box">123</div>
+	</div>
+	<div class="box box2">
+		<div class="inner-box">123</div>
+	</div>
+</body>
+</html>
