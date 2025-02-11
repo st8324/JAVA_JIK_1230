@@ -35,6 +35,11 @@
 		- rifght : 오른쪽 float 요소의 높이를 계산한 후 배치
 		- both : 왼쪽 float 요소와 오른쪽 float 요소의 높이 중 긴 요소를 기준으로 배치
 		*/
+		.clear-box .box1{ height: 200px; float: left; width: 100px; border: 1px solid black;}
+		.clear-box .box2{ height: 300px; float: right; width: 100px; border: 1px solid black;}
+		.clear-box::after{
+			content: ''; display: block; clear: left;
+		}
 	</style>
 </head>
 <body>
@@ -49,7 +54,6 @@
 		<div class="box">2</div>
 		<div class="box">3</div>
 	</div>
-
 	<div class="container3">
 		<div class="clear-box">
 			<div class="box1">1</div>
