@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>position</title>
+	<style>
+		/* 
+		position
+		- 요소를 배치하는 방식을 지정하는 속성
+		- static(기본값), relative, absolute, fixed
+		- fixed
+		  - 요소를 브라우저를 기준으로 위치를 고정
+			- top, left, right, bottom 속성을 이용해서 위치를 조절
+			  - +값이면 박스 안쪽으로, -값이면 박스 바깥쪽으로
+		- relative
+		  - 요소의 상대위치를 계산해서 배치
+			  - top, left, right, bottom 속성을 이용해서 위치를 조절
+				- 다른 요소에 영향을 주지 않음
+			- absolute의 기준점이 됨
+		- absolute
+		  - 기준 요소를 기준으로 위치를 조절해서 배치
+			  - 기준 요소 : 
+				  - position : relative가 적용된 가장 가까운 조상 요소
+					- position : relative가 적용된 조상이 없는 경우 브라우저를 기준으로 배치
+			- top, botton, left, right 속성을 이용해서 위치를 조절(width/height가 있는 경우)
+			- top, botton, left, right 속성을 이용해서 요소의 크기를 설정(width/height가 없는 경우)
+			- absolute가 적용된 요소는 부모 요소의 높이에 영향을 주지 않음
+
+		 */
+		.box{ 
+			width: 100px; height: 100px; display: inline-block;
+			border: 1px solid black; text-align: center;
+			font-size: 30px; font-weight: bold; 
+			line-height: 100px; 
+		}
+		.relative-box .box{ position: relative; }
+		/* 첫 번째 박스를 제외한 나머지 박스에 margin-left : 50px를 적용 */
+		.relative-box .box+.box{ margin-left: 50px;}
+
+		/* 첫 번째 박스를 선택하는 선택자 */
+		.relative-box > div:first-of-type{ top: 50px;		}
+		.relative-box > :nth-child(2){ left: 30px;		}
+		.relative-box > :nth-child(3){ bottom: 30px;		}
+		.relative-box > :nth-child(4){ right: 30px;		}
+		.relative-box > :nth-child(5){ top: 30px; left: 30px;		}
+
+		.static-box{ margin-top: 100px;}
+		/* 첫번째 요소에 마진-탑을 주면 다른 요소도 같이 내려감 */
+		.static-box :first-child{ margin-top: 50px;}
+
+		.fixed-box{ position: fixed; bottom: 10px; right: 10px;}
+
+		.absolute-box{position: relative; margin-top: 50px;}
+		.absolute-box .box{ position: absolute;}
+		.absolute-box > div:nth-of-type(1){ top: 0; left: 0;		}
+		.absolute-box > div:nth-of-type(2){ top: 0; left: 150px;		}
+		.absolute-box > div:nth-of-type(3){ top: 0; left: 300px;		}
+		.absolute-box > div:nth-of-type(4){ top: 0; left: 450px;		}
+		.absolute-box > div:nth-of-type(5){ top: 0; left: 600px;		}
+
+	</style>
+</head>
+<body style="height: 1000px;">
+	<div class="relative-box">
+		<div class="box">H</div>
+		<div class="box">E</div>
+		<div class="box">L</div>
+		<div class="box">L</div>
+		<div class="box">O</div>
+	</div>
+	<div class="static-box">
+		<div class="box">H</div>
+		<div class="box">E</div>
+		<div class="box">L</div>
+		<div class="box">L</div>
+		<div class="box">O</div>
+	</div>
+	<div class="fixed-box box">위로</div>
+	<div class="absolute-box">
+		<div class="box">H</div>
+		<div class="box">E</div>
+		<div class="box">L</div>
+		<div class="box">L</div>
+		<div class="box">O</div>
+	</div>
+</body>
+</html>

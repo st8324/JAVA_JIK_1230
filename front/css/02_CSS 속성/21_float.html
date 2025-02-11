@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>float</title>
+	<style>
+		.box{
+			bottom: 10px; right: 10px;
+			width: 33.33%; height: 100px; border: 1px solid black;
+			text-align: center;	line-height: 100px; font-size: 30px; font-weight: bold; 
+			box-sizing: border-box;
+		}
+		.container1 .box{ display: inline-block;}
+		.container1{ font-size: 0;}
+
+		/* 
+		float
+		- 요소를 왼쪽 또는 오른쪽으로 배치할 때 사용
+		- 요소들이 공백없이 붙음(엔터에 의한 공백이 없어짐)
+		- 부모 요소의 높이가 안잡힘
+		  - 해결방법 있음
+		- 요소의 width를 지정하지 않으면 컨텐츠의 크기만큼 width가 잡힘
+		- display의 inline, block, inline-block이 의미가 없어짐
+		*/
+		.container2{margin-top: 50px;}
+		.container2 .box{ float: left;}
+		.container2::after{
+			content: ''; clear: both; display: block;
+		}
+		/* 
+		clear
+		- float이 적용된 요소가 있으면 다음 요소에 영향을 미치는데 이를 초기화하는 속성
+		- left : 왼쪽 float 요소의 높이를 계산한 후 배치
+		- rifght : 오른쪽 float 요소의 높이를 계산한 후 배치
+		- both : 왼쪽 float 요소와 오른쪽 float 요소의 높이 중 긴 요소를 기준으로 배치
+		*/
+	</style>
+</head>
+<body>
+	<div class="container1">
+		<div class="box">1</div>
+		<div class="box">2</div>
+		<div class="box">3</div>
+	</div>
+
+	<div class="container2">
+		<div class="box">1</div>
+		<div class="box">2</div>
+		<div class="box">3</div>
+	</div>
+
+	<div class="container3">
+		<div class="clear-box">
+			<div class="box1">1</div>
+			<div class="box2">2</div>
+		</div>
+		<div>
+			안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 
+		</div>
+	</div>
+</body>
+</html>
