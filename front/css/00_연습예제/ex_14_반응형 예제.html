@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>반응형 예제</title>
+	<style>
+		
+		.box{
+			height: 100px; box-sizing: border-box; width: 100%;
+			border: 1px solid black; background-color: yellow;
+		} 
+		@media screen and (min-width:600px) and (max-width:900px) {
+			.box{ width: 33.33%; float: left;}
+		}
+		@media screen and (max-width:600px) {
+			.box{ width: 100%; float: left;}
+		}
+		@media screen and (min-width:900px) {
+			.box{ width: calc(100% / 6); float: left;}
+		}
+	</style>
+</head>
+<body>
+	<!-- 
+	너비가 600px 이하이면 한 라인에 박스가 1개씩 배치가 되고
+	너비가 900px 이하이면 한 라인에 박스가 3개씩 배치가 되고
+	너비가 900px을 넘으면 한 라인에 박스가 6개 배치 되도록 작성 -->
+	<div class="box">1</div>
+	<div class="box">2</div>
+	<div class="box">3</div>
+	<div class="box">4</div>
+	<div class="box">5</div>
+	<div class="box">6</div>
+</body>
+</html>
