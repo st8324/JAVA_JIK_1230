@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>반응형 적용 예제</title>
+	<style>
+		/* 
+		같은 화면을 다양한 기기에서 보는데, 기기마다 화면 크기가 다름
+		=> PC에서 보던 화면을 모바일에서 보면 불편
+		=> 기기 크기마다 다르게 보이게 하는 것 => 반응형
+
+		반응형 적용 방법
+		1. style 태그 안에 @media 쿼리를 이용
+		2. style 태그에 media 속성을 이용
+		3. link 태그에 media 속성을 이용
+		*/
+		.box{ 
+			width: 100px; height: 100px; border: 1px solid black;
+			margin-bottom: 50px;
+		}
+		/* 
+		style태그가 동작이 되고, 
+		화면에 따라 @media가 동작이 되거나 안될수 있음 */
+		@media screen and (max-width:600px) {
+			.box1{ background-color: yellow; width: 100%;}
+		}
+	</style>
+	<!-- 화면에 따라 style 태그가 동작이 되거나 안될 수 있음 -->
+	<style media="screen and (max-width:600px)">
+		.box2{background-color: yellow; width: 100%;}
+	</style>
+	<link rel="stylesheet" href="29_반응형 적용.css" 
+	  media="screen and (max-width:600px)">
+</head>
+<body>
+	<div class="box box1">1</div>
+	<div class="box box2">2</div>
+	<div class="box box3">3</div>
+</body>
+</html>
