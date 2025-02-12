@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>메뉴 예제(flex)</title>
+	<style>
+		*{padding: 0; margin-top: o;}
+		.menu-list{ 
+			list-style: none; display: flex;
+		}
+		.menu-item{
+			height: 50px; border: 2px solid black; width: 100%;
+		}
+		.menu-link{ 
+			color: black; text-decoration: none;
+			height: 100%; display: block; text-align: center;
+			line-height: 50px;
+		}
+		.nav1 .menu-item+.menu-item{
+			border-left: none;
+		}
+		.nav2 .menu-item+.menu-item{
+			margin-left: -2px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 
+	11번 메뉴 예제와 같이 메뉴가 구성되도록 display : flex를 이용해서
+	구성하세요. 
+	-->
+	<nav class="nav1">
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3</a>
+			</li>
+		</ul>
+	</nav>
+	<nav class="nav2">
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3</a>
+			</li>
+		</ul>
+	</nav>
+</body>
+</html>
