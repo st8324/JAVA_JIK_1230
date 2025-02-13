@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>js - 자료형</title>
+	<script>
+		/* 
+		1. 숫자 : number
+		  - 정수, 실수를 모두 포함
+			- Infinity, -Infinity, NaN 도 숫자로 인식
+			- NaN : Not a Number
+		2. 문자열 : string
+		  - "", '', `` 안에 있는 값들
+			- `` 안에 ${변수명}을 이용해서 변수값을 쉽게 문자열에 넣을 수 있음
+		3. boolean
+		  - true, false
+		4. null
+		  - object
+			- 값이 없음을 나타냄
+		5. bigint
+		  - 큰 정수를 나타낼 때 사용
+			- 접미사 n을 붙임
+		6. 심볼 : symbol
+		  - 고유하고 변경 불가능한 자료형
+			- 주로 객체의 속성키로 사용
+		7. object
+		  - 객체, 배열, null
+			- 객체
+			{
+				속성명1 : 값1,
+				속성명2 : 값2
+			}
+			- 배열
+			  - [값1, 값2,...]
+				- 다른 자료형의 값들이 올 수 있음
+		8. undefined
+		  - 초기화 하지 않은 변수에 들어가는 값
+		9. function
+		  - 함수. 함수나 메소드 모두 function.
+		typeof
+		  - 변수 또는 값의 자료형을 알려주는 연산자
+		*/
+		var age = 20;
+		var str = `당신의 나이는 ${age}살 입니다.`;
+		document.write(str + '<br>');
+
+		document.write(`${1}의 자료형은 ? ${typeof 1}` + '<br>');
+		document.write(`${3.14}의 자료형은 ? ${typeof 3.14}` + '<br>');
+		document.write(`${NaN}의 자료형은 ? ${typeof NaN}` + '<br>');
+		document.write(`${Infinity}의 자료형은 ? ${typeof Infinity}` + '<br>');
+		document.write(`${-Infinity}의 자료형은 ? ${typeof -Infinity}` + '<br>');
+		
+		document.write("<hr>");
+
+		document.write(`""의 자료형은 ? ${typeof ""}` + '<br>');
+		document.write(`''의 자료형은 ? ${typeof ''}` + '<br>');
+		document.write("``의 자료형은 ? " + typeof `` + '<br>');
+
+		document.write("<hr>");
+
+		document.write(`${true}의 자료형은 ? ${typeof true}` + '<br>');
+		
+		document.write("<hr>");
+
+		document.write(`${1n}n의 자료형은 ? ${typeof 1n}` + '<br>');
+		
+		document.write("<hr>");
+		
+		document.write(`{}의 자료형은 ? ${typeof {}}` + '<br>');
+		document.write(`[]의 자료형은 ? ${typeof []}` + '<br>');
+		document.write(`null의 자료형은 ? ${typeof null}` + '<br>');
+
+		document.write("<hr>");
+
+		var num;
+		document.write(`${num}의 자료형은 ? ${typeof num}` + '<br>');
+
+		document.write("<hr>");
+
+		var func = function(){}
+		document.write(`함수의 자료형은 ? ${typeof func}` + '<br>');
+
+		document.write("<hr>");
+
+		var symbol = Symbol("id");
+		document.write(`심볼의 자료형은 ? ${typeof symbol}` + '<br>');
+
+		document.write("<hr>");
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

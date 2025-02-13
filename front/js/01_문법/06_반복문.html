@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>반복문</title>
+	<script>
+		/*
+		for in문
+		- 사용법
+		for(변수 in 배열 또는 객체){
+		
+		}
+		- 배열인 경우 변수에 0부터 크기-1까지 차례대로 넣어 줌
+		- 객체인 경우 변수에 객체의 속성명을 차례대로 넣어 줌
+		
+		for of문
+		for(변수 of 배열){
+
+		}
+		- 배열의 있는 값을 가져와서 변수에 넣어 줌.
+		- 자바의 향상된 for문 비슷
+		*/
+		var obj = {
+			name : '홍길동',
+			age : 21
+		};
+		var arr = [1, 2, 3, "abc"];
+
+		for(attr in obj){
+			document.write(`${attr} : ${obj[attr]}` + '<br>');
+		}
+
+		document.write('<hr>');
+		
+		for(attr in arr){
+			document.write(`${attr} : ${arr[attr]}` + '<br>');
+		}
+
+		document.write('<hr>');
+
+		for(val of arr){
+			document.write(`${val}` + '<br>');
+		}
+		
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

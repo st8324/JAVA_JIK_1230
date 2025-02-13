@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>js 적용 방법</title>
+	<!-- 
+	js 적용 방법
+	1. script 태그를 이용
+	  - head 태그에 작성 또는 body 태그에 작성
+		- 위치에 따라 결과가 다를 수 있음
+	<script>
+		//원하는 코드를 작성
+	</script>
+	2. script 태그를 이용하여 이미 만들어진 js 파일을 연결하여 이용
+	  - 일반적으로 head태그에 작성
+	<script src="js파일경로"></script>
+	- 둘 중 하나만 적용
+	- script 태그는 여러개 있어도 됨
+	- 1번과 2번의 차이점
+	  - 1번은 화면을 불러올 때 script 코드도 같이 불러옴
+		- 2번은 화면을 불러올 때 처음에만 js파일을 다운로드하고, 이후에는 다운로드 된 파일을 불러옴
+	-->
+	<script>
+		/*
+		자바와 js의 차이점 
+		1. js에서는 문자와 문자열을 구분하지 않음.
+		  => 다 문자열로 인식
+		  => ''와 "" 모두 문자열
+		2. js에서는 ;을 생략해도 대부분은 가능.
+		3. js는 전체 문법이 다 맞지 않아도 일부 실행 됨. 
+		*/
+		// console.log() : 개발자 도구의 콘솔창에 원하는 값을 출력
+		console.log("안녕하세요. js입니다.");
+		consol.log("123"); //잘못된 코드. 여기 전까지는 잘 실행
+		console.log("123");//잘못된 코드 이후는 실행되지 않음
+	</script>
+	<script src="01_js 적용 방법.js"></script>
+</head>
+<body>
+	<h1>개발자 도구 콘솔창을 확인하세요.</h1>
+</body>
+</html>
