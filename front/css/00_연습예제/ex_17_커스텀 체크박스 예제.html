@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>커스텀 체크박스 예제</title>
+	<style>
+		[name=hobby]{ display: none;}
+		[name=hobby]+label{
+			padding-left: 20px; position: relative;
+			line-height: 20px;
+		}
+		[name=hobby]+label::before{
+			content: ''; width: 16px; height: 16px; position: absolute;
+			top: 3px; left: 2px; background: url(../../img/checkbox_off.png);
+		}
+		[name=hobby]:checked+label::before{
+			background: url(../../img/checkbox_on.png);
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>당신의 취미는</h1>
+		<div class="hobby-box">
+			<input type="checkbox" name="hobby" id="data1"> 
+			<label for="data1">운동</label>
+			<input type="checkbox" name="hobby" id="data2"> 
+			<label for="data2">독서</label>
+			<input type="checkbox" name="hobby" id="data3">
+			<label for="data3">음악 감상</label>
+		</div>
+	</div>
+</body>
+</html>
