@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{ padding: 0; margin: 0; color: black;}
+		ul, ol{ list-style: none;}
+		a{ text-decoration: none;}
+
+		/* shpping-list 스타일*/
+		.shopping-list{
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-evenly;
+		}
+
+		/* shopping-item 스타일 */
+		.shopping-item{
+			width: 150px; 
+		}
+
+		/* shopping-link-img 스타일 */
+		.shopping-link-img{
+			display: block; overflow: hidden; 
+			position: relative;
+			border-radius: 10px;
+		}
+		/* shopping-img 스타일  */
+		.shopping-img{
+			display: block;
+			transition: transform 0.3s;
+		}
+		.shopping-item:hover .shopping-img{
+			transform: scale(1.03);
+		}
+
+		/* shopping-link-title 스타일 */
+		.shopping-link-title:hover{
+			text-decoration: underline;
+		}
+		.shopping-link-title{
+			display: block; margin-top: 10px;
+		}
+		
+		/* border */
+		.border{
+			border: 1px solid gray; position: absolute;
+			top: 0; bottom: 0; left: 0; right: 0; border-radius: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<ul class="shopping-list">
+			<li class="shopping-item">
+				<a href="#" class="shopping-link-img">
+					<img class="shopping-img" src="../../img/강아지.jpg" width="150" height="200" alt="강아지">
+					<i class="border"></i>
+				</a>
+				<a href="#" class="shopping-link-title">
+					<p>강아지</p>
+					<p>귀엽다</p>
+				</a>
+			</li>
+			<li class="shopping-item">
+				<a href="#" class="shopping-link-img">
+					<img class="shopping-img" src="../../img/강아지.jpg" width="150" height="200" alt="강아지">
+					<i class="border"></i>
+				</a>
+				<a href="#" class="shopping-link-title">
+					<p>강아지</p>
+					<p>귀엽다</p>
+				</a>
+			</li>
+			<li class="shopping-item">
+				<a href="#" class="shopping-link-img">
+					<img class="shopping-img" src="../../img/강아지.jpg" width="150" height="200" alt="강아지">
+					<i class="border"></i>
+				</a>
+				<a href="#" class="shopping-link-title">
+					<p>강아지</p>
+					<p>귀엽다</p>
+				</a>
+			</li>
+			<li class="shopping-item">
+				<a href="#" class="shopping-link-img">
+					<img class="shopping-img" src="../../img/강아지.jpg" width="150" height="200" alt="강아지">
+					<i class="border"></i>
+				</a>
+				<a href="#" class="shopping-link-title">
+					<p>강아지</p>
+					<p>귀엽다</p>
+				</a>
+			</li>
+			<li class="shopping-item">
+				<a href="#" class="shopping-link-img">
+					<img class="shopping-img" src="../../img/강아지.jpg" width="150" height="200" alt="강아지">
+					<i class="border"></i>
+				</a>
+				<a href="#" class="shopping-link-title">
+					<p>강아지</p>
+					<p>귀엽다</p>
+				</a>
+			</li>
+			<li class="shopping-item">
+				<a href="#" class="shopping-link-img">
+					<img class="shopping-img" src="../../img/강아지.jpg" width="150" height="200" alt="강아지">
+					<i class="border"></i>
+				</a>
+				<a href="#" class="shopping-link-title">
+					<p>강아지</p>
+					<p>귀엽다</p>
+				</a>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
