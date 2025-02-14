@@ -15,13 +15,14 @@
 
 		js 배열에서는 값들인 같은 자료형이 아니어도 가능
 		*/
-		let arr = [1, '1', true, {
+		let arr = [1, '1', true, '1', {
 			name : "홍길동",
 			age : 21
 		}];
 		document.write(`배열 : ${arr}`, "<hr>");
 
 		/* 
+		- 요소 추가/삭제
 		push(값)
 		  - 값을 배열 끝에 추가
 		unshift(값)
@@ -40,7 +41,74 @@
 		document.write('<h3>push을 이용하여 추가</h3>');
 		document.write(`배열 : ${arr}`,'<br>');
 
+		let val = arr.shift();
+		document.write('<h3>shift을 이용하여 제거</h3>');
+		document.write(`제거한 값 : ${val}`, '<br>');
+		document.write(`배열 : ${arr}`,'<br>');
+
+		arr.unshift("사과");
+		document.write('<h3>unshift을 이용하여 추가</h3>');
+		document.write(`배열 : ${arr}`,'<hr>');
+
+		/*
+		- 요소 탐색
+		indexOf(값)
+		  - 값이 배열에 앞에서 부터 몇번지에 있는지 반환. 
+			- 없으면 -1
+			- 값과 타입이 일치
+		lastIndexOf(값)
+		  - 값이 배열에 뒤에서 부터 몇번지에 있는지 반환
+			- 없으면 -1
+			- 값과 타입이 일치
+		includes
+		  - 값이 배열에 있는지 없는지를 반환
+		*/
+		var search = '1';
+		document.write('<h3>탐색</h3>');
+		document.write(
+			`배열에 ${search}가 몇번지에 있습니까?(앞에서부터) ${arr.indexOf(search)}`,"<br>");
+		document.write(
+			`배열에 ${search}가 몇번지에 있습니까?(뒤에서부터) ${arr.lastIndexOf(search)}`, "<br>");
+		document.write(
+			`배열에 ${search}가 있습니까? ${arr.includes(search)}`, "<hr>");
+
+		/* 
+		join(구분자)
+		  - 배열 값들 사이에 구분자를 추가하여 하나의 문자열로 반환
+		*/
+		document.write('<h3>join</h3>');
+		document.write(arr.join(","),"<br>");
+		document.write(arr.join(", "),"<br>");
+		document.write(arr.join(" - "),"<hr>");
+
+		/*
+		잘라내기
+		slice(start?, end?)
+		  - 배열을 잘라내서 부분 배열을 생성해서 반환
+			- 원본은 안 바뀜
+			- start번지에서 end-1번지까지 부분 배열을 반환
+		splice(start, count?)
+		  - 배열에서 start번지에서 count개만큼 삭제해서 삭제된 값을 반환
+			- 원본은 바뀜
+		splice(start, count, ...items?)
+		  - 배열에서 start번지에서 count개만큼 삭제한 후 items를 추가
+		*/
+		document.write('<h3>잘라내기</h3>');
+		document.write('<h4>slice</h4>');
+		var arr2 = arr.slice();
+		var arr3 = arr.slice(2,4);
+		document.write(`원본 : ${arr}` , `<br>`);
+		document.write(`slice() : ${arr2}` , `<br>`);
+		document.write(`slice(2,4) : ${arr3}` , `<br>`);
 		
+		document.write('<h4>splice</h4>');
+		document.write(`원본 : ${arr}` , `<br>`);
+		var arr4 = arr.splice(0,1);
+		document.write(`splice(0,1) : ${arr4}` , `<br>`);
+		document.write(`작업후 원본 : ${arr}` , `<br>`);
+		var arr5 = arr.splice(0,2, 3,4,5,6,7,8);
+		document.write(`splice(0,2, 3,4,5,6,7,8,) : ${arr5}` , `<br>`);
+		document.write(`작업후 원본 : ${arr}` , `<br>`);
 	</script>
 </head>
 <body>
