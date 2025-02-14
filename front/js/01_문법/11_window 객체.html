@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>window 객체</title>
+	<style>
+		.btn-up{
+			position: fixed; bottom: 10px; right: 10px;
+			width: 50px; height: 50px; border-radius: 50%;
+			border: 1px solid black; background: #fff;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body style="height: 1000px;">
+	<button type="button" onclick="newWindowOpen()">새창 열기</button>
+	<button type="button" onclick="newWindowClose()">새창 닫기</button>
+	<button type="button" class="btn-up" onclick="moveUp()">위로</button>
+	<hr>
+
+	<button type="button" onclick="afterTenSecond()">10초 뒤 실행</button>
+	<button type="button" onclick="stopTenSecond()">10초 뒤 실행 중지</button>
+	<hr>
+
+	<button type="button" onclick="intervalSecond()">1초 마다 실행</button>
+	<button type="button" onclick="stopSecond()">1초 마다 실행 중지</button>
+	<script>
+		/* 
+		window 객체
+		  - 브라우저의 최상위 객체
+			- window 객체 메소드들은 window를 생략할 수 있음
+			  - window.alert() => alert()
+			- 메소드
+			  - open('경로', target, '옵션')
+				  - 새 창을 염
+					- 열고 난 뒤 연 자식창의 아이디값을 반환
+				- close()
+				  - 지정된 창을 닫음
+				- scrollTo(옵션)
+				  - 지정된 위치로 스크롤을 이동
+					- 옵션은 객체로 지정
+					- 옵션값에 따라 부드럽게 이동
+		*/
+		
+		var childId = null;
+
+		function newWindowOpen(){
+			if(childId){
+				alert('이미 새창이 열려있습니다.');
+				return;
+			}
+			childId = 
+				open('10_Date 객체.html', '_blank', 'width=400, height=400, top=100, left=100');
+		}
+		function newWindowClose(){
+			if(childId){
+				childId.close();
+				childId = null;
+			}
+		}
+		function moveUp(){
+			window.scrollTo({
+				top : 0,
+				behavior : 'smooth'
+			})
+		}
+		/* 
+		window 객체의 대표적인 함수들
+		setTimeOut(콜백함수, 시간)
+		  - 지정된 시간이 지나면 콜백함수를 호출
+			- 생성된 timeout 아이디를 반환
+		clearTimeOut(id)
+		  - 아이디와 일치하는 timeOut을 제거
+		setInterval(콜백함수, 시간)
+		  - 일정 시간마다 콜백하수를 호출
+			- 생성된 interval 아이디를 반환
+		clearInterval(아이디)
+		  - 아이디와 일치하는 interval을 제거
+		*/
+		var timeoutId = null;
+		var intervalId = null;
+		var count = 0;
+
+		function afterTenSecond(){
+			//여러번 실행되는 것을 방직하기 위해서
+			if(timeoutId)	{
+				return;
+			}
+			timeoutId = setTimeout(()=>{
+				console.log("10초 뒤입니다.");
+			}, 10000);
+		}
+		function stopTenSecond(){
+			//실행 중인 timeout이 없으면 종료
+			if(!timeoutId){
+				return;
+			}
+			clearTimeout(timeoutId);
+			timeoutId = null;
+			console.log("10초 뒤 실행 중지됐습니다.")
+		}
+		function intervalSecond(){
+			if(intervalId){
+				return;
+			}
+
+			intervalId = setInterval(()=>{
+				count++;
+				console.log(`${count}초`);
+			}, 1000)
+		}
+		function stopSecond(){
+			if(!intervalId){
+				return;
+			}
+			clearInterval(intervalId);
+			intervalId = null;
+			console.log("1초마다 실행이 중지 됐습니다.")
+		}
+	</script>
+</body>
+</html>
