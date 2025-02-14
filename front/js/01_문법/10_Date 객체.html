@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Date 객체</title>
+	<script>
+		/* 
+		Date 객체
+		  - 날짜를 관리하는 객체
+			- 생성
+			  var 객체명 = new Date();
+				var 객체명 = new Date("년-월-일")
+			- 메소드
+			  - getFullYear() : 연도 4자리
+				- getMonth() : 월
+				- getDate() : 일
+				- getHours() : 시
+				- getMinutes() : 분
+				- getSeconds() : 초
+				- getMilliseconds() : 밀리초
+				- getDay() : 요일을 정수로. 0~6, 일~토
+				- getTime() : 1970년 1월 1일 0시를 기준으로 흐른 시간을
+				  밀리초로 변환
+		
+		문자열.padStart(size, char)
+		  - 문자열이 size보다 크기가 작은 경우 char로 문자열 앞을 채워줌
+		*/
+		document.write("<h3>padStart</h3>");
+		document.write(`${"1".padStart(2,"0")}`, "<br>");
+		var now = new Date();
+		document.write(now, "<hr>");
+		document.write(convertDateToString(now), "<br>");
+		
+
+		function convertDateToString(date){
+			var year = date.getFullYear();
+			//1 => 01로 만들기 위해
+			var month = String(date.getMonth()+1).padStart(2,0);
+			var dates = String(date.getDate()).padStart(2,0);
+			var hour = String(date.getHours()).padStart(2,0);
+			var minute = String(date.getMinutes()).padStart(2,0);
+			var second = String(date.getSeconds()).padStart(2,0);
+			return `${year}-${month}-${dates} ${hour}:${minute}:${second}`;
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
