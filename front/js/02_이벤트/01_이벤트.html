@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>이벤트</title>
+	<script>
+		/*
+		요소에 이벤트를 등록하는 방법
+		1. 요소(태그)에 속성으로 이벤트를 등록
+		  - on이벤트명="실행할 코드"
+		*/
+		function click2(){
+			alert('클릭2');
+		}
+
+		/*
+		2. 스크립트로 이벤트를 등록 : on이벤트명
+		요소.on이벤트명 = function(){
+			//구현;
+		}
+
+		3. 스크립트로 이벤트를 등록 : addEventListner('이벤트명', 함수, 캡처링)
+		  - 캡처링이 true이면 캡처링, false이면 버블링
+			- 캡처링 : 이벤트가 발생하면 발생한 이벤트가 자손 요소들에게 전달되는 현상
+			- 버블링 : 이벤트가 발생되면 발생한 이벤트가 조상 요소들에게 전달되는 현상
+		요소.addEventListner('이벤트명', ()=>{
+		
+		}, 캡처링);
+		*/
+		
+	</script>
+</head>
+<body>
+	<!-- 이벤트 등록 방법1 -->
+	<button type="button" onclick="alert('클릭1');">클릭1</button>
+	<button type="button" onclick="click2();">클릭2</button>
+	<hr>
+	<!-- 이벤트 등록 방법2 -->
+	<button type="button" id="btn3">클릭3</button>
+	<hr>
+	<!-- 이벤트 등록 방법3 -->
+	<button type="button" id="btn4">클릭4</button>
+	<script>
+		/* 
+		js에서는 id가 지정된 요소는 따로 요소를 선택하는 작업을 하지 않아도 id값으로 요소를
+		선택할 수 있음.(비추천)
+		*/
+		btn3.onclick = ()=>{
+			alert("클릭3");
+		}
+		btn4.addEventListener('click',()=>{
+			alert("클릭4");
+		} )
+	</script>
+</body>
+</html>
