@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>배열</title>
+	<script>
+		/* 
+		배열 선언 방법
+		var 배열명 = [];
+		var 배열명 = [값1, 값2 ,... ];
+		var 배열명 = new Array(크기);
+		var 배열명 = new Array(값1, 값2, ...);
+		var 배열명 = Array(값1, 값2, ...);
+
+		js 배열에서는 값들인 같은 자료형이 아니어도 가능
+		*/
+		let arr = [1, '1', true, {
+			name : "홍길동",
+			age : 21
+		}];
+		document.write(`배열 : ${arr}`, "<hr>");
+
+		/* 
+		push(값)
+		  - 값을 배열 끝에 추가
+		unshift(값)
+		  - 값을 배열 처음에 추가
+		pop()
+		  - 배열 끝에 있는 값을 제거하고 리턴
+		shfit()
+		  - 배열 처음에 있는 값을 제거하고 리턴
+		*/
+		let obj = arr.pop();
+		document.write('<h3>pop을 이용하여 제거</h3>');
+		document.write(`제거한 값 : ${obj}`, '<br>');
+		document.write(`배열 : ${arr}`,'<br>');
+
+		arr.push("안녕하세요");
+		document.write('<h3>push을 이용하여 추가</h3>');
+		document.write(`배열 : ${arr}`,'<br>');
+
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
