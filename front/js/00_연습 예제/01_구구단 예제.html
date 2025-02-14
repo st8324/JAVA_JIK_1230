@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>구구단 예제</title>
+	<script>
+		/* 
+		입력창을 통해 단을 입력받고, 입력받은 단에 대한 구구단을 출력하는 코드를 작성하세요.
+		단, 입력이 정상적일지 않을 때 2단을 출력하도록 작성하세요.
+		- prompt
+		- 반복문
+		*/
+		var dan = prompt("단을 입력하세요.");
+
+		//dan이 null인 경우 2를 저장
+		dan = dan || 2;
+
+		dan = +dan;
+		//isNaN(변수) : 변수 값이 NaN인지 아닌지 알려주는 함수
+		//isFinite(변수) : 변수 값이 유한수인지를 알려주는 함수
+		
+		if(isNaN(dan)){
+			dan = 2;
+		}
+
+		for(i = 1; i<=9; i++){
+			document.write(`${dan} X ${i} = ${dan * i}<br>`)
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
