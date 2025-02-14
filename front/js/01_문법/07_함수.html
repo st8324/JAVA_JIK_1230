@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>함수</title>
+	<script>
+		/* 
+		함수 vs 메소드
+		- 함수는 객체의 호출 없이 사용
+		- 메소드는 객체를 이용해서 호출
+
+		함수 선언 방법
+		//자바에서
+		리턴타입 메소드명(자료형 변수명){
+		
+		}
+
+		1. 함수 선언식
+		  - 함수 선언 위치에 상관 없이 호출이 가능 => 호이스팅
+		function 함수명(매개변수명1, 매개변수명2, ..){
+			//구현
+		}
+
+		2. 함수 표현식
+		  - 함수를 선언한 후 호출해야 됨. 선언하기 전에 호출하면 에러가 발생
+			- 화살표 함수를 적용할 수 있음.
+		var 함수명 = function(매개변수명1, 매개변수명2, ...){
+			//구현
+		}
+		*/
+		//함수 선언식
+		hello1();
+		
+		function hello1(){
+			document.write("안녕하세요.(함수 선언식)<br>");
+		}
+
+		//함수 표현식
+		//아래에서 호이스팅이 일어나면 주석과 같아짐
+		//var hello2;
+		//hello2(); //이 위치에 있으면 실행이 안됨.hello2는 undefined이기 때문에
+		//hello2 = function(){document.write("안녕하세요.(함수 표현식)<br>")}
+		var hello2 = function(){
+			document.write("안녕하세요.(함수 표현식)<br>");
+		}
+		hello2();
+
+		//화살표 함수
+		//문자열을 화면에 출력하는 기능
+		var print = (str) =>{
+			document.write(`${str}<br>`);
+		}
+
+		print("Hello")
+		print("화살표 함수 테스트");
+
+		/* 
+		즉시 실행 함수
+		  - 함수를 호출하지 않고 바로 실행하는 함수
+		*/
+		(function (){
+			document.write("즉시 실행 함수. 따로 호출하지 않았음.<br>");
+		}());
+
+		/* 
+		나머지 매개변수. 자바에서 가변 매개변수
+		- 함수 호출시 넘겨준 인수들을 배열로 저장해서 관리
+		function 함수명(...변수명){
+		
+		}
+		*/
+		function sum(...args){
+			var sum = 0;
+			for(val of args){
+				sum += val;
+			}
+			return sum;
+		}
+		document.write(`sum(1,2,3) = ${sum(1,2,3)}<br>`);
+		document.write(`sum(1,2,3,4,5) = ${sum(1,2,3,4,5)}<br>`);
+
+		/* 
+		함수에 정의된 매개변수의 개수보다 많거나 적은 값들을 넘겨줬을 때
+		- 자바에서는 정의된 매개변수와 호출할 때 넘겨분 매개변수가 다르면 에러가 발생
+		- js에서는 실행이 됨
+		  - 적게 넣어주면 나머지 값들은 undefined로 들어감
+			- 많이 넣어주면 사용하지 않음. 또는 arguments 객체를 이용하면 활용할 수 있다(비추천)
+		*/
+		function printA(a, b, c){
+			document.write(`${a} ${b} ${c} <br>`);
+		}
+		printA(1, 2);
+		printA(1, 2, 3);
+		printA(1, 2, 3, 4);
+
+		/*
+		arguments 객체
+		  - 함수에서 넘겨준 인수들을 관리하는 객체
+			- 배열처럼 사용하지만 배열은 아님
+			- 비추천
+			- 화살표 함수를 사용할 수 없음
+		매개변수
+		  - 함수 선언할 때 사용하는 변수
+		인수(인자)
+		  - 함수 호출할 때 넘겨준 값
+		*/
+		function sum2(){
+			var sum = 0;
+			for(i = 0; i < arguments.length; i++){
+				sum += arguments[i];
+			}
+			return sum;
+		}
+		document.write(`sum2(1,2,3) = ${sum2(1,2,3)}<br>`);
+		document.write(`sum2(1,2,3,4,5) = ${sum2(1,2,3,4,5)}<br>`);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
