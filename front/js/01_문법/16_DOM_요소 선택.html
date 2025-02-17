@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM 요소 선택</title>
+	
+</head>
+<body>
+	<nav id="nav">
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-lnik">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-lnik">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-lnik">메뉴3</a>
+			</li>
+		</ul>
+	</nav>
+	<script>
+		/* 
+		document
+		  - 현재 웹 페이지의 HTML 문서를 참조하는 객체
+			- HTML 구조에 접근하거나 동적으로 내용을 변경할 수 있음
+		DOM : Document Object Model
+		  - HTML 문서를 트리 구조로 표현
+			- 문서의 각 요소를 객체로 표현
+
+		요소 선택
+		getElementById(아이디)
+		  - 아이디를 이용하여 요소를 선택
+			- 없거나 하나만 선택
+		getElementsByClassName(클래스)
+		  - 클래스를 이용하여 요소를 선택
+			- 여러개가 선택될 수 있기 때문에 배열처럼 사용
+		getElementsByTagName(태그명)
+		  - 태그를 이용하여 요소를 선택
+			- 여러개가 선택될 수 있기 때문에 배열처럼 사용
+		
+		querySelectorAll(선택자)
+		  - 선택자와 일치하는 요소를 선택
+			- 여러개가 선택될 수 있기 때문에 배열처럼 사용
+		querySelector(선택자)
+		  - 선택자와 일치하는 첫번째 요소를 선택
+
+		getElementsxxx vs querySelectorAll
+		- 요소를 선택한 후 나중에 요소가 추가된 경우
+		  - getElementsxxx 추가된 요소가 잡힘
+		  - querySelectorAll은 추가된 요소가 선택되지 않음
+		- getElementsxxx은 결과가 HTMLCollection이기 때문에 forEach를 사용하지 못함
+		  => 반복문으로 사용
+		- querySelectorAll은 결과가 NodeList이기 때문에 forEach를 사용할 수 있음
+		*/
+		
+		//id가 nav인 요소를 선택
+		var nav = document.getElementById("nav");
+		console.log(nav);
+		//id가 nav인 요소를 클릭하면 알림창으로 nav라고 뜨도록 작성
+		//nav.onclick = ()=> alert('nav');
+		nav.addEventListener('click', ()=>alert("nav"));
+
+		var list = document.getElementsByClassName("menu-item");
+		console.log(list);
+
+		var list2 = document.getElementsByTagName("li");
+		console.log(list2);
+
+		var list3 = document.querySelectorAll(".menu-item");
+		console.log(list3);
+
+		
+	</script>
+	<nav id="nav2">
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-lnik">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-lnik">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-lnik">메뉴3</a>
+			</li>
+		</ul>
+	</nav>
+	<script>
+		console.log("nav2를 추가 후");
+		console.log(list);
+		console.log(list2);
+		console.log(list3);
+		//list3 = document.querySelectorAll(".menu-item");
+		//console.log(list3);
+		var nav2 = document.querySelector('#nav2');
+		console.log(nav2)
+		nav2.onclick = ()=> alert("nav2");
+
+		/* 
+		getElementsByClassName(), getElementsByTagName()으로 선택한 요소에 이벤트를 등록
+		- 이벤트 등록 후 테스트를 하면 alert("nav")도 같이 실행 되는데 이유는
+		  이벤트 버블링 때문에.
+			=> li태그를 클릭하면 li태그 클릭 이벤트 발생 => ul태그 클릭 이벤트 발생 
+			=> nav태그 클릭 이벤트 발생 => body태그 클릭 이벤트 발생 => html태그 클릭 이벤트 발생
+		*/
+		if(list){
+			for(let i = 0; i < list.length; i++){
+				list[i].addEventListener('click', ()=>alert(list[i].textContent.trim()));
+			}
+		}
+
+		/* 
+		querySelectorAll()로 선택한 요소에 이벤트를 등록
+		*/
+		
+		if(list3){
+			list3.forEach(li=>{
+				li.addEventListener('click', ()=>alert(li.textContent.trim()+"-1"));
+			})
+		}
+	</script>
+</body>
+</html>
