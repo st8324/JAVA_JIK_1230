@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>이벤트 종류</title>
+	<style>
+		.box{
+			border: 3px solid; padding: 100px;
+		}
+		.inner-box{
+			height: 100px; background-color: yellow;
+		}
+	</style>
+</head>
+<body>
+	<h1>마우스 이벤트</h1>
+	<div class="box">
+		<div class="inner-box"></div>
+	</div>
+	<hr>
+	<h1>키보드 이벤트</h1>
+	<input type="text" id="text">
+	<hr>
+	<h1>form 이벤트</h1>
+	<form action="" id="form">
+		<input type="text" id="text2" name="text2">
+		<button type="submit" id="submitBtn">전송</button>
+	</form>
+	<script>
+		/* 
+		이벤트 종류
+		
+		마우스 이벤트
+		click
+		  - 마우스를 클릭
+		dblclick
+		  - 마우스 더블 클릭
+		mousedown
+		  - 사용자가 요소를 마우스로 눌렀을 때
+		mouseup
+		  - 사용자가 요소에서 마우스를 놓았을 때
+		mousemove
+		  - 사용자가 요소 위에서 마우스를 이동할 때
+		mouseover
+		  - 마우스가 요소 위로 올라갈 때
+			- 자식 요소로 이동을 하면 mouseout이 발생하고 다시 mouseover가 동작
+		mouseout
+		  - 마우스가 요소를 벗어났을 때
+		mouseenter
+		  - 마우스가 요소 위로 올라갈 때
+			- 자식 요소로 이동해도 이벤트가 유지가 됨.
+		mouseleave
+		  - 마우스가 요소를 벗어났을 때
+		contextmenu
+		  - 마우스 우클릭 했을 때
+		*/
+		const box = document.querySelector('.box');
+		box.ondblclick = ()=> console.log('박스 더블 클릭');
+		box.onclick = ()=> console.log('박스 클릭');
+		box.onmousedown = ()=> console.log('박스 클릭 중');
+		box.onmouseup = ()=> console.log('박스 클릭 끝');
+		//box.onmousemove = ()=> console.log('박스 마우스 이동 중');
+		box.onmouseover = ()=> console.log('박스 요소 안으로 - over');
+		box.onmouseout = ()=> console.log('박스 요소 밖으로 - out');
+		box.onmouseenter = ()=> console.log('박스 요소 안으로 - enter');
+		box.onmouseleave = ()=> console.log('박스 요소 밖으로 - leave');
+		box.oncontextmenu = ()=> console.log('박스 우클릭');
+
+		/*
+		키보드 이벤트
+		keydown
+		  - 키보드의 키를 눌렀을 때
+			- 모든 키를 인식
+		keypress
+		  - 키보드의 키를 눌렀을 때
+			- 한글을 인식하지 못함
+			- alt, ctrl 등과 같은 특수키에서 발생하지 않음
+			- 최신 표준에서는 권장하지 않음
+		keyup
+		  - 키보드의 키를 땠을 때
+		*/
+		const textEl = document.querySelector('#text');
+		textEl.onkeydown = ()=> console.log("키 눌림(down)");
+		textEl.onkeyup = ()=> console.log("키 땜");
+		textEl.onkeypress = ()=> console.log("키 눌림(press)");
+
+		/*
+		form 이벤트
+		sumbit
+		  - 서버로 데이터를 전송할 때 발생
+			- 유효성 검사를 할 때 활용
+			- 반환값이 false이면 전송을 안함
+		input
+		  - 입력 태그에서 입력이 변경될 때 발생
+			- 입력하는 중에도 적용
+		  - 복붙도 적용
+		change
+		  - 입력 태그에서 포커스를 잃거나 엔터를 쳤을 때 발생
+			- 입력하는 중에는 발생하지 않음.
+			- 초기 값과 나중값이 같은 경우는 발생하지 않음
+		focus
+		  - 요소가 활성화 됐을 때 발생
+		blur
+		  - 활성화 됐던 요소가 비활성화 될 때 발생
+		*/
+		const form = document.querySelector('#form');
+		const textEl2 = document.querySelector("#text2");
+		const submitBtn = document.querySelector('#submitBtn');
+
+		form.onsubmit = ()=>{
+			alert('submit 이벤트입니다. 전송 안함.')
+			return false;
+		}
+		//submit 버튼의 반환값이 false이면 submit 이벤트가 실행되지 않음
+		submitBtn.onclick = ()=> false;
+
+		textEl2.onchange = ()=> console.log('change 이벤트 발생');
+		textEl2.oninput = ()=> console.log('input 이벤트 발생');
+		textEl2.onfocus = () => console.log('focus 이벤트 발생')
+		textEl2.onblur = () => console.log('blur 이벤트 발생');
+
+		/*
+		윈도우 이벤트
+		load
+		  - 리소스가 모두 로드 되었을 때
+		resize
+		  - 브라우저 창이 변경 되었을 때
+		scroll
+		  - 페이지나 요소에 스크롤이 발생했을 때
+		unload
+		  - 페이지가 닫히기 전에 발생
+		*/
+		window.onresize = ()=> console.log('브라우저 창의 크기가 변경됩니다.');
+	</script>
+</body>
+</html>
