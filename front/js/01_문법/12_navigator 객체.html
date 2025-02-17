@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>navigator 객체</title>
+	<script>
+		/* 
+		navigator
+		  - 웹 브라우저의 정보를 제공하는 객체
+		navigator.userAgent
+		  - 브라우저의 사용자 에이전트 문자열을 반환
+		navigator.language
+		  - 브라우저의 언어를 반환
+		navigator.onLine
+		  - 브라우저의 온라인 상태 여부를 반환
+		navigator.geolocation
+		  - 위치 정보를 제공하는 객체를 반환
+		navigator.cookieEnabled
+		  - 쿠키 사용 가능 여부를 반환
+		*/
+		document.write(navigator.userAgent,'<br>');
+		document.write(navigator.language,'<br>');
+		document.write(navigator.onLine,'<br>');
+		//document.write(navigator.geolocation,'<br>');
+		navigator.geolocation.getCurrentPosition(pos=>{
+			console.log("위도 : " + pos.coords.latitude);
+			console.log("경도 : " + pos.coords.longitude);
+		})
+		document.write(navigator.cookieEnabled,'<br>');
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

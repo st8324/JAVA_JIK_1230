@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>location 객체</title>
+</head>
+<body>
+	<button id="btn1">네이버로 이동</button>
+	<button id="btn2">새로 고침</button>
+	<button id="btn3">구글로 이동</button>
+	<button id="btn4">글쓰기</button>
+	<button id="btn5">샘플</button>
+	<hr>
+	<script>
+		/* 
+		location
+		  - 현재 페이지 정보를 관리하는 객체
+		  - href
+		    - 현재 페이지 url을 가져오거나, 현재 페이지를 지정된 url로 변경하여 페이지를 이동할 수 있음
+		  - protocol
+			  - 현재 URL의 프로토콜을 반환
+				- http:, https:
+			- host
+			  - 호스트의 이름과 포트 번호를 반환
+			- pathname
+			  - url 경로 부분을 반환
+			- search
+			  - url의 쿼리 문자열을 반환
+				- ?와 뒤에 있는 값들
+			- hash
+			  - #부분을 반환
+			- asign(url)
+			  - 지정된 url로 이동
+			- reload()
+			  - 현재 페이지를 다시 로드
+				- 새로고침
+	
+		*/
+		btn1.onclick = ()=> location.href = "https://www.naver.com";
+		btn2.onclick = ()=> location.reload();
+		btn3.onclick = ()=> location.assign("https://google.com");
+		btn4.onclick = ()=>{
+			if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?")){
+				location.href = "https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/";
+			}
+		}
+		btn5.onclick = ()=> location.href += "?abc=123&def=456#body"
+		document.write(`현재 URL 프로토콜 : ${location.protocol}<br>`);
+		document.write(`현재 URL 호스트 : ${location.host}<br>`);
+		document.write(`현재 URL pathname : ${location.pathname}<br>`);
+
+		//샘플 버튼을 클릭 후 확인
+		document.write(`현재 URL 쿼리 : ${location.search}<br>`);
+		document.write(`현재 URL 해쉬코드 : ${location.hash}<br>`);
+
+	</script>
+</body>
+</html>

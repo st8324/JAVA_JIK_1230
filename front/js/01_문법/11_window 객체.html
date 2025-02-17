@@ -29,6 +29,7 @@
 		/* 
 		window 객체
 		  - 브라우저의 최상위 객체
+			- 새창이 열릴때마다 window 객체가 생성
 			- window 객체 메소드들은 window를 생략할 수 있음
 			  - window.alert() => alert()
 			- 메소드
@@ -73,7 +74,7 @@
 		clearTimeOut(id)
 		  - 아이디와 일치하는 timeOut을 제거
 		setInterval(콜백함수, 시간)
-		  - 일정 시간마다 콜백하수를 호출
+		  - 일정 시간마다 콜백함수를 호출
 			- 생성된 interval 아이디를 반환
 		clearInterval(아이디)
 		  - 아이디와 일치하는 interval을 제거
@@ -118,6 +119,25 @@
 			intervalId = null;
 			console.log("1초마다 실행이 중지 됐습니다.")
 		}
+		/* 
+		window 객체의 대표적인 함수들
+		- onload
+		  - 윈도우 객체가 로딩이 완료되면 실행하는 메소드
+			- onload 메소드가 여러개 정의되면 마지막 메소드만 적용
+		*/
+		 //아이디가 btn1인 요소가 배치되기 전에 이벤트를 등록하기 때문에 에러가 발생
+		//btn1.onclick = ()=> alert("버튼1");
+		window.onload = ()=>{
+			//윈도우가 다 로딩되고 btn3인 요소에 이벤트를 등록하기 때문에 정상 실행
+			btn3.onclick = ()=> alert("버튼3");
+		}
+	</script>
+	<hr>
+	<button id="btn1">버튼1</button>
+	<button id="btn2">버튼2</button>
+	<button id="btn3">버튼3</button>
+	<script>
+		btn2.onclick = ()=> alert("버튼2");
 	</script>
 </body>
 </html>
