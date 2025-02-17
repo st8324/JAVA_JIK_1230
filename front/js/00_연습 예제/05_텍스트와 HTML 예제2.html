@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>페이지네이션</title>
+</head>
+<body>
+	<!-- 
+	페이지를 관리하는 버튼으로 이루어진 코드를 작성하세요.
+	-->
+	<button type="button" class="prev-btn" onclick="addPage(-1)"><</button>
+	<span>
+		<span class="current-page">1</span>
+		<span> / </span>
+		<span class="max-page">6</span>
+	</span>
+	<button type="button" class="next-btn" onclick="addPage(1)">></button>
+
+	<script>
+		const currentPageEl = document.querySelector('.current-page');
+		const maxPageEl = document.querySelector('.max-page');;
+
+		function addPage(amount){
+			//현재 페이지 값을 가져옴. innerText
+			let currentPage = currentPageEl.innerText;
+			
+			//최대 페이지 값을 가져옴. innerText
+			let maxPage = maxPageEl.innerText;
+
+			//현재 페이지에 amount를 더한 값을 현재 페이지에 저장
+			currentPage = +currentPage + amount;
+
+			//현재 페이지가 1보다 작으면 최대 페이지로 수정
+			//currentPage = currentPage < 1 ? maxPage : currentPage;
+			if(currentPage < 1){
+				currentPage = maxPage;
+			}
+
+			//현재 페이지가 최대 페이지보다 크면 1로 수정
+			if(currentPage > maxPage){
+				currentPage = 1;
+			}
+
+			//새로 계산된 현재 페이지를 현재 페이지 위치에 텍스트로 수정. innerText
+			currentPageEl.innerText = currentPage;
+		}
+	</script>
+</body>
+</html>

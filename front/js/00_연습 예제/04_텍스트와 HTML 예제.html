@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>오늘의 할일</title>
+</head>
+<body>
+	<!-- 
+	텍스트 창에 오늘의 할일을 입력하고, 
+	추가 버튼을 클릭하면 오늘의 할일 목록 제일 아래에
+	오늘의 할일이 추가 되도록 작성해보세요.
+	-->
+	<input type="text" name="todo" id="todo" placeholder="오늘의 할일을 입력하세요.">
+	<button type="button" id="btn">추가</button>
+	<h1>오늘의 할일</h1>
+	<ul class="todo-list">
+		<li class="todo-item">오늘의 할일 예시</li>
+	</ul>
+	<script>
+		const btn = document.getElementById("btn");
+		const textEl = document.getElementById("todo");
+		const todoList = document.getElementsByClassName("todo-list")[0];
+
+		btn.addEventListener("click", ()=>{
+			//텍스트 창에 입력된 값을 가져와서 text 변수에 저장
+			let text = textEl.value;
+
+			//텍스트 창에 입력된 값을 ''로 수정
+			textEl.value = '';
+
+			//text를 li태그로 감싸서 html코드 문자열로 만듬
+			let todo = `<li class="todo-item">${text}</li>`;
+
+			//ul태그의 html 코드를 가져와서 htmlCode에 저장
+			let htmlCode = todoList.innerHTML;
+
+			//ul태그의 html코드로 htmlCode에 todo를 이어 붙인 문자열로 수정
+			todoList.innerHTML = htmlCode + todo;
+
+			//위 두 작업을 한줄로 처리
+			//todoList.innerHTML += todo;
+		});
+	</script>
+</body>
+</html>
