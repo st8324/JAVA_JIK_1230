@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>표준 속성 예제</title>
+</head>
+<body>
+	<button type="button" onclick="addNum(-1)">-</button>
+	<input type="text" name="num" id="num" readonly value="0">
+	<button type="button" onclick="addNum(1)">+</button>
+	<script>
+		const numEl = document.getElementById("num");
+
+		function addNum(amount){
+			//input태그 value값의 자료형은 무조건 string
+			var num = numEl.value;
+			num = +num + amount;
+			numEl.value = num;
+		}
+	</script>
+</body>
+</html>
