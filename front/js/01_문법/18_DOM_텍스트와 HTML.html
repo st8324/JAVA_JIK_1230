@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>텍스트와 HTML</title>
+</head>
+<body>
+	<button type="button" id="btn1">UP</button>
+	<hr>
+	<div id="box">
+		<div id="box1">박스1 안녕하세요.</div>
+		<div id="box2" style="display: none;">박스2 안녕하세요.</div>
+	</div>
+	<br>
+	<button type="button" id="btn2">텍스트 가져오기</button>
+	<script>
+		/* 
+		요소.innerText
+		  - 태그 안에 있는 글자를 가져오거나 수정
+			- 스타일에 영향을 받음
+			  => display : none인 경우 못가져옴
+		요소.textContent
+		  - 태그 안에 있는 글자를 가져오거나 수정
+			- 스타일에 영향을 받지 않음
+			  => display : none이어도 가져옴
+		요소.innerHTML
+		  - 요소 안에 있는 HTML 코드를 가져오거나 수정
+
+		*/
+		const btn1 = document.getElementById("btn1");
+		const btn2 = document.getElementById("btn2");
+		const box = document.getElementById("box");
+
+		btn1.onclick = ()=>{
+			//버튼의 텍스트를 가져옴
+			let text = btn1.innerText;
+			
+			//텍스트가 UP이면 DOWN 아니면 UP으로 변경
+			text = text == "UP" ? "DOWN" : "UP";
+
+			//변경된 텍스트가 적용
+			btn1.innerText = text;
+
+		}
+		btn2.addEventListener('click', ()=>{
+			let t1 = box.innerText;
+			let t2 = box.textContent;
+
+			console.log(`box의 innerText : ${t1}`);
+			console.log(`box의 textContent : ${t2}`);
+			
+		})
+	</script>
+</body>
+</html>
