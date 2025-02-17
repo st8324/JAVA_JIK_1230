@@ -14,6 +14,12 @@
 	</div>
 	<br>
 	<button type="button" id="btn2">텍스트 가져오기</button>
+	<hr>
+	<button type="button" id="btn3">박스 내용 바꾸기</button>
+	<button type="button" id="btn4">박스 내용 가져오기</button>
+	<div id="box3">
+		<a href="#">링크</a>
+	</div>
 	<script>
 		/* 
 		요소.innerText
@@ -30,7 +36,10 @@
 		*/
 		const btn1 = document.getElementById("btn1");
 		const btn2 = document.getElementById("btn2");
+		const btn3 = document.getElementById("btn3");
+		const btn4 = document.getElementById("btn4");
 		const box = document.getElementById("box");
+		const box3 = document.getElementById("box3");
 
 		btn1.onclick = ()=>{
 			//버튼의 텍스트를 가져옴
@@ -50,7 +59,21 @@
 			console.log(`box의 innerText : ${t1}`);
 			console.log(`box의 textContent : ${t2}`);
 			
-		})
+		});
+		btn4.addEventListener('click', ()=>{
+			let htmlCode = box3.innerHTML;
+			console.log(htmlCode.trim());
+		});
+		btn3.addEventListener('click', ()=>{
+			let htmlCode = `
+				<ul>
+					<li>메뉴1</li>
+					<li>메뉴2</li>
+					<li>메뉴3</li>
+				</ul>
+			`;
+			box3.innerHTML = htmlCode;
+		});
 	</script>
 </body>
 </html>

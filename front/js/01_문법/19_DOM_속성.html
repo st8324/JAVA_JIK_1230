@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>속성</title>
+</head>
+<body>
+	<div class="box" data-target="a">박스</div>
+	<hr>
+	<button id="btn1">버튼1 : data-target 가져오기</button>
+	<br>
+	<button id="btn2">버튼2 : data-target 수정하기</button>
+	<br>
+	<button id="btn3">버튼3 : data-target 가져오기</button>
+	<br>
+	<button id="btn4">버튼4 : data-target 수정하기</button>
+	<script>
+		/* 
+		속성
+		- 각 요소의 표준이 아닌 속성
+
+		getAttribute(속성명)
+		  - 요소의 속성값을 가져옴
+		setAttribute(속성명, 값)
+		  - 요소의 속성값을 값으로 수정
+		*/
+		const btn1 = document.querySelector('#btn1');
+		const btn2 = document.querySelector('#btn2');
+		const btn3 = document.querySelector('#btn3');
+		const btn4 = document.querySelector('#btn4');
+		const box = document.querySelector('.box');
+
+		btn1.onclick = ()=>{
+			let target = box.getAttribute('data-target');
+			console.log(target);
+		}
+
+		btn2.onclick = ()=>{
+			box.setAttribute('data-target', 'b');
+		}
+		/* 
+		data-*은 dataset 객체로 접근할 수 있음
+		- data-target은 dataset.target으로 접근할 수 있음
+		- data-를 제외한 부분을 카멜 표기법으로 사용하면 됨
+		  - data-user-id => dataset.userId
+		*/
+		btn3.onclick = ()=>{
+			let target = box.dataset.target;
+			console.log(target);
+		}
+
+		btn4.onclick = ()=>{
+			box.dataset.target = 'b';
+		}
+
+	</script>
+</body>
+</html>
