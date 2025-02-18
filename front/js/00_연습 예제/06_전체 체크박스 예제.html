@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>전체 체크박스 예제</title>
+</head>
+<body>
+	<input type="checkbox" id="all"> 
+	<label for="all">전체</label> 
+	<br>
+	<input type="checkbox" name="email">
+	<br>
+	<input type="checkbox" name="email">
+	<br>
+	<input type="checkbox" name="email">
+	<br>
+	<input type="checkbox" name="email">
+	<br>
+	<script>
+		//전체 체크박스 요소를 선택
+		const all = document.getElementById("all");
+		//전체 체크박스를 제외한 다른 체크박스 요소들을 선택
+		const checkboxes = document.querySelectorAll("[name=email]");
+
+		//전체 체크박스를 change 이벤트를 등록
+		all.addEventListener("change", ()=>{
+			
+			//전체 체크박스의 checked 값을 가져옴(checked는 표준 속성)
+			let checked = all.checked;
+			
+			//반복으로 다른 체크박스 요소들을 하나씩 꺼내서 각 요소들의 checked 값을 
+			//전체 체크박스의 checked 값으로 수정
+			checkboxes.forEach(checkbox=>{
+				checkbox.checked = checked;
+			});
+		});
+
+		//checkboxes을 반복으로 change 이벤트를 등록
+		checkboxes.forEach(checkbox=>{
+			checkbox.addEventListener("change", ()=>{
+				//현재 체크박스의 checked 상태를 가져옴
+				let checked = checkbox.checked;
+
+				//체크를 해제한 경우
+				if(!checked){
+					//전체 체크박스를 해제
+					all.checked = false;
+					return;
+				}
+
+				//체크박스의 상태가 현재 checked와 같은 요소들을 선택
+				let selector = "[name=email]:checked";
+				let sameCheckboxes = document.querySelectorAll(selector);
+				//체크박스의 상태가 현재 checked와 같은 요소의 수가 checkboxes의 수와 같다면
+				if(sameCheckboxes.length == checkboxes.length){
+					//전체 체크박스의 checked를 현재 체크박스의 checked 수정
+					all.checked = checked;
+				}
+
+			});
+		});
+
+
+	</script>
+</body>
+</html>
