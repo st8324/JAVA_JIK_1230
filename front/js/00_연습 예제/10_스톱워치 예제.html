@@ -17,6 +17,11 @@
 			width: 45%; margin-bottom: 10px; border: 3px solid rgba(0,0,0,0.7);
 			height: 30px; cursor: pointer;
 		}
+		.record-box{
+			height: 300px; border: 3px solid rgba(0,0,0,0.7);
+			margin : 10px 0; line-height: 50px; text-align: center;
+			overflow: auto;
+		}
 	</style>
 </head>
 <body>
@@ -43,7 +48,86 @@
 		- 기록
 		  - 스톱워치가 클릭했을 때의 시간을 기록해서 record-box 위쪽에 추가
 		*/
+		const startBtn = document.querySelector("#start");
+		const stopBtn = document.querySelector("#stop");
+		const resetBtn = document.querySelector("#reset");
+		const recordBtn = document.querySelector("#record");
+
+		const viewBox = document.querySelector(".view-box");
+		const recordBox = document.querySelector(".record-box");
+
+		//밀리초, 초, 분을 위한 전역 변수
+		let ms = 0, s = 0, m = 0;
+
+		//스톱워치를 위한 변수
+		let intervalId = null;
+
+		//시작 버튼 클릭 이벤트를 등록
+		startBtn.addEventListener("click", ()=>{
+			//이미 시작했으면(intervalId가 null이 아니면) 알림창 출력 후 종료
+			if(intervalId){
+				alert("스톱 워치가 진행중입니다.");
+				return;
+			}
+			//setInterval을 이용하여 10ms마다 실행하는 함수를 호출한 후 반환값을 intervalId에 저장
+			intervalId = setInterval(()=>{
+				//ms를 10씩 증가
+				ms += 10;
+				//1000ms => 1s로 변환. ms가 1000이면 ms를 0으로, s를 1 증가
+				if(ms == 1000){
+					ms = 0;
+					s++;
+				}
+				//60s => 1m으로 변환. s가 60이면 s를 0으로, m을 1 증가
+				if(s == 60){
+					s = 0;
+					m++;
+				}
+				//ms, s, m을 이용해서 mm:ss.ms 형태로 문자열로 변환
+				let time = getTime(m, s, ms);
+				//viewBox에 문자열을 넣어줌
+				viewBox.innerText = time;
+			}, 10);
+			
+		});
+
+		//중지버튼 클릭이벤트를 등록
+		stopBtn.addEventListener("click", ()=>{
+			//clearInterval로 스톱워치를 중지하고 null로 초기화
+			clearInterval(intervalId);
+			intervalId = null;
+		})
+
 		
+		//리셋 버튼 클릭 이벤트를 등록
+		resetBtn.addEventListener("click", ()=>{
+			//스톱 워치를 중지
+			stopBtn.click();
+			//시간을 0으로 초기화
+			m = 0; s = 0; ms = 0;
+			//초기화 된 시간을 viewBox에 출력
+			viewBox.innerText = getTime(m, s, ms);
+		});
+
+		//기록 버튼 클릭 이벤트를 등록
+		recordBtn.addEventListener("click", ()=>{
+			//현재 시간을 문자열로 변환
+			let time = getTime(m, s, ms);
+			// 문자열을 div태그로 감싸고
+			let div = `<div>${time}</div>`;
+			// 만들어진 html 코드를 recordBox 상단에 html 코드로 추가
+			let htmlCode = recordBox.innerHTML;
+			recordBox.innerHTML = div + htmlCode;
+		});
+
+
+		function getTime(m, s, ms){
+			m = String(m).padStart(2, "0");
+			s = String(s).padStart(2, "0");
+			ms = String(ms/10).padStart(2, "0");
+			return `${m}:${s}.${ms}`;
+		}
+
 	</script>
 </body>
 </html>
