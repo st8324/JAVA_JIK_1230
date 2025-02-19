@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM - 속성 요소 추가</title>
+</head>
+<body>
+	<div class="box">
+		<!-- <img src="../../img/강아지.jpg" alt="강아지" height="200px"> -->
+	</div>
+	<script>
+		/*
+		속성노드 = document.createAttribute("속성명")
+		  - 속성 노드를 생성해서 반환
+		속성노드.value = 값
+		  - 속성 노드의 값을 지정
+		요소노드.setAttributeNode(속성노드)
+		  - 요소 노드에 속성 노드를 추가
+		*/
+
+		const box = document.querySelector(".box");
+
+		//이미지 태그를 생성해서 .box에 추가하는 작업
+		//1. img태그를 생성 <img>
+		let img = document.createElement("img");
+
+		//2. src, alt, height 속성을 생성 src="" alt="" height=""
+		let src = document.createAttribute("src");
+		let alt = document.createAttribute("alt");
+		let height = document.createAttribute("height");
+
+		//3. 각 속성의 값을 지정. src="../../img/강아지.jpg" alt="강아지" height="200"
+		src.value = "../../img/강아지.jpg";
+		alt.value = "강아지";
+		height.value = "200";
+
+		//4. img 태그에 각 속성을 추가 <img src="../../img/강아지.jpg" alt="강아지" height="200">
+		
+		img.setAttributeNode(src);
+		img.setAttributeNode(alt);
+		img.setAttributeNode(height);
+
+		//5. .box에 img 태그를 추가
+		box.append(img);
+
+		/* 
+		속성 노드를 생성하지 않고, 속성 정보를 객체로 저장해서 적용하는 방법
+		*/
+		let img2 = document.createElement("img");
+		
+		let attributes = {
+			src : "../../img/강아지.jpg",
+			alt : "강아지",
+			height : 200
+		}
+		Object.assign(img2, attributes);
+
+		box.append(img2);
+		
+		/* 
+		*/
+		function createNode(tag, attributes, text){
+			let element = document.createElement(tag);
+			
+			if(text){
+				let textNode = document.createTextNode(text);
+				element.append(textNode);
+			}
+
+			if(!attributes){
+				return element;
+			}
+			//속성 정보가 객체로 오지 않으면 
+			if(typeof attributes != "object"){
+				return element;
+			}
+			//
+			for( attr in attributes){
+				let attrNode = document.createAttribute(attr);
+				attrNode.value = attributes[attr];
+				element.setAttributeNode(attrNode);
+			}
+			return element;
+		}
+		let img3 = createNode("img", attributes);
+		box.append(img3);
+
+		let div = createNode("div", {
+			"data-target" : "abc"
+		}, "안녕하세요.");
+		box.append(div);
+	</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM - 요소 추가</title>
+	<style>
+		.container{
+			margin: 10px; border: 3px solid black; padding: 10px;
+		}
+		.box{
+			height: 50px; margin: 10px 0; border: 3px solid black; background-color: yellow;
+		}
+		.base2 .box{ background-color: red;}
+	</style>
+</head>
+<body>
+	<div class="container base">
+		<div class="box">1</div>
+		<div class="box">2</div>
+	</div>
+	<div class="container base2">
+		<div class="box">1</div>
+		<div class="box">2</div>
+	</div>
+	<script>
+		/*
+		document.createElement('태그')
+		  - 태그를 이용하여 요소를 생성하여 반환
+		document.createTextNode('텍스트')
+		  - 텍스트를 이용하여 텍스트 노드를 생성하여 반환
+		부모요소.append(...노드들)
+		  - 부모 요소의 마지막 자식 요소 뒤에 노드들을 추가
+		부모요소.appendChild(노드1)
+		  - 부모 요소의 마지막 자식 요소 뒤에 노드1을 추가
+		부모요소.prepend(...노드들)
+		  - 부모 요소의 첫번째 자식 요소 앞에 노드들을 추가
+		형제요소.before(노드)
+		  - 형제 요소 앞에 노드를 추가
+		형제요소.after(노드)
+		  - 형제 요소 뒤에 노드를 추가
+		*/
+		
+		const baseContainer = document.querySelector(".base");
+		const firstBox = document.querySelector(".box");
+		//const firstBox = document.getElementsByClassName("box")[0];
+
+		let box3 = createNode("div", "3 - .base : appendChild");
+		box3.classList.add("box");
+		baseContainer.appendChild(box3);
+
+		let box4 = createNode("div", "4 - .base : prepend");
+		box4.classList.add("box");
+		baseContainer.prepend(box4);
+
+		let box5 = createNode("div", "5 - .box1 : before");
+		box5.classList.add("box");
+		firstBox.before(box5);
+
+		let box6 = createNode("div", "6 - .box1 : after");
+		box6.classList.add("box");
+		firstBox.after(box6);
+
+		let box7 = "<div class='box'>7 - html코드로 이어붙이기</div>";
+		baseContainer.innerHTML += box7;
+
+		function createNode(tag, text){
+			//<div></div>
+			let node = document.createElement(tag);
+			if(text){
+				//안녕하세요.
+				let textNode = document.createTextNode(text);
+				//<div>안녕하세요.</div>
+				node.append(textNode);
+			}
+			return node;
+		}
+		/* 
+		기준요소.insertAdjacentElement("위치", 요소);
+		  - 위치
+			  - beforebegin : 기준 요소 바로 앞(before)
+				- afterbegin : 기준 요소의 첫번째 자식 요소 앞(prepend)
+				- beforeend : 기준 요소의 마지막 자식 요소 다음(append)
+				- afterend : 기준 요소 바로 다음(after)
+		*/
+
+		const baseContainer2 = document.querySelector(".base2");
+		const firstBox2 = document.querySelector(".base2 .box");
+
+		box3 = createNode("div", "3 - .base : appendChild");
+		box3.classList.add("box");
+		baseContainer2.insertAdjacentElement("beforeend",box3);
+
+		box4 = createNode("div", "4 - .base : prepend");
+		box4.classList.add("box");
+		baseContainer2.insertAdjacentElement("afterbegin", box4);
+
+		box5 = createNode("div", "5 - .box1 : before");
+		box5.classList.add("box");
+		firstBox2.insertAdjacentElement("beforebegin",box5);
+
+		box6 = createNode("div", "6 - .box1 : after");
+		box6.classList.add("box");
+		firstBox2.insertAdjacentElement("afterend",box6);
+	</script>
+
+</body>
+</html>

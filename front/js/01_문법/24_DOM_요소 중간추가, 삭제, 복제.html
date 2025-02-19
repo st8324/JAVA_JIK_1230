@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM - 요소 중간 추가, 삭제, 복제</title>
+</head>
+<body>
+	<ul class="list1">
+		<li class="item">1</li>
+		<li class="item item-base">2(기준)</li>
+		<li class="item">3</li>
+	</ul>
+	<script>
+		/* 
+		부모요소.insertBefore(요소, 기준요소)
+		  - 부모 요소 안에 있는 자식 요소 중 기준 요소 앞에 요소를 추가
+		  - 기준요소.before(요소)와 결과가 같음
+		*/
+		const list1 = document.querySelector(".list1");
+		const itemBase1 = document.querySelector('.list1 .item-base');
+
+		let li1 = document.createElement("li");
+		let text1 = document.createTextNode("4");
+		li1.append(text1);
+
+		list1.insertBefore(li1, itemBase1);
+		//itemBase1.before(li1);
+
+		/*
+		부모요소.removeChild(자식요소)
+		  - 자식 요소를 삭제
+		요소.remove()
+		  - 요소를 삭제
+		*/
+		const firstList= document.querySelector('li');
+		//list1.removeChild(firstList); //1이 삭제
+		firstList.remove();//1이 삭제
+
+		/*
+		요소.cloneNode(깊은복제)
+		  - 깊은복제가 true이면 요소를 깊은 복제, false이면 얕은 복제
+			- 깊은 복제 : 자식 요소들과 속성 노드들도 복제
+			- 얕은 복제 : 자식 요소들은 복제하지 않음
+		*/
+		let list2 = list1.cloneNode(true);
+		list2.style.background = "yellow";
+		
+		let list3 = list1.cloneNode(false);
+		list3.style.background = "gray";
+		list3.style.padding = "10px";
+
+		list1.before(list2);
+		list1.after(list3);
+
+		let list = document.querySelectorAll("li");
+
+	</script>
+</body>
+</html>
