@@ -22,6 +22,7 @@
 		}
 		nav{ margin-bottom: 10px;}
 		.box{ height: 300px; border: 3px solid black;}
+		.bg-yellow{ background-color: yellow;}
 	</style>
 </head>
 <body>
@@ -58,10 +59,48 @@
 		const box3 = document.querySelector(".box3");
 
 		//menuLink1을 클릭했을 때 box1을 보여주고, box2,box3은 감춤
+		menuLink1.addEventListener("click", e=>{
+			box1.style.display = "block";
+			box2.style.display = "none";
+			box3.style.display = "none";
 
+			menuLink1.classList.remove("bg-yellow");
+			menuLink2.classList.remove("bg-yellow");
+			menuLink3.classList.remove("bg-yellow");
+			
+			clearMenuLinkBackground();
+			menuLink1.classList.add("bg-yellow");
+		})
 		//menuLink2을 클릭했을 때 box2을 보여주고, box1,box3은 감춤
+		menuLink2.addEventListener("click", e=>{
+			box2.style.display = "block";
+			box1.style.display = "none";
+			box3.style.display = "none";
 
+			clearMenuLinkBackground();
+			menuLink2.classList.add("bg-yellow");
+		})
 		//menuLink3을 클릭했을 때 box3을 보여주고, box1,box2은 감춤
+		menuLink3.addEventListener("click", e=>{
+			box3.style.display = "block";
+			box1.style.display = "none";
+			box2.style.display = "none";
+
+			//clearMenuLinkBackground();
+			//menuLink3.classList.add("bg-yellow");
+			setMenuLinkBackground(menuLink3);
+		});
+		menuLink1.click();
+
+		function clearMenuLinkBackground(){
+			menuLink1.classList.remove("bg-yellow");
+			menuLink2.classList.remove("bg-yellow");
+			menuLink3.classList.remove("bg-yellow");
+		}
+		function setMenuLinkBackground(menuLink){
+			clearMenuLinkBackground();
+			menuLink.classList.add("bg-yellow");
+		}
 	</script>
 </body>
 </html>
