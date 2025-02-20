@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>정규 표현식</title>
+</head>
+<body>
+	<input type="text" name="id" placeholder="아이디를 입력하세요.">
+	<button id="btn">체크</button>
+	<script>
+		/* 
+		let 정규표현식변수 = /^$/;
+		정규표현식변수.test(문자열)
+		  - 문자열이 정규 표현식에 맞으면 true, 아니면 false를 반환
+		*/
+		let regex1 = /^\d{3}$/;
+		console.log(`/^\\d{3}$/.test("123") : ${regex1.test("123")}`);
+		console.log(`/^\\d{3}$/.test("12a") : ${regex1.test("12a")}`);
+
+		const btn = document.querySelector("#btn");
+		const idEl = document.querySelector("[name=id]");
+		//버튼을 클릭하면
+		btn.addEventListener("click", e=>{
+			//텍스트창에서 아이디를 입력받아 아이디 유효성 검사(영문과 숫자로만 되어 있고 8~13자)
+			let text = idEl.value;
+			let regex = /^[a-zA-Z0-9]{8,13}$/;
+			if(regex.test(text)){
+				alert("사용 가능한 형태의 아이디입니다.");
+			}else{
+				alert("아이디는 영문, 숫자로만 구성되며, 8~13자이어야 합니다.")
+			}
+		});
+	</script>
+</body>
+</html>

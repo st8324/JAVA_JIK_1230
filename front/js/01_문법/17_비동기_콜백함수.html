@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>비동기 - 콜백 함수</title>
+</head>
+<body>
+	
+	<script>
+		/* 
+		동기
+		  - 앞 작업이 다 끝나야 뒤 작업이 실행됨
+		비동기
+		  - 앞 작업이 다 끝나지 않아도 뒤 작업이 실행되는 상황.
+			- 이 때, 앞 작업을 비동기로 해야 함
+		*/
+		function increase(n , callback){
+			setTimeout(()=>{
+				document.write(`${n+1}<br>`);
+				if(callback){
+					callback(n+1);
+				}
+			}, 1000);
+		}
+		increase(0, n=>{
+			increase(n, n=>{
+				increase(n, n=>{
+					increase(n, n=>{
+						increase(n, n=>{
+							document.write("종료<br>");
+						})
+					})
+				});
+			});
+		});
+		document.write("마지막 작업<br>");
+	</script>
+</body>
+</html>

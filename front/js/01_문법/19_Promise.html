@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Promise</title>
+</head>
+<body>
+	
+	<script>
+		let count = 0;
+
+		function countPromise(){
+			return new Promise((resolve, reject)=>{
+					setTimeout(()=>{
+						++count;
+						document.write(`${count}<br>`);
+						if(count < 3){
+							resolve();
+						}else{
+							reject();
+						}
+					},1000);
+				});
+		} 
+		countPromise()
+			.then(()=>{
+				document.write(`완료 : ${count}<br>`);
+				return countPromise();
+			})
+			.then(()=>{
+				document.write(`완료 : ${count}<br>`);
+				return countPromise();
+			})
+			.then(()=>{
+				document.write(`완료 : ${count}<br>`);
+				return countPromise();
+			})
+			.then(()=>{
+				document.write(`완료 : ${count}<br>`);
+				return countPromise();
+			})
+			.catch(()=>{
+				document.write(`count가 3이 되어서 reject 실행<br>`);
+			})
+			.finally(()=>{
+				document.write("promise 종료<br>");
+			});
+	</script>
+</body>
+</html>

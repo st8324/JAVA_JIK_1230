@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>fetch</title>
+</head>
+<body>
+	<ul id="list"></ul>
+	<script>
+		/*
+		fetch
+		  - 비동기 통신을 하는 함수
+
+		fetch(url주소)
+			.then((res) => ~~~)
+			.then((res) => ~~~)
+		- 서버에서 보낸 결과를 res 객체에 담아서 then에서 처리
+		- res.json() : 받은 결과를 json으로 변환(객체로 변환)
+		- res.text() : 받은 결과를 문자열로 변환
+		*/
+		const list = document.querySelector("#list");
+		fetch("https://my-json-server.typicode.com/st8324/repo/board")
+			.then(res => res.json())
+			.then(res => {
+				let html = '';
+				res.forEach(b=>{
+					html += `
+						<li>${b.num} : ${b.title}(${b.view}) - ${b.writer} </li>
+					`;
+					list.innerHTML = html;
+				})
+				
+			});
+
+		fetch("https://my-json-server.typicode.com/st8324/repo/board")
+			.then(res => res.text())
+			.then(res => console.log(res))
+	</script>
+</body>
+</html>
