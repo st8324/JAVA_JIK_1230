@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jquery - 기본 사용</title>
+	<script src="../../static/js/jquery.min.js"></script>
+</head>
+<body>
+	<div class="container1">
+		<h1>JS로 이벤트 등록</h1>
+		<button type="button" class="btn">버튼1</button>
+		<button type="button" class="btn">버튼2</button>
+		<button type="button" class="btn">버튼3</button>
+	</div>
+	<div class="container2">
+		<h1>JQuery로 이벤트 등록</h1>
+		<button type="button" class="btn">버튼1</button>
+		<button type="button" class="btn">버튼2</button>
+		<button type="button" class="btn">버튼3</button>
+	</div>
+	<script>
+		/* 
+		jquery
+		  - 자바 스크립트로 작성된 프레임워크
+		jquery 사용 방법
+		  - script 태그로 연결해서 사용
+		요소 선택
+		  - $("선택자")
+		이벤트 등록
+		  - $("선택자").이벤트명(콜백함수);
+			- $("선택자").on("이벤트명", 콜백함수);
+			- $(docuemnt).on("이벤트명", "선택자", 콜백함수);
+			  - 요소나 이벤트 등록 후에 추가되도 이벤트가 동작 됨
+		*/
+		const btns = document.querySelectorAll(".container1 .btn");
+		btns.forEach(btn=>{
+			btn.addEventListener("click", e=>{
+				alert(btn.innerText);
+			});
+		})
+		/*
+		$(".container2 .btn").click(function(){
+			alert($(this).text());
+		});
+		*/
+		$(document).on("click", ".container2 .btn", function(){
+			alert($(this).text());
+		})
+	</script>
+	<div class="container2">
+		<button type="button" class="btn">버튼4</button>
+	</div>
+</body>
+</html>

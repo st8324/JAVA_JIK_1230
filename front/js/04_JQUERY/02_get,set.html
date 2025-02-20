@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jquery - get,set 예제</title>
+	<script src="../../static/js/jquery.min.js"></script>
+</head>
+<body>
+	<div class="box1" data-target="box1">1</div>
+	<div class="box2">
+		<span>2</span>
+	</div>
+	<input type="text" id="id" value="test"> <br>
+	<input type="checkbox" name="a" checked> <br>
+	<input type="checkbox" name="b"> <br>
+	<script>
+		/*
+		요소의 정보를 가져오는 메소드들
+
+		text()
+		  - 요소의 텍스트를 가져옴. js : innerText, textContent
+		html()
+		  - 요소의 html 코드를 가져옴. js : innerHTML
+		val()
+		  - 요소의 value 값을 가져옴. 
+			- input, select, textarea 태그등과 같은 입력 태그에 사용
+		attr(속성)
+		  - 요소의 속성 값을 가져옴
+			- html 속성
+			- 초기 HTML 속성값에 중점을 둠
+		prop(속성)
+		  - 요소의 속성 값을 가져옴
+			- DOM 속성
+			- 동적인 값에 중점을 둠
+		data(이름)
+		  - 요소의 속성 중 data-이름의 값을 가져옴
+		
+		요소의 정보를 수정하는 메소드들
+		text(문자열)
+		  - 요소의 텍스트를 문자열로 수정
+		html(문자열)
+		  - 요소의 html 코드를 문자열로 수정
+		val(문자열)
+		  - 요소의 value를 문자열로 수정
+		attr(속성, 값)
+		  - 요소의 속성 값을 값으로 수정
+		prop(속성, 값)
+		  - 요소의 속성 값을 값으로 수정
+		data(이름, 값)
+		  - 요소의 data-이름 속성의 값을 값으로 수정
+
+		*/
+		//text(), text(문자열)
+		let text1 = $(".box1").text();
+		console.log(`초기 박스1의 문자열 : ${text1}`);
+		
+		$(".box1").text("박스1");//.box1의 문자열을 수정
+
+		text1 = $(".box1").text();
+		console.log(`이후 박스1의 문자열 : ${text1}`);
+
+		//html(), html(코드)
+
+		let html2 = $(".box2").html();
+		console.log(`초기 박스2의 html코드 : ${html2}`);
+
+		$(".box2").html("<h1>박스2</h1>");
+		
+		html2 = $(".box2").html();
+		console.log(`이후 박스2의 html코드 : ${html2}`);	
+
+		//val(), val(값)
+		let val = $("#id").val();
+		console.log(`초기 입력창의 값 : ${val}`);
+
+		$("#id").val("1234");
+
+		//attr(속성), prop(속성)
+		let attr = $("[name=a]").attr("checked");
+		let prop = $("[name=b]").prop("checked");
+
+		console.log(`체크 여부(attr) : ${attr}`);
+		console.log(`체크 여부(prop) : ${prop}`);
+
+		$("[name=a]").attr("checked", "checked");
+		$("[name=b]").prop("checked", true);
+
+
+		//data(이름), data(이름, 값)
+		let target = $(".box1").data("target");
+		console.log(`박스1의 data-target : ${target}`);
+
+		$(".box1").data("target","box2");
+
+		target = $(".box1").data("target");
+		console.log(`박스1의 data-target : ${target}`);
+	</script>
+</body>
+</html>
