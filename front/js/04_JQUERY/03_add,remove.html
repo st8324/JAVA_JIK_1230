@@ -4,6 +4,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>add, remove</title>
+	<style>
+		[class^=box]{
+			border: 3px solid black; margin-bottom: 10px; padding: 10px;
+		}
+		.box2{ border-color: red;}
+		.box3{ border-color: blue;}
+	</style>
 </head>
 <body>
 	<div class="box1">
@@ -15,11 +22,12 @@
 	<div class="box3">
 		<p>안녕하세요.</p>
 	</div>
+	<script src="../../static/js/jquery.min.js"></script>
 	<script>
 		/* 
 		$("선택자").append(요소)
 		  - 선택자의 마지막 자식 요소 다음에 요소를 추가
-		$("요소").appendTo("선택자")
+		$(요소).appendTo("선택자")
 		  - 선택자의 마지막 자식 요소 다음에 요소를 추가
 		$("선택자").prepend(요소)
 		  - 선택자의 첫번째 자식 요소 앞에 요소를 추가
@@ -35,6 +43,17 @@
 		$("선택자").empty()
 		  - 선택자의 자식 요소들을 제거
 		*/
+		$(".box1").append(`<a href="#">링크1</a>`);
+		$(`<a href="#">링크2</a>`).appendTo(".box1");
+
+		$(".box1").prepend(`<a href="#">링크3</a>`);
+		$(`<a href="#">링크4</a>`).prependTo(".box1");
+
+		$(".box1").before(`<div class="box1-1">box1 : before</div>`);
+		$(".box1").after(`<div class="box1-2">box1 : after</div>`);
+
+		$(".box2").remove();
+		$(".box3").empty();
 	</script>
 </body>
 </html>

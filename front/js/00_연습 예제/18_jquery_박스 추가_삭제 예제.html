@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>박스 추가 삭제 예제</title>
+	<style>
+		.add-btn{
+			cursor: pointer; height: 50px; background: #fff;
+			border: 1px solid black; border-radius: 5px;
+		}
+		.add-btn:active{
+			background: rgba(0,0,0,0.03);
+		}
+		.box{
+			border: 3px solid black; padding: 20px; margin-top: 10px; 
+			border-radius: 10px; height: 30px;
+		}
+		.close-btn{
+			float: right; width: 30px; height: 30px;line-height: 30px;
+			text-decoration: none; font-size: 20px; text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<button type="button" class="add-btn">박스 추가</button>
+	<div class="container">
+		<div class="box"></div>
+		<!-- <div class="box">
+			<a href="" class="close-btn">&times;</a>
+		</div> -->
+	</div>
+	<script src="../../static/js/jquery.min.js"></script>
+	<script>
+		$(".add-btn").click(()=>{
+			const box = `
+				<div class="box">
+				</div>
+			`;
+			$(".container").append(box);
+		});
+		
+		$(document).on("click", ".box", function(){
+
+			let count = $(".box").length;
+			if(count == 1){
+				alert("마지막 박스는 삭제할 수 없습니다.");
+				return;
+			}
+
+			if(confirm("박스를 삭제하시겠습니까?")){
+				$(this).remove();
+			}
+		})
+		
+		
+	</script>
+</body>
+</html>
