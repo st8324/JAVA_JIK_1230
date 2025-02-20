@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM - 노드 탐색</title>
+</head>
+<body>
+	<nav>
+		<a href="#">로고</a>
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3</a>
+			</li>
+		</ul>
+		<a href="#">로그아웃</a>
+	</nav>
+	<script>
+		/*
+		노드 탐색
+		  - 텍스트 노드를 포함한 노드들을 탐색
+			- 노드 : 텍스트 노드, 요소 노드
+		
+		노드.parentNode
+		  - 부모 노드를 선택
+	
+		노드.firstChild
+		  - 첫번째 자식 노드
+		노드.lastChild
+		  - 마지막 자식 노드
+		노드.childNodes
+		  - 모든 자식 노드들을 선택
+			- forEach 사용 가능
+		
+		노드.previousSibling
+		  - 노드 바로 앞에 있는 형제 노드
+		노드.nextSibling
+		  - 노드 바로 뒤에 있는 형제 노드
+
+		*/
+		const ul = document.querySelector(".menu-list");
+
+		const ulParent = ul.parentNode; //nav 태그
+		ulParent.style.border = "3px solid black"
+
+		const ulFirstChild = ul.firstChild; //ul과 첫번째 li 사이에 있는 공백
+		const ulLastChild = ul.lastChild; //ul과 마지막 li 사이에 있는 공백
+		const ulChildren = ul.childNodes; 
+
+		console.log(ulFirstChild);
+		console.log(ulLastChild);
+		
+		console.log("---ul 태그의 자식 노드들---")
+		ulChildren.forEach(ch=>{
+			console.log(ch);
+		});
+
+		const ulPreviousSibling = ul.previousSibling;
+		const ulNextSibling = ul.nextSibling;
+
+		console.log("---ul 태그의 형제 노드들---")
+		console.log(ulPreviousSibling);
+		console.log(ulNextSibling);
+	</script>
+</body>
+</html>

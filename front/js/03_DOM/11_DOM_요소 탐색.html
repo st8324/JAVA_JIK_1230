@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM - 요소 탐색</title>
+	<style>
+		.box{
+			border: 3px solid black; padding: 30px;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<a href="#">로고</a>
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3</a>
+			</li>
+		</ul>
+		<a href="#">로그아웃</a>
+	</nav>
+	<div class="container box">
+		<div class="inner-conatiner box">
+			<div class="content box">
+				<a href="#" class="link">링크</a>
+			</div>
+		</div>
+	</div>
+	<script>
+		/*
+		요소 탐색
+		  - 텍스트 노드를 제외한 요소들을 탐색
+			- 요소는 태그로 된 요소들
+		
+		요소.parentElement
+		  - 부모 요소를 선택
+	
+		요소.firstElementChild
+		  - 첫번째 자식 요소
+		요소.lastElementChild
+		  - 마지막 자식 요소
+		요소.children
+		  - 모든 자식 요소들을 선택
+			- forEach 사용 불가능. for of를 활용
+		
+		요소.previousElementSibling
+		  - 요소 바로 앞에 있는 형제 요소
+		요소.nextElementSibling
+		  - 요소 바로 뒤에 있는 형제 요소
+
+		*/
+		const ul = document.querySelector(".menu-list");
+
+		const ulParent = ul.parentElement; //nav 태그
+		ulParent.style.border = "3px solid black"
+
+		const ulFirstChild = ul.firstElementChild; //첫번째 li 
+		ulFirstChild.style.background = "yellow";
+
+		const ulLastChild = ul.lastElementChild; //마지막 li
+		ulLastChild.style.background = "gray";
+
+		const ulChildren = ul.children; 
+		for( let child of ulChildren){
+			child.style.fontSize = "20px";
+		}
+		
+		
+		
+		const ulPreviousSibling = ul.previousElementSibling;
+		const ulNextSibling = ul.nextElementSibling;
+
+		ulPreviousSibling.style.color = "red";
+		ulNextSibling.style.color = "skyblue";
+
+		/*
+		요소.closest("선택자");
+		  - 선택자와 일치하는 요소의 조상들 중 가장 가까운 조상 요소
+			- 없으면 null을 반환
+		*/
+		const link = document.querySelector(".link");
+		link.closest(".box").style.borderColor = "red";
+		/*
+		요소.querySelector("선택자")
+		  - 요소의 자손들 중 선택자와 일치하는 첫번째 요소
+		요소.querySelectorAll("선택자")
+		  - 요소의 자손들 중 선택자와 일치하는 요소들
+		*/
+		const container = document.querySelector(".container");
+		container.querySelector(".box").style.borderStyle = "dashed";
+		container.querySelectorAll(".box").forEach(el=>{
+			el.style.borderWidth = "5px";
+		});
+	</script>
+</body>
+</html>
