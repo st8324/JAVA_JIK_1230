@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>탐색 예제</title>
+	<style>
+		.table{
+			width: 100%; border-collapse: collapse;
+		}
+		thead>tr :first-child{
+			text-align: left;
+		}
+		.table td, .table th{ 
+			border: 1px solid black; border-width: 1px 0; height: 50px;
+		}
+		tfoot>tr :first-child{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					<input type="checkbox" id="all">
+					<label for="all">전체</label>
+				</th>
+				<th>제품명</th>
+				<th>가격</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<input type="checkbox" name="pr-num" value="3" checked>
+				</td>
+				<td>
+					<a href="#" class="pr-link">마우스</a>
+				</td>
+				<td>
+					<span class="pr-price">10000</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="pr-num" value="6">
+				</td>
+				<td>
+					<a href="#" class="pr-link">키보드</a>
+				</td>
+				<td>
+					<span class="pr-price">50000</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="pr-num" value="13" checked>
+				</td>
+				<td>
+					<a href="#" class="pr-link">USB</a>
+				</td>
+				<td>
+					<span class="pr-price">5000</span>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="2">합계</td>
+				<td class="total-price">~~~</td>
+			</tr>
+		</tfoot>
+	</table>
+	<script>
+		//전체 선택을 했을 때 마지막에 calculatePrice()를 호출
+
+		//[name=pr-num]가 click했을 때 calculatePrice()를 호출
+		const prNums = document.querySelectorAll("[name=pr-num]");
+		const all= document.querySelector("#all");
+
+		prNums.forEach(prNum=>{
+			prNum.addEventListener("change", e=>{
+				calculatePrice();
+
+				//현재 체크박스의 checked 상태를 가져옴
+				let checked = prNum.checked;
+
+				//체크를 해제한 경우
+				if(!checked){
+					//전체 체크박스를 해제
+					all.checked = false;
+					return;
+				}
+
+				//체크박스의 상태가 현재 checked와 같은 요소들을 선택
+				let selector = "[name=pr-num]:checked";
+				let sameCheckboxes = document.querySelectorAll(selector);
+				//체크박스의 상태가 현재 checked와 같은 요소의 수가 checkboxes의 수와 같다면
+				if(sameCheckboxes.length == prNums.length){
+					//전체 체크박스의 checked를 현재 체크박스의 checked 수정
+					all.checked = checked;
+				}
+			})
+		})
+
+		//전체 체크박스를 change 이벤트를 등록
+		all.addEventListener("change", ()=>{
+			
+			let checked = all.checked;
+			
+			prNums.forEach(prNum=>{
+				prNum.checked = checked;
+			});
+			calculatePrice();
+		});
+
+		function calculatePrice(){
+			//[name=pr-num] 요소들 중 checked 된 요소들을 선택
+			const checkes = document.querySelectorAll("[name=pr-num]:checked");
+			let sum = 0;
+			//반복을 통해 각 요소들을 선택해서 작업
+			checkes.forEach(check=>{
+				//요소의 조상들 중에서 가장 가까운 tr을 선택
+				let tr = check.closest("tr");
+				
+				//선택된 tr의 마지막 자식 요소를 선택
+				//let priceTd = tr.lastElementChild;
+				
+				//마지막 자식 요소 안에 .pr-price를 선택
+				//let prPrice = priceTd.querySelector(".pr-price");
+				let prPrice = tr.querySelector(".pr-price");
+
+				//텍스트를 가져옴
+				let price = prPrice.innerText;
+				//가져온 텍스트를 숫자로 변환해서 sum에 누적
+				sum += +price;
+			});
+
+			//.totla-price 요소의 텍스트를 sum으로 수정
+			const totalPrice = document.querySelector(".total-price");
+			totalPrice.innerText = sum;
+		}
+	</script>
+</body>
+</html>
