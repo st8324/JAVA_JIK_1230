@@ -14,5 +14,28 @@
 	<button class="btn">클릭</button>
 	<br>
 	<input type="text" name="addr" readonly>
+	<script>
+		const $addr1 = $("[name=addr1]");
+		const $addr2 = $("[name=addr2]");
+
+		$(".btn").click(function(){
+			let addr1 = $addr1.val();
+			let addr2 = $addr2.val();
+
+			if(addr1.trim() == ""){
+				alert("주소를 입력하세요.");
+				$addr1.focus();
+				return;
+			}
+			if(addr2.trim() == ""){
+				alert("상세 주소를 입력하세요.");
+				$addr2.focus();
+				return;
+			}
+
+			let addr = addr1 + " " + addr2;
+			$("[name=addr]").val(addr);
+		})
+	</script>
 </body>
 </html>
