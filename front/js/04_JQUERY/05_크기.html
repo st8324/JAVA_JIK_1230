@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JQuery - 요소 크기</title>
+	<script src="../../static/js/jquery.min.js"></script>
+	<style>
+		.box{
+			height: 200px;
+			border: 10px solid black;
+			padding: 20px;
+			margin: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+	<script>
+		/* 
+		width()/height()
+		  - 요소 컨텐츠의 너비/높이
+		innerWidth()/innerHeight()
+		  - 요소 컨텐츠 + 패딩 너비/높이
+		outerWidth()/outerHeight()
+		  - 요소 컨텐츠 + 패딩 + 테두리 너비/높이
+		outerWidth(true)/outerHeight(true)
+		  - 요소 컨텐츠 + 패딩 + 테두리 + 마진 너비/높이
+			
+		*/
+		const $box = $(".box");
+		let contentH = $box.height();
+		let paddingH = $box.innerHeight();
+		let borderH = $box.outerHeight();
+		let marginH = $box.outerHeight(true);
+		let result = `
+			컨텐츠 높이 : ${contentH} <br>
+			컨텐츠 + 패딩 높이 : ${paddingH} <br>
+			컨텐츠 + 패딩 + 테두리 높이 : ${borderH} <br>
+			컨텐츠 + 패딩 + 테두리 + 마진 높이 : ${marginH} <br>
+		`;
+		$box.html(result);
+	</script>
+</body>
+</html>

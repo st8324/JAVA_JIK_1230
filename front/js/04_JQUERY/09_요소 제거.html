@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JQuery - 요소 제거</title>
+	<script src="../../static/js/jquery.min.js"></script>
+</head>
+<body>
+	<ul>
+		<li>메뉴1</li>
+		<li>메뉴2</li>
+		<li>메뉴3</li>
+	</ul>
+	<script>
+		/* 
+		detach()
+		  - 요소를 제거해서 반환
+			- remove는 제거.
+		*/
+		const $li = $("li").first().detach();
+		$("ul").append($li);
+	</script>
+</body>
+</html>

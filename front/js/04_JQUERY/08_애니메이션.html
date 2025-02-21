@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JQuery - 애니메이션</title>
+	<script src="../../static/js/jquery.min.js"></script>
+	<style>
+		.container{
+			margin-top: 10px;
+		}
+		.box{
+			width: 100px; height: 100px; background: red;
+		}
+	</style>
+</head>
+<body>
+	<button type="button" id="btn1">시작</button>
+	<button type="button" id="btn2">중지</button>
+	<button type="button" id="btn3">돌아가기</button>
+	<div class="container">
+		<div class="box"></div>
+	</div>
+	<script>
+		/* 
+		animate(옵션, 동작시간, 콜백함수)
+		  - 옵션
+			  - 변경할 스타일
+				- 객체로 전달
+				  {
+				    속성1 : 값1,
+						속성2 : 값2
+				  }
+				- 값에 기존 값에 누적이 되는 경우 +=이나 -=을 이용할 수 있음
+			- 콜백함수 : 애니메이션이 종료 된 후 실행할 작업
+			- 같은 요소에 여러 애니메이션을 여러개 등록하면 애니메이션 종료 후 순차적으로 실행
+		is("상태")
+		  - 요소의 상태가 true인지 false인지 알려줌
+		is(":animated")
+		  - 요소가 애니메이션 중인지 아닌지를 알려줌
+		stop(stopAll)
+		  - 요소의 애니메이션을 중지
+			- stopAll이 true이면 등록된 모든 애니메이션을 중지
+			- false이면 현재 진행중인 애니메이션 중지
+		*/
+		const $box = $(".box");
+		$("#btn1").click(function(){
+			if($box.is(":animated")){
+				return;
+			}
+			$box.animate({
+				marginLeft : "+=100px"
+			}, 1000, function(){
+				console.log("우측으로 이동 끝")
+			});
+		})
+		$("#btn3").click(function(){
+			if($box.is(":animated")){
+				return;
+			}
+			$box.animate({
+				marginLeft : "-=100px"
+			}, 1000, function(){
+				console.log(" 좌측으로 이동 끝")
+			});
+		})
+		$("#btn2").click(function(){
+			$box.stop(true);
+		})
+	</script>
+</body>
+</html>

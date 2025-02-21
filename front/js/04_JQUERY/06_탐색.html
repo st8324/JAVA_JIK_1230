@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JQuery - 탐색</title>
+	<script src="../../static/js/jquery.min.js"></script>
+	<style>
+		body>nav, 
+		body>nav *{
+			border: 3px solid black;
+			padding: 10px;
+			list-style: none;
+			display: block; 
+			margin: 10px; ;
+		}
+		.base1{ border: 5px solid red;}
+		.base2{ border: 3px solid blue;}
+		.base3{ border: 3px solid green;}
+	</style>
+</head>
+<body>
+
+	<nav>
+		<ul class="menu-list1">
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1-1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link base1">메뉴1-2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1-3</a>
+			</li>
+		</ul>
+		<ul class="menu-list2 base2">
+			<li class="menu-item first">
+				<a href="#" class="menu-link first">메뉴2-1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2-2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2-3</a>
+			</li>
+		</ul>
+		<ul class="menu-list3">
+			<li class="menu-item first">
+				<a href="#" class="menu-link">메뉴3-1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3-2</a>
+			</li>
+			<li class="menu-item base3">
+				<a href="#" class="menu-link">메뉴3-3</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3-4</a>
+			</li>
+			<li class="menu-item last">
+				<a href="#" class="menu-link">메뉴3-5</a>
+			</li>
+		</ul>
+	</nav>
+	
+	<script>
+		/* 
+		조상 선택 메소드
+		parent()
+		  - 부모 요소를 선택
+		parents()
+		  - 모든 조상 요소들을 선택
+		parents("선택자")
+		  - 조상들 중 선택자와 일치하는 조상들을 선택
+		parentsUntil("선택자")
+		  - 부모 요소부터 선택자와 일치하는 조상 요소 전까지의 조상들을 선택
+
+		자손 선택 메소드
+		children()
+		  - 모든 자식 요소들을 선택
+		children("선택자")
+		  - 자식 요소 중 선택자와 일치하는 자식들을 선택
+		find("선택자")
+		  - 선택자와 일치하는 자손 요소들을 선택
+
+		형제 선택 메소드
+		prev()
+		  - 이전 형제 요소를 선택
+		prevAll()
+		  - 이전 모든 형제 요소를 선택
+		prevAll("선택자")
+		  - 선택자와 일치하는 이전 요소들을 선택
+		prevUntil("선택자")
+		  - 선택자와 일치하는 요소 전까지의 이전 형제 요소들을 선택
+		next()
+			- 다음 형제 요소를 선택
+		nextAll()
+		  - 다음 모든 형제 요소를 선택
+		nextAll("선택자")
+		  - 선택자와 일치하는 다음 요소들을 선택
+		nextUntil("선택자")
+		  - 선택자와 일치하는 요소 전까지의 다음 형제 요소들을 선택
+		siblings()
+		  - 모든 형제 요소들을 선택
+		siblings("선택자")
+		  - 선택자와 일치하는 형제 요소들을 선택
+		*/
+		const $base1 = $(".base1");
+		$base1.parent().css("border-top-color", "orange");
+		$base1.parents().css("border-right-style", "dashed");
+		$base1.parents(".menu-list1").css("border-bottom-color", "yellow");
+		$base1.parentsUntil(".menu-list1").css("border-left-color", "skyblue");
+
+		const $base2 = $(".base2");
+		$base2.children().css("border-top-color", "orange");
+		$base2.children(".first").css("border-right-style", "dashed");
+		$base2.find(".menu-link").css("border-bottom-color", "yellow");
+
+		const $base3 = $(".base3");
+		$base3.prev().css("border-top-color", "orange");
+		$base3.next().css("border-top-color", "orange");
+		$base3.prevAll().css("border-right-style", "double");
+		$base3.nextAll().css("border-right-style", "double");
+		$base3.prevAll(".first").css("border-bottom-color", "yellow");
+		$base3.nextAll(".last").css("border-bottom-color", "yellow");
+		$base3.prevUntil(".first").css("border-left-color", "skyblue");
+		$base3.nextUntil(".last").css("border-left-color", "skyblue");
+
+		$base3.siblings().children().css("color", "red");
+		$base3.siblings(".first").children().css("text-decoration", "none");
+	</script>
+</body>
+</html>

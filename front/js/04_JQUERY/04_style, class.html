@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JQuery - style, class</title>
+	<script src="../../static/js/jquery.min.js"></script>
+	<style>
+		.box{ height: 200px; border: 3px solid black; margin: 10px 0;}
+		.bg-yellow{ background: yellow;}
+	</style>
+</head>
+<body>
+	<button type="button" id="btn1">배경 : 노랑</button>
+	<button type="button" id="btn2">배경 : 없음</button>
+	<button type="button" id="btn3">배경 : 노랑 &lt;-&gt; 없음</button>
+	<button type="button" id="btn4">글자 : 노랑 &lt;-&gt; 없음</button>
+	<div class="box box1"></div>
+	<button type="button" id="btn5">배경 : 노랑</button>
+	<button type="button" id="btn6">배경 : 없음</button>
+	<button type="button" id="btn7">배경 : 노랑 &lt;-&gt; 없음</button>
+	<div class="box box2"></div>
+	<script>
+		/* 
+		$("선택자").addClass("클래스명")
+		  - 요소에 클래스를 추가
+		$("선택자").removeClass("클래스명")
+		  - 요소에 클래스를 제거
+		$("선택자").toggleClass("클래스명")
+		  - 요소에 클래스가 있으면 제거, 없으면 추가
+		$("선택자").hasClass("클래스명")
+		  - 요소에 클래스가 있으면 true, 없으면 false를 반환
+
+		$("선택자").css("속성A")
+		  - 요소의 스타일 속성A의 값을 반환
+		$("선택자").css("속성A", 값B)
+		  - 요소의 스타일 속성A의 값을 값B로 수정
+		$("선택자").css(객체)
+		$("선택자").css({
+			속성A : 값A,
+			속성B : 값B,
+			...
+		})
+		  - 객체의 키값을 요소의 스타일 속성으로 객체의 값을 요소의 스타일 값으로 수정
+		*/
+		const $box1 = $(".box1");
+		const $box2 = $(".box2");
+		
+		$("#btn1").click(e=>{
+			$box1.addClass("bg-yellow");
+			$("#btn4").click();
+		})
+		$("#btn2").click(e=>{
+			$box1.removeClass("bg-yellow");
+			$("#btn4").click();
+		})
+		$("#btn3").click(e=>{
+			$box1.toggleClass("bg-yellow");
+			$("#btn4").click();
+		})
+		$("#btn4").click(e=>{
+			if($box1.hasClass("bg-yellow")){
+				$box1.text("노랑");
+			}else{
+				$box1.text("없음");
+			}
+		})
+		$("#btn4").click();
+
+
+		$("#btn5").click(e=>{
+			$box2.css("background-color", "yellow");
+			
+		})
+		$("#btn6").click(e=>{
+			$box2.css({
+				//"background-color" : "white"
+				backgroundColor : "white"
+			});
+			
+		})
+		$("#btn7").click(e=>{
+			let backgroundColor = $box2.css("backgroundColor");
+			if("rgb(255, 255, 0)" == backgroundColor){
+				$box2.css("background-color", "white");
+			}else{
+				$box2.css("background-color", "yellow");
+			}
+		})
+	</script>
+</body>
+</html>
