@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>회원가입 validate</title>
+	<style>
+		.form-group{
+			display: flex;
+		}
+		.form-group ~ .form-group{
+			margin-top: 10px;
+		}
+		.justify-content-center{
+			justify-content: center;
+		}
+		.form-left{
+			width: 100px;
+		}
+		.form-right{
+			width: calc(100% - 100px);
+		}
+		.table{ width: 100%; border: 1px solid black;}
+		.table th, .table td{border: 1px solid black;}
+		.table thead, .table tfoot{ background: tomato;}
+		.table .btn{ width: 100%;}
+
+		[class^=error]{
+			color: red; line-height: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div class="signup-container">
+		<form action="">
+			<fieldset>
+				<legend>회원가입</legend>
+				<div class="form-group">
+					<label for="id" class="form-left">아이디</label>
+					<input type="text" name="id" id="id" class="form-right">
+				</div>
+				<label id="id-error" class="error" for="id"></label>
+				<div class="form-group">
+					<label for="pw" class="form-left">비번</label>
+					<input type="password" name="pw" id="pw" class="form-right">
+				</div>
+				<label id="pw-error" class="error" for="pw"></label>
+				<div class="form-group">
+					<label for="pw2" class="form-left">비번 확인</label>
+					<input type="password" name="pw2" id="pw2" class="form-right">
+				</div>
+				<label id="pw2-error" class="error" for="pw2"></label>
+				<div class="form-group justify-content-center">
+					<button type="submit">작성하기</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<hr>
+	<div class="news-container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th colspan="2">기사 제목</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>2</td>
+					<td>오늘의 날씨는?</td>
+					<td>
+						<button type="button" class="btn">기사보기</button>
+					</td>
+					<td>10</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>오늘의 뉴스는 무엇인가요?</td>
+					<td>
+						<button type="button" class="btn">기사보기</button>
+					</td>
+					<td>100</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="3">기사 개수</th>
+					<th>2</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<script src="../../static/js/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+	<script>
+		/* 
+		아이디는 영어, 숫자로 되어 있으며 8~13자이다
+		비번은 영어, 숫자, 특수문자(!@#$)로 되어 있으며 8~15자이다.
+		비번 확인은 비번과 일치해야 한다.
+		아이디, 비번, 비번 확인 필수 항목이다.
+		유효성 검사 시기
+		  1. 작성하기 버튼을 클릭하면 아이디, 비번, 비번확인 유효성 검사
+			2. 각 입력창에 입력을 하면 각 입력창 유효성 검사를 함
+		*/
+		const $form = $("form");
+		/* 
+		rules 
+		  - 유효성 검사를 할 규칙들
+			- 객체가 필요
+			  - 속성 : 입력태그의 name
+				- 값 : 옵션
+				  - required : 필수항목, true
+					- minlength : 최소길이
+					- maxlength : 최대길이
+					- equalTo : 다른값과 같은지 확인, id명이 필요
+					- digits : 숫자만 있는지 체크
+					- email : 이메일 형식인지 체크
+					- url : url 형식 체크
+					- regex : 기본 옵션이 아님. 메소드를 추가해야 사용 가능. 정규 표현식
+		messages
+		  - 유효성 검사가 맞지 않을 때 출력할 메시지들. 
+			- 객체로 필요
+		*/
+		$form.validate({
+			rules : {
+				id : {
+					required : true,
+					regex : /^[a-zA-Z0-9]{8,13}$/
+				},
+				pw : {
+					required : true,
+					regex : /^[a-zA-Z0-9!@#$]{8,15}$/
+				},
+				pw2 : {
+					equalTo : pw
+				}
+			},
+			messages : {
+				id : {
+					required : "필수 항목입니다.",
+					regex : "아이디는 영문, 숫자만 가능하며, 8~13자입니다."
+				},
+				pw : {
+					required : "필수 항목입니다.",
+					regex : "비번은 영문, 숫자,특수문자(!@#$)만 가능하며, 8~15자입니다."
+				},
+				pw2 : {
+					equalTo : "비번과 비번확인이 일치하지 않습니다."
+				}
+			},
+			//유효성 검사 체크 후 전송하기 직전에 확인하고 싶을 때 사용. return true 전송
+			submitHandler : function(){
+				return true;
+			}
+		})
+		$.validator.addMethod("regex", function(value, element, regex){
+			var re = new RegExp(regex);
+			return this.optional(element) || re.test(value);
+		}, "정규표현식을 확인하세요.");
+	</script>
+</body>
+</html>
