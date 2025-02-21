@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JQuery - 메뉴 예제</title>
+	<script src="../../static/js/jquery.min.js"></script>
+	<style>
+		*{padding: 0; margin: 0;}
+		ul{ list-style: none;}
+		a{ text-decoration: none;}
+
+		.menu-list{
+			display: flex; 
+		}
+		.menu-item{
+			width: 100%; height: 50px; border: 3px solid black;
+		}
+		.menu-item+.menu-item{
+			margin-left: -3px;
+		}
+		.menu-link{
+			color: black; height: 100%; display: block; text-align: center;
+			line-height: 50px;
+		}
+		nav{ margin-bottom: 10px;}
+		.box{ height: 300px; border: 3px solid black;}
+		.bg-yellow{ background-color: yellow;}
+		.menu-item.select{ background-color: yellow;}
+	</style>
+</head>
+<body>
+	<nav>
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3</a>
+			</li>
+		</ul>
+	</nav>
+
+	<script>
+		/* 메뉴를 클릭하면 클릭한 메뉴만 배경색이 노란색으로 되도록 작성하세요.
+		*/
+		const $li = $(".menu-item");
+
+		/*
+		$li.click(function(){
+			$li.removeClass("select");
+			$(this).addClass("select");
+		})
+		*/
+		$li.click(function(){
+			$(this).addClass("select");
+			$li.not(this).removeClass("select");
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JQuery - 롤링</title>
+	<script src="../../static/js/jquery.min.js"></script>
+	<style>
+		*{margin: 0; padding: 0;}
+		.container{
+			height: 30px; border: 3px solid black;
+			padding: 10px;
+		}
+		.news-list{
+			list-style: none;
+		}
+		.news-item{
+			height: 100%;
+		}
+		.news-link{
+			line-height: 30px; height: 30px; display: block;
+			text-decoration: none;
+		}
+		.inner-container{ 
+			height: 30px; overflow: hidden; background: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="inner-container">
+			<ul class="news-list">
+				<li class="news-item">
+					<a href="#" class="news-link">기사1</a>
+				</li>
+				<li class="news-item">
+					<a href="#" class="news-link">기사2</a>
+				</li>
+				<li class="news-item">
+					<a href="#" class="news-link">기사3</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<script>
+
+		let rollingId = rolling();
+
+		$(".container").hover(()=>{
+			clearInterval(rollingId);
+		}, ()=>{
+			rollingId = rolling();
+		})
+
+		function rolling(){
+			return setInterval(()=>{
+				let $first = $(".news-item").first();
+
+				if($first.is(":animated")){
+					return;
+				}
+
+				$first.animate({marginTop : "-30px"}, 900, function(){
+					$(this).detach().removeAttr("style").appendTo(".news-list");
+				});
+
+			}, 1500);
+		}
+	</script>
+</body>
+</html>
