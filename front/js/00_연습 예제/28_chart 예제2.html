@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>차트 예제</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+	<div>
+		<input type="text" name="name" id="name" placeholder="이름을 입력하세요.">
+		<input type="text" name="score" id="score" placeholder="성적을 입력하세요.">
+		<button id="btn">추가</button>
+	</div>
+	<div>
+		<canvas id="chart"></canvas>
+	</div>
+	<script>
+		const ctx = document.getElementById('chart');
+		
+		let data = [];
+		let labels = [];
+
+		function newChart(ctx){
+			return new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: labels,
+					datasets: [{
+						label: "학생들 성적",
+						data: data,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					}
+				}
+			});
+		}
+		let chart = newChart(ctx);
+	</script>
+	
+</body>
+</html>

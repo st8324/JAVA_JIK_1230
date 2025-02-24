@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>차트 예제</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+	<div>
+		<canvas id="chart"></canvas>
+	</div>
+	<script>
+		const ctx = document.getElementById('chart');
+		
+		let data = [100, 90, 50, 95, 20];
+		let labels = ["홍길동", "둘리", "임꺽정", "고길동", "또치"];
+
+		function newChart(ctx){
+			return new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: labels,
+					datasets: [{
+						label: "학생들 성적",
+						data: data,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					}
+				}
+			});
+		}
+		let chart = newChart(ctx);
+		
+		data.push(100);
+		labels.push("익명");
+
+		chart.update();
+	</script>
+	
+</body>
+</html>
