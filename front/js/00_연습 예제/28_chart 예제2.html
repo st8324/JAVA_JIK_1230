@@ -7,19 +7,46 @@
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-	<div>
+	<form onsubmit="return addScore()">
 		<input type="text" name="name" id="name" placeholder="이름을 입력하세요.">
 		<input type="text" name="score" id="score" placeholder="성적을 입력하세요.">
-		<button id="btn">추가</button>
-	</div>
+		<button type="submit">추가</button>
+	</form>
 	<div>
 		<canvas id="chart"></canvas>
 	</div>
 	<script>
+		const name = document.getElementById("name");
+		const score = document.getElementById("score");
 		const ctx = document.getElementById('chart');
 		
 		let data = [];
 		let labels = [];
+
+		let chart = newChart(ctx);
+
+		function addScore(){
+			if(name.value == ''){
+				alert("이름을 입력하세요.");
+				name.focus();
+				return false;
+			}
+
+			if(score.value == '' || !/^\d+$/.test(score.value)){
+				alert("성적은 숫자만 가능합니다.");
+				score.focus();
+				return false;
+			}
+
+			data.push(score.value);
+			labels.push(name.value);
+			chart.update();
+
+			name.value = '';
+			score.value = '';
+			name.focus();
+			return false;
+		}
 
 		function newChart(ctx){
 			return new Chart(ctx, {
@@ -41,7 +68,7 @@
 				}
 			});
 		}
-		let chart = newChart(ctx);
+		
 	</script>
 	
 </body>
