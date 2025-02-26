@@ -24,7 +24,8 @@ CREATE TABLE BOARD(
     BO_VIEW INT NOT NULL DEFAULT 0
 );
 # abc123회원이 "인사"라는 제목으로 "안녕하세요"라는 내용을 작성했을 때 필요한 쿼리 
-INSERT INTO BOARD(BO_TITLE, BO_CONTENT, BO_WRITER) VALUES("인사", "안녕하세요.", "abc123");
+INSERT INTO COMMUNITY.BOARD(BO_TITLE, BO_CONTENT, BO_WRITER) VALUES("인사", "안녕하세요.", "abc123");
+INSERT INTO COMMUNITY.BOARD(BO_TITLE, BO_CONTENT, BO_WRITER) VALUES("공지", "공지입니다.", "ADMIN");
 
 # 1번 게시글을 클릭해서 게시글 내용을 조회할 때 필요한 쿼리 => 조회수 증가, 게시글 내용을 조회 
 # 조회수 증가
@@ -45,8 +46,12 @@ SELECT * FROM BOARD WHERE BO_DATE BETWEEN "2025-02-25" AND "2025-02-25 23:59:59"
 # 제목이나 내용에 "안녕"을 포함하는 게시글을 조회하는 쿼리 
 SELECT * FROM BOARD WHERE BO_TITLE LIKE "%안녕%" OR BO_CONTENT LIKE "%안녕%";
 
+# 최신글을 조회하는 쿼리 => 등록된 날짜가 최근 => 날짜 순으로 정렬
+SELECT * FROM COMMUNITY.BOARD ORDER BY BO_DATE DESC;
+SELECT * FROM COMMUNITY.BOARD ORDER BY BO_NUM DESC;
 
-
+# 인기글을 조회하는 쿼리 => 조회수가 높은 글이 인기글 => 조회순으로 정렬 
+SELECT * FROM COMMUNITY.BOARD ORDER BY BO_VIEW DESC;
 
 
 
