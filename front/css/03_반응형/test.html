@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>display:grid</title>
+	<style>
+		/* 
+		display : grid
+		- 격자를 이용하여 요소를 배치하는 방법
+		
+		grid-template-columns 
+		- 그리드의 열의 개수를 지정. 개수와 크기를 지정
+		
+		grid-template-rows
+		- 그리드의 행의 개수를 지정. 개수와 크기를 지정
+
+		- minmax(최소크기, 쾨대 크기)
+		  - 그리드의 행과 열을 지정할 때 사용하는 함수
+			- 한 아이템의 최소 너비와 최대 너비를 지정
+		- repeat(개수, 크기)
+		  - 그리드의 행과 열을 지정할 때 사용하는 함수
+			- 같은 크기의 항목을 여러개 지정할 때 사용
+		- auto-fit/auto-fill
+		  - 컬럼의 개수를 자동으로 조절할 때 사용하는 값
+			- auto-fill : 남은 공간을 그래도 둠. 아이템 개수를 늘리지 않음
+			- auto-fit: 남은 공간이 발생하지 않게 아이템을 개수를 늘림
+		- fr
+		  - 단위.
+			- 각 아이템이 동일한 길을 가지게 함
+		
+		column-gap
+		- 컬럼 사이의 간격을 지정
+		row-gap
+		- 행 사이의 간격을 지정
+		gap
+		- 행과 열 사이의 간격을 지정
+		*/
+		[class^=box]{ text-align: center; line-height: 50px;}
+		.container1{
+			display: grid;
+			grid-template-columns: repeat(auto-fit, 100px);
+			column-gap: 10px;
+			row-gap: 20px;
+			gap: 20px 10px;
+		}
+		/* 
+		아이템에 적용하는 속성들
+
+		grid-column-start
+		- 아이템을 배치할 때 배치할 위치의 열 시작 번호
+		grid-column-end
+		- 아이템을 배치할 때 배치할 위치의 열 끝 번호
+		grid-column
+		- column-start/column-end를 한번에 지정하는 속성
+		- /로 구분
+		grid-row-start
+		- 아이템을 배치할 때 배치할 위치의 행 시작 번호
+		grid-row-end
+		- 아이템을 배치할 때 배치할 위치의 행 끝 번호
+		grid-row
+		- row-start/row-end를 한번에 지정하는 속성
+		- /로 구분
+		*/
+		/* .container1 .box1{
+			background-color: yellow;
+			grid-row-start: 1;
+			grid-row-end: 2;
+			grid-column-start: 1;
+			grid-column-end: 5;
+			
+		}
+		.container1 .box2{
+			background-color: aliceblue;
+			grid-row: 2/4;
+			grid-column: 1/3;
+		}
+		.container1 .box3{
+			background-color: blue;
+			grid-row: 4;
+			grid-column: 1/3;
+		}
+		.container1 .box4{
+			background-color: gray;
+			grid-row: 2/5;
+			grid-column: 3/5;
+		} */
+		/* 
+		grid-template-areas
+		- 아이템에 지정된 템플릿들을 어떻게 배치할지를 나타내는 속성
+		- ""을 이용하여 한행에 들어갈 템플릿을 지정
+		- 빈 곳은 .으로 표시
+
+		grid-area
+		- 아이템에 적용하는 속성
+		- 템플릿의 이름을 지정
+		*/
+		
+	</style>
+</head>
+<body>
+	<div class="container1">
+		<div class="box1">1</div>
+		<div class="box2">2</div>
+		<div class="box3">3</div>
+		<div class="box4">4</div>
+	</div>
+	
+</body>
+</html>
