@@ -327,36 +327,34 @@ FROM SCORE;
 # 성적이 최고성적과 같으면 NULL, 다르면 성적을 출력하는 쿼리
 SELECT *, NULLIF(SC_SCORE, (SELECT MAX(SC_SCORE) FROM SCORE)) AS 결과 FROM SCORE;
 
-# 내장함수 - 문자열 
-# CHAR_LENGTH(문자열) : 문자열 개수 
-SELECT CHAR_LENGTH("안녕하세요") AS CHAR_LENGTH;
-# LENGTH(문자열) : 바이트 수 
-SELECT LENGTH("안녕하세요") AS LENGTH;
-# CONCAT(문자열1, ...) : 문자열을 이어 붙임 
-SELECT CONCAT("안녕", "하", "세요?") AS CONCAT;
-# FIELD(찾을문자열, 문자열1, ....) : 찾을 문자열의 위치를 찾아 반환 . 위치는 1부터 시작
-SELECT FIELD("안녕", "안녕하", "누구 안녕?", "안녕") AS FIELD;
-# INSTR(기준문자열, 부분문자열) : 기준 문자열에서 부분 문자열의 위치를 찾아 반환. 위치는 1부터 시작
-SELECT INSTR("HELLO JAVA", "JAVA") AS INSTR;
-# LOCATE(부분문자열, 기준문자열) : 기준 문자열에서 부분 문자열의 위치를 찾아 반환 . 위치는 1부터 시작
-SELECT LOCATE("JAVA", "HELLO JAVA") AS LOCATE;
-# FORMAT(숫자, 소수점자리) : 숫자를 소수점이하 자리까지 표현. 1000단위마다 ,를 추가 
-SELECT FORMAT(10000.123456, 0) AS FORMAT;
-# BIN(숫자), OCT(숫자), HEX(숫자) : 2,8,16진수로 변환 
-SELECT BIN(255) AS BIN,OCT(255) AS OCT,HEX(255) AS HEX ;
-# INSERT(기준문자열, 위치, 길이, 삽입할문자열) : 기준문자열의 위치부터 길이만큼 지우고 삽입할 문자열을 끼워서 반환
-SELECT INSERT("HELLO JAVA", 7, 4, "C++") AS `INSERT`;
-# LEFT(문자열, 길이), RIGHT(문자열, 길이) : 왼쪽/오른족에서 문자열의 길이만큼 반환 
-SELECT LEFT("TEST.TXT", 4) AS `LEFT`, RIGHT("TEST.TXT", 3) AS `RIGHT`;
-# LOWER(문자열), UPPER(문자열) : 소문자로/대문자로 
-SELECT LOWER("HELLO JAVA") AS `LOWER`, UPPER("hello java") AS `UPPER`;
-# LPAD(문자열, 길이, 채울문자열)/RPAD(문자열,길이,채울문자열) : 문자열을 길이만큼 늘리고 빈곳을 채울문자열로 채움 
-SELECT LPAD(1, 3, "0") AS LPAD, RPAD(1, 3, "0") AS RPAD;
-# REPEAT(문자열, 횟수) : 문자열을 횟수만큼 반복 
-SELECT REPEAT(1, 3) `REPEAT`;
-# REPLACE(문자열, 문자열A, 문자열B) : 문자열에서 문자열A를 문자열B로 바꿈 
-SELECT REPLACE("HELLO JAVA", "JAVA", "C++") AS `REPLACE`;
-# REVERSE(문자열) : 문자열 순서를 역순으로 반환 
-SELECT REVERSE("ABCDEF") AS `REVERSE`;
-# SUBSTRING(문자열, 시작위치, 길이) 문자열에서 시작위치부터 길이만큼 부분문자열을 반환 
-SELECT SUBSTRING("HELLO JAVA", 7, 4) AS SUBSTRING;
+# GROUP BY 할 때 GROUP BY에 사용한 속성이 아닌 속성을 조회하는 경우 에러가 발생하는데 이를 해결하는 쿼리 
+SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';
+# 원상 복구하는 쿼리
+SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY';
+
+# 각 학생별 평균을 조회하는 쿼리 
+SELECT ST_GRADE 학년, ST_CLASS 반, ST_NUM 번호, ST_NAME 이름, IFNULL(AVG(SC_SCORE), 0) 평균
+FROM SCORE
+RIGHT JOIN STUDENT ON SC_ST_KEY = ST_KEY
+GROUP BY ST_KEY;
+
+# 1학년 1반 반 등수를 조회는 쿼리(평균). 
+# 평균이 같으면 국어, 영어, 수학 점수 순으로 비교하여 등수를 결정. 다 같으면 같은 등수 
+# 같은 등수는 나오는 경우, 다음 등수는 같은 등수 수만큼 건너 뜀 
+SELECT RANK() OVER(ORDER BY 평균 DESC) 순위, T.*
+FROM 
+	(SELECT ST_GRADE 학년, ST_CLASS 반, ST_NUM 번호, ST_NAME 이름, IFNULL(AVG(SC_SCORE), 0) 평균
+		FROM SCORE
+		RIGHT JOIN STUDENT ON SC_ST_KEY = ST_KEY
+        WHERE ST_GRADE = 1 AND ST_CLASS = 1
+		GROUP BY ST_KEY) AS T;
+
+# 2학년 등수를 조회는 쿼리(평균). 
+SELECT RANK() OVER(ORDER BY 평균 DESC) 순위, T.*
+FROM 
+	(SELECT ST_GRADE 학년, ST_CLASS 반, ST_NUM 번호, ST_NAME 이름, IFNULL(AVG(SC_SCORE), 0) 평균
+		FROM SCORE
+		RIGHT JOIN STUDENT ON SC_ST_KEY = ST_KEY
+        WHERE ST_GRADE = 2
+		GROUP BY ST_KEY) AS T;
+
