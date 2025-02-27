@@ -341,13 +341,26 @@ GROUP BY ST_KEY;
 # 1학년 1반 반 등수를 조회는 쿼리(평균). 
 # 평균이 같으면 국어, 영어, 수학 점수 순으로 비교하여 등수를 결정. 다 같으면 같은 등수 
 # 같은 등수는 나오는 경우, 다음 등수는 같은 등수 수만큼 건너 뜀 
-SELECT RANK() OVER(ORDER BY 평균 DESC) 순위, T.*
+SELECT RANK() OVER(ORDER BY 평균 DESC, 국어평균 DESC, 영어평균 DESC, 수학평균 DESC ) 순위, T.*
 FROM 
-	(SELECT ST_GRADE 학년, ST_CLASS 반, ST_NUM 번호, ST_NAME 이름, IFNULL(AVG(SC_SCORE), 0) 평균
-		FROM SCORE
-		RIGHT JOIN STUDENT ON SC_ST_KEY = ST_KEY
-        WHERE ST_GRADE = 1 AND ST_CLASS = 1
-		GROUP BY ST_KEY) AS T;
+	(SELECT 
+		ST_GRADE 학년, 
+        ST_CLASS 반, 
+        ST_NUM 번호, 
+        ST_NAME 이름, 
+        IFNULL(AVG(SC_SCORE), 0) 평균,
+        AVG(CASE WHEN SJ_NAME = '국어' THEN SC_SCORE END) 국어평균, 
+        AVG(CASE WHEN SJ_NAME = '수학' THEN SC_SCORE END) 수학평균, 
+        AVG(CASE WHEN SJ_NAME = '영어' THEN SC_SCORE END) 영어평균
+	FROM 
+		SCORE
+	JOIN 
+		SUBJECT ON SC_SJ_NUM = SJ_NUM
+	RIGHT JOIN 
+		STUDENT ON SC_ST_KEY = ST_KEY
+	WHERE 
+		ST_GRADE = 1 AND ST_CLASS = 1
+	GROUP BY ST_KEY) AS T;
 
 # 2학년 등수를 조회는 쿼리(평균). 
 SELECT RANK() OVER(ORDER BY 평균 DESC) 순위, T.*
@@ -357,4 +370,45 @@ FROM
 		RIGHT JOIN STUDENT ON SC_ST_KEY = ST_KEY
         WHERE ST_GRADE = 2
 		GROUP BY ST_KEY) AS T;
+
+# 2학년들의 1학년 성적 평균을 이용하여 반 등수를 조회하는 쿼리 
+SELECT 
+	RANK() OVER(ORDER BY 반평균 DESC) 반등수, T.*
+FROM
+	(
+	SELECT 
+		학년, 반, AVG(학생평균) 반평균
+	FROM 
+		(SELECT 
+			ST_GRADE 학년,
+			ST_CLASS 반,
+			ST_KEY, 
+			IFNULL(AVG(SC_SCORE), 0) 학생평균
+		FROM 
+			SCORE 
+		RIGHT JOIN 
+			STUDENT ON ST_KEY = SC_ST_KEY
+		GROUP BY 
+			ST_KEY
+		) AS T
+	WHERE 
+		학년 = 2
+	GROUP BY
+		학년, 반) AS T;
+
+SELECT 
+	RANK() OVER(ORDER BY 반평균 DESC) 반등수, T.*
+FROM
+	(
+	SELECT 
+		ST_GRADE 학년, ST_CLASS 반, IFNULL(AVG(SC_SCORE), 0) 반평균
+	FROM 
+		SCORE 
+	RIGHT JOIN
+		STUDENT ON SC_ST_KEY = ST_KEY
+	WHERE 
+		ST_GRADE = 3
+	GROUP BY
+		ST_GRADE, ST_CLASS) AS T;
+
 
