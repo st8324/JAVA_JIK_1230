@@ -23,8 +23,8 @@
 			- 같은 크기의 항목을 여러개 지정할 때 사용
 		- auto-fit/auto-fill
 		  - 컬럼의 개수를 자동으로 조절할 때 사용하는 값
-			- auto-fit : 남은 공간을 그래도 둠
-			- auto-fill: 남은 공간이 발생하지 않게 아이템 개수를 늘림
+			- auto-fill : 남은 공간을 그래도 둠. 아이템 개수를 늘리지 않음
+			- auto-fit: 남은 공간이 발생하지 않게 아이템을 개수를 늘림
 		- fr
 		  - 단위.
 			- 각 아이템이 동일한 길을 가지게 함
@@ -39,10 +39,7 @@
 		[class^=box]{ text-align: center; line-height: 50px;}
 		.container1{
 			display: grid;
-			grid-template-columns: repeat(4, 1fr);
-			/* grid-template-columns: minmax(100px, 1fr) minmax(500px, 1fr);
-			grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) */
-			grid-template-rows: repeat(4,1fr);
+			grid-template-columns: repeat(auto-fit, 100px);
 			column-gap: 10px;
 			row-gap: 20px;
 			gap: 20px 10px;
@@ -65,7 +62,7 @@
 		- row-start/row-end를 한번에 지정하는 속성
 		- /로 구분
 		*/
-		.container1 .box1{
+		/* .container1 .box1{
 			background-color: yellow;
 			grid-row-start: 1;
 			grid-row-end: 2;
@@ -87,7 +84,7 @@
 			background-color: gray;
 			grid-row: 2/5;
 			grid-column: 3/5;
-		}
+		} */
 		/* 
 		grid-template-areas
 		- 아이템에 지정된 템플릿들을 어떻게 배치할지를 나타내는 속성
@@ -98,22 +95,7 @@
 		- 아이템에 적용하는 속성
 		- 템플릿의 이름을 지정
 		*/
-		.container2{
-			display: grid;
-			grid-template-columns: repeat(4, 1fr);
-			grid-template-rows: repeat(4, 1fr);
-			column-gap: 10px;
-			gap: 20px 10px;
-			grid-template-areas: 
-				"box1 box1 box1 box1"
-				"box2 box2 box4 box4"
-				"box2 box2 box4 box4"
-				"box3 box3 box4 box4";
-		}
-		.container2 .box1{ background: yellow; grid-area: box1;}
-		.container2 .box2{ background: aliceblue; grid-area: box2;}
-		.container2 .box3{ background: blue; grid-area: box3;}
-		.container2 .box4{ background: gray; grid-area: box4;}
+		
 	</style>
 </head>
 <body>
@@ -123,11 +105,6 @@
 		<div class="box3">3</div>
 		<div class="box4">4</div>
 	</div>
-	<div class="container2">
-		<div class="box1">1</div>
-		<div class="box2">2</div>
-		<div class="box3">3</div>
-		<div class="box4">4</div>
-	</div>
+	
 </body>
 </html>
