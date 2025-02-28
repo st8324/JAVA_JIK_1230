@@ -75,10 +75,95 @@ SELECT @VALUE;
 DROP PROCEDURE IF EXISTS P_TEST2;
 
 DELIMITER //
-CREATE PROCEDURE P_TEST1(
+CREATE PROCEDURE P_TEST2(
 	INOUT _NUM INT
 )
 BEGIN
 	SET _NUM = _NUM * 2;
 END //
 DELIMITER ;
+CALL P_TEST2(@VALUE);
+SELECT @VALUE;
+
+/* 
+프로시저에서 사용하는 문법 
+1. 변수 선언 
+  - 변수는 프로시저 시작 위치에 모아 놓아야 함. 중간에 선언할 수 없음. 
+DECLARE 변수명 자료형 [DEFAULT 초기값];
+2. 검색 결과를 변수에 저장 
+SET 변수 = (SELECT 속성 FROM 테이블명 [WHERE ...]);
+3. 조건문 - IF
+IF 조건식 THEN
+	실행문;
+ELSEIF 조건식 THEN
+	실행문;
+ELSE
+	실행문;
+END IF;
+4. 조건문 - CASE 
+CASE 변수 
+	WHEN 값 THEN
+		실행문;
+	WHEN 값 THEN
+		실행문;
+	ELSE 
+		실행문;
+END CASE;
+5. 반복문 - WHILE
+WHILE 조건식 DO
+	실행문;
+END WHILE;
+6. 반복문 - REPEAT
+REPEAT
+	실행문;
+UNTIL 조건식
+END REPEAT;
+7. 반복문 - CURSOR 
+  - 검색 결과를 반복문으로 활용할 때 
+DECLARE 커서명 CURSOR FOR SELECT 속성1, ... FROM 테이블명;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET 변수명A = TRUE;
+OPEN 커서명;
+루프명 : LOOP
+FETCH 커서명 INTO 변수명1 , ....; 
+IF 변수명A THEN
+	LEAVE 루프명;
+END IF;
+반복문 실행문;
+END LOOP;
+CLOSE 커서명; studentstudent
+*/
+
+# AVERAGE 테이블에 등록된 학생만큼 1학년 1학기~3학년 2학기 평균 초기 데이터를 추가하는 프로시저 
+
+DROP PROCEDURE IF EXISTS INIT_AVERAGE;
+
+DELIMITER //
+CREATE PROCEDURE INIT_AVERAGE()
+BEGIN
+	DECLARE _COUNT INT;
+    DECLARE _CURSOR CURSOR FOR SELECT ST_KEY FROM STUDENT;
+    
+    SET _COUNT = (SELECT COUNT(*) FROM AVERAGE);
+    
+    IF _COUNT != 0 THEN
+		
+    END IF;
+    
+END //
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
