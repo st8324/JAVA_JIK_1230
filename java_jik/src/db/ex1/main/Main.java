@@ -14,8 +14,10 @@ public class Main {
 	
 		List<StudentVO> list = studentService.getStudentList();
 		for(StudentVO std : list) {
-			System.out.println(std);
+			//System.out.println(std);
 		}
+		StudentVO std = studentService.getStudent(1,1,1); 
+		System.out.println(std);
 	}
 
 }

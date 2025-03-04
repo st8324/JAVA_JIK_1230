@@ -34,4 +34,9 @@ public class StudentServiceImp implements StudentService {
 	public List<StudentVO> getStudentList() {
 		return studentDao.selectStudentList();
 	}
+
+	@Override
+	public StudentVO getStudent(int grade, int classNum, int num) {
+		return studentDao.selectStudent(grade, classNum, num);
+	}
 }

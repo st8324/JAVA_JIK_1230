@@ -16,4 +16,8 @@
 		select * from student
 	</select>
  
+ 	<select id="selectStudent" resultType="db.ex1.model.vo.StudentVO">
+ 		select * from student 
+ 			where st_grade = #{grade} and st_class = #{classNum} and st_num = #{num}
+ 	</select>
 </mapper>

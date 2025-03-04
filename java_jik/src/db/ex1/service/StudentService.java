@@ -8,4 +8,6 @@ public interface StudentService {
 
 	List<StudentVO> getStudentList();
 
+	StudentVO getStudent(int grade, int classNum, int num);
+
 }
