@@ -39,4 +39,12 @@ public class StudentServiceImp implements StudentService {
 	public StudentVO getStudent(int grade, int classNum, int num) {
 		return studentDao.selectStudent(grade, classNum, num);
 	}
+
+	@Override
+	public StudentVO getStudent(StudentVO studentVO) {
+		if(studentVO == null) {
+			return null;
+		}
+		return studentDao.selectStudent2(studentVO);
+	}
 }

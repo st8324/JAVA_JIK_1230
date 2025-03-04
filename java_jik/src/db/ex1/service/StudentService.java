@@ -10,4 +10,6 @@ public interface StudentService {
 
 	StudentVO getStudent(int grade, int classNum, int num);
 
+	StudentVO getStudent(StudentVO studentVO);
+
 }

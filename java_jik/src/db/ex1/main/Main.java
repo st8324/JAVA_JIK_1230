@@ -18,6 +18,10 @@ public class Main {
 		}
 		StudentVO std = studentService.getStudent(1,1,1); 
 		System.out.println(std);
+		
+		StudentVO std2 = studentService.getStudent(new StudentVO(0, 1, 1, 1, null)); 
+		System.out.println(std2);
+		
 	}
 
 }

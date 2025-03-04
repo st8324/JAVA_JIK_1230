@@ -12,4 +12,6 @@ public interface StudentDAO {
 
 	StudentVO selectStudent(@Param("grade")int grade, @Param("classNum")int classNum, @Param("num")int num);
 
+	StudentVO selectStudent2(@Param("std")StudentVO studentVO);
+
 }

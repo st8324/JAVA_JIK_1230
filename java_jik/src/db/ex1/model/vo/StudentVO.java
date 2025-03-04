@@ -1,8 +1,10 @@
 package db.ex1.model.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class StudentVO {
 
 	private int st_key;

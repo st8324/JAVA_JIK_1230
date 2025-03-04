@@ -20,4 +20,8 @@
  		select * from student 
  			where st_grade = #{grade} and st_class = #{classNum} and st_num = #{num}
  	</select>
+ 	<select id="selectStudent2" resultType="db.ex1.model.vo.StudentVO">
+ 		select * from student 
+ 			where st_grade = #{std.st_grade} and st_class = #{std.st_class} and st_num = #{std.st_num}
+ 	</select>
 </mapper>
