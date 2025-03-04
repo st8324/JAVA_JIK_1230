@@ -47,4 +47,14 @@ public class StudentServiceImp implements StudentService {
 		}
 		return studentDao.selectStudent2(studentVO);
 	}
+
+	@Override
+	public boolean addStudent(StudentVO std) {
+		StudentVO dbStd = studentDao.selectStudent2(std);
+		//학년 반 번호가 일치하는 학생이 존재하면 
+		if(dbStd != null) {
+			return false;
+		}
+		return studentDao.insertStudent(std);
+	}
 }

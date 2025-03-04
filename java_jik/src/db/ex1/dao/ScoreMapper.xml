@@ -23,4 +23,10 @@
 		select * from score
         join subject on sc_sj_num = sj_num
 	</select>
+	
+	<select id="selectScoreListBySt_key" resultMap="ScoreMap">
+		select * from score
+        join subject on sc_sj_num = sj_num
+        where sc_st_key = #{st_key}
+	</select>
 </mapper>

@@ -8,4 +8,6 @@ public interface ScoreService {
 
 	List<ScoreVO> getScoreList();
 
+	List<ScoreVO> getScoreList(int st_key);
+
 }

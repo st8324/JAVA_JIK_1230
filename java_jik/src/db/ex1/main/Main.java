@@ -38,10 +38,28 @@ public class Main {
 		
 		/* 등록된 모든 성적을 가져오는 코드*/
 		List<ScoreVO> scoreList = scoreService.getScoreList();
-		System.out.println(scoreList);
+		//System.out.println(scoreList);
 		
 		/* 1학년 1반 1번 학생의 등록된 성적들을 가져오는 코드 */
+		// 1학년 1반 1번 학생의 정보를 가져옴 
+		StudentVO std3 = studentService.getStudent(1, 1, 1);
 		
+		// 학생의 기본키를 이용하여 성적들을 가져옴 
+		List<ScoreVO> scores = scoreService.getScoreList(std3.getSt_key());
+		//System.out.println(std3 + "의 성적 목록");
+		
+		for(ScoreVO score : scores) {
+		//	System.out.println(score);
+		}
+		
+		/* 1학년 1반 1번 abc 학생을 등록 */
+		StudentVO std4 = new StudentVO(0, 1, 1, 11, "abc"); 
+		if(studentService.addStudent(std4)) {
+			System.out.println(std4 + "학생을 등록 했습니다.");
+			System.out.println(std4.getSt_key());
+		}else {
+			System.out.println(std4 + " 학생을 등록하지 못했습니다.");
+		}
 	}
 
 }

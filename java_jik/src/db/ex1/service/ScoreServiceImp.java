@@ -36,4 +36,9 @@ public class ScoreServiceImp implements ScoreService {
 	public List<ScoreVO> getScoreList() {
 		return scoreDao.selectScoreList();
 	}
+
+	@Override
+	public List<ScoreVO> getScoreList(int st_key) {
+		return scoreDao.selectScoreListBySt_key(st_key);
+	}
 }

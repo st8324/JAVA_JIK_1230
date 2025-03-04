@@ -24,4 +24,9 @@
  		select * from student 
  			where st_grade = #{std.st_grade} and st_class = #{std.st_class} and st_num = #{std.st_num}
  	</select>
+ 	
+ 	<insert id="insertStudent" useGeneratedKeys="true" keyProperty="std.st_key">
+ 		insert into student(st_grade, st_class, st_num, st_name) 
+ 		value(#{std.st_grade}, #{std.st_class}, #{std.st_num}, #{std.st_name});
+ 	</insert>
 </mapper>
