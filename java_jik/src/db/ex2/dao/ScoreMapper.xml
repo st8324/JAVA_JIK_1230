@@ -4,4 +4,36 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="db.ex2.dao.ScoreDAO">
 	
+	<resultMap type="db.ex2.model.vo.SubjectScore" id="ScoreMap">
+		<id property="num" column="sc_num"/>
+		<result property="score" column="sc_score"/>
+		<result property="key" column="sc_st_key"/>
+		
+		<association property="subject" javaType="db.ex2.model.vo.Subject">
+			<id property="num" column="sj_num"/>
+			<result property="grade" column="sj_grade"/>
+			<result property="semester" column="sj_semester"/>
+			<result property="name" column="sj_name"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectScore" resultMap="ScoreMap">
+		select * from score
+		join (select * 
+				from subject
+				where
+					sj_grade = #{score.subject.grade} and 
+					sj_semester = #{score.subject.semester} and
+					sj_name = #{score.subject.name}) as sub on sc_sj_num = sj_num
+		where
+			sc_st_key = 
+				(select 
+					st_key 
+				from 
+					student 
+				where 
+					st_grade = #{std.grade} and 
+					st_class = #{std.classNum} and 
+					st_num = #{std.num} )
+	</select>
 </mapper>

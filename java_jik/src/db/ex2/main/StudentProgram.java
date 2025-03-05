@@ -256,7 +256,7 @@ public class StudentProgram implements ConsoleProgram {
 		Student std = inputBaseStudent();
 		
 		//리스트에 있는지 확인해서 없으면 알림 후 종료 => indexOf
-		if(studentManager.getStudent(std) == null ){
+		if(!studentManager.contains(std) ){
 			System.out.println("일치하는 학생이 없습니다.");
 			return;
 		}

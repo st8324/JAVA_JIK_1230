@@ -9,8 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import db.ex1.dao.ScoreDAO;
+import db.ex2.dao.ScoreDAO;
 import db.ex2.dao.StudentDAO;
+import db.ex2.dao.SubjectDAO;
 import db.ex2.model.vo.Student;
 import db.ex2.model.vo.Subject;
 import db.ex2.model.vo.SubjectScore;
@@ -22,6 +23,8 @@ public class StudentManager {
 	private List<Student> list;
 	
 	private StudentDAO studentDao;
+	private ScoreDAO scoreDao;
+	private SubjectDAO subjectDao;
 	
 	public StudentManager() {
 		String resource = "db/ex2/config/mybatis-config.xml";
@@ -32,12 +35,14 @@ public class StudentManager {
 			SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 			session = sessionFactory.openSession(true);
 			studentDao = session.getMapper(StudentDAO.class);
+			scoreDao = session.getMapper(ScoreDAO.class);
+			subjectDao = session.getMapper(SubjectDAO.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private boolean contains(Student std) {
+	public boolean contains(Student std) {
 		//DB에서 std를 이용하여 학생 정보를 가져옴 
 		Student dBstd = studentDao.selectStudent(std);
 		
@@ -61,9 +66,7 @@ public class StudentManager {
 	}
 
 	public Student getStudent(Student std) {
-		int index = list.indexOf(std);
-		
-		return index < 0 ? null : list.get(index);
+		return contains(std) ? std : null;
 	}
 	//1 1 1 => 1 1 1
 	public boolean updateStudent(Student selStd, Student newStd) {
@@ -84,10 +87,10 @@ public class StudentManager {
 	}
 
 	public boolean deleteStudent(Student std) {
-		if(std == null || list == null) {
+		if(std == null) {
 			return false;
 		}
-		return list.remove(std);
+		return studentDao.deleteStudent(std);
 	}
 
 	public void printStudent(Student std) {
@@ -107,15 +110,35 @@ public class StudentManager {
 		tmp.print();
 	}
 
+	public boolean scoreContains(Student std, SubjectScore subjectScore) {
+		if(std == null || subjectScore == null || subjectScore.getSubject() == null) {
+			return false;
+		}
+		//등록된 학생인지 확인
+		Student dbStd = studentDao.selectStudent(std);
+		if(dbStd == null) {
+			return false;
+		}
+		//등록된 과목인지 확인 
+		Subject dbSubject = subjectDao.selectSubject(subjectScore.getSubject());
+		if(dbSubject == null) {
+			return false;
+		}
+		subjectScore.setKey(dbStd.getKey());
+		subjectScore.setNum(dbSubject.getNum());
+		SubjectScore dbSubScore = subjectDao.selectSubject(subjectScore);
+		return dbSubScore != null;
+	}
+	
 	public boolean insertScore(Student std, SubjectScore subjectScore) {
-		if(list == null || std == null || subjectScore == null) {
+		if(std == null || subjectScore == null) {
 			return false;
 		}
-		std = getStudent(std);
-		if(std == null) {
+		//새로 등록할 학생의 성적이 이미 등록되어 있는지를 확인 
+		if(scoreContains(std, subjectScore)) {
 			return false;
 		}
-		return std.insertScore(subjectScore);
+		return scoreDao.insertScore(std, subjectScore);
 	}
 
 	public boolean updateScore(Student std, Subject subject, SubjectScore subjectScore) {

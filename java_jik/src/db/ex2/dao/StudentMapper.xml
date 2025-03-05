@@ -32,4 +32,9 @@
 			st_grade = #{old.grade} and st_class = #{old.classNum} and	
 			st_num = #{old.num}
 	</update>
+	<delete id="deleteStudent">
+		delete from student
+		where st_grade = #{std.grade} and st_class = #{std.classNum} 
+			and st_num = #{std.num} 
+	</delete>
 </mapper>

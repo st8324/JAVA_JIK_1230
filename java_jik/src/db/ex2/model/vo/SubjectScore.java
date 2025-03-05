@@ -5,11 +5,13 @@ import java.util.Objects;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class SubjectScore implements Serializable {
 
 	private static final long serialVersionUID = 5589823857268140091L;
@@ -18,6 +20,7 @@ public class SubjectScore implements Serializable {
 	private Subject subject;
 	@NonNull
 	private int score;//sc_score
+	private int key;//sc_st_key
 	
 	@Override
 	public boolean equals(Object obj) {
