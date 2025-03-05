@@ -103,7 +103,6 @@ public class StudentManager {
 			System.out.println("일치하는 학생이 없습니다.");
 			return;
 		}
-		System.out.println(tmp.getList());
 		tmp.print();
 	}
 

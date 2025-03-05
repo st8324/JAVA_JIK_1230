@@ -11,7 +11,7 @@
 		<result property="num" column="st_num"/>
 		<result property="name" column="st_name"/>
 		
-		<collection property="list" select="selectScoreList" column="key"
+		<collection property="list" select="selectScoreList" column="st_key"
 			ofType="db.ex2.model.vo.SubjectScore" />
 	</resultMap>
 	
@@ -33,6 +33,7 @@
 		join subject on sc_sj_num = sj_num
 		where
 			sc_st_key = #{key}
+		order by sj_grade, sj_semester, sj_name
 	</select>
 	
 	<select id="selectStudent" resultMap="StudentMap">
