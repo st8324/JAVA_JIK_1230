@@ -14,4 +14,8 @@ public interface StudentService {
 
 	boolean addStudent(StudentVO std);
 
+	boolean updateStudentName(StudentVO std);
+
+	boolean deleteStudent(StudentVO std);
+
 }

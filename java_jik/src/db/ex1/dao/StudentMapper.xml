@@ -29,4 +29,18 @@
  		insert into student(st_grade, st_class, st_num, st_name) 
  		value(#{std.st_grade}, #{std.st_class}, #{std.st_num}, #{std.st_name});
  	</insert>
+ 	<update id="updateStudentName">
+ 		update student 
+ 		set
+ 			st_name = #{std.st_name}
+ 		where
+ 			st_grade = #{std.st_grade} and st_class = #{std.st_class} 
+ 			and st_num = #{std.st_num} 
+ 	</update>
+ 	<delete id="deleteStudent">
+ 		delete from student 
+ 		where
+ 			st_grade = #{std.st_grade} and st_class = #{std.st_class} 
+ 			and st_num = #{std.st_num}  
+ 	</delete>
 </mapper>

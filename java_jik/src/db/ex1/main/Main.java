@@ -52,13 +52,28 @@ public class Main {
 		//	System.out.println(score);
 		}
 		
-		/* 1학년 1반 1번 abc 학생을 등록 */
+		/* 1학년 1반 11번 abc 학생을 등록 */
 		StudentVO std4 = new StudentVO(0, 1, 1, 11, "abc"); 
 		if(studentService.addStudent(std4)) {
-			System.out.println(std4 + "학생을 등록 했습니다.");
+			System.out.println(std4 + " 학생을 등록 했습니다.");
 			System.out.println(std4.getSt_key());
 		}else {
 			System.out.println(std4 + " 학생을 등록하지 못했습니다.");
+		}
+		
+		/* 1학년 1반 1번 학생의 이름을 111로 수정 */
+		StudentVO std5 = new StudentVO(0, 1, 1, 1, "111");
+		if(studentService.updateStudentName(std5)) {
+			System.out.println(std5 + " 학생을 수정 했습니다.");
+		}else {
+			System.out.println(std5 + " 학생을 수정하지 못했습니다.");
+		}
+		
+		std4.setSt_grade(2);
+		if(studentService.deleteStudent(std4)) {
+			System.out.println(std4 + " 학생을 삭제 했습니다.");
+		}else {
+			System.out.println(std4 + " 학생을 삭제하지 못했습니다.");
 		}
 	}
 

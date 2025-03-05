@@ -16,4 +16,8 @@ public interface StudentDAO {
 
 	boolean insertStudent(@Param("std")StudentVO std);
 
+	boolean updateStudentName(@Param("std")StudentVO std);
+
+	boolean deleteStudent(@Param("std")StudentVO std);
+
 }

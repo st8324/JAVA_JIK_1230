@@ -57,4 +57,20 @@ public class StudentServiceImp implements StudentService {
 		}
 		return studentDao.insertStudent(std);
 	}
+
+	@Override
+	public boolean updateStudentName(StudentVO std) {
+		if(std == null) {
+			return false;
+		}
+		return studentDao.updateStudentName(std);
+	}
+
+	@Override
+	public boolean deleteStudent(StudentVO std) {
+		if(std == null) {
+			return false;
+		}
+		return studentDao.deleteStudent(std);
+	}
 }
