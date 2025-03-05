@@ -3,5 +3,33 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="db.ex2.dao.StudentDAO">
+
+	<resultMap type="db.ex2.model.vo.Student" id="StudentMap">
+		<id property="key" column="st_key"/>
+		<result property="grade" column="st_grade"/>
+		<result property="classNum" column="st_class"/>
+		<result property="num" column="st_num"/>
+		<result property="name" column="st_name"/>
+	</resultMap>
 	
+	<select id="selectStudent" resultMap="StudentMap">
+		select * from student
+		where st_grade = #{std.grade} and st_class = #{std.classNum} 
+			and st_num = #{std.num} 
+	</select>
+	<insert id="insertStudent">
+		insert into student(st_grade, st_class, st_num, st_name)
+		values(#{std.grade}, #{std.classNum}, #{std.num}, #{std.name})
+	</insert>
+	<update id="updateStudent">
+		update student
+		set
+			st_grade = #{new.grade},
+			st_class = #{new.classNum},
+			st_num = #{new.num},
+			st_name = #{new.name}
+		where
+			st_grade = #{old.grade} and st_class = #{old.classNum} and	
+			st_num = #{old.num}
+	</update>
 </mapper>

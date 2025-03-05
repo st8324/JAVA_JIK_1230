@@ -37,22 +37,27 @@ public class StudentManager {
 		}
 	}
 	
+	private boolean contains(Student std) {
+		//DB에서 std를 이용하여 학생 정보를 가져옴 
+		Student dBstd = studentDao.selectStudent(std);
+		
+		//DB에서 가져온 학생 정보가 있으면 중복 
+		if(dBstd != null) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean insertStudent(Student std) {
 		if(std == null) {
 			return false;
 		}
 		//학생 중복 확인 
-		//DB에서 std를 이용하여 학생 정보를 가져옴 
-		Student dBstd = studentDao.selectStudent(std);
-		
-		System.out.println("DB에서 가져온 학생 정보 : " + std);
-		
-		//DB에서 가져온 학생 정보가 있으면 중복 => false를 반환 
-		if(dBstd != null) {
+		if(contains(std)) {
 			return false;
 		}
 		//학생이 중복되지 않으면 학생을 추가
-		return list.add(std);
+		return studentDao.insertStudent(std);
 	}
 
 	public Student getStudent(Student std) {
@@ -62,19 +67,20 @@ public class StudentManager {
 	}
 	//1 1 1 => 1 1 1
 	public boolean updateStudent(Student selStd, Student newStd) {
-		if(selStd == null || newStd == null || list == null) {
+		if(selStd == null || newStd == null) {
 			return false;
 		}
-		if(!list.contains(selStd)) {
+		//학년 반 번호가 같은 경우=>이름만 바꾸는 경우
+		if(selStd.equals(newStd)) {
+			return studentDao.updateStudent(newStd, newStd);		
+		}
+		//학년 반 번호가 다른 경우
+		//새 학생 정보가 중복된 경우
+		if(contains(newStd)) {
 			return false;
 		}
-		Student tmp = getStudent(newStd);
-		//수정될 정보가 업거나 이전 학생 정보이면 수정 
-		if(tmp == null || tmp == getStudent(selStd)) {
-			getStudent(selStd).update(newStd);
-			return true;
-		}
-		return false;
+		return studentDao.updateStudent(selStd, newStd);	
+		
 	}
 
 	public boolean deleteStudent(Student std) {
