@@ -19,21 +19,12 @@
 	
 	<select id="selectScore" resultMap="ScoreMap">
 		select * from score
-		join (select * 
-				from subject
-				where
-					sj_grade = #{score.subject.grade} and 
-					sj_semester = #{score.subject.semester} and
-					sj_name = #{score.subject.name}) as sub on sc_sj_num = sj_num
+		join subject on sc_sj_num = sj_num
 		where
-			sc_st_key = 
-				(select 
-					st_key 
-				from 
-					student 
-				where 
-					st_grade = #{std.grade} and 
-					st_class = #{std.classNum} and 
-					st_num = #{std.num} )
+			sc_st_key = #{score.key} and sc_sj_num = #{score.num}
 	</select>
+	<insert id="insertScore">
+		insert into score(sc_st_key, sc_sj_num, sc_score)
+		values(#{score.key}, #{score.num}, #{score.score})
+	</insert>
 </mapper>

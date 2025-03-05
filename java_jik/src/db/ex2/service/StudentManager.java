@@ -126,7 +126,8 @@ public class StudentManager {
 		}
 		subjectScore.setKey(dbStd.getKey());
 		subjectScore.setNum(dbSubject.getNum());
-		SubjectScore dbSubScore = subjectDao.selectSubject(subjectScore);
+		SubjectScore dbSubScore = scoreDao.selectScore(subjectScore);
+		
 		return dbSubScore != null;
 	}
 	
@@ -138,7 +139,7 @@ public class StudentManager {
 		if(scoreContains(std, subjectScore)) {
 			return false;
 		}
-		return scoreDao.insertScore(std, subjectScore);
+		return scoreDao.insertScore(subjectScore);
 	}
 
 	public boolean updateScore(Student std, Subject subject, SubjectScore subjectScore) {
