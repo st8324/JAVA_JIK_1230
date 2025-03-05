@@ -74,6 +74,8 @@ public class SubjectManager {
 	}
 
 	public void print() {
+		List<Subject> list = subjectDao.selectSubjectList();
+		
 		if(list == null || list.size() == 0) {
 			System.out.println("등록된 과목이 없습니다.");
 			return;

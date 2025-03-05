@@ -37,4 +37,8 @@
 			sj_grade = #{sub.grade} and sj_semester = #{sub.semester} and
 			sj_name = #{sub.name}
 	</delete>
+	<select id="selectSubjectList" resultMap="SubjectMap">
+		select * from subject
+		order by sj_grade, sj_semester, sj_name
+	</select>
 </mapper>
