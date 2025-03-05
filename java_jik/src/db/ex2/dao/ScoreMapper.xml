@@ -21,10 +21,23 @@
 		select * from score
 		join subject on sc_sj_num = sj_num
 		where
-			sc_st_key = #{score.key} and sc_sj_num = #{score.num}
+			sc_st_key = #{score.key} and sc_sj_num = #{score.subject.num}
 	</select>
 	<insert id="insertScore">
 		insert into score(sc_st_key, sc_sj_num, sc_score)
 		values(#{score.key}, #{score.num}, #{score.score})
 	</insert>
+	<update id="updateScore">
+		update score
+		set
+			sc_score = #{score.score},
+			sc_sj_num = #{score.subject.num}
+		where
+			sc_num = #{score.num}
+	</update>
+	<delete id="deleteScore">
+		delete from score
+		where
+			sc_st_key = #{key} and sc_sj_num = #{num}
+	</delete>
 </mapper>

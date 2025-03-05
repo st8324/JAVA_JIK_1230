@@ -107,4 +107,10 @@ public class Student implements Serializable {
 
 		return list.remove(new SubjectScore(subject, 0));
 	}
+
+	@Override
+	public String toString() {
+		return grade + "학년 " + classNum + "반 " + num + "번 " + name + " ";
+	}
+	
 }

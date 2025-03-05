@@ -10,4 +10,8 @@ public interface ScoreDAO {
 
 	boolean insertScore(@Param("score")SubjectScore subjectScore);
 
+	boolean updateScore(@Param("score")SubjectScore subjectScore);
+
+	boolean deleteScore(@Param("key")int key, @Param("num")int num);
+
 }

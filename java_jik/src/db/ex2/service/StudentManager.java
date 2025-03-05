@@ -98,11 +98,7 @@ public class StudentManager {
 			System.out.println("학생 정보가 없습니다.");
 			return;
 		}	
-		if(list == null) {
-			System.out.println("학생 리스트가 없습니다.");
-			return;
-		}
-		Student tmp = getStudent(std);
+		Student tmp = studentDao.selectStudent(std);
 		if(tmp == null) {
 			System.out.println("일치하는 학생이 없습니다.");
 			return;
@@ -110,25 +106,25 @@ public class StudentManager {
 		tmp.print();
 	}
 
-	public boolean scoreContains(Student std, SubjectScore subjectScore) {
+	public int getScoreNum(Student std, SubjectScore subjectScore) {
 		if(std == null || subjectScore == null || subjectScore.getSubject() == null) {
-			return false;
+			return -1;
 		}
 		//등록된 학생인지 확인
 		Student dbStd = studentDao.selectStudent(std);
 		if(dbStd == null) {
-			return false;
+			return -1;
 		}
 		//등록된 과목인지 확인 
 		Subject dbSubject = subjectDao.selectSubject(subjectScore.getSubject());
 		if(dbSubject == null) {
-			return false;
+			return -1;
 		}
 		subjectScore.setKey(dbStd.getKey());
-		subjectScore.setNum(dbSubject.getNum());
+		subjectScore.getSubject().setNum(dbSubject.getNum());
 		SubjectScore dbSubScore = scoreDao.selectScore(subjectScore);
 		
-		return dbSubScore != null;
+		return dbSubScore != null ? dbSubScore.getNum() : -1;
 	}
 	
 	public boolean insertScore(Student std, SubjectScore subjectScore) {
@@ -136,45 +132,76 @@ public class StudentManager {
 			return false;
 		}
 		//새로 등록할 학생의 성적이 이미 등록되어 있는지를 확인 
-		if(scoreContains(std, subjectScore)) {
+		if(getScoreNum(std, subjectScore) != -1) {
 			return false;
 		}
 		return scoreDao.insertScore(subjectScore);
 	}
 
 	public boolean updateScore(Student std, Subject subject, SubjectScore subjectScore) {
-		if(list == null || std == null || subject == null || subjectScore == null) {
+		if(	std == null || subject == null || 
+			subjectScore == null || subjectScore.getSubject() == null) {
 			return false;
 		}
-		std = getStudent(std);
-		if(std == null) {
+		//std와 subject를 이용하여 기존 성적 정보를 가져옴 
+		SubjectScore tmp = new SubjectScore(subject, 0);
+		int scNum = getScoreNum(std, tmp);
+		//등록된 성적이 아니면
+		if(scNum == -1) {
 			return false;
 		}
-		return std.updateScore(subject, subjectScore);
+		Subject dbSubject = subjectDao.selectSubject(subjectScore.getSubject());
+		//수정할 성적의 과목 정보가 없으면 
+		if(dbSubject == null) {
+			return false;
+		}
+		//현재 성적의 기본키를 가져옴
+		subjectScore.setNum(scNum);
+		//새 성적의 과복의 기본키를 가져옴 
+		subjectScore.getSubject().setNum(dbSubject.getNum());
+		return scoreDao.updateScore(subjectScore);
 	}
 
 	public boolean deleteScore(Student std, Subject subject) {
-		if (std == null || subject == null || list == null) {
+		if (std == null || subject == null) {
 			return false;
 		}
-		std = getStudent(std);
-		if(std == null) {
+		Student dbStd = studentDao.selectStudent(std);
+		if(dbStd == null) {
 			return false;
 		}
-		return std.deleteScore(subject);
+		Subject dbSubject = subjectDao.selectSubject(subject);
+		if(dbSubject == null) {
+			return false;
+		}
+		return scoreDao.deleteScore(dbStd.getKey(), dbSubject.getNum());
 	}
 
 	public void printScore(Student std, Subject subject) {
-		if(std == null || subject == null || list == null) {
+		if(std == null || subject == null) {
 			System.out.println("출력할 수 없습니다.");
 			return ;
 		}
-		std = getStudent(std);
+		std = studentDao.selectStudent(std);
 		if(std == null) {
 			System.out.println("일치하는 학생이 없습니다.");
 			return;
 		}
-		std.printScore(subject);
+		subject = subjectDao.selectSubject(subject);
+		if(subject == null) {
+			System.out.println("일치하는 과목 정보가 없습니다.");
+			return;
+		}
+		SubjectScore tmp = new SubjectScore(new Subject(0, 0, ""),0);
+		tmp.setKey(std.getKey());
+		tmp.getSubject().setNum(subject.getNum());
+		
+		SubjectScore score = scoreDao.selectScore(tmp);
+		if(score == null ) {
+			System.out.println("등록된 성적이 없습니다.");
+			return;
+		}
+		System.out.println(std + " " + score);
 	}
 }
 
