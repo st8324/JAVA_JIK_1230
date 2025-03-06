@@ -44,11 +44,25 @@ SELECT * FROM (
 WHERE RNK = 1;
 
 # 카테고리별 최고 금액을 조회하는 쿼리 
-
+SELECT PR_CA_NUM 카테고리, MAX(PR_PRICE) 최고금액 FROM PRODUCT GROUP BY PR_CA_NUM;
 
 # 카테고리별 최고 금액의 제품을 조회하는 쿼리 
+SELECT * FROM PRODUCT 
+JOIN (SELECT PR_CA_NUM 카테고리, MAX(PR_PRICE) 최고금액 FROM PRODUCT GROUP BY PR_CA_NUM) T 
+ON PR_CA_NUM = 카테고리
+WHERE PR_PRICE = 최고금액
+ORDER BY 카테고리;
 
+# 사용자별 누적 구매액을 조회하는 쿼리 
+# - OUTER JOIN : 구매내역이 없는 사용자도 조회를 하기 위해 
+# - GROUP BY, SUM() : 사용자별 구매액을 계산하기 위해
+SELECT ME_ID, IFNULL(SUM(BU_TOTAL_PRICE),0) AS 누적구매량 FROM BUY 
+RIGHT JOIN MEMBER ON ME_ID = BU_ME_ID
+GROUP BY ME_ID;
 
+# "반"으로 제품을 검색했을 때 조회하는 쿼리 
+SELECT * FROM PRODUCT 
+WHERE PR_TITLE LIKE CONCAT("%", "반", "%") OR PR_CONTENT LIKE CONCAT("%", "반", "%");
 
 
 
