@@ -147,10 +147,29 @@ INSERT INTO SCHEDULE(SD_DATE, SD_TIME, SD_POS_SEAT, SD_EARLY, SD_MV_NUM, SD_SC_N
 ("2025-03-11", "11:50", 15, "N", 1, 3),
 ("2025-03-11", "10:00", 20, "Y", 1, 5);
 
+# 회원가입하는 쿼리. 아이디 : abc123, 비번 : abc123, 사용자 
+INSERT INTO MEMBER(ME_ID, ME_PW) VALUES("abc123", "abc123");
 
+# abc123 회원이 3번 스케쥴(미키 17, 1관 3월 11일 16:20)의 예약 가능한 좌석 A1, A2를 예매했을 때 필요한 쿼리 
+# 성인 1, 청소년 1 
+# 예매 테이블(TICKET)에 추가하는 쿼리
+INSERT INTO TICKET(TI_ADULT, TI_TEEN, TI_PRICE, TI_ME_NUM, TI_SD_NUM)
+VALUES(1, 1, 27000, 1, 3);
+# 예매 리스트 테이블(TICKET_LIST)에 추가하는 쿼리 
+INSERT INTO TICKET_LIST(TL_TI_NUM, TL_SE_NUM) VALUES(1, 1), (1,2);
 
-
-
+# abc123 회원이 1번 스케쥴(미키 17, 4관 3월 11일 13:50)의 예약 가능한 좌석 A1, A2를 예매했을 때 필요한 쿼리 
+INSERT INTO TICKET(TI_ADULT, TI_TEEN, TI_PRICE, TI_ME_NUM, TI_SD_NUM)
+VALUES(1, 1, 27000, 1, 1);
+INSERT INTO TICKET_LIST(TL_TI_NUM, TL_SE_NUM) VALUES(2, 38), (2,39);
+# abc123 회원이 2번 스케쥴(미키 17, 4관 3월 11일 19:10)의 예약 가능한 좌석 A1, A2를 예매했을 때 필요한 쿼리 
+INSERT INTO TICKET(TI_ADULT, TI_TEEN, TI_PRICE, TI_ME_NUM, TI_SD_NUM)
+VALUES(1, 1, 27000, 1, 2);
+INSERT INTO TICKET_LIST(TL_TI_NUM, TL_SE_NUM) VALUES(3, 38), (3,39);
+# abc123 회원이 2번 스케쥴(미키 17, 4관 3월 11일 19:10)의 예약 가능한 좌석 A3, A4를 예매했을 때 필요한 쿼리 
+INSERT INTO TICKET(TI_ADULT, TI_TEEN, TI_PRICE, TI_ME_NUM, TI_SD_NUM)
+VALUES(1, 1, 27000, 1, 2);
+INSERT INTO TICKET_LIST(TL_TI_NUM, TL_SE_NUM) VALUES(4, 40), (4,41);
 
 
 
