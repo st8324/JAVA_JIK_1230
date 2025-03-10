@@ -44,4 +44,8 @@ WHERE SE_SC_NUM = 4 AND SE_NUM NOT IN(
 	WHERE SE_POS = "Y" AND SD_NUM = 2 AND TL_SE_NUM = SE_NUM  AND TI_STATE = "결제");
     
 # 장르별 등록된 영화수를 조회하는 쿼리
+SELECT GR_NAME, COUNT(MG_GR_NAME) 영화수 FROM GENRE
+LEFT JOIN MOVIE_GENRE ON GR_NAME = MG_GR_NAME
+GROUP BY GR_NAME;
 
+# 현재 시간을 기준으로 한달 사이에 개봉한 영화를 조회하는 쿼리 
