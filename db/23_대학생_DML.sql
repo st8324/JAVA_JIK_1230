@@ -207,34 +207,78 @@ SELECT "기계의 이해", 2, 2, CONCAT("MEC", LPAD(COUNT(*) + 1, 3, "0")), "MEC
 
 # 강의명 : 컴퓨터 개론(1), 2025,학기 : 1,강의실 : KH 1관 501호, 분반 : 1, 정원 : 30,강의계획서 : 없음,교수 : 홍교수(P2000160001)
 # 시간 : 월1A, 월1B, 월2A, 월2B
+INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PLAN, LE_SJ_NUM, LE_PR_NUM) VALUES
+(2025, 1, "KH 1관 501호", 1, 30, "없음", 1, "P2000160001");
+INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
+("월", 1, "A", 1), ("월", 1, "B", 1), ("월", 2, "A", 1), ("월", 2, "B", 1);
 
 # 강의명 : 프로그래밍 언어(2), 2025,학기 : 1,강의실 : KH 1관 501호, 분반 : 1, 정원 : 30,강의계획서 : 없음,교수 : 홍교수(P2000160001)
 # 시간 : 월4A, 월4B, 월5A, 수4A, 수4B, 수5A
+INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PLAN, LE_SJ_NUM, LE_PR_NUM) VALUES
+(2025, 1, "KH 1관 501호", 1, 30, "없음", 2, "P2000160001");
+INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
+("월", 4, "A", 2), ("월", 4, "B", 2), ("월", 5, "A", 2), 
+("수", 4, "A", 2), ("수", 4, "B", 2), ("수", 5, "A", 2);
 
 # 강의명 : 프로그래밍 언어(2), 2025,학기 : 1,강의실 : KH 1관 502호, 분반 : 2, 정원 : 30,강의계획서 : 없음,교수 : 김교수(P2000160002)
 # 시간 : 월4A, 월4B, 월5A, 수4A, 수4B, 수5A
+INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PLAN, LE_SJ_NUM, LE_PR_NUM) VALUES
+(2025, 1, "KH 1관 502호", 1, 30, "없음", 2, "P2000160002");
+INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
+("월", 4, "A", 3), ("월", 4, "B", 3), ("월", 5, "A", 3), 
+("수", 4, "A", 3), ("수", 4, "B", 3), ("수", 5, "A", 3);
 
 # 강의명 : 알고리즘(3), 2025,학기 : 1,강의실 : KH 1관 502호, 분반 : 1, 정원 : 30,강의계획서 : 없음,교수 : 김교수(P2000160002)
 # 시간 : 목1A, 목1B, 목2A, 목2B, 목3A, 목3B
+INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PLAN, LE_SJ_NUM, LE_PR_NUM) VALUES
+(2025, 1, "KH 1관 502호", 1, 30, "없음", 3, "P2000160002");
+INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
+("목", 1, "A", 4), ("목", 1, "B", 4), ("목", 2, "A", 4), ("목", 2, "B", 4), ("목", 3, "A", 4), ("목", 3, "B", 4);
 
 # 강의명 : 확률과 통계(4), 2025,학기 : 1,강의실 : KH 3관 501호, 분반 : 1, 정원 : 30,강의계획서 : 없음,교수 : 김교수(P2000160002)
 # 시간 : 화1A, 화1B, 화2A, 금1A,금1B,금2A
+INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PLAN, LE_SJ_NUM, LE_PR_NUM) VALUES
+(2025, 1, "KH 3관 501호", 1, 30, "없음", 4, "P2000160002");
+INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
+("화", 1, "A", 5), ("화", 1, "B", 5), ("화", 2, "A", 5), 
+("금", 1, "A", 5), ("금", 1, "B", 5), ("금", 2, "A", 5);
 
 # 강의명 : 미분과 적분(5), 2025,학기 : 1,강의실 : KH 3관 502호, 분반 : 1, 정원 : 30,강의계획서 : 없음,교수 : 홍교수(P2000160001)
 # 시간 : 화1A, 화1B, 화2A, 금1A,금1B,금2A
+INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PLAN, LE_SJ_NUM, LE_PR_NUM) VALUES
+(2025, 1, "KH 3관 502호", 1, 30, "없음", 5, "P2000160001");
+INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
+("화", 1, "A", 6), ("화", 1, "B", 6), ("화", 2, "A", 6), 
+("금", 1, "A", 6), ("금", 1, "B", 6), ("금", 2, "A", 6);
 
 # 강의명 : 영어1(6), 2025,학기 : 1,강의실 : KH 2관 501호, 분반 : 1, 정원 : 30,강의계획서 : 없음,교수 : 이교수(P2010123001)
 # 시간 : 화1A, 화1B, 화2A, 금1A,금1B,금2A
+INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PLAN, LE_SJ_NUM, LE_PR_NUM) VALUES
+(2025, 1, "KH 2관 501호", 1, 30, "없음", 6, "P2010123001");
+INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
+("화", 1, "A", 7), ("화", 1, "B", 7), ("화", 2, "A", 7), 
+("금", 1, "A", 7), ("금", 1, "B", 7), ("금", 2, "A", 7);
 
 # 강의명 : 음악감상(7), 2025,학기 : 1,강의실 : KH 2관 502호, 분반 : 1, 정원 : 30,강의계획서 : 없음,교수 : 최교수(P2020456001)
 # 시간 : 월6A,월6B,월7A,월7B,월8A,월8B
+INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PLAN, LE_SJ_NUM, LE_PR_NUM) VALUES
+(2025, 1, "KH 2관 502호", 1, 30, "없음", 7, "P2020456001");
+INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
+("월", 6, "A", 8), ("월", 6, "B", 8), ("월", 7, "A", 8), ("월", 7, "B", 8),  ("월", 8, "A", 8), ("월", 8, "B", 8);
 
 # 강의명 : 교육학 개론(8), 2025,학기 : 1,강의실 : KH 4관 501호, 분반 : 1, 정원 : 30,강의계획서 : 없음,교수 : 최교수(P2005456001)
 # 시간 : 화1A,화1B,화2A,화2B,화3A,화3B
+INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PLAN, LE_SJ_NUM, LE_PR_NUM) VALUES
+(2025, 1, "KH 4관 501호", 1, 30, "없음", 8, "P2005456001");
+INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
+("화", 1, "A", 9), ("화", 1, "B", 9), ("화", 2, "A", 9), ("화", 2, "B", 9),  ("화", 3, "A", 9), ("화", 3, "B", 9);
 
 # 강의명 : 교육 방법론(9), 2025,학기 : 1,강의실 : KH 4관 502호, 분반 : 1, 정원 : 30,강의계획서 : 없음,교수 : 박교수(P2005123001)
 # 시간 : 화1A,화1B,화2A,화2B,화3A,화3B
-
+INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PLAN, LE_SJ_NUM, LE_PR_NUM) VALUES
+(2025, 1, "KH 4관 502호", 1, 30, "없음", 9, "P2005123001");
+INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
+("화", 1, "A", 10), ("화", 1, "B", 10), ("화", 2, "A", 10), ("화", 2, "B", 10),  ("화", 3, "A", 10), ("화", 3, "B", 10);
 
 
 
