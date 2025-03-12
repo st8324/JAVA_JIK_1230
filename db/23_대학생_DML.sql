@@ -311,9 +311,49 @@ WHERE
 # 고길동(2025160001) 학생의 컴퓨터개론(1) 성적이 중간 100, 기말 80, 과제 0, 출석 100일때 성적을 계산하는 프로시저를
 # 작성해서 실행하세요. A+ : 95이상, A : 90이상 
 
+DROP PROCEDURE IF EXISTS INSERT_SCORE;
 
-CALL INSERT_SCORE("2025160001", 1, 100, 80, 0, 100);
-
+DELIMITER //
+CREATE PROCEDURE INSERT_SCORE(
+	IN _ST_NUM CHAR(10),
+    IN _LE_NUM INT,
+    IN _MID INT,
+    IN _FINAL INT,
+    IN _ATT INT,
+    IN _HOME INT
+)
+BEGIN
+	DECLARE _TOTAL INT;
+    DECLARE _RES VARCHAR(4);
+    SET _TOTAL = (
+		SELECT 
+			(_MID  * LS_MID + 
+			_FINAL * LS_FINAL + 
+            _ATT   * LS_ATT + 
+            _HOME  * LS_HOME) / 100 
+            FROM LECTURE_STANDARD WHERE LS_LE_NUM = _LE_NUM);
+	IF _TOTAL >= 95 THEN SET _RES = "A+";
+    ELSEIF _TOTAL >= 90 THEN SET _RES = "A";
+    ELSEIF _TOTAL >= 85 THEN SET _RES = "B+";
+    ELSEIF _TOTAL >= 80 THEN SET _RES = "B";
+    ELSEIF _TOTAL >= 75 THEN SET _RES = "C+";
+    ELSEIF _TOTAL >= 70 THEN SET _RES = "C";
+    ELSEIF _TOTAL >= 65 THEN SET _RES = "D+";
+    ELSEIF _TOTAL >= 60 THEN SET _RES = "D";
+    ELSE SET _RES = "F";
+    END IF;
+    UPDATE COURSE 
+    SET
+		CO_MID = _MID,
+        CO_FINAL = _FINAL,
+        CO_ATT = _ATT,
+        CO_HOME = _HOME,
+        CO_TOTAL = _RES
+	WHERE
+		CO_ST_NUM = _ST_NUM AND CO_LE_NUM = _LE_NUM;
+END //
+DELIMITER ;
+CALL INSERT_SCORE("2025160001", 1, 100, 80, 100,  0);
 
 
 
