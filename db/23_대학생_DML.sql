@@ -280,9 +280,39 @@ INSERT INTO LECTURE(LE_YEAR, LE_SEMESTER, LE_CLASS_ROOM, LE_CLASS, LE_MAX, LE_PL
 INSERT INTO LECTURE_SCHEDULE(LC_DAY, LC_TIME, LC_MINUTE, LC_LE_NUM) VALUES
 ("화", 1, "A", 10), ("화", 1, "B", 10), ("화", 2, "A", 10), ("화", 2, "B", 10),  ("화", 3, "A", 10), ("화", 3, "B", 10);
 
+# 고길동(2025160001) 학생이 컴퓨터개론(1), 프로그래밍언어(2), 확률과 통계(5), 음악과 감상(8)을 수강 신청 했을 때 쿼리 
+INSERT INTO COURSE(CO_ST_NUM, CO_LE_NUM) VALUES
+("2025160001", 1), ("2025160001", 2), ("2025160001", 5), ("2025160001", 8);
+
+# 교수님이 성적 비율을 다음과 같이 수정했을 때 필요한 쿼리
+# 모든 강의의 성적 비율을 기본으로 적용하는 쿼리 
+INSERT INTO LECTURE_STANDARD(LS_LE_NUM) 
+SELECT LE_NUM FROM LECTURE;
+
+# 컴퓨터개론(1)의 성적 비율 - 중간 : 45, 기말 : 45, 출석 : 10, 과제 : 0
+# 프로그래밍언어(2)의 성적 비율 - 중간 : 40, 기말 : 40, 출석 : 10, 과제 : 10
+UPDATE LECTURE_STANDARD 
+SET
+	LS_MID = 45,
+    LS_FINAL = 45,
+    LS_ATT = 10,
+    LS_HOME = 0
+WHERE
+	LS_LE_NUM = 1;
+UPDATE LECTURE_STANDARD 
+SET
+	LS_MID = 40,
+    LS_FINAL = 40,
+    LS_ATT = 10,
+    LS_HOME = 10
+WHERE
+	LS_LE_NUM = 2;    
+
+# 고길동(2025160001) 학생의 컴퓨터개론(1) 성적이 중간 100, 기말 80, 과제 0, 출석 100일때 성적을 계산하는 프로시저를
+# 작성해서 실행하세요. A+ : 95이상, A : 90이상 
 
 
-
+CALL INSERT_SCORE("2025160001", 1, 100, 80, 0, 100);
 
 
 
