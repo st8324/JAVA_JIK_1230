@@ -48,3 +48,51 @@ WHERE
 	LE_YEAR = 2025 AND LE_SEMESTER = 1
 GROUP BY LE_NUM ;
 
+# 고길동(2025160001) 학생이 이수한 강의 목록을 조회하는 쿼리 
+SELECT 
+    SUBJECT.*, CO_TOTAL 성적
+FROM
+    COURSE
+JOIN 
+	LECTURE ON LE_NUM = CO_LE_NUM
+JOIN 
+	SUBJECT ON LE_SJ_NUM = SJ_NUM
+WHERE
+    CO_ST_NUM = 2025160001
+        AND CO_TOTAL IS NOT NULL;
+# 고길동(2025160001) 학생이 취득한 학점을 조회하는 쿼리 
+SELECT 
+    CO_ST_NUM, SUM(SJ_POINT) 취득학점
+FROM
+    COURSE
+JOIN 
+	LECTURE ON LE_NUM = CO_LE_NUM
+JOIN 
+	SUBJECT ON LE_SJ_NUM = SJ_NUM
+WHERE
+    CO_ST_NUM = 2025160001
+        AND CO_TOTAL IS NOT NULL;
+        
+# 고길동(2025160001) 학생의 2025년 1학기 성적을 조회하는 쿼리 
+# => 4.5점 만점 기준. A+ : 4.5, A : 4, B+ : 3.5, B : 3, C+ : 2.5, C : 2, D+ : 1.5, D : 1
+SELECT 
+    SUM(IF(CO_TOTAL = "A+", 4.5, 
+		IF(CO_TOTAL = "A", 4, 
+			IF(CO_TOTAL = "B+", 3.5, 
+				IF(CO_TOTAL = "B", 3.5, 
+					IF(CO_TOTAL = "C+", 2.5, 
+						IF(CO_TOTAL = "C", 2.5, 
+							IF(CO_TOTAL = "D+", 1.5, 
+								IF(CO_TOTAL = "D", 1, 0)))))))) * SJ_POINT) / SUM(SJ_POINT) AS 평균평점
+FROM
+    COURSE
+JOIN 
+	LECTURE ON LE_NUM = CO_LE_NUM
+JOIN 
+	SUBJECT ON LE_SJ_NUM = SJ_NUM
+WHERE
+    CO_ST_NUM = 2025160001
+        AND CO_TOTAL IS NOT NULL
+        AND LE_YEAR = 2025 AND LE_SEMESTER = "1"
+GROUP BY CO_ST_NUM;
+
