@@ -35,6 +35,8 @@
 	<br>
 	<button type="submit">전송</button> 
 </form>
+<h1>url 경로에 데이터 보내기</h1>
+<a href="/spring/홍길동/10">url 경로에 데이터 보내기</a>
 <script type="text/javascript">
 	let name1 = "${name}";
 	console.log(name1);
