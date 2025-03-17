@@ -83,4 +83,25 @@ public class HomeController {
 		System.out.println("화면에서 전송한 이름 : " + age1);
 		return "sample/send";
 	}
+	@GetMapping("/redirect")
+	public String redirect( PersonDTO person) {
+		System.out.println(person);
+		/* redirect 방식
+		 * - URL 변경
+		 * - 해당 URL를 처리하는 메소드를 호출
+		 * - 기존 request 정보는 전송하지 않음.
+		 * */
+		return "redirect:/send";
+	}
+	@GetMapping("/forward")
+	public String forward( PersonDTO person) {
+		System.out.println(person);
+		/* forward 방식
+		 * - URL 변경되지 않음
+		 * - 해당 URL를 처리하는 메소드를 호출
+		 * - 기존 request 정보도 같이 전송 => 매개변수로 받은 데이터들도 함께 전송
+		 * 
+		 * */
+		return "forward:/send";
+	}
 }
