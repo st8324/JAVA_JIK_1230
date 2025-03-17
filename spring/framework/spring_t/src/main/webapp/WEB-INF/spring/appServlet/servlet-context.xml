@@ -7,21 +7,25 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
-	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- 
+	- 기본 뷰 리졸버
+	  - 디스패처에게 전달 받은 문자열을 가공해서 view를 선택 함.
+	  - 예외로 redirect:, forward:인 경우는 view를 선택하지 않음
+	  - prefix : 받은 문자열 앞에 붙일 문자열
+	  - suffix : 받은 문자열 뒤에 붙일 문자열 
+	  - 기본 경로는 webapp부터 시작
+	  
+	 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="kr.kh.spring" />
+	<context:component-scan base-package="kr.kh.spring.controller" />
 	
 	
 	
