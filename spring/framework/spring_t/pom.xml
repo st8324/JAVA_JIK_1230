@@ -116,6 +116,13 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>        
+		<!-- 롬복 -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.36</version>
+		</dependency>
+				
 	</dependencies>
     <build>
         <plugins>
