@@ -1,10 +1,13 @@
 package kr.kh.spring.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.kh.spring.model.dto.PersonDTO;
@@ -103,5 +106,13 @@ public class HomeController {
 		 * 
 		 * */
 		return "forward:/send";
+	}
+	@GetMapping("/jstl")
+	public String jstl(Model model) {
+		List<String> list = Arrays.asList("사과","바나나", "딸기", "포도");
+		model.addAttribute("str", "<h1>서버에서 보낸 데이터입니다.</h1>");
+		model.addAttribute("age", 10);
+		model.addAttribute("list", list);
+		return "/sample/jstl";
 	}
 }

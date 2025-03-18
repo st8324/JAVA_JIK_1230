@@ -14,7 +14,7 @@ public class BoardController {
 	
 	@GetMapping("/board/list")
 	public String boardList() {
-		System.out.println(boardService.getCount());
+		
 		return "/board/list";
 	}
 }

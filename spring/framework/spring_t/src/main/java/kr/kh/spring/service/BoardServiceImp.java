@@ -11,9 +11,5 @@ public class BoardServiceImp implements BoardService {
 	@Autowired
 	private BoardDAO boardDao;
 
-	@Override
-	public int getCount() {
-		return boardDao.selectCount();
-	}
-	
+		
 }
