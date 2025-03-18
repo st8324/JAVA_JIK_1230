@@ -1,7 +1,7 @@
 package kr.kh.spring.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -113,6 +113,7 @@ public class HomeController {
 		model.addAttribute("str", "<h1>서버에서 보낸 데이터입니다.</h1>");
 		model.addAttribute("age", 10);
 		model.addAttribute("list", list);
+		model.addAttribute("date", new Date());
 		return "/sample/jstl";
 	}
 }
