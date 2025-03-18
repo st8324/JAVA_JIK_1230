@@ -20,15 +20,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list }" var="board">
+			<c:forEach items="${list }" var="post">
 				<tr>
-					<td>${board.bo_num}</td>
+					<td>${post.po_num}</td>
 					<td>
-						<a href="#">${board.bo_title }</a>
+						<a href="#">${post.po_title }</a>
 					</td>
-					<td>${board.bo_me_id }</td>
-					<td><fmt:formatDate value="${board.bo_date }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
-					<td>${board.bo_view }</td>
+					<td>${post.po_me_id }</td>
+					<td><fmt:formatDate value="${post.po_date }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
+					<td>${post.po_view }</td>
 				</tr>
 			</c:forEach>
 			<c:if test="${list.size() eq 0 }">

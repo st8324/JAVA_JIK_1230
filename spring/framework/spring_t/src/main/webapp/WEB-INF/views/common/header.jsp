@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="<c:url value="/board/list"/>">게시글 목록</a>
+          <a class="nav-link" href="<c:url value="/post/list"/>">게시글 목록</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>

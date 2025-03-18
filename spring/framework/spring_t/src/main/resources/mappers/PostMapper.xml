@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.kh.spring.dao.BoardDAO">
+<mapper namespace="kr.kh.spring.dao.PostDAO">
 	
-	<select id="selectBoardList" resultType="kr.kh.spring.model.vo.BoardVO">
-		select * from board order by bo_num desc
+	<select id="selectPostList" resultType="kr.kh.spring.model.vo.PostVO">
+		select * from Post order by po_num desc
 	</select>
 </mapper>

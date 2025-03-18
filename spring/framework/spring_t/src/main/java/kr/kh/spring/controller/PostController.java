@@ -7,22 +7,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import kr.kh.spring.model.vo.BoardVO;
-import kr.kh.spring.service.BoardService;
+import kr.kh.spring.model.vo.PostVO;
+import kr.kh.spring.service.PostService;
 
 @Controller
-public class BoardController {
+public class PostController {
 
 	@Autowired
-	private BoardService boardService;
+	private PostService postService;
 	
-	@GetMapping("/board/list")
-	public String boardList(Model model) {
+	@GetMapping("/post/list")
+	public String postList(Model model) {
 		//게시글 목록 전체를 가져옴
-		List<BoardVO> list = boardService.getBoardList();
+		List<PostVO> list = postService.getPostList();
 		//화면에 게시글 목록을 전송
-		//매퍼의 resultType=kr.kh.spring.model.vo.BoardVO
+		//매퍼의 resultType=kr.kh.spring.model.vo.postVO
 		model.addAttribute("list", list);
-		return "/board/list";
+		return "/post/list";
 	}
 }
