@@ -84,7 +84,7 @@ public class HomeController {
 	public String nameAge(@PathVariable("name")String name1, @PathVariable("age")int age1) {
 		System.out.println("화면에서 전송한 이름 : " + name1);
 		System.out.println("화면에서 전송한 이름 : " + age1);
-		return "sample/send";
+		return "/sample/send";
 	}
 	@GetMapping("/redirect")
 	public String redirect( PersonDTO person) {

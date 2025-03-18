@@ -9,7 +9,7 @@
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand" href="<c:url value="/" />">Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,11 +25,10 @@
           <a class="nav-link" href="#">Link</a>
         </li>  
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Dropdown</a>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">예제</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Link</a></li>
-            <li><a class="dropdown-item" href="#">Another link</a></li>
-            <li><a class="dropdown-item" href="#">A third link</a></li>
+            <li><a class="dropdown-item" href="<c:url value="/" />">데이터 전송 예제</a></li>
+            <li><a class="dropdown-item" href="<c:url value="/jstl" />">JSTL 예제</a></li>
           </ul>
         </li>
       </ul>
