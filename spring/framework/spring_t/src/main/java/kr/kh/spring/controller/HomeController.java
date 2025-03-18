@@ -58,7 +58,7 @@ public class HomeController {
 		System.out.println("화면에서 보낸 이름과 나이 : " + person);
 		//서버에서 화면으로 객체를 전송
 		model.addAttribute("person", person);
-		return "sample/send";
+		return "/sample/send";
 	}
 	/*
 	@GetMapping("/send")
