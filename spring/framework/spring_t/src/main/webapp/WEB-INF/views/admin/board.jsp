@@ -8,7 +8,7 @@
 <body>
 	<h1>게시판 관리</h1>
 	<!-- 게시판 목록 조회 -->
-	<table class="table table-hover table-warning">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th class="text-center">게시판명</th>
@@ -18,9 +18,12 @@
 		<tbody>
 			<c:forEach items="${list }" var="board">
 				<tr>
-					<td>${board.bo_name}</td>
 					<td>
-						수정, 삭제
+						<input type="text" value="${board.bo_name}" class="form-control">
+					</td>
+					<td class="text-center">
+						<button type="button" class="btn btn-outline-warning">수정</button>
+						<button type="button" class="btn btn-outline-danger">삭제</button>
 					</td>
 				</tr>
 			</c:forEach>
@@ -33,5 +36,11 @@
 	</table>
 
 	<!-- 게시판 등록  -->
+	<form action="<c:url value="/admin/board/insert"/>" method="post">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="게시판을 입력하세요." name="bo_name">
+			<button type="submit" class="btn btn-outline-success">등록</button>
+		</div>
+	</form>
 </body>
 </html>

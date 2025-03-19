@@ -10,4 +10,7 @@
 	<select id="selectBoardList" resultType="kr.kh.spring.model.vo.BoardVO">
 		select * from board
 	</select>
+	<insert id="insertBoard">
+		insert into board(bo_name) values(#{bo_name})
+	</insert>
 </mapper>

@@ -11,6 +11,8 @@ public interface PostService {
 
 	List<BoardVO> getBoardList();
 
+	boolean insertBoard(String bo_name);
+
 	
 
 }
