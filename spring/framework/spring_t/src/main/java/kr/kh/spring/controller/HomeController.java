@@ -135,4 +135,14 @@ public class HomeController {
 		}
 		return "redirect:/signup";
 	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "/member/login";
+	}
+	@PostMapping("/login")
+	public String loginPost(MemberVO member) {
+		System.out.println(member);
+		return "redirect:/login";
+	}
 }
