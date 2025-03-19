@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,8 +41,8 @@ public class HomeController {
 	 * => @RequestMapping(method = RequestMethod.POST)인 경우 대체할 수 있는 어노테이션 
 	 * */
 	//@RequestMapping(value = "/", method = RequestMethod.GET)
-	@GetMapping(value = "/")
-	public String home(Model model, String name, Integer age) {
+	@GetMapping(value = "/example")
+	public String example(Model model, String name, Integer age) {
 		System.out.println("화면에서 보낸 이름 : " + name);
 		System.out.println("화면에서 보낸 나이 : " + age);
 		/* 화면에 데이터를 전송하는 방법
@@ -55,6 +58,11 @@ public class HomeController {
 		 *    => 기본 뷰 리졸버에 의해 /WEB-INF/view/home.jsp가 완성되어
 		 *       최종적으로 해당 jsp의 결과 화면을 클라이언트에 전송
 		 * */
+		return "/sample/home";
+	}
+	
+	@GetMapping("/")
+	public String home() {
 		return "home";
 	}
 	
@@ -149,6 +157,14 @@ public class HomeController {
 		if(user == null) {
 			return "redirect:/login";			
 		}
+		return "redirect:/";
+	}
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		
+		//세션에 있는 user를 삭제
+		HttpSession session = request.getSession();
+		session.removeAttribute("user");
 		return "redirect:/";
 	}
 }

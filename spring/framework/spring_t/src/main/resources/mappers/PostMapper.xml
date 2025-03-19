@@ -5,6 +5,9 @@
 <mapper namespace="kr.kh.spring.dao.PostDAO">
 	
 	<select id="selectPostList" resultType="kr.kh.spring.model.vo.PostVO">
-		select * from Post order by po_num desc
+		select * from post order by po_num desc
+	</select>
+	<select id="selectBoardList" resultType="kr.kh.spring.model.vo.BoardVO">
+		select * from board
 	</select>
 </mapper>
