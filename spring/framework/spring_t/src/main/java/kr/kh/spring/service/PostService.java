@@ -13,6 +13,10 @@ public interface PostService {
 
 	boolean insertBoard(String bo_name);
 
+	boolean deleteBoard(int bo_num);
+
+	boolean updateBoard(BoardVO board);
+
 	
 
 }

@@ -39,5 +39,18 @@ public class PostServiceImp implements PostService {
 		return false;
 	}
 
+	@Override
+	public boolean deleteBoard(int bo_num) {
+		return postDao.deleteBoard(bo_num);
+	}
+
+	@Override
+	public boolean updateBoard(BoardVO board) {
+		if(board == null || board.getBo_name() == null || board.getBo_name().trim().length() == 0) {
+			return false;
+		}
+		return postDao.updateBoard(board);
+	}
+
 		
 }

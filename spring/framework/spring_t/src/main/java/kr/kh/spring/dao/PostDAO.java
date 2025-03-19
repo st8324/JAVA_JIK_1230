@@ -15,6 +15,10 @@ public interface PostDAO {
 
 	boolean insertBoard(@Param("bo_name")String bo_name);
 
+	boolean deleteBoard(@Param("bo_num")int bo_num);
+
+	boolean updateBoard(@Param("board")BoardVO board);
+
 	
 	
 }

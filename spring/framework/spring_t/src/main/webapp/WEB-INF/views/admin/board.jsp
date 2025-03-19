@@ -16,14 +16,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list }" var="board">
+			<c:forEach items="${list }" var="board" varStatus="vs">
 				<tr>
 					<td>
-						<input type="text" value="${board.bo_name}" class="form-control">
+						<input type="text" value="${board.bo_name}" class="form-control" id="name${vs.count}">
 					</td>
-					<td class="text-center">
-						<button type="button" class="btn btn-outline-warning">수정</button>
-						<button type="button" class="btn btn-outline-danger">삭제</button>
+					<td class="text-center box-func">
+						<form action="<c:url value="/admin/board/update"/>" method="post" style="display: inline">
+							<input type="hidden" name="bo_num" value="${board.bo_num }">
+							<input type="hidden" name="bo_name" value="">
+							<button type="submit" class="btn btn-outline-warning btn-update" data-target="#name${vs.count}">수정</button>
+						</form>
+						<form action="<c:url value="/admin/board/delete"/>" method="post" style="display: inline">
+							<input type="hidden" name="bo_num" value="${board.bo_num }">
+							<button type="submit" class="btn btn-outline-danger">삭제</button>
+						</form>
 					</td>
 				</tr>
 			</c:forEach>
@@ -42,5 +49,18 @@
 			<button type="submit" class="btn btn-outline-success">등록</button>
 		</div>
 	</form>
+	<script type="text/javascript">
+		let uBtns = document.querySelectorAll(".btn-update");
+		uBtns.forEach(btn=>{
+			btn.addEventListener("click", ()=>{
+				//let text = btn.closest(".box-func").previousElementSibling.firstElementChild.value;
+				let target = btn.dataset.target;//data-target 값을 가져옴
+				let targetObj = document.querySelector(target);
+				let text = targetObj.value;
+				
+				btn.previousElementSibling.value = text;
+			})
+		})
+	</script>
 </body>
 </html>

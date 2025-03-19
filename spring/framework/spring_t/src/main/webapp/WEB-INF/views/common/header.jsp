@@ -38,12 +38,14 @@
             <li><a class="dropdown-item" href="<c:url value="/jstl" />">JSTL 예제</a></li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">관리자</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="<c:url value="/admin/board" />">게시판</a></li>
-          </ul>
-        </li>
+        <c:if test="${user ne null && user.me_authority eq 'ADMIN' }">
+	        <li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">관리자</a>
+	          <ul class="dropdown-menu">
+	            <li><a class="dropdown-item" href="<c:url value="/admin/board" />">게시판</a></li>
+	          </ul>
+	        </li>
+        </c:if>
       </ul>
     </div>
   </div>

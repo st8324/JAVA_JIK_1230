@@ -8,9 +8,19 @@
 		select * from post order by po_num desc
 	</select>
 	<select id="selectBoardList" resultType="kr.kh.spring.model.vo.BoardVO">
-		select * from board
+		select * from board order by bo_num
 	</select>
 	<insert id="insertBoard">
 		insert into board(bo_name) values(#{bo_name})
 	</insert>
+	<delete id="deleteBoard">
+		delete from board where bo_num = #{bo_num}
+	</delete>
+	<update id="updateBoard">
+		update board 
+		set
+			bo_name = #{board.bo_name}
+		where
+			bo_num = #{board.bo_num}
+	</update>
 </mapper>
