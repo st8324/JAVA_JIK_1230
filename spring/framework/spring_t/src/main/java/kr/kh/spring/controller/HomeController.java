@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.kh.spring.model.dto.PersonDTO;
 import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring.service.MemberService;
 
 /* @Controller
  *  => HandlerMapping에 url을 등록하기 위한 어노테이션
@@ -21,6 +23,9 @@ import kr.kh.spring.model.vo.MemberVO;
 @Controller
 public class HomeController {
 
+	@Autowired
+	private MemberService memberService;
+	
 	/* @RequestMapping
 	 * => 처리할 URL 정보를 지정하는 어노테이션으로 해당 정보와 일치하는 경우 메소드를 호출하여 실행
 	 * => value : 처리할 URL을 지정
@@ -125,7 +130,9 @@ public class HomeController {
 	
 	@PostMapping("/signup")
 	public String signupPost(MemberVO member) {
-		
-		return "/member/signup";
+		if(memberService.signup(member)) {
+			return "redirect:/";
+		}
+		return "redirect:/signup";
 	}
 }
