@@ -18,12 +18,14 @@
         <li class="nav-item">
           <a class="nav-link" href="<c:url value="/post/list"/>">게시글 목록</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<c:url value="/signup"/>">회원 가입</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<c:url value="/login"/>">로그인</a>
-        </li>  
+        <c:if test="${user == null}">
+	        <li class="nav-item">
+	          <a class="nav-link" href="<c:url value="/signup"/>">회원 가입</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="<c:url value="/login"/>">로그인</a>
+	        </li>  
+        </c:if>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">예제</a>
           <ul class="dropdown-menu">

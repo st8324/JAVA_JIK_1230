@@ -41,6 +41,15 @@
 	
 	<context:component-scan base-package="kr.kh.spring.*" />
 	
-	
-	
+	<!-- 인터셉터 등록 -->
+	<beans:bean id="loginInterceptor" class="kr.kh.spring.interceptor.LoginInterceptor"/>
+
+	<!-- 인터셉터 맵핑 -->
+	<interceptors>
+		<interceptor>
+			<!-- /login(get, post)를 갔다 올때마다 LoginInterceptor가 실행  -->
+			<mapping path="/login"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

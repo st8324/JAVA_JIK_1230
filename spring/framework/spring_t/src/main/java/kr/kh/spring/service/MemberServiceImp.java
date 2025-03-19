@@ -39,4 +39,23 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.insertMember(member);
 	}
 
+	@Override
+	public MemberVO login(MemberVO member) {
+		if(member == null) {
+			return null;
+		}
+		MemberVO user = memberDao.selectMember(member.getMe_id());
+		//아이디가 일치하지 않을 때 
+		if(user == null) {
+			return null;
+		}
+		//비번이 일치하지 않을 때
+		if(!passwordEncoder.matches(member.getMe_pw(), user.getMe_pw())) {
+			return null;
+		}
+		
+		//아이디 비번이 다 일치할 때
+		return user;
+	}
+
 }

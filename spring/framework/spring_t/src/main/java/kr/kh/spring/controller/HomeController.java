@@ -141,8 +141,14 @@ public class HomeController {
 		return "/member/login";
 	}
 	@PostMapping("/login")
-	public String loginPost(MemberVO member) {
-		System.out.println(member);
-		return "redirect:/login";
+	public String loginPost(Model model, MemberVO member) {
+		//화면에서 보낸 회원 정보와 일치하는 회원 정보를 DB에서 가져옴
+		MemberVO user = memberService.login(member);
+		//가져온 회원 정보를 인터셉터에게 전달
+		model.addAttribute("user", user);
+		if(user == null) {
+			return "redirect:/login";			
+		}
+		return "redirect:/";
 	}
 }
