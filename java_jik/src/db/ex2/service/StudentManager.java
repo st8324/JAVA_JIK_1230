@@ -203,6 +203,12 @@ public class StudentManager {
 		}
 		System.out.println(std + " " + score);
 	}
+
+	public void printStudentList() {
+		List<Student> stds = studentDao.selectStudentList();
+		System.out.println(stds);
+		
+	}
 }
 
 

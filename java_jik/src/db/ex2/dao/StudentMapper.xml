@@ -61,4 +61,7 @@
 		where st_grade = #{std.grade} and st_class = #{std.classNum} 
 			and st_num = #{std.num} 
 	</delete>
+	<select id="selectStudentList"  resultMap="StudentMap">
+		select * from student
+	</select>
 </mapper>

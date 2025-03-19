@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.kh.spring.model.dto.PersonDTO;
+import kr.kh.spring.model.vo.MemberVO;
 
 /* @Controller
  *  => HandlerMapping에 url을 등록하기 위한 어노테이션
@@ -115,5 +117,15 @@ public class HomeController {
 		model.addAttribute("list", list);
 		model.addAttribute("date", new Date());
 		return "/sample/jstl";
+	}
+	@GetMapping("/signup")
+	public String signup() {
+		return "/member/signup";
+	}
+	
+	@PostMapping("/signup")
+	public String signupPost(MemberVO member) {
+		
+		return "/member/signup";
 	}
 }

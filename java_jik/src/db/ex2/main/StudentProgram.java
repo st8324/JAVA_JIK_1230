@@ -26,6 +26,7 @@ public class StudentProgram implements ConsoleProgram {
 		final int EXIT = 13;
 		
 		do {
+			studentManager.printStudentList();
 			//메뉴 출력
 			printMenu();
 			

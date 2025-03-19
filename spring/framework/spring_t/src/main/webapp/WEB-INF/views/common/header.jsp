@@ -19,7 +19,7 @@
           <a class="nav-link" href="<c:url value="/post/list"/>">게시글 목록</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="<c:url value="/signup"/>">회원 가입</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
