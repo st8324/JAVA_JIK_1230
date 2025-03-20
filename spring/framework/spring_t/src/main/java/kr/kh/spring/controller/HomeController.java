@@ -95,7 +95,7 @@ public class HomeController {
 		return "sample/send";
 	}
 	*/
-	@GetMapping("/{name}/{age}")
+	@GetMapping("/sample/{name}/{age}")
 	public String nameAge(@PathVariable("name")String name1, @PathVariable("age")int age1) {
 		System.out.println("화면에서 전송한 이름 : " + name1);
 		System.out.println("화면에서 전송한 이름 : " + age1);

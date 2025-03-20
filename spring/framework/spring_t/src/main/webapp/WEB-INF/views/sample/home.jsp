@@ -36,7 +36,7 @@
 	<button type="submit">전송</button> 
 </form>
 <h1>url 경로에 데이터 보내기</h1>
-<a href="<c:url value="/홍길동/10"/>">url 경로에 데이터 보내기</a>
+<a href="<c:url value="/sample/홍길동/10"/>">url 경로에 데이터 보내기</a>
 <h1>redirect 예제</h1>
 <a href="<c:url value="/redirect?name=홍길동&age=10"/>">리다이렉트 예제</a>
 <h1>forward 예제</h1>

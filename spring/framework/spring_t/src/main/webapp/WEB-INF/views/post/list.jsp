@@ -38,5 +38,6 @@
 			</c:if>
 		</tbody>
 	</table>
+	<a href="<c:url value="/post/insert"/>" class="btn btn-outline-success">게시글 등록</a>
 </body>
 </html>
