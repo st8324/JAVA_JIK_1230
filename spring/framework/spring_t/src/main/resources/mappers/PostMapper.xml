@@ -23,4 +23,8 @@
 		where
 			bo_num = #{board.bo_num}
 	</update>
+	<insert id="insertPost">
+		insert into post(po_title, po_content, po_me_id, po_bo_num)
+		values(#{post.po_title}, #{post.po_content}, #{post.po_me_id}, #{post.po_bo_num})
+	</insert>
 </mapper>

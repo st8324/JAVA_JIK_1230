@@ -66,6 +66,7 @@ public class PostServiceImp implements PostService {
 		post.setPo_me_id(user.getMe_id());
 		boolean res = postDao.insertPost(post);
 		
+		
 		return res;
 	}
 

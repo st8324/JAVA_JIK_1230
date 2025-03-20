@@ -19,6 +19,8 @@ public interface PostDAO {
 
 	boolean updateBoard(@Param("board")BoardVO board);
 
+	boolean insertPost(@Param("post")PostVO post);
+
 	
 	
 }
