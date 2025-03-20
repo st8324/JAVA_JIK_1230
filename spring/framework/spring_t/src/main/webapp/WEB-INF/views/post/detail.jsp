@@ -37,6 +37,12 @@
 			<div class="form-control" id="content" style="min-height: 400px;">${post.po_content }</div>
 		</div>
 	</div>
-	
+	<div class="d-flex justify-content-between">
+		<a href="<c:url value="/post/list"/>" class="btn btn-outline-success">목록</a>
+		<div class="btns">
+			<a href="" class="btn btn-outline-info">수정</a>
+			<a href="<c:url value="/post/delete/${post.po_num}"/>" class="btn btn-outline-danger">삭제</a>
+		</div>
+	</div>
 </body>
 </html>

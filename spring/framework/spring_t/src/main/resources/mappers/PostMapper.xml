@@ -9,6 +9,7 @@
 			post.*, bo_name as po_bo_name 
 		from post
 		join board on po_bo_num = bo_num 
+		where  po_del = "N"
 		order by po_num desc
 	</select>
 	<select id="selectBoardList" resultType="kr.kh.spring.model.vo.BoardVO">
@@ -36,6 +37,9 @@
 			post.*, bo_name as po_bo_name 
 		from post
 		join board on po_bo_num = bo_num 
-		where po_num = #{po_num}
+		where po_num = #{po_num} and po_del = "N"
 	</select>
+	<update id="deletePost">
+		update post set po_del = "Y" where po_num = #{po_num}
+	</update>
 </mapper>

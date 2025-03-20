@@ -75,5 +75,22 @@ public class PostServiceImp implements PostService {
 		return postDao.selectPost(po_num);
 	}
 
+	@Override
+	public boolean deletePost(int po_num, MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		//게시글 정보를 가져옴
+		PostVO post = postDao.selectPost(po_num);
+		//게시글의 작성자와 회원이 다르면 false 리턴
+		if(post == null || !post.getPo_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		//게시글 수정
+		boolean res = postDao.deletePost(po_num);
+		
+		return res;
+	}
+
 		
 }
