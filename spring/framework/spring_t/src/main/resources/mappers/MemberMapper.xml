@@ -8,7 +8,7 @@
 		insert into member(me_id, me_pw, me_email)
 		values(#{member.me_id}, #{member.me_pw}, #{member.me_email})
 	</insert>
-	<select id="selectMember" resultType="kr.kh.spring.model.vo.MemberVO">
+	<select id="selectMember" resultType="MemberVO">
 		select * from member where me_id = #{me_id}
 	</select>
 </mapper>
