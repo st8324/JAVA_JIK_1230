@@ -5,7 +5,11 @@
 <mapper namespace="kr.kh.spring.dao.PostDAO">
 	
 	<select id="selectPostList" resultType="kr.kh.spring.model.vo.PostVO">
-		select * from post order by po_num desc
+		select 
+			post.*, bo_name as po_bo_name 
+		from post
+		join board on po_bo_num = bo_num 
+		order by po_num desc
 	</select>
 	<select id="selectBoardList" resultType="kr.kh.spring.model.vo.BoardVO">
 		select * from board order by bo_num

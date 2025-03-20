@@ -13,6 +13,7 @@ public class PostVO {
 	int po_view;
 	int po_up, po_down;
 	int po_bo_num;
+	String po_bo_name;
 	String po_del;
 	
 	
