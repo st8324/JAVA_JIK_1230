@@ -2,6 +2,8 @@ package kr.kh.spring.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,10 +41,8 @@ public class PostController {
 	}
 	
 	@PostMapping("/post/insert")
-	public String postInsertPost(Model model, PostVO post) {
-		//추후 삭제될 예정
-		MemberVO user = new MemberVO();
-		user.setMe_id("admin");
+	public String postInsertPost(Model model, PostVO post, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		if(postService.insertPost(post, user)) {
 			model.addAttribute("url", "/post/list");
 			model.addAttribute("msg", "게시글을 등록했습니다.");
@@ -54,6 +54,8 @@ public class PostController {
 	}
 	@GetMapping("/post/detail/{po_num}")
 	public String postDetail(Model model, @PathVariable("po_num")int po_num) {
+		//게시글 조회수를 증가
+		postService.updateView(po_num);
 		//게시글을 가져옴
 		PostVO post = postService.getPost(po_num);
 		//화면에 전송
@@ -61,11 +63,9 @@ public class PostController {
 		return "/post/detail";
 	}
 	@GetMapping("/post/delete/{po_num}")
-	public String postDelete(Model model, @PathVariable("po_num")int po_num) {
+	public String postDelete(Model model, @PathVariable("po_num")int po_num, HttpSession session) {
 		//로그인한 회원 정보를 가져옴
-		//추후 삭제될 예정
-		MemberVO user = new MemberVO();
-		user.setMe_id("admin");
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		if(postService.deletePost(po_num, user)) {
 			model.addAttribute("url", "/post/list");
 			model.addAttribute("msg", "게시글을 삭제했습니다.");
@@ -76,7 +76,7 @@ public class PostController {
 		return "/msg/msg";
 	}
 	@GetMapping("/post/update/{po_num}")
-	public String postUpdate(Model model, @PathVariable("po_num")int po_num) {
+	public String postUpdate(Model model, @PathVariable("po_num")int po_num, HttpSession session) {
 		
 		List<BoardVO> list = postService.getBoardList();
 		model.addAttribute("list", list);
@@ -84,9 +84,7 @@ public class PostController {
 		//게시글을 가져옴
 		PostVO post = postService.getPost(po_num);
 		//작성자인지 아닌지 확인하는 작업 
-		//추후 삭제될 예정
-		MemberVO user = new MemberVO();
-		user.setMe_id("admin");
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		//로그인 안되어 있거나, 없는 게시글이거나 작성자가 아니면
 		if(user == null || post == null || !post.getPo_me_id().equals(user.getMe_id())) {
 			model.addAttribute("url", "/post/list");
@@ -101,10 +99,8 @@ public class PostController {
 		
 	}
 	@PostMapping("/post/update")
-	public String postUpdatePost(Model model, PostVO post) {
-		//추후 삭제될 예정
-		MemberVO user = new MemberVO();
-		user.setMe_id("admin");
+	public String postUpdatePost(Model model, PostVO post, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		if(postService.updatePost(post, user)) {
 			model.addAttribute("msg", "게시글을 수정했습니다.");
 		}else {

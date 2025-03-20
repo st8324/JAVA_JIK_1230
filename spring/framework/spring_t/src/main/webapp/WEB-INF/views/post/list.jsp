@@ -44,6 +44,21 @@
 			</c:if>
 		</tbody>
 	</table>
-	<a href="<c:url value="/post/insert"/>" class="btn btn-outline-success">게시글 등록</a>
+	<a href="<c:url value="/post/insert"/>" class="btn btn-outline-success btn-insert">게시글 등록</a>
+	<script type="text/javascript">
+		$(".btn-insert").click(function(e){
+			//로그인 했으면
+			if(${user != null}){
+				return;
+			}
+			e.preventDefault();
+			//안했으면
+			if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하겠습니까?")){
+				location.href = "<c:url value="/login"/>";
+				
+			}
+		})
+		
+	</script>
 </body>
 </html>

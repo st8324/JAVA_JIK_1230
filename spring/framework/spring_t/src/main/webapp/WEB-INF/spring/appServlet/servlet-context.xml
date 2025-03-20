@@ -45,9 +45,16 @@
 	<beans:bean id="loginInterceptor" class="kr.kh.spring.interceptor.LoginInterceptor"/>
 	<beans:bean id="adminInterceptor" class="kr.kh.spring.interceptor.AdminInterceptor"/>
 	<beans:bean id="guestInterceptor" class="kr.kh.spring.interceptor.GuestInterceptor"/>
+	<beans:bean id="memberInterceptor" class="kr.kh.spring.interceptor.MemberInterceptor"/>
 
 	<!-- 인터셉터 맵핑 -->
 	<interceptors>
+		<interceptor>
+			<mapping path="/post/insert"/>
+			<mapping path="/post/delete/*"/>
+			<mapping path="/post/update/*"/>
+			<beans:ref bean="memberInterceptor"/>
+		</interceptor>
 		<interceptor>
 			<!-- /login(get, post)를 갔다 올때마다 LoginInterceptor가 실행  -->
 			<mapping path="/login"/>
