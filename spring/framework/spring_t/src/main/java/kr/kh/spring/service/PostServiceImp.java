@@ -70,5 +70,10 @@ public class PostServiceImp implements PostService {
 		return res;
 	}
 
+	@Override
+	public PostVO getPost(int po_num) {
+		return postDao.selectPost(po_num);
+	}
+
 		
 }
