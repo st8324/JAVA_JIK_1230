@@ -17,8 +17,8 @@ public class PostServiceImp implements PostService {
 	private PostDAO postDao;
 
 	@Override
-	public List<PostVO> getPostList() {
-		return postDao.selectPostList();
+	public List<PostVO> getPostList(int po_bo_num) {
+		return postDao.selectPostList(po_bo_num);
 	}
 
 	@Override

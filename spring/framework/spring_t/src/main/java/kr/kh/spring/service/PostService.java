@@ -8,7 +8,7 @@ import kr.kh.spring.model.vo.PostVO;
 
 public interface PostService {
 
-	List<PostVO> getPostList();
+	List<PostVO> getPostList(int po_bo_num);
 
 	List<BoardVO> getBoardList();
 

@@ -10,6 +10,9 @@
 		from post
 		join board on po_bo_num = bo_num 
 		where  po_del = "N"
+		<if test="po_bo_num != 0"> 
+			and po_bo_num = #{po_bo_num}
+		</if>
 		order by po_num desc
 	</select>
 	<select id="selectBoardList" resultType="BoardVO">

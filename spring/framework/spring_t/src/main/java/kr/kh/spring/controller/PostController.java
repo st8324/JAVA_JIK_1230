@@ -23,12 +23,21 @@ public class PostController {
 	private PostService postService;
 	
 	@GetMapping("/post/list")
-	public String postList(Model model) {
+	public String postList(Model model, Integer po_bo_num) {
+		
+		po_bo_num = po_bo_num == null ? 0 : po_bo_num;
+		
 		//게시글 목록 전체를 가져옴
-		List<PostVO> list = postService.getPostList();
+		List<PostVO> list = postService.getPostList(po_bo_num);
+		
+		List<BoardVO> boardList = postService.getBoardList();
+		
+		model.addAttribute("boardList", boardList);
+		
 		//화면에 게시글 목록을 전송
 		//매퍼의 resultType=kr.kh.spring.model.vo.postVO
 		model.addAttribute("list", list);
+		model.addAttribute("po_bo_num", po_bo_num);
 		return "/post/list";
 	}
 	

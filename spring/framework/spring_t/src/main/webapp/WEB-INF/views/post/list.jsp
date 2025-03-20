@@ -7,6 +7,15 @@
 <head>
 </head>
 <body>
+	<div class="mt-5 mb-5">
+		
+		
+		<a class="btn btn<c:if test="${po_bo_num ne 0 }">-outline</c:if>-success" href="<c:url value="/post/list?po_bo_num=0"/>">전체</a>
+		<c:forEach items="${boardList}" var="board">
+			<a class="btn btn<c:if test="${po_bo_num ne board.bo_num }">-outline</c:if>-success" href="<c:url value="/post/list?po_bo_num=${board.bo_num}"/>">${board.bo_name }</a>
+		</c:forEach>
+	</div>
+
 	<h1>게시글 리스트</h1>
 	<!-- 서버에서 보낸 게시글 목록을 출력 -->
 	<table class="table table-hover table-warning">
