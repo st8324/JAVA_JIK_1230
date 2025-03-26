@@ -31,7 +31,7 @@
 		where
 			bo_num = #{board.bo_num}
 	</update>
-	<insert id="insertPost">
+	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.po_num">
 		insert into post(po_title, po_content, po_me_id, po_bo_num)
 		values(#{post.po_title}, #{post.po_content}, #{post.po_me_id}, #{post.po_bo_num})
 	</insert>
@@ -60,4 +60,11 @@
 		where
 			po_num = #{po_num}
 	</update>
+	<insert id="insertFile">
+		insert into file(fi_ori_name, fi_name, fi_po_num)
+		values(#{file.fi_ori_name},#{file.fi_name},#{file.fi_po_num})
+	</insert>
+	<select id="selectFileList" resultType="FileVO">
+		select * from file where fi_po_num = #{po_num}
+	</select>
 </mapper>

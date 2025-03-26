@@ -7,5 +7,6 @@
 		<typeAlias type="kr.kh.spring.model.vo.PostVO" alias="PostVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.BoardVO" alias="BoardVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.MemberVO" alias="MemberVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.FileVO" alias="FileVO"/>
 	</typeAliases>
 </configuration>

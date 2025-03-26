@@ -1,20 +1,29 @@
 package kr.kh.spring.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring.dao.PostDAO;
 import kr.kh.spring.model.vo.BoardVO;
+import kr.kh.spring.model.vo.FileVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.PostVO;
+import kr.kh.spring.utils.UploadFileUtils;
 
 @Service
 public class PostServiceImp implements PostService {
 
 	@Autowired
 	private PostDAO postDao;
+	
+	@Resource
+	private String uploadPath;
 
 	@Override
 	public List<PostVO> getPostList(int po_bo_num) {
@@ -54,7 +63,7 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public boolean insertPost(PostVO post, MemberVO user) {
+	public boolean insertPost(PostVO post, MemberVO user, MultipartFile[] fileList) {
 		if(	post == null || 
 			post.getPo_title().trim().length() == 0 || 
 			post.getPo_content().length() == 0) {
@@ -66,8 +75,29 @@ public class PostServiceImp implements PostService {
 		post.setPo_me_id(user.getMe_id());
 		boolean res = postDao.insertPost(post);
 		
+		if(!res) {
+			return false;
+		}
 		
-		return res;
+		if(fileList == null || fileList.length == 0) {
+			return true;
+		}
+		
+		for(MultipartFile file : fileList) {
+			String fi_ori_name = file.getOriginalFilename();
+			//파일명이 없으면
+			if(fi_ori_name == null || fi_ori_name.length() == 0) {
+				continue;
+			}
+			try {
+				String fi_name = UploadFileUtils.uploadFile(uploadPath, fi_ori_name, file.getBytes());
+				FileVO fileVo = new FileVO(fi_ori_name, fi_name, post.getPo_num());
+				postDao.insertFile(fileVo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -117,6 +147,11 @@ public class PostServiceImp implements PostService {
 	@Override
 	public void updateView(int po_num) {
 		postDao.updateView(po_num);
+	}
+
+	@Override
+	public List<FileVO> getFileList(int po_num) {
+		return postDao.selectFileList(po_num);
 	}
 
 		

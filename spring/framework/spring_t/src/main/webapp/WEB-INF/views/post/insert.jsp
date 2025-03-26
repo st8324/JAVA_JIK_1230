@@ -26,6 +26,12 @@
 			<label for="content" class="form-label">내용</label>
 			<textarea class="form-control" id="content" name="po_content" rows="10"></textarea>
 		</div>
+		<div class="form-group mt-3">
+			<label class="form-label">첨부파일</label>
+			<input type="file" class="form-control" name="fileList">
+			<input type="file" class="form-control" name="fileList">
+			<input type="file" class="form-control" name="fileList">
+		</div>
 		<button type="submit" class="btn btn-outline-success mt-3 col-12">게시글 등록</button>
 	</form>
 	<script type="text/javascript">

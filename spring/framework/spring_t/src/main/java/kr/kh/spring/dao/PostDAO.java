@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kh.spring.model.vo.BoardVO;
+import kr.kh.spring.model.vo.FileVO;
 import kr.kh.spring.model.vo.PostVO;
 
 public interface PostDAO {
@@ -28,6 +29,10 @@ public interface PostDAO {
 	boolean updatePost(@Param("post")PostVO post);
 
 	void updateView(@Param("po_num")int po_num);
+
+	void insertFile(@Param("file")FileVO fileVo);
+
+	List<FileVO> selectFileList(@Param("po_num")int po_num);
 
 	
 	

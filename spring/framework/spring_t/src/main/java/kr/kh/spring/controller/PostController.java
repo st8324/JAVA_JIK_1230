@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring.model.vo.BoardVO;
+import kr.kh.spring.model.vo.FileVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.PostVO;
 import kr.kh.spring.service.PostService;
@@ -50,9 +52,9 @@ public class PostController {
 	}
 	
 	@PostMapping("/post/insert")
-	public String postInsertPost(Model model, PostVO post, HttpSession session) {
+	public String postInsertPost(Model model, PostVO post, HttpSession session, MultipartFile[] fileList) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
-		if(postService.insertPost(post, user)) {
+		if(postService.insertPost(post, user, fileList)) {
 			model.addAttribute("url", "/post/list");
 			model.addAttribute("msg", "게시글을 등록했습니다.");
 		}else {
@@ -67,8 +69,12 @@ public class PostController {
 		postService.updateView(po_num);
 		//게시글을 가져옴
 		PostVO post = postService.getPost(po_num);
+		//첨부파일을 가져옴
+		List<FileVO> list = postService.getFileList(po_num);
+		
 		//화면에 전송
 		model.addAttribute("post", post);
+		model.addAttribute("list", list);
 		return "/post/detail";
 	}
 	@GetMapping("/post/delete/{po_num}")
