@@ -73,7 +73,7 @@ public class UploadFileUtils {
         // /2025/03/26/uuid_a.jpg
         return iconName.replace(File.separatorChar, '/');
     }
-    public static void delteFile(String uploadPath, String fi_name) {
+    public static void deleteFile(String uploadPath, String fi_name) {
     	// /2025/03/26/uuid_a.jpg => \\2025\\03\\26\\uuid_a.jpg
 		fi_name = fi_name.replace('/', File.separatorChar);
 		File file = new File(uploadPath + fi_name);

@@ -84,22 +84,26 @@ public class PostServiceImp implements PostService {
 		}
 		
 		for(MultipartFile file : fileList) {
-			String fi_ori_name = file.getOriginalFilename();
-			//파일명이 없으면
-			if(fi_ori_name == null || fi_ori_name.length() == 0) {
-				continue;
-			}
-			try {
-				String fi_name = UploadFileUtils.uploadFile(uploadPath, fi_ori_name, file.getBytes());
-				FileVO fileVo = new FileVO(fi_ori_name, fi_name, post.getPo_num());
-				postDao.insertFile(fileVo);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			uploadFile(file, post.getPo_num());
 		}
 		return true;
 	}
 
+	private void uploadFile(MultipartFile file, int po_num) {
+		String fi_ori_name = file.getOriginalFilename();
+		//파일명이 없으면
+		if(fi_ori_name == null || fi_ori_name.length() == 0) {
+			return;
+		}
+		try {
+			String fi_name = UploadFileUtils.uploadFile(uploadPath, fi_ori_name, file.getBytes());
+			FileVO fileVo = new FileVO(fi_ori_name, fi_name, po_num);
+			postDao.insertFile(fileVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public PostVO getPost(int po_num) {
 		return postDao.selectPost(po_num);
@@ -119,7 +123,32 @@ public class PostServiceImp implements PostService {
 		//게시글 수정
 		boolean res = postDao.deletePost(po_num);
 		
-		return res;
+		if(!res) {
+			return false;
+		}
+		//첨부파일 삭제
+		List<FileVO> fileList = postDao.selectFileList(po_num);
+		
+		if(fileList == null || fileList.size() == 0) {
+			return true;
+		}
+		
+		for(FileVO fileVo : fileList) {
+			deleteFile(fileVo);
+		}
+		//db에서 해당 첨부파일을 삭제
+		return true;
+	}
+
+	private void deleteFile(FileVO fileVo) {
+		if(fileVo == null) {
+			return;
+		}
+		//실제 첨부파일을 삭제
+		UploadFileUtils.deleteFile(uploadPath, fileVo.getFi_name());
+		
+		//db에서 해당 첨부파일을 삭제
+		postDao.deleteFile(fileVo.getFi_num());
 	}
 
 	@Override

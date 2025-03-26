@@ -53,7 +53,6 @@
 			<h3>등록되지 않거나 삭제된 게시글입니다.</h3>		
 		</c:otherwise>
 	</c:choose>
-	
 	<div class="d-flex justify-content-between">
 		<a href="<c:url value="/post/list"/>" class="btn btn-outline-success">목록</a>
 		<c:if test="${user.me_id eq post.po_me_id }">
