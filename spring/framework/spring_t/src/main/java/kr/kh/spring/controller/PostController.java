@@ -1,6 +1,5 @@
 package kr.kh.spring.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +16,8 @@ import kr.kh.spring.model.vo.BoardVO;
 import kr.kh.spring.model.vo.FileVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.PostVO;
+import kr.kh.spring.pagination.PageMaker;
+import kr.kh.spring.pagination.PostCriteria;
 import kr.kh.spring.service.PostService;
 
 @Controller
@@ -26,21 +27,21 @@ public class PostController {
 	private PostService postService;
 	
 	@GetMapping("/post/list")
-	public String postList(Model model, Integer po_bo_num) {
-		
-		po_bo_num = po_bo_num == null ? 0 : po_bo_num;
-		
+	public String postList(Model model, PostCriteria cri) {
+		cri.setPerPageNum(2);
 		//게시글 목록 전체를 가져옴
-		List<PostVO> list = postService.getPostList(po_bo_num);
+		List<PostVO> list = postService.getPostList(cri);
 		
 		List<BoardVO> boardList = postService.getBoardList();
 		
-		model.addAttribute("boardList", boardList);
 		
+		PageMaker pm = postService.getPageMaker(cri);
+
 		//화면에 게시글 목록을 전송
 		//매퍼의 resultType=kr.kh.spring.model.vo.postVO
+		model.addAttribute("boardList", boardList);
 		model.addAttribute("list", list);
-		model.addAttribute("po_bo_num", po_bo_num);
+		model.addAttribute("pm", pm);
 		return "/post/list";
 	}
 	

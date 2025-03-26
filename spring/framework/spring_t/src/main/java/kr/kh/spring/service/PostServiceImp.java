@@ -14,6 +14,8 @@ import kr.kh.spring.model.vo.BoardVO;
 import kr.kh.spring.model.vo.FileVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.PostVO;
+import kr.kh.spring.pagination.Criteria;
+import kr.kh.spring.pagination.PageMaker;
 import kr.kh.spring.utils.UploadFileUtils;
 
 @Service
@@ -26,8 +28,8 @@ public class PostServiceImp implements PostService {
 	private String uploadPath;
 
 	@Override
-	public List<PostVO> getPostList(int po_bo_num) {
-		return postDao.selectPostList(po_bo_num);
+	public List<PostVO> getPostList(Criteria cri) {
+		return postDao.selectPostList(cri);
 	}
 
 	@Override
@@ -202,6 +204,12 @@ public class PostServiceImp implements PostService {
 	@Override
 	public List<FileVO> getFileList(int po_num) {
 		return postDao.selectFileList(po_num);
+	}
+
+	@Override
+	public PageMaker getPageMaker(Criteria cri) {
+		int totalCount = postDao.selectCountPostList(cri);
+		return new PageMaker(3, cri, totalCount);
 	}
 
 		
