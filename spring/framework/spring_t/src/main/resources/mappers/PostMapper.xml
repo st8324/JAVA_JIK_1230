@@ -70,4 +70,7 @@
 	<delete id="deleteFile">
 		delete from file where fi_num = #{fi_num}
 	</delete>
+	<select id="selectFile" resultType="FileVO">
+		select * from file where fi_num = #{fi_num}	
+	</select>
 </mapper>

@@ -27,7 +27,7 @@ public interface PostService {
 
 	boolean deletePost(int po_num, MemberVO user);
 
-	boolean updatePost(PostVO post, MemberVO user);
+	boolean updatePost(PostVO post, MemberVO user, MultipartFile[] fileList, int[] delNums);
 
 	void updateView(int po_num);
 

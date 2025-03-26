@@ -1,5 +1,6 @@
 package kr.kh.spring.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -93,30 +94,36 @@ public class PostController {
 	@GetMapping("/post/update/{po_num}")
 	public String postUpdate(Model model, @PathVariable("po_num")int po_num, HttpSession session) {
 		
-		List<BoardVO> list = postService.getBoardList();
-		model.addAttribute("list", list);
-		
 		//게시글을 가져옴
 		PostVO post = postService.getPost(po_num);
 		//작성자인지 아닌지 확인하는 작업 
 		MemberVO user = (MemberVO) session.getAttribute("user");
+
 		//로그인 안되어 있거나, 없는 게시글이거나 작성자가 아니면
 		if(user == null || post == null || !post.getPo_me_id().equals(user.getMe_id())) {
 			model.addAttribute("url", "/post/list");
 			model.addAttribute("msg", "작성자가 아니거나 없는 게시글입니다.");
 			return "/msg/msg";
 		}
-		else {
-			//화면에 전송
-			model.addAttribute("post", post);
-			return "/post/update";			
-		}
+		
+		
+		List<BoardVO> list = postService.getBoardList();
+		
+		List<FileVO> fileList = postService.getFileList(po_num);
+		
+		//화면에 전송
+		model.addAttribute("post", post);
+		model.addAttribute("list", list);
+		model.addAttribute("fileList", fileList);
+		return "/post/update";			
+		
 		
 	}
 	@PostMapping("/post/update")
-	public String postUpdatePost(Model model, PostVO post, HttpSession session) {
+	public String postUpdatePost(Model model, PostVO post, 
+			HttpSession session, MultipartFile [] fileList, int [] delNums) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
-		if(postService.updatePost(post, user)) {
+		if(postService.updatePost(post, user, fileList, delNums)) {
 			model.addAttribute("msg", "게시글을 수정했습니다.");
 		}else {
 			model.addAttribute("msg", "게시글을 수정하지 못했습니다.");
