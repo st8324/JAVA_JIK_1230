@@ -70,4 +70,15 @@
 			<beans:ref bean="guestInterceptor"/>
 		</interceptor>
 	</interceptors>
+	
+	<!-- 업로드 파일 용량 설정-->
+	<beans:bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 업로드 최대 크기 10Mb -->
+		<beans:property name="maxUploadSize" value="10485760"/>
+	</beans:bean>
+	<!-- 업로드할 파일 경로 -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="d:\\uploads"/>
+	</beans:bean>
 </beans:beans>

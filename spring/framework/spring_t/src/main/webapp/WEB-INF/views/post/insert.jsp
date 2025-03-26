@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>게시글 등록</h1>
-	<form action="<c:url value="/post/insert"/>" method="post">
+	<form action="<c:url value="/post/insert"/>" method="post" enctype="multipart/form-data">
 		<div class="form-group mt-3">
 			<label for="board" class="form-label">게시판</label>
 			<select class="form-control" id="board" name="po_bo_num">
