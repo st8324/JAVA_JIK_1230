@@ -10,8 +10,20 @@
 			ifnull(max(co_num),0) + 1, 
 			#{comment.co_content}, 
 			#{comment.co_me_id},
-			
+			<choose>
+				<when test="comment.co_ori_num == 0">
+					ifnull(max(co_num),0) + 1,	
+				</when>
+				<otherwise>
+					#{comment.co_ori_num},
+				</otherwise>
+			</choose>
 			#{comment.co_po_num}
 		from comment
 	</insert>
+	<select id="selectCommentList" resultType="CommentVO">
+		select * from comment 
+		where co_po_num = #{cri.search}
+		order by co_ori_num desc, co_num
+	</select>
 </mapper>
