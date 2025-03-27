@@ -13,6 +13,7 @@
 			<label for="id" class="form-label">아이디</label>
 			<input type="text" class="form-control" id="id" name="me_id">
 		</div>
+		<button type="button" class="btn btn-outline-success col-12" id="check">아이디 중복 확인</button>
 		<div class="form-group mt-3">
 			<label for="pw" class="form-label">비번</label>
 			<input type="password" class="form-control" id="pw" name="me_pw">
@@ -27,5 +28,37 @@
 		</div>
 		<button type="submit" class="btn btn-outline-success mt-3 col-12">회원가입</button>
 	</form>
+	<script type="text/javascript">
+		$("#check").click(function(e){
+			if(checkId()){
+				alert("사용 가능한 아이디입니다.");
+			}else{
+				alert("이미 사용중인 아이디입니다.");
+			}
+		});
+		function checkId(){
+			//입력한 아이디를 가져옴
+			let id = $("#id").val();
+			//정규 표현식에 맞지 않으면 알림창 리턴 후 종료
+			
+			let res = false;
+			//비동기 통신으로 아이디를 전송하고, 서버에서 보낸 결과를 이용하여 처리
+			$.ajax({
+				async : false, 
+				url : '<c:url value="/check/id"/>', 
+				type : 'post', 
+				data : { id : id }, 
+				success : function (data){
+					if(data){
+						res = true;	
+					}
+				}, 
+				error : function(jqXHR, textStatus, errorThrown){
+
+				}
+			});
+			return res;
+		}
+	</script>
 </body>
 </html>
