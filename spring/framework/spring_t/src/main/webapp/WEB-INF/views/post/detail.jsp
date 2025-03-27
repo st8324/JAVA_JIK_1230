@@ -90,6 +90,22 @@
 		</div>
 	</div>
 	
+	<!-- 답글 등록 -->
+	<script type="text/javascript">
+		$(document).on("click", ".btn-reply", function(e){
+			let str = `
+				<form class="input-group mb-3 insert-form reply mt-2" action="<c:url value="/comment/insert"/>" method="post">
+					<input type="hidden" name="co_ori_num" value="\${""}">
+					<input type="hidden" name="co_po_num" value="${post.po_num}">
+				    <textarea rows="" cols="" class="form-control" name="co_content"></textarea>
+				    <button class="btn btn-outline-primary"> 답글 등록</button>
+				</form>
+			`
+			$(this).parent().after(str);
+		});
+	</script>
+	
+	<!-- 댓글 목록 조회 -->
 	<script type="text/javascript">
 		function getCommentList(cri){
 			//ajax로 댓글 리스트를 가져와서 화면에 출력
@@ -135,7 +151,7 @@
 							<div class="comment-content">\${comment.co_content}</div>
 						</div>
 						<div class="comment-func mt-2">
-							<button class="btn btn-outline-success">답글</button>
+							<button class="btn btn-outline-success btn-reply">답글</button>
 							\${btns}
 						</div>
 					</div>
@@ -147,6 +163,7 @@
 		getCommentList();
 	</script>
 	
+	<!-- 댓글 등록 -->
 	<script type="text/javascript">
 		$(".insert-form").submit(function(e){
 			e.preventDefault();
