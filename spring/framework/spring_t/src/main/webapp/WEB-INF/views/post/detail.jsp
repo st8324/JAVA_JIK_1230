@@ -62,5 +62,57 @@
 			</div>
 		</c:if>
 	</div>
+	<hr>
+	<h3>댓글</h3>
+	<div class="comment-container">
+		<ul class="comment-list"></ul>
+		<div class="comment-insert-box">
+		<form class="input-group mb-3 insert-form" action="<c:url value="/comment/insert"/>" method="post">
+		    <input type="hidden" name="co_po_num" value="${post.po_num}">
+		    <textarea rows="" cols="" class="form-control" name="co_content"></textarea>
+		    <button class="btn btn-outline-success"> 댓글 등록</button>
+		</form>
+		</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+		$(".insert-form").submit(function(e){
+			e.preventDefault();
+			
+			if('${user.me_id}' == ''){
+				if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하겠습니까?")){
+					location.href = "<c:url value="/login"/>";
+				}
+				return false;
+			}
+			let $obj = $("[name=co_content]");
+			let content = $obj.val().trim();
+			if(content == ''){
+				alert("댓글을 입력하세요.");
+				$obj.focus();
+				return false;
+			}
+			let obj = {
+				co_po_num : $("[name=co_po_num]").val(),
+				co_content : $("[name=co_content]").val()
+			}
+			let url = $(this).attr("action"); 
+			$.ajax({
+				async : false, 
+				url : url,   
+				type : 'post', 
+				data : JSON.stringify(obj), 
+				contentType : "application/json; charset=utf-8",
+				success : function (data){
+					console.log(data);
+				}, 
+				error : function(jqXHR, textStatus, errorThrown){
+
+				}
+			});
+			return false;
+		});
+	</script>
 </body>
 </html>

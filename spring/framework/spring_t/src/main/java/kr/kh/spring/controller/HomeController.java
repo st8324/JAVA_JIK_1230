@@ -139,9 +139,11 @@ public class HomeController {
 	}
 	
 	@PostMapping("/signup")
-	public String signupPost(MemberVO member) {
+	public String signupPost(Model model, MemberVO member) {
 		if(memberService.signup(member)) {
-			return "redirect:/";
+			model.addAttribute("msg", "회원 가입을 했습니다.");
+			model.addAttribute("url", "/");
+			return "msg/msg";
 		}
 		return "redirect:/signup";
 	}
