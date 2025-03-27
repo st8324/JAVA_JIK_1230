@@ -85,6 +85,10 @@
 				},
 				me_pw2 : {
 					equalTo : pw
+				},
+				me_email : {
+					required : true,
+					email : true
 				}
 			},
 			messages : {
@@ -98,6 +102,10 @@
 				},
 				me_pw2 : {
 					equalTo : "비번과 비번확인이 일치하지 않습니다."
+				},
+				me_email : {
+					required : "필수 항목입니다.",
+					email : "이메일 형식이 아닙니다."
 				}
 			},
 			//유효성 검사 체크 후 전송하기 직전에 확인하고 싶을 때 사용. return true 전송
