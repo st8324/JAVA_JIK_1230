@@ -9,6 +9,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
 	<style type="text/css">
 		.error,.red{ color : red; }
+		.green{ color : green; }
 	</style>
 </head>
 <body>
@@ -66,8 +67,12 @@
 			let str;
 			if(res){
 				str = "사용 가능한 아이디입니다.";
+				$("#checkId").addClass("green");
+				$("#checkId").removeClass("red");
 			}else{
 				str = "이미 사용중인 아이디입니다.";
+				$("#checkId").addClass("red");
+				$("#checkId").removeClass("green");
 			}
 			$("#checkId").text(str);
 			return res;
