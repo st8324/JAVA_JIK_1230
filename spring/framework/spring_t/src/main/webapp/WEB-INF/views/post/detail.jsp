@@ -112,6 +112,12 @@
 			});
 		}
 		function drawCommentList(list){
+			
+			if(list.length == 0){
+				$(".comment-list").html(`<div class="text-center mb-3">등록된 게시글이 없습니다.</div>`)
+				return;
+			}
+			
 			let str = '';
 			for(comment of list){
 				let btns = '';
