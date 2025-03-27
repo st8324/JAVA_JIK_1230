@@ -93,9 +93,10 @@
 	<!-- 답글 등록 -->
 	<script type="text/javascript">
 		$(document).on("click", ".btn-reply", function(e){
+			let co_num = $(this).data("num");
 			let str = `
 				<form class="input-group mb-3 insert-form reply mt-2" action="<c:url value="/comment/insert"/>" method="post">
-					<input type="hidden" name="co_ori_num" value="\${""}">
+					<input type="hidden" name="co_ori_num" value="\${co_num}">
 					<input type="hidden" name="co_po_num" value="${post.po_num}">
 				    <textarea rows="" cols="" class="form-control" name="co_content"></textarea>
 				    <button class="btn btn-outline-primary"> 답글 등록</button>
@@ -137,6 +138,10 @@
 			let str = '';
 			for(comment of list){
 				let btns = '';
+				let replyBtn = '';
+				let padding = '';
+				
+				//회원이 댓글/답글 작성자이면 수정/삭제버튼 추가
 				if(comment.co_me_id == '${user.me_id}'){
 					btns = `
 						<button class="btn btn-outline-warning">수정</button>
@@ -144,15 +149,26 @@
 					`;
 				}
 				
+				//댓글이면 답글 버튼 추가
+				if(comment.co_num == comment.co_ori_num){
+					replyBtn = `<button class="btn btn-outline-success btn-reply" data-num="\${comment.co_num}">답글</button>`;	
+				}
+				//답글이면 왼쪽 패딩 추가
+				else{
+					padding = 'pl-5';
+				}
+				
 				str += `
-					<div class="comment-item form-control mb-3" style="min-height: auto; height: auto;">
-						<div class="comment-wrap">
-							<div class="comment-writer">\${comment.co_me_id}</div>
-							<div class="comment-content">\${comment.co_content}</div>
-						</div>
-						<div class="comment-func mt-2">
-							<button class="btn btn-outline-success btn-reply">답글</button>
-							\${btns}
+					<div class="\${padding}">
+						<div class="comment-item form-control mb-3" style="min-height: auto; height: auto;">
+							<div class="comment-wrap">
+								<div class="comment-writer">\${comment.co_me_id}</div>
+								<div class="comment-content">\${comment.co_content}</div>
+							</div>
+							<div class="comment-func mt-2">
+								\${replyBtn}
+								\${btns}
+							</div>
 						</div>
 					</div>
 				`
@@ -165,7 +181,7 @@
 	
 	<!-- 댓글 등록 -->
 	<script type="text/javascript">
-		$(".insert-form").submit(function(e){
+		$(document).on("submit", ".insert-form", function(e){
 			e.preventDefault();
 			
 			if('${user.me_id}' == ''){
@@ -174,17 +190,23 @@
 				}
 				return false;
 			}
-			let $obj = $("[name=co_content]");
+			let $obj = $(this).find("[name=co_content]");
 			let content = $obj.val().trim();
 			if(content == ''){
 				alert("댓글을 입력하세요.");
 				$obj.focus();
 				return false;
 			}
+			let co_ori_num = $(this).find("[name=co_ori_num]").val();
+			let co_po_num = $(this).find("[name=co_po_num]").val();
+			let co_content = $(this).find("[name=co_content]").val();
+			
 			let obj = {
-				co_po_num : $("[name=co_po_num]").val(),
-				co_content : $("[name=co_content]").val()
+				co_po_num : co_po_num,
+				co_content : co_content,
+				co_ori_num : co_ori_num == 'undefined' ? 0 : co_ori_num
 			}
+			console.log(obj);
 			let url = $(this).attr("action"); 
 			$.ajax({
 				async : false, 
