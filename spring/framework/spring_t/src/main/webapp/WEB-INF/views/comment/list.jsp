@@ -39,7 +39,25 @@
 			<div class="text-center">등록된 댓글이 없습니다.</div>
 		</c:if>
 	</div>
-	<div class="comment-pagination"></div>
+	<div class="comment-pagination">
+		<ul class="pagination justify-content-center">
+			<c:if test="${pm.prev}">
+				<li class="page-item">
+					<a class="page-link" href="javascript:void(0);" data-page="${pm.startPage-1}">이전</a>
+				</li>
+			</c:if>
+			<c:forEach begin="${pm.startPage}" end="${pm.endPage }" var="i">
+				<li class="page-item <c:if test="${pm.cri.page == i }">active</c:if>">
+					<a class="page-link" href="javascript:void(0);" data-page="${i}">${i}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${pm.next}">
+				<li class="page-item">
+					<a class="page-link" href="javascript:void(0);" data-page="${pm.endPage+1}">다음</a>
+				</li>
+			</c:if>
+		</ul>
+	</div>
 	<div class="comment-insert-box">
 	<form class="input-group mb-3 insert-form" action="<c:url value="/comment/insert"/>" method="post">
 	    <input type="hidden" name="co_po_num" value="${pm.cri.search}">
@@ -48,7 +66,17 @@
 	</form>
 	</div>
 
-	<!-- 삭제 등록 -->
+	<!-- 페이지 클릭 이벤트 등록 -->
+	<script type="text/javascript">
+		
+		$(".comment-pagination .page-link").click(function(e){
+			let page = $(this).data("page");
+			cri.page = page;
+			getCommentList(cri);
+		});
+	</script>
+
+	<!-- 삭제 이벤트 등록 -->
 	<script type="text/javascript">
 	
 		$(".btn-delete").click(function(e){
@@ -61,7 +89,7 @@
 				success : function (data){
 					if(data){
 						alert("댓글을 삭제했습니다.");
-						getCommentList();
+						getCommentList(cri);
 					}else{
 						alert("댓글을 삭제하지 못했습니다.");
 					}
@@ -133,7 +161,7 @@
 				success : function (data){
 					if(data){
 						alert("댓글을 등록했습니다.");
-						getCommentList();
+						getCommentList(cri);
 					}else{
 						alert("댓글을 등록하지 못했습니다.");
 					}

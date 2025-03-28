@@ -47,7 +47,8 @@ public class CommentServiceImp implements CommentService {
 		if(cri == null) {
 			return null;
 		}
-		return new PageMaker(3, cri, 0);
+		int totalCount = commentDao.selectCountCommentList(cri);
+		return new PageMaker(3, cri, totalCount);
 	}
 
 	@Override

@@ -46,7 +46,7 @@ public class CommentController {
 	}
 	@PostMapping("/list")
 	public String list(Model model,@RequestBody Criteria cri) {
-		
+		cri.setPerPageNum(5);
 		List<CommentVO> list= commentService.getCommentList(cri);
 		PageMaker pm = commentService.getPageMaker(cri);
 		model.addAttribute("list", list);
