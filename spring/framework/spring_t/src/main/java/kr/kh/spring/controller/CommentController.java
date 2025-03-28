@@ -1,6 +1,5 @@
 package kr.kh.spring.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.kh.spring.model.vo.CommentVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.pagination.Criteria;
+import kr.kh.spring.pagination.PageMaker;
 import kr.kh.spring.service.CommentService;
 
 //컨트롤러 안의 모든 메소드에 @ResponseBody가 붙은 경우에 사용
@@ -34,12 +34,22 @@ public class CommentController {
 		return commentService.insertComment(comment, user);
 	}
 	
-	@GetMapping("/list")
-	public String list(Model model, Criteria cri) {
+	@GetMapping("/list2")
+	public String list2(Model model, Criteria cri) {
 		
 		List<CommentVO> list= commentService.getCommentList(cri);
-		
+		PageMaker pm = commentService.getPageMaker(cri);
 		model.addAttribute("list", list);
+		model.addAttribute("pm", pm);
 		return "/comment/list";
+	}
+	@PostMapping("/list")
+	public String list(Model model,@RequestBody Criteria cri) {
+		
+		List<CommentVO> list= commentService.getCommentList(cri);
+		PageMaker pm = commentService.getPageMaker(cri);
+		model.addAttribute("list", list);
+		model.addAttribute("pm", pm);
+		return "comment/list";
 	}
 }
