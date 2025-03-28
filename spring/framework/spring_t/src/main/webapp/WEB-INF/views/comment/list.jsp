@@ -41,9 +41,14 @@
 	</form>
 	</div>
 
-	
-	<!-- 답글 등록 -->
+	<!-- 삭제 등록 -->
 	<script type="text/javascript">
+		
+	</script>
+	
+	<!-- 답글 클릭 이벤트 -->
+	<script type="text/javascript">
+		$(document).off("click", ".btn-reply");
 		$(document).on("click", ".btn-reply", function(e){
 			let co_num = $(this).data("num");
 			//답글 입력창 생겼으면 추가하지 않음
@@ -62,8 +67,9 @@
 		});
 	</script>
 
-	<!-- 댓글 등록 -->
+	<!-- 댓글/답글 등록 이벤트 -->
 	<script type="text/javascript">
+		$(document).off("submit", ".insert-form");
 		$(document).on("submit", ".insert-form", function(e){
 			e.preventDefault();
 			
