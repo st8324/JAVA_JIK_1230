@@ -19,7 +19,9 @@ import kr.kh.spring.model.vo.PostVO;
 import kr.kh.spring.pagination.PageMaker;
 import kr.kh.spring.pagination.PostCriteria;
 import kr.kh.spring.service.PostService;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Controller
 public class PostController {
 
@@ -31,12 +33,9 @@ public class PostController {
 		cri.setPerPageNum(2);
 		//게시글 목록 전체를 가져옴
 		List<PostVO> list = postService.getPostList(cri);
-		
 		List<BoardVO> boardList = postService.getBoardList();
-		
-		
 		PageMaker pm = postService.getPageMaker(cri);
-
+		
 		//화면에 게시글 목록을 전송
 		//매퍼의 resultType=kr.kh.spring.model.vo.postVO
 		model.addAttribute("boardList", boardList);
