@@ -60,4 +60,11 @@ public class CommentController {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		return commentService.deleteComment(co_num, user);
 	}
+	
+	@PostMapping("/update")
+	@ResponseBody
+	public boolean update(@RequestBody CommentVO comment, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		return commentService.updateComment(comment, user);
+	}
 }

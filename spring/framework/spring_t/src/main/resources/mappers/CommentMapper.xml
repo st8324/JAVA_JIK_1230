@@ -37,4 +37,7 @@
 		select count(*) from comment 
 		where co_po_num = #{cri.search}
 	</select>
+	<update id="updateComment">
+		update comment set co_content = #{comment.co_content} where co_num = #{comment.co_num}
+	</update>
 </mapper>

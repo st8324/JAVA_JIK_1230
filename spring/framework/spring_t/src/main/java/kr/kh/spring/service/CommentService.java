@@ -17,4 +17,6 @@ public interface CommentService {
 
 	boolean deleteComment(int co_num, MemberVO user);
 
+	boolean updateComment(CommentVO comment, MemberVO user);
+
 }

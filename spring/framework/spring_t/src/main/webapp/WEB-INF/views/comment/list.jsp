@@ -23,7 +23,7 @@
 									<button class="btn btn-outline-success btn-reply" data-num="${comment.co_num}">답글</button>
 								</c:if>
 								<c:if test="${comment.co_me_id == user.me_id }">
-									<button class="btn btn-outline-warning">수정</button>
+									<button class="btn btn-outline-warning btn-update" data-num="${comment.co_num}">수정</button>
 									<button class="btn btn-outline-danger btn-delete" data-num="${comment.co_num}">삭제</button>
 								</c:if>
 							</div>
@@ -65,7 +65,80 @@
 	    <button class="btn btn-outline-success"> 댓글 등록</button>
 	</form>
 	</div>
+	
+	<!-- 수정 완료 버튼을 눌러서 댓글 수정 등록 -->
+	<script type="text/javascript">
+		$(document).off("submit", ".update-form");
+		$(document).on("submit", ".update-form", function(e){
+			e.preventDefault();
+			
+			if('${user.me_id}' == ''){
+				if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하겠습니까?")){
+					location.href = "<c:url value="/login"/>";
+				}
+				return;
+			}
+			let $obj = $(this).find("[name=co_content]");
+			let content = $obj.val().trim();
+			if(content == ''){
+				alert("댓글을 입력하세요.");
+				$obj.focus();
+				return;
+			}
+			let co_num = $(this).find("[name=co_num]").val();
+			let co_content = $(this).find("[name=co_content]").val();
+			
+			let obj = {
+				co_content : co_content,
+				co_num : co_num
+			}
+			
+			let url = $(this).attr("action"); 
+			$.ajax({
+				async : true, 
+				url : url,   
+				type : 'post', 
+				data : JSON.stringify(obj), 
+				contentType : "application/json; charset=utf-8",
+				success : function (data){
+					if(data){
+						alert("댓글을 수정했습니다.");
+						getCommentList(cri);
+					}else{
+						alert("댓글을 수정하지 못했습니다.");
+					}
+				}, 
+				error : function(jqXHR, textStatus, errorThrown){
 
+				}
+			});
+		});
+	</script>
+	
+	<!-- 수정 버튼 클릭 이벤트 등록 -->
+	<script type="text/javascript">
+		$(".btn-update").click(function(e){
+			var $content = $(this).parents(".comment-item").find(".comment-content");
+			$content.hide();
+			
+			var co_content = $content.text();
+			var co_num = $(this).data("num");
+			
+			//수정 입력창 생겼으면 추가하지 않음
+			if($content.next().length != 0){
+				return;
+			}
+			
+			var str = `
+				<form class="input-group mb-3 update-form reply mt-2" action="<c:url value="/comment/update"/>" method="post">
+					<input type="hidden" name="co_num" value="\${co_num}">
+				    <textarea class="form-control" name="co_content">\${co_content}</textarea>
+				    <button class="btn btn-outline-primary"> 답글 수정</button>
+				</form>
+			`
+			$content.after(str);
+		})
+	</script>
 	<!-- 페이지 클릭 이벤트 등록 -->
 	<script type="text/javascript">
 		
