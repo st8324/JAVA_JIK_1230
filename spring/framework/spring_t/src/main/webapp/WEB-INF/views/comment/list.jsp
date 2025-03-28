@@ -12,19 +12,26 @@
 		<c:forEach items="${list}" var="comment">
 			<div class="<c:if test="${comment.co_num != comment.co_ori_num }">pl-5</c:if>">
 				<div class="comment-item form-control mb-3" style="min-height: auto; height: auto;">
-					<div class="comment-wrap">
-						<div class="comment-writer">${comment.co_me_id}</div>
-						<div class="comment-content">${comment.co_content }</div>
-					</div>
-					<div class="comment-func mt-2">
-						<c:if test="${comment.co_num == comment.co_ori_num }">
-							<button class="btn btn-outline-success btn-reply" data-num="${comment.co_num}">답글</button>
-						</c:if>
-						<c:if test="${comment.co_me_id == user.me_id }">
-							<button class="btn btn-outline-warning">수정</button>
-							<button class="btn btn-outline-danger" >삭제</button>
-						</c:if>
-					</div>
+					<c:choose>
+						<c:when test="${comment.co_del eq 'N' }">
+							<div class="comment-wrap">
+								<div class="comment-writer">${comment.co_me_id}</div>
+								<div class="comment-content">${comment.co_content }</div>
+							</div>
+							<div class="comment-func mt-2">
+								<c:if test="${comment.co_num == comment.co_ori_num }">
+									<button class="btn btn-outline-success btn-reply" data-num="${comment.co_num}">답글</button>
+								</c:if>
+								<c:if test="${comment.co_me_id == user.me_id }">
+									<button class="btn btn-outline-warning">수정</button>
+									<button class="btn btn-outline-danger btn-delete" data-num="${comment.co_num}">삭제</button>
+								</c:if>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div>작성자에 의해 삭제된 댓글입니다.</div>
+						</c:otherwise>
+					</c:choose>
 				</div> 
 			</div>
 		</c:forEach>
@@ -43,7 +50,27 @@
 
 	<!-- 삭제 등록 -->
 	<script type="text/javascript">
-		
+	
+		$(".btn-delete").click(function(e){
+			let co_num = $(this).data("num");
+			$.ajax({
+				async : true, 
+				url : "<c:url value="/comment/delete"/>",   
+				type : 'post', 
+				data : {co_num : co_num}, 
+				success : function (data){
+					if(data){
+						alert("댓글을 삭제했습니다.");
+						getCommentList();
+					}else{
+						alert("댓글을 삭제하지 못했습니다.");
+					}
+				}, 
+				error : function(jqXHR, textStatus, errorThrown){
+
+				}
+			});
+		});
 	</script>
 	
 	<!-- 답글 클릭 이벤트 -->

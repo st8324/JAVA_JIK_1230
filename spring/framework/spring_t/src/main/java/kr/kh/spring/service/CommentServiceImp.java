@@ -49,4 +49,18 @@ public class CommentServiceImp implements CommentService {
 		}
 		return new PageMaker(3, cri, 0);
 	}
+
+	@Override
+	public boolean deleteComment(int co_num, MemberVO user) {
+		if(user == null) {
+			return false;
+		}
+		//작성자 확인
+		CommentVO comment = commentDao.selectComment(co_num);
+		
+		if(comment == null || !comment.getCo_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		return commentDao.deleteComment(co_num);
+	}
 }
