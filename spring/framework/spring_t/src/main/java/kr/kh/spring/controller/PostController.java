@@ -1,6 +1,8 @@
 package kr.kh.spring.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -140,10 +142,15 @@ public class PostController {
 	}
 	@ResponseBody
 	@PostMapping("/post/like")
-	public int postLike(@RequestBody LikeVO like, HttpSession session) {
+	public Map<String, Object> postLike(@RequestBody LikeVO like, HttpSession session) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		int res = postService.updateLike(like, user);
 		postService.updateUpDown(like.getLi_po_num());
-		return res;
+		PostVO post = postService.getPost(like.getLi_po_num());
+		HashMap<String, Object>map = new HashMap<String, Object>();
+		map.put("res", res);
+		map.put("up", post.getPo_up());
+		map.put("down", post.getPo_down());
+		return map;
 	}
 }
