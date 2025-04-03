@@ -35,8 +35,7 @@
 					<label for="title" class="form-label">조회수</label>
 					<input type="text" class="form-control" value="${post.po_view}" readonly>
 				</div>
-				<div class="form-group mt-3 d-flex justify-content-center">
-					<c:if test="${like.li_state ne 1 }">-outline</c:if>
+				<div class="form-group mt-3 d-flex justify-content-center" id="btns">
 					<button class="btn btn<c:if test="${like.li_state ne 1 }">-outline</c:if>-success btn-up" data-state="1">추천(${post.po_up })</button>
 					<button class="btn btn<c:if test="${like.li_state ne -1 }">-outline</c:if>-danger ml-3 btn-down" data-state="-1">비추천(${post.po_down })</button>
 				</div>
@@ -100,7 +99,7 @@
 	</script>
 	<script type="text/javascript">
 		//추천/비추천 버튼 클릭 이벤트 등록
-		$(".btn-up, .btn-down").click(function(e){
+		$(document).on("click", ".btn-up, .btn-down", function(e){
 			
 			if(${user == null}){
 				if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하겠습니까?")){
@@ -125,15 +124,15 @@
 					switch(data){
 					case -1:
 						alert("비추천 했습니다.");
-						location.reload();
+						$("#btns").load(location.href + " #btns>*");
 						break;
 					case 1:
 						alert("추천 했습니다.");
-						location.reload();
+						$("#btns").load(location.href + " #btns>*");
 						break;
 					case 0:
 						alert((state == 1?"추천":"비추천") + "을 취소했습니다.");
-						location.reload();
+						$("#btns").load(location.href + " #btns>*");
 						break;
 					default:
 						alert("추천/비추천을 하지 못했습니다.");
