@@ -122,11 +122,11 @@
 				contentType : "application/json; charset=utf-8",
 				dataType : "json",
 				success : function (data){
-					let state = data.res;
+					let res = data.res;
 					let upCount = data.up;
 					let downCount = data.down;
-					drawUpDownBtns(state, upCount, downCount)
-					switch(state){
+					drawUpDownBtns(res, upCount, downCount)
+					switch(res){
 					case -1:
 						alert("비추천 했습니다.");
 						break;
