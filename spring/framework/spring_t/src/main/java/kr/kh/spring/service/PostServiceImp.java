@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.kh.spring.dao.PostDAO;
 import kr.kh.spring.model.vo.BoardVO;
 import kr.kh.spring.model.vo.FileVO;
+import kr.kh.spring.model.vo.LikeVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.PostVO;
 import kr.kh.spring.pagination.Criteria;
@@ -210,6 +211,55 @@ public class PostServiceImp implements PostService {
 	public PageMaker getPageMaker(Criteria cri) {
 		int totalCount = postDao.selectCountPostList(cri);
 		return new PageMaker(3, cri, totalCount);
+	}
+
+	@Override
+	public int updateLike(LikeVO like, MemberVO user) {
+		if(like == null || user == null) {
+			return -2;
+		}
+		
+		like.setLi_me_id(user.getMe_id());
+		//기존 추천 정보를 가져옴
+		LikeVO dbLike = postDao.selectLike(like);
+		System.out.println(dbLike);
+		//없으면 추가
+		if(dbLike == null) {
+			boolean res = postDao.insertLike(like);
+			if(!res) {
+				return -2;
+			}
+			return like.getLi_state();
+		}
+		//있으면 취소, 추천->비추천, 비추천->추천
+		//취소하는 경우,
+		if(dbLike.getLi_state() == like.getLi_state()) {
+			like.setLi_state(0);
+		}
+		
+		boolean res = postDao.updateLike(like);
+		if(!res) {
+			return -2;
+		}
+		return like.getLi_state();
+	}
+
+	@Override
+	public void updateUpDown(int po_num) {
+		postDao.updateUpDown(po_num);
+	}
+
+	@Override
+	public LikeVO getLike(int po_num, MemberVO user) {
+		if(user == null) {
+			return null;
+		}
+		
+		LikeVO like = new LikeVO();
+		like.setLi_me_id(user.getMe_id());
+		like.setLi_po_num(po_num);
+		
+		return postDao.selectLike(like);
 	}
 
 		

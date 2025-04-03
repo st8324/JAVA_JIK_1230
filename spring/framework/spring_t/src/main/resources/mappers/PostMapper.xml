@@ -111,4 +111,22 @@
 			</when>
 		</choose>
 	</select>
+	<select id="selectLike" resultType="LikeVO">
+		select * from `like` 
+		where li_po_num = #{like.li_po_num} and li_me_id = #{like.li_me_id}
+	</select>
+	<insert id="insertLike">
+		insert into `like`(li_po_num, li_me_id, li_state)
+		value(#{like.li_po_num},#{like.li_me_id},#{like.li_state})
+	</insert>
+	<update id="updateLike">
+		update `like` set li_state = #{like.li_state} 
+		where li_po_num = #{like.li_po_num} and li_me_id = #{like.li_me_id}
+	</update>
+	<update id="updateUpDown">
+		update post set
+		po_up = (select count(*) from `like` where li_po_num = #{po_num} and li_state = 1),
+		po_down = (select count(*) from `like` where li_po_num = #{po_num} and li_state = -1)
+		where po_num = #{po_num}
+	</update>
 </mapper>

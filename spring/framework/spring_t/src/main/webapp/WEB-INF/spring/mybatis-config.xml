@@ -9,5 +9,6 @@
 		<typeAlias type="kr.kh.spring.model.vo.MemberVO" alias="MemberVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.FileVO" alias="FileVO"/>
 		<typeAlias type="kr.kh.spring.model.vo.CommentVO" alias="CommentVO"/>
+		<typeAlias type="kr.kh.spring.model.vo.LikeVO" alias="LikeVO"/>
 	</typeAliases>
 </configuration>

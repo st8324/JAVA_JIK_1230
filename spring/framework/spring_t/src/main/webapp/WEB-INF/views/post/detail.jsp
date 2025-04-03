@@ -8,7 +8,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>
 </head>
-<body>
+<body id="body">
 	
 	<c:choose>
 		<c:when test="${post ne null}">
@@ -34,6 +34,11 @@
 				<div class="form-group mt-3">
 					<label for="title" class="form-label">조회수</label>
 					<input type="text" class="form-control" value="${post.po_view}" readonly>
+				</div>
+				<div class="form-group mt-3 d-flex justify-content-center">
+					<c:if test="${like.li_state ne 1 }">-outline</c:if>
+					<button class="btn btn<c:if test="${like.li_state ne 1 }">-outline</c:if>-success btn-up" data-state="1">추천(${post.po_up })</button>
+					<button class="btn btn<c:if test="${like.li_state ne -1 }">-outline</c:if>-danger ml-3 btn-down" data-state="-1">비추천(${post.po_down })</button>
 				</div>
 				<div class="form-group mt-3">
 					<label for="content" class="form-label">내용</label>
@@ -93,6 +98,54 @@
 		
 		getCommentList(cri);
 	</script>
-	
+	<script type="text/javascript">
+		//추천/비추천 버튼 클릭 이벤트 등록
+		$(".btn-up, .btn-down").click(function(e){
+			
+			if(${user == null}){
+				if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하겠습니까?")){
+					location.href= "<c:url value="/login"/>";	
+				}
+				return;
+			}
+			let state = $(this).data("state");
+			let num ="${post.po_num}";
+			
+			let like = {
+				li_po_num : num,
+				li_state : state
+			}
+			$.ajax({
+				async : true, 
+				url : '<c:url value="/post/like"/>', 
+				type : 'post', 
+				data : JSON.stringify(like), 
+				contentType : "application/json; charset=utf-8",
+				success : function (data){
+					switch(data){
+					case -1:
+						alert("비추천 했습니다.");
+						location.reload();
+						break;
+					case 1:
+						alert("추천 했습니다.");
+						location.reload();
+						break;
+					case 0:
+						alert((state == 1?"추천":"비추천") + "을 취소했습니다.");
+						location.reload();
+						break;
+					default:
+						alert("추천/비추천을 하지 못했습니다.");
+					}
+				}, 
+				error : function(jqXHR, textStatus, errorThrown){
+
+				}
+			});
+		});
+		
+		
+	</script>
 </body>
 </html>
