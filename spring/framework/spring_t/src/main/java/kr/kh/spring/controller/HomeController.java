@@ -156,11 +156,12 @@ public class HomeController {
 	public String loginPost(Model model, MemberVO member) {
 		//화면에서 보낸 회원 정보와 일치하는 회원 정보를 DB에서 가져옴
 		MemberVO user = memberService.login(member);
-		//가져온 회원 정보를 인터셉터에게 전달
-		model.addAttribute("user", user);
 		if(user == null) {
 			return "redirect:/login";			
 		}
+		user.setAuto(member.isAuto());
+		//가져온 회원 정보를 인터셉터에게 전달
+		model.addAttribute("user", user);
 		return "redirect:/";
 	}
 	@GetMapping("/logout")
@@ -168,7 +169,12 @@ public class HomeController {
 		
 		//세션에 있는 user를 삭제
 		HttpSession session = request.getSession();
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		session.removeAttribute("user");
+		if(user != null) {
+			user.setMe_cookie(null);
+			memberService.updateCookie(user);
+		}
 		return "redirect:/";
 	}
 	@ResponseBody
