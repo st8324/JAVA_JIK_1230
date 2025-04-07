@@ -1,6 +1,10 @@
 package kr.kh.spring.service;
 
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +19,9 @@ public class MemberServiceImp implements MemberService{
 	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@Override
 	public boolean signup(MemberVO member) {
@@ -84,9 +91,16 @@ public class MemberServiceImp implements MemberService{
 			//새 비번을 생성
 			String newPw = createPw(8);
 			//새 비번을 이메일로 전송
-			
+			boolean res = 
+				mailSend(user.getMe_email(), 
+						"새 비밀번호입니다.", 
+						"새 비밀번호는 <b>"+newPw+"</b> 입니다.");
+			if(!res) {
+				return false;
+			}
 			//새 비번으로 db에 업데이트
-			
+			newPw = passwordEncoder.encode(newPw);
+			memberDao.updatePw(user.getMe_id(), newPw);
 			return true;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -120,4 +134,24 @@ public class MemberServiceImp implements MemberService{
 		return pw;
 	}
 
+	private boolean mailSend(String to, String title, String content) {
+
+	    String setfrom = "stajun@naver.com";
+	   try{
+	        MimeMessage message = mailSender.createMimeMessage();
+	        MimeMessageHelper messageHelper
+	            = new MimeMessageHelper(message, true, "UTF-8");
+
+	        messageHelper.setFrom(setfrom);// 보내는사람 생략하거나 하면 정상작동을 안함
+	        messageHelper.setTo(to);// 받는사람 이메일
+	        messageHelper.setSubject(title);// 메일제목은 생략이 가능하다
+	        messageHelper.setText(content, true);// 메일 내용
+
+	        mailSender.send(message);
+	        return true;
+	    } catch(Exception e){
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
 }
