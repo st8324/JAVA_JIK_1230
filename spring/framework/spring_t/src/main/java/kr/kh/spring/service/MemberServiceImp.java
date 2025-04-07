@@ -74,4 +74,50 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.selectMemberByCookie(cookieId);
 	}
 
+	@Override
+	public boolean findPw(String id) {
+		MemberVO user = memberDao.selectMember(id);
+		if(user == null) {
+			return false;
+		}
+		try {
+			//새 비번을 생성
+			String newPw = createPw(8);
+			//새 비번을 이메일로 전송
+			
+			//새 비번으로 db에 업데이트
+			
+			return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	private String createPw(int size) {
+		String pw = "";
+		if(size < 3) {
+			return null;
+		}
+		while(pw.length() < size) {
+			//랜덤으로 정수를 생성(0~61)
+			int r = (int)(Math.random()*62);
+			
+			//0~9이면 문자0~9로 맵핑 후 이어붙임
+			if(r < 10) {
+				pw += r;
+			}
+			//10~35이면 a~z로 맵핑 후 이어붙임
+			else if(r < 36) {
+				pw += (char)(r - 10 + 'a');
+			}
+			//36~61이면 A~Z로 맵핑 후 이어붙임
+			else {
+				pw += (char)(r - 36 + 'A');
+			}
+			
+		}
+		return pw;
+	}
+
 }
