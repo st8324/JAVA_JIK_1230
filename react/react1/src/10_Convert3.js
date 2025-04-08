@@ -41,7 +41,7 @@ function Convert3(){
 					onChange={e=>setAmount(e.target.value)} 
 					value={!flag?amount : amount/100}
 					/*onChange={mToCm}*/ /*onChange={convert} value={amount1}*//> 
-				<button onClick={()=>isFlag(!flag)}>변환</button>
+				<button onClick={()=>{ isFlag(!flag); setAmount(0);}}>변환</button>
 			</div>
 			<input type="number" 
 				disabled={!flag} 
