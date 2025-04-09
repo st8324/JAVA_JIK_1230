@@ -23,7 +23,7 @@ public class ReactController {
 	
 	@GetMapping("/react/post/list")
 	public Map<String,Object> postList( PostCriteria cri) {
-		
+		cri.setPerPageNum(2);
 		List<PostVO> list = postService.getPostList(cri);
 		List<BoardVO> boardList = postService.getBoardList();
 		PageMaker pm = postService.getPageMaker(cri);
