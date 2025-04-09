@@ -10,7 +10,7 @@ function App() {
       <Header/>
         <Routes>
           <Route path='/' exact element={<Main/>} />
-          <Route path='/post/list' element={<PostList/>} />
+          <Route path='/post/list/:num' element={<PostList/>} />
         </Routes>
       <Footer/>
     </BrowserRouter>

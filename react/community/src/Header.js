@@ -11,7 +11,7 @@ function Header(){
 				<div className="collapse navbar-collapse" id="collapsibleNavbar">
 					<ul className="navbar-nav">
 						<li className="nav-item">
-							<Link to={"/post/list"} className="nav-link">게시글 목록</Link>
+							<Link to={"/post/list/0"} className="nav-link">게시글 목록</Link>
 						</li>
 					</ul>
 				</div>
