@@ -12,6 +12,9 @@ function Page2({func}){
 			content, 
 		}
 		func(obj);
+		setTitle("");
+		setWriter("");
+		setContent("");
 	}
 	return(
 		<div>
@@ -22,11 +25,11 @@ function Page2({func}){
 				출력할 때 제목, 내용, 작성자를 객체 만들어서 출력.
 			 */}
 			<form onSubmit={submit}>
-				<input type="text" placeholder="제목을 입력하세요." onChange={e=>setTitle(e.target.value)} /> 
+				<input type="text" placeholder="제목을 입력하세요." onChange={e=>setTitle(e.target.value)}  value={title}/> 
 				<br/>
-				<input type="text" placeholder="작성자를 입력하세요." onChange={e=>setWriter(e.target.value)}/> 
+				<input type="text" placeholder="작성자를 입력하세요." onChange={e=>setWriter(e.target.value)} value={writer}/> 
 				<br/>
-				<textarea placeholder="내용을 입력하세요." onChange={e=>setContent(e.target.value)}></textarea>
+				<textarea placeholder="내용을 입력하세요." onChange={e=>setContent(e.target.value)} value={content}></textarea>
 				<br/>
 				<button type="submit">게시글 작성</button>
 			</form>
