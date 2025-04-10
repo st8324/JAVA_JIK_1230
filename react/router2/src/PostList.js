@@ -70,27 +70,27 @@ function PostList(){
 				</table>
 			</div>
 			<div>
-				<ul>
+				<ul className="pagination justify-content-center">
 					{
 						pm.prev ? (
-							<li>
-								<Link to={"/post/list/"+num+"?page="+(pm.startPage-1)}>이전</Link>
+							<li className="page-item">
+								<Link className="page-link" to={"/post/list/"+num+"?page="+(pm.startPage-1)}>이전</Link>
 							</li>
 						) : null
 					}
 					{
 						Array.from({length : pm.endPage - pm.startPage + 1}, (_,i)=> pm.startPage+i).map(i =>{
 							return (
-								<li key={i}>
-									<Link to={"/post/list/"+num+"?page="+i}>{i}</Link>
+								<li className={"page-item " + (i == pm.cri.page?"active" : "")} key={i}>
+									<Link className="page-link" to={"/post/list/"+num+"?page="+i}>{i}</Link>
 								</li>
 							)
 						})
 					}
 					{
 						pm.next ? (
-							<li>
-								<Link to={"/post/list/"+num+"?page="+(pm.endPage+1)}>다음</Link>
+							<li className="page-item">
+								<Link className="page-link" to={"/post/list/"+num+"?page="+(pm.endPage+1)}>다음</Link>
 							</li>
 						) : null
 					}
