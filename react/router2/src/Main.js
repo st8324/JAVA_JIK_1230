@@ -12,7 +12,10 @@ function Main(){
 	
 		if(isSignup === true){
 			alert("회원가입에 성공했습니다.");
-			location.state = null;
+			//회원가입 완료 후 새로고침해도 알림창이 안뜨게 하는 코드
+			//React Router에서 location.state를 없애는 공식적인 방법은 없음.
+			//그래서 window.history.replaceState({}, document.title);를 사용하여 지움
+			window.history.replaceState({}, document.title);
 		}
 	}, [location.state]);
 	fetch("/api/test")
