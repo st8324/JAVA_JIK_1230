@@ -1,11 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function Signup(){
-	let [id, setId] = useState("");
-	let [pw, setPw] = useState("");
-	let [pw2, setPw2] = useState("");
-	let [email, setEmail] = useState("");
+	const navigate = useNavigate();
 
 	let [data, setData] = useState({
 		me_id : '',
@@ -61,11 +59,16 @@ function Signup(){
 		.then(res=>res.json())
 		.then(res=>{
 			if(res){
-				alert("회원 가입이 완료되었습니다.");
-				clearData();
+				//alert("회원 가입이 완료되었습니다.");
+				navigate("/", {
+					state : {
+						res : res
+					}
+				});
 			}
 			else{
 				alert("회원 가입에 실패했습니다.")
+				clearData();
 			}
 		});
 
