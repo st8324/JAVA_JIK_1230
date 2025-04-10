@@ -15,9 +15,9 @@ function Nav(){
 						<li className="nav-item">
 							<Link className="nav-link" to={"/post/list/0"}>게시글 목록</Link>
 						</li>
-						<li className="nav-item">
+						{/* <li className="nav-item">
 							<Link className="nav-link" to={"/post/insert"}>게시글 등록</Link>
-						</li>
+						</li> */}
 					</ul>
 				</div>
 			</div>

@@ -53,9 +53,11 @@ function PostList(){
 								return(
 									<tr key={post.po_num}>
 										<td>{post.po_num}</td>
-										<td>{post.po_title}</td>
+										<td>
+											<Link to={"/post/detail/"+post.po_num}>{post.po_title}</Link>
+										</td>
 										<td>{post.po_me_id}</td>
-										<td>{post.po_date}</td>
+										<td>{new Date(post.po_date).toLocaleDateString()}</td>
 										<td>{post.po_view}</td>
 										<td>{post.po_up}/{post.po_down}</td>
 									</tr>
