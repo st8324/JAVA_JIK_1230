@@ -25,17 +25,18 @@ function PostList(){
 	}
 
 	return(
-		<div>
+		<div className="container">
 			<h1>게시글 목록</h1>
-			<div>
+			<div className="mb-3">
+				<Link className={"btn btn"+(num == 0 ? "" : "-outline")+"-danger me-2"} to={"/post/list/0"}>전체</Link>
 				{
 					boards.map(board=>{
-						return <Link to={"/post/list/"+board.bo_num} key={board.bo_num}>{board.bo_name}</Link>
+						return <Link className={"btn btn"+(num == board.bo_num ? "" : "-outline")+"-success me-2"} to={"/post/list/"+board.bo_num} key={board.bo_num}>{board.bo_name}</Link>
 					})
 				}
 			</div>
 			<div>
-				<table>
+				<table className="table table-hover">
 					<thead>
 						<tr>
 							<th>번호</th>
