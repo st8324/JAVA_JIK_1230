@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 
 function PostList(){
 	let [list, setList] = useState([]);
 	let [pm, setPm] = useState({});
 	let [boards, setBoards] = useState([]);
 	let {num} = useParams();
+	let [seachParams] = useSearchParams();
+	let page = seachParams.get("page") || 1;
 
 	useEffect(()=>{
 		getPostList();
 
-	}, [num]);
+	}, [num, page]);
 
 	function getPostList(){
-		fetch("/api/react/post/list?po_bo_num="+num)
+		fetch("/api/react/post/list?po_bo_num="+num+"&page=" + page)
 		.then(res=>res.json())
 		.then(res=>{
 			setList(res.list);
@@ -71,7 +73,7 @@ function PostList(){
 					{
 						pm.prev ? (
 							<li>
-								<Link>이전</Link>
+								<Link to={"/post/list/"+num+"?page="+(pm.startPage-1)}>이전</Link>
 							</li>
 						) : null
 					}
@@ -79,7 +81,7 @@ function PostList(){
 						Array.from({length : pm.endPage - pm.startPage + 1}, (_,i)=> pm.startPage+i).map(i =>{
 							return (
 								<li key={i}>
-									<Link>{i}</Link>
+									<Link to={"/post/list/"+num+"?page="+i}>{i}</Link>
 								</li>
 							)
 						})
@@ -87,7 +89,7 @@ function PostList(){
 					{
 						pm.next ? (
 							<li>
-								<Link>다음</Link>
+								<Link to={"/post/list/"+num+"?page="+(pm.endPage+1)}>다음</Link>
 							</li>
 						) : null
 					}
