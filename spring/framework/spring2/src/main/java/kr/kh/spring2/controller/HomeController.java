@@ -32,4 +32,8 @@ public class HomeController {
 		}
 		return "redirect:/signup";
 	}
+	@GetMapping("/login")
+	public String login() {
+		return "/member/login";
+	}
 }
