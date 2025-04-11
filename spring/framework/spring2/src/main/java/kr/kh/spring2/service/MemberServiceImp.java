@@ -39,4 +39,22 @@ public class MemberServiceImp implements MemberService {
 			return false;
 		}
 	}
+
+	@Override
+	public MemberVO login(MemberVO member) {
+		if(member == null) {
+			return null;
+		}
+		//아이디를 이용하여 회원 정보를 가져옴. 왜? => 암호화된 비번과 암호화 안된 비번을 비교해야 하기 때문에
+		MemberVO user = memberDao.selectMember(member.getMe_id());
+		//아이디 불일치
+		if(user == null) {
+			return null;
+		}
+		//비번 불일치
+		if(!passwordEncoder1.matches(member.getMe_pw(), user.getMe_pw())) {
+			return null;
+		}
+		return user;
+	}
 }

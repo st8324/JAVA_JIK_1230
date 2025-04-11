@@ -2,6 +2,7 @@ package kr.kh.spring2.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -36,4 +37,14 @@ public class HomeController {
 	public String login() {
 		return "/member/login";
 	}
+	@PostMapping("/login")
+	public String loginPost(Model model, MemberVO member) {
+		MemberVO user = memberService.login(member);
+		if(user == null) {
+			return "redirect:/login";
+		}
+		model.addAttribute("user", user);
+		return "redirect:/";
+	}
+	
 }

@@ -49,10 +49,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 인터셉터 추가 및 URL 패턴 설정
         registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/**")  // 모든 경로에 대해 인터셉터 적용
-                .excludePathPatterns("/post/list", "/post/detail"); //제외할 경로  // 특정 경로 제외
+                .addPathPatterns("/login"); 
         
     }
 	@Bean
