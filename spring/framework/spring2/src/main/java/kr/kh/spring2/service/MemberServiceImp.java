@@ -1,5 +1,6 @@
 package kr.kh.spring2.service;
 
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,18 @@ public class MemberServiceImp implements MemberService {
 			return null;
 		}
 		return user;
+	}
+
+	@Override
+	public void updateMemberCookie(String me_id, String me_cookie, Date me_limit) {
+		memberDao.updateMemberCookie(me_id, me_cookie, me_limit );
+	}
+
+	@Override
+	public MemberVO getMemberByCookie(String me_cookie) {
+		if(me_cookie == null) {
+			return null;
+		}
+		return memberDao.selectMemberByCookie(me_cookie);
 	}
 }
