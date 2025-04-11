@@ -194,6 +194,12 @@
 		    <artifactId>mail</artifactId>
 		    <version>1.4.3</version>
 		</dependency>
+		<!-- 롬복 -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.36</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>
