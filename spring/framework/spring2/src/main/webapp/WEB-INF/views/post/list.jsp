@@ -30,15 +30,33 @@
 		</div>
 		 -->
 	</div>
-	<!-- 더보기 버튼을 추가 -->
 	
 	<script type="text/javascript">
-	getPostList(0);
+	let cri = {
+		po_bo_num : 0,
+		page : 1
+	}
 	
+	let data = getPostList(cri);
+	$(".pl-container").html(data);
+
+	
+	//게시판 클릭 이벤트
 	$(".btn-board").click(function (e) {
-		let num = $(this).data("num");
-		getPostList(num);
+		cri.po_bo_num = $(this).data("num");
+		cri.page = 1;
+		let data = getPostList(cri);
+		$(".pl-container").html(data);
 	});
+	
+	//더보기 클릭 이벤트
+	$(document).on("click", ".btn-more", function(e){
+		$(this).remove();
+		cri.page = cri.page + 1;
+		let data = getPostList(cri);
+		$(".pl-container").append(data);
+	})
+	
 	
 	function checkBoardBtn(num){
 		//초기 설정
@@ -53,23 +71,27 @@
 		});	
 	}
 	
-	function getPostList(num){
-		checkBoardBtn(num);
+	function getPostList(cri){
+		checkBoardBtn(cri.po_bo_num);
 		/*
 		비동기 통신으로 서버에 연결하여 빈 문자열을 받는 코드를 작성
 		url : /post/list 
 		method : post
-		data : num를 전송
+		data : po_bo_num와 page를 전송
+		po_bo_num와 page 번호에 맞는 게시글 목록을 가져오도록 수정
 		*/
+		let res = '';
 		$.ajax({
-			async : true,
+			async : false,
 			url : '<c:url value="/post/list"/>', 
 			type : 'post', 
-			data : {num : num}, 
+			data : JSON.stringify(cri), 
+			contentType : "application/json; charset=utf-8",
 			success : function (data){
-				$(".pl-container").html(data);
+				res = data;
 			}
 		});
+		return res;
 	}
 	
 	</script>

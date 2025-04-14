@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import kr.kh.spring2.dao.PostDAO;
 import kr.kh.spring2.model.vo.BoardVO;
 import kr.kh.spring2.model.vo.PostVO;
+import kr.kh.spring2.pagination.Criteria;
+import kr.kh.spring2.pagination.PageMaker;
 
 @Service
 public class PostServiceImp implements PostService {
@@ -21,7 +23,19 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public List<PostVO> getPostList(int num) {
-		return postDao.selectPostList(num);
+	public List<PostVO> getPostList(Criteria cri) {
+		if(cri == null) {
+			return null;
+		}
+		return postDao.selectPostList(cri);
+	}
+
+	@Override
+	public PageMaker getPageMaker(Criteria cri) {
+		if(cri == null) {
+			return null;
+		}
+		int count = postDao.selectCountPostList(cri);
+		return new PageMaker(1, cri, count);
 	}
 }

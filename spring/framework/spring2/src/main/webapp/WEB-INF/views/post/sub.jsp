@@ -24,5 +24,9 @@
 	<c:if test="${list.size() eq 0 }">
 		<div class="form-control text-center">등록된 게시글이 없습니다.</div>
 	</c:if>
+	<!-- 더보기 버튼을 추가 -->
+	<c:if test="${pm.next}">
+		<button class="btn btn-danger btn-more col-12">더보기</button>
+	</c:if>
 </body>
 </html>
