@@ -10,6 +10,7 @@ import kr.kh.spring2.model.vo.BoardVO;
 import kr.kh.spring2.model.vo.PostVO;
 import kr.kh.spring2.pagination.Criteria;
 import kr.kh.spring2.pagination.PageMaker;
+import kr.kh.spring2.pagination.PostCriteria;
 
 @Service
 public class PostServiceImp implements PostService {
@@ -35,6 +36,7 @@ public class PostServiceImp implements PostService {
 		if(cri == null) {
 			return null;
 		}
+		
 		int count = postDao.selectCountPostList(cri);
 		return new PageMaker(1, cri, count);
 	}

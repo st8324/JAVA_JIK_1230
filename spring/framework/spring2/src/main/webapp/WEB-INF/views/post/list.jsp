@@ -13,6 +13,12 @@
 	</c:forEach>
 	<!-- 검색 화면을 추가(검색창, 검색타입, 버튼) -->
 	
+	<!-- 정렬방식 선택 -->
+	<select class="form-control col-3 sel-type mt-3">
+		<option value="po_num desc">최신순</option>
+		<option value="po_up desc">추천순</option>
+		<option value="po_view desc">조회순</option>
+	</select>
 	<!-- 게시글 목록을 보여주는 컨테이터 -->
 	<div class="pl-container mt-3 mb-3">
 		<!-- 
@@ -34,7 +40,8 @@
 	<script type="text/javascript">
 	let cri = {
 		po_bo_num : 0,
-		page : 1
+		page : 1,
+		orderBy : "po_num desc"
 	}
 	
 	let data = getPostList(cri);
@@ -55,8 +62,15 @@
 		cri.page = cri.page + 1;
 		let data = getPostList(cri);
 		$(".pl-container").append(data);
-	})
+	});
 	
+	//정렬방법 change 이벤트
+	$(".sel-type").change(function(e){
+		cri.orderBy = $(this).val();
+		cri.page = 1;
+		let data = getPostList(cri);
+		$(".pl-container").html(data);
+	})
 	
 	function checkBoardBtn(num){
 		//초기 설정

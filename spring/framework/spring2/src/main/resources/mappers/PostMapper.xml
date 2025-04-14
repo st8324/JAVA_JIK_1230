@@ -11,7 +11,13 @@
 		<if test="cri.po_bo_num != 0">
 			and po_bo_num = #{cri.po_bo_num}
 		</if>
-		order by po_num desc
+		order by ${cri.orderBy}
 		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="selectCountPostList" resultType="int">
+		select count(*) from post where po_del = "N" 
+		<if test="cri.po_bo_num != 0">
+			and po_bo_num = #{cri.po_bo_num}
+		</if>
 	</select>
 </mapper>
