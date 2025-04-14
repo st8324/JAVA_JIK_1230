@@ -7,10 +7,13 @@
 		select * from board order by bo_num asc
 	</select>
 	<select id="selectPostList" resultType="PostVO">
-		select * from post where po_del = "N" 
+		select post.*, fi_name as po_fi_name from post 
+		left join file on po_num = fi_po_num
+		where po_del = "N" 
 		<if test="cri.po_bo_num != 0">
 			and po_bo_num = #{cri.po_bo_num}
 		</if>
+		group by po_num
 		order by ${cri.orderBy}
 		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>

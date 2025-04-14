@@ -10,7 +10,14 @@
 	<c:forEach items="${list}" var="post">
 		<div class="form-group ">
 			<div class="form-control input-group" style="min-height: auto; height: auto">
-				<img width="100" height="120" src="https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.webp">
+				<c:choose>
+					<c:when test="${post.po_fi_name ne null }">
+						<img width="100" height="120" src="<c:url value="/download${post.po_fi_name }"/>">
+					</c:when>
+					<c:otherwise>
+						<img width="100" height="120" src="<c:url value="/resources/base.png"/>">
+					</c:otherwise>
+				</c:choose>
 				<div class="ml-3">
 					<div>${post.po_title }</div>
 					<div>작성자 : ${post.po_me_id }</div>

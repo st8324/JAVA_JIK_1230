@@ -15,6 +15,6 @@ public class PostVO {
 	int po_bo_num;
 	String po_bo_name;
 	String po_del;
-	
+	String po_fi_name;
 	
 }
