@@ -90,30 +90,31 @@ public class PostServiceImp implements PostService {
 		if(!res) {
 			return false;
 		}
-		
+		count = 1;
 		for(MultipartFile file : fileList) {
 			if(file.getOriginalFilename().length() == 0) {
 				continue;
 			}
-			insertFile(post.getPo_num(), file);
+			insertFile(post.getPo_num(), count++, file);
 		}
 		
 		return true;
 	}
 
-	private void insertFile(int po_num, MultipartFile file) {
+	private void insertFile(int po_num, int order, MultipartFile file) {
 		if(file == null) {
 			return; 
 		}
-		
 		String fi_ori_name = file.getOriginalFilename();
 		
 		if(fi_ori_name.length() == 0) {
 			return;
 		}
+		int index = fi_ori_name.lastIndexOf("."); 
+		String suffix = fi_ori_name.substring(index);
 		
 		try {
-			String fi_name = UploadFileUtils.uploadFile(uploadPath, fi_ori_name, file.getBytes());
+			String fi_name = UploadFileUtils.uploadFile(uploadPath,""+ po_num, order + suffix, file.getBytes());
 			FileVO fileVo = new FileVO(fi_ori_name, fi_name, po_num);
 			postDao.insertFile(fileVo);
 		} catch (Exception e) {
