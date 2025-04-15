@@ -43,21 +43,23 @@
 					<label for="content" class="form-label">내용</label>
 					<div class="form-control" id="content" style="min-height: 400px;">${post.po_content }</div>
 				</div>
-				<div class="mb-3">
-					<!-- Swiper -->
-					<div class="swiper mySwiper">
-					  <div class="swiper-wrapper">
-					  	<c:forEach items="${list}" var="file">
-						    <div class="swiper-slide" style="background: #fff; text-align: center;">
-								<img alt="첨부파일" width="100" height="120" src="<c:url value="/download${file.fi_name }"/>">
-						    </div>
-						</c:forEach>
-					  </div>
-					  <div class="swiper-button-next"></div>
-					  <div class="swiper-button-prev"></div>
-					  <div class="swiper-pagination"></div>
+				<c:if test="${list.size() != 0 }">
+					<div class="mb-3">
+						<!-- Swiper -->
+						<div class="swiper mySwiper">
+						  <div class="swiper-wrapper">
+						  	<c:forEach items="${list}" var="file">
+							    <div class="swiper-slide" style="background: #fff; text-align: center;">
+									<img alt="첨부파일" width="100" height="120" src="<c:url value="/download${file.fi_name }"/>">
+							    </div>
+							</c:forEach>
+						  </div>
+						  <div class="swiper-button-next"></div>
+						  <div class="swiper-button-prev"></div>
+						  <div class="swiper-pagination"></div>
+						</div>
 					</div>
-				</div>
+				</c:if>
 			</div>
 		</c:when>
 		<c:otherwise>
