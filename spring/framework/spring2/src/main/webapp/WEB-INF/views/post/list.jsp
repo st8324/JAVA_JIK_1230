@@ -16,8 +16,8 @@
 	<!-- 정렬방식 선택 -->
 	<select class="form-control col-3 sel-type mt-3">
 		<option value="po_num desc">최신순</option>
-		<option value="po_up desc">추천순</option>
-		<option value="po_view desc">조회순</option>
+		<option value="po_up desc, po_num desc">추천순</option>
+		<option value="po_view desc, po_num desc">조회순</option>
 	</select>
 	<!-- 게시글 목록을 보여주는 컨테이터 -->
 	<div class="pl-container mt-3 mb-3">
