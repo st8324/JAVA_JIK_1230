@@ -8,7 +8,7 @@
 <body>
 	<!-- 서버에서 보낸 게시글 목록을 이용하여 화면을 구성. 이미지는 고정 -->
 	<c:forEach items="${list}" var="post">
-		<div class="form-group ">
+		<a class="form-group " href="<c:url value="/post/detail/${post.po_num}"/>">
 			<div class="form-control input-group" style="min-height: auto; height: auto">
 				<c:choose>
 					<c:when test="${post.po_fi_name ne null }">
@@ -26,7 +26,7 @@
 					<div>추천수 : ${post.po_up }</div>
 				</div>
 			</div>
-		</div>
+		</a>
 	</c:forEach>
 	<c:if test="${list.size() eq 0 }">
 		<div class="form-control text-center">등록된 게시글이 없습니다.</div>

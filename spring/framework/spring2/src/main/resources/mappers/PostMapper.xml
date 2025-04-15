@@ -23,4 +23,9 @@
 			and po_bo_num = #{cri.po_bo_num}
 		</if>
 	</select>
+	<select id="selectPost" resultType="PostVO">
+		select post.*, bo_name as po_bo_name from post
+		join board on po_bo_num = bo_num 
+		where po_num = #{po_num} and po_del = "N"
+	</select>
 </mapper>
