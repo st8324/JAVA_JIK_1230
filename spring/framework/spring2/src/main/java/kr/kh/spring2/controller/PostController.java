@@ -58,4 +58,9 @@ public class PostController {
 		model.addAttribute("list", list);
 		return "/post/detail";
 	}
+	@GetMapping("/insert")
+	public String insert(Model model) {
+		
+		return "/post/insert";
+	}
 }
