@@ -28,4 +28,7 @@
 		join board on po_bo_num = bo_num 
 		where po_num = #{po_num} and po_del = "N"
 	</select>
+	<select id="selectFileList" resultType="FileVO">
+		select * from file where fi_po_num = #{po_num}
+	</select>
 </mapper>
