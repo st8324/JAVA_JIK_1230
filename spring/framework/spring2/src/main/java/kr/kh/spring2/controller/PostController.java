@@ -3,6 +3,7 @@ package kr.kh.spring2.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,9 +59,14 @@ public class PostController {
 		model.addAttribute("list", list);
 		return "/post/detail";
 	}
+	@Value("${file.location}")
+	String uploadPath;
+	
 	@GetMapping("/insert")
 	public String insert(Model model) {
-		
+		List<BoardVO> list = postService.getBoardList();
+		System.out.println(uploadPath);
+		model.addAttribute("list", list);
 		return "/post/insert";
 	}
 }

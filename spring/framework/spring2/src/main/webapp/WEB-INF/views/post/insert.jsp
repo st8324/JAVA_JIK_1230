@@ -35,21 +35,23 @@
 		</div>
 		<div class="form-group mt-3">
 			<div class="form-label">첨부파일</div>
-			<label class="file-label">
-				<span class="base-img">+</span>
-				<img class="sel-img" width="156" height="206">
-				<input type="file" class="form-control" name="fileList" accept="image/*">
-			</label>
-			<label class="file-label">
-				<span class="base-img">+</span>
-				<img class="sel-img" width="156" height="206">
-				<input type="file" class="form-control" name="fileList" accept="image/*">
-			</label>
-			<label class="file-label">
-				<span class="base-img">+</span>
-				<img class="sel-img" width="156" height="206">
-				<input type="file" class="form-control" name="fileList" accept="image/*">
-			</label>
+			<div class="d-flex">
+				<label class="file-label mr-3">
+					<span class="base-img">+</span>
+					<img class="sel-img" width="150" height="200">
+					<input type="file" class="form-control" name="fileList" accept="image/*">
+				</label>
+				<label class="file-label  mr-3">
+					<span class="base-img">+</span>
+					<img class="sel-img" width="150" height="200">
+					<input type="file" class="form-control" name="fileList" accept="image/*">
+				</label>
+				<label class="file-label  mr-3">
+					<span class="base-img">+</span>
+					<img class="sel-img" width="150" height="200">
+					<input type="file" class="form-control" name="fileList" accept="image/*">
+				</label>
+			</div>
 		</div>
 		<button type="submit" class="btn btn-outline-success mt-3 col-12">게시글 등록</button>
 	</form>
