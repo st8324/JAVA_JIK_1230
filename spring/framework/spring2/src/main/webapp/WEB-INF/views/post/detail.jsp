@@ -39,10 +39,6 @@
 					<button class="btn btn<c:if test="${like.li_state ne 1 }">-outline</c:if>-success btn-up" data-state="1">추천(<span>${post.po_up }</span>)</button>
 					<button class="btn btn<c:if test="${like.li_state ne -1 }">-outline</c:if>-danger ml-3 btn-down" data-state="-1">비추천(<span>${post.po_down }</span>)</button>
 				</div>
-				<div class="form-group mt-3">
-					<label for="content" class="form-label">내용</label>
-					<div class="form-control" id="content" style="min-height: 400px;">${post.po_content }</div>
-				</div>
 				<c:if test="${list.size() != 0 }">
 					<div class="mb-3">
 						<!-- Swiper -->
@@ -50,7 +46,7 @@
 						  <div class="swiper-wrapper">
 						  	<c:forEach items="${list}" var="file">
 							    <div class="swiper-slide" style="background: #fff; text-align: center;">
-									<img alt="첨부파일" width="100" height="120" src="<c:url value="/download${file.fi_name }"/>">
+									<img alt="첨부파일" width="auto" height="300" src="<c:url value="/download${file.fi_name }"/>">
 							    </div>
 							</c:forEach>
 						  </div>
