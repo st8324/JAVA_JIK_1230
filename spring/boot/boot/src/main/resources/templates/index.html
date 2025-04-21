@@ -1,0 +1,15 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>부트</title>
+</head>
+<body>
+	<h1>메인</h1>
+	<div>
+		안녕하세요. 제 이름은 <span th:text="${name}"></span>입니다.
+	</div>
+	<a th:href="@{/test}">테스트 링크</a>
+</body>
+</html>

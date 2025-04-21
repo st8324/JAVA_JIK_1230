@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>테스트</title>
+</head>
+<body>
+	<h1>테스트</h1>
+	<!-- href -->
+	<a th:href="@{/test/{num}(num=${num})}">랜덤 수 : <span th:text="${num}">기본값</span></a>
+	<!-- if, unless -->
+	<div th:if="${num >= 5}">5이상입니다.</div>
+	<div th:unless="${num >= 5}">5미만입니다.</div>
+	<!-- swtich case -->
+	<div th:switch="${role}">
+		<div th:case="'ADMIN'">관리자입니다.</div>
+		<div th:case="'USER'">회원입니다.</div>
+		<div th:case="*">게스트입니다.</div>
+	</div>
+	<!-- each -->
+	<ul>
+		<li th:each="item, stat : ${items}">
+			<span th:text="${stat.count}"></span>-
+			<span th:text="${item}"></span>
+		</li>
+	</ul>
+	<ul>
+		<li th:each="num : ${#numbers.sequence(1,5)}" th:text="${num}"></li>
+	</ul>
+</body>
+</html>
