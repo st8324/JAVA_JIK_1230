@@ -8,10 +8,10 @@
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<ul class="navbar-nav">
-				<li class="nav-item">
+				<li class="nav-item" th:classappend="${url == '/' ? 'active' : ''}">
 					<a class="nav-link" th:href="@{/}">홈</a>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item" th:classappend="${url == '/post/list' ? 'active' : ''}">
 					<a class="nav-link" th:href="@{/post/list/0}">게시글 목록</a>
 				</li>
 				<li class="nav-item">

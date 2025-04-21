@@ -10,8 +10,30 @@
 	<title>부트</title>
 </head>
 <body>
-	<main layout:fragment="content">
+	<main layout:fragment="content" class="container">
 		<h1>게시글 목록</h1>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+					<th>추/비추</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="post : ${list}">
+					<td th:text="${post.po_num}">1</td>
+					<td th:text="${post.po_title}">제목</td>
+					<td th:text="${post.po_me_id}">작성자</td>
+					<td th:text="${post.po_date}">작성일</td>
+					<td th:text="${post.po_view}">조회수</td>
+					<td th:text="${post.po_up}+'/'+${post.po_down}">추/비추</td>
+				</tr>
+			</tbody>
+		</table>
 	</main>
 </body>
 </html>
