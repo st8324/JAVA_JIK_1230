@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.boot.dao.PostDAO;
 import kr.kh.boot.model.vo.BoardVO;
+import kr.kh.boot.model.vo.CommentVO;
 import kr.kh.boot.model.vo.FileVO;
 import kr.kh.boot.model.vo.PostVO;
 
@@ -37,8 +38,28 @@ public class PostService {
 			return false;
 		}
 
+		if(post.getPo_me_id() == null){
+			return false;
+		}
+
 		boolean res = postDAO.insertPost(post);
 
-		return res;
+		if(!res){
+			return false;
+		}
+		//댓글 추가 작업
+		List<CommentVO> list = post.getList();
+		if(list == null || list.isEmpty()){
+			return true;
+		}
+		for(CommentVO comment : list){
+			try{
+				comment.setCo_po_num(post.getPo_num());
+				postDAO.insertComment(comment);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return true;
 	}
 }

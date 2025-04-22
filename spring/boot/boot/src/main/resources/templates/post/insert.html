@@ -39,18 +39,25 @@
 		<script>
 			$("#btn-comment-insert").click(function(){
 				let str = `
-					<div class="input-group form-group">
-						<input type="text" name="" class="form-control col-3" placeholder="아이디를 입력하세요.">
-						<input type="text" name="" class="form-control col-8" placeholder="댓글을 입력하세요.">
-						<button class="btn btn-outline-success form-control col-1 btn-comment-delete">-</button>
+					<div class="input-group form-group comment">
+						<input type="text" name="" class="form-control col-3 co_me_id" placeholder="아이디를 입력하세요.">
+						<input type="text" name="" class="form-control col-8 co_content" placeholder="댓글을 입력하세요.">
+						<button type="button" class="btn btn-outline-success form-control col-1 btn-comment-delete">-</button>
 					</div>
 				`;
 				$("#comment").append(str);
+				checkNames();
 			});
 			$(document).on("click", ".btn-comment-delete", function(){
 				$(this).parent().remove();
+				checkNames();
 			});
-			
+			function checkNames(){
+				$(".comment").each((index, el)=>{
+					$(el).find(".co_me_id").attr("name", `list[${index}].co_me_id`);
+					$(el).find(".co_content").attr("name", `list[${index}].co_content`);
+				})
+			}
 		</script>
 	</main>
 </body>

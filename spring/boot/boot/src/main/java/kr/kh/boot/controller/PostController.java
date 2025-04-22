@@ -56,6 +56,7 @@ public class PostController {
 	}
 	@PostMapping("/post/insert")
 	public String postInsertPost(PostVO post, @AuthenticationPrincipal CustomUser customUser) {
+		
 		//로그인한 회원 정보를 가져옴
 		if(customUser != null){
 			MemberVO user = customUser.getMember();
