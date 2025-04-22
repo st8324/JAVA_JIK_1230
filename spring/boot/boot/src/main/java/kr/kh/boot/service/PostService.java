@@ -31,4 +31,14 @@ public class PostService {
 	public List<FileVO> getFileList(int po_num) {
 		return postDAO.selectFileList(po_num);
 	}
+
+	public boolean insertPost(PostVO post) {
+		if(post == null || post.getPo_title().isBlank() || post.getPo_content().isBlank()){
+			return false;
+		}
+
+		boolean res = postDAO.insertPost(post);
+
+		return res;
+	}
 }

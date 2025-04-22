@@ -17,4 +17,8 @@
 	<select id="selectFileList" resultType="FileVO">
 		select * from file where fi_po_num = #{po_num}
 	</select>
+	<insert id="insertPost">
+		insert into post(po_title, po_content, po_bo_num, po_me_id)
+		value(#{po_title},#{po_content},#{po_bo_num},#{po_me_id})
+	</insert>
 </mapper>

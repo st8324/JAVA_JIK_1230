@@ -15,5 +15,7 @@ public interface PostDAO {
 	PostVO selectPost(int po_num);
 
 	List<FileVO> selectFileList(int po_num);
+
+	boolean insertPost(PostVO post);
 	
 }

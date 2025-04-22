@@ -16,6 +16,9 @@
 			<a th:href="@{/post/list/0}" class="btn btn-outline-success mr-2">전체</a>
 			<a th:each="board : ${boardList}" th:text="${board.bo_name}" th:href="@{/post/list/{num}(num=${board.bo_num})}" class="btn btn-outline-success mr-2"></a>
 		</div>
+		<div>
+			<a th:href="@{/post/insert}" class="btn btn-outline-success mb-2">게시글 등록</a>
+		</div>
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
