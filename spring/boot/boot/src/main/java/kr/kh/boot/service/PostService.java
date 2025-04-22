@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.boot.dao.PostDAO;
 import kr.kh.boot.model.vo.BoardVO;
+import kr.kh.boot.model.vo.FileVO;
 import kr.kh.boot.model.vo.PostVO;
 
 @Service
@@ -21,5 +22,13 @@ public class PostService {
 
 	public List<BoardVO> getBoardList() {
 		return postDAO.selectBoardList();
+	}
+
+	public PostVO getPost(int po_num) {
+		return postDAO.selectPost(po_num);
+	}
+
+	public List<FileVO> getFileList(int po_num) {
+		return postDAO.selectFileList(po_num);
 	}
 }

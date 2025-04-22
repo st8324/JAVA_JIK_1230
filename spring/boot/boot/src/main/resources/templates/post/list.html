@@ -30,7 +30,9 @@
 			<tbody>
 				<tr th:each="post : ${list}">
 					<td th:text="${post.po_num}">1</td>
-					<td th:text="${post.po_title}">제목</td>
+					<td>
+						<a th:href="@{/post/detail/{num}(num=${post.po_num})}" th:text="${post.po_title}"></a>
+					</td>
 					<td th:text="${post.po_me_id}">작성자</td>
 					<td th:text="${post.po_date}">작성일</td>
 					<td th:text="${post.po_view}">조회수</td>
