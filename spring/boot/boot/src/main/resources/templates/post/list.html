@@ -11,7 +11,11 @@
 </head>
 <body>
 	<main layout:fragment="content" class="container">
-		<h1>게시글 목록</h1>
+		<h1 class="mt-3 mb-3">게시글 목록</h1>
+		<div class="mb-3 d-flex">
+			<a th:href="@{/post/list/0}" class="btn btn-outline-success mr-2">전체</a>
+			<a th:each="board : ${boardList}" th:text="${board.bo_name}" th:href="@{/post/list/{num}(num=${board.bo_num})}" class="btn btn-outline-success mr-2"></a>
+		</div>
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
@@ -31,6 +35,9 @@
 					<td th:text="${post.po_date}">작성일</td>
 					<td th:text="${post.po_view}">조회수</td>
 					<td th:text="${post.po_up}+'/'+${post.po_down}">추/비추</td>
+				</tr>
+				<tr th:if="${list.size() == 0}">
+					<td colspan="6" class="text-center">등록된 게시글이 없습니다.</td>
 				</tr>
 			</tbody>
 		</table>
