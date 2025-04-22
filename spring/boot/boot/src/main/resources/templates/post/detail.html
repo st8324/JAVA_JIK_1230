@@ -35,7 +35,8 @@
 			<a class="form-control mb-2" 
 				th:each="file : ${list}" 
 				th:href="@{/file{num}(num=${file.fi_name})}" 
-				th:text="${file.fi_ori_name}" th:attr="download=${file.fi_ori_name}"></a>
+				th:text="${file.fi_ori_name}" 
+				th:attr="download=${file.fi_ori_name}"></a>
 		</div>
 		<a th:href="@{/post/list/{num}(num=${post.po_bo_num})}" class="btn btn-outline-success">목록으로</a>
 	</main>
