@@ -82,6 +82,18 @@
 		 	</artifactId>
 		 	<optional>true</optional>
 		</dependency>
+					
+		<!-- 스프링 시큐리티 사용 -->				
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- 타임리프에서 sec를 사용하여 로그인 여부를 확인하기 위해  -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
