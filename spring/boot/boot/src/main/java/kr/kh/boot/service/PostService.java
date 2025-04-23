@@ -130,7 +130,7 @@ public class PostService {
 		postDAO.deleteFile(file.getFi_num());
 	}
 
-	public void updatePost(PostVO post, CustomUser customUser) {
+	public void updatePost(PostVO post, CustomUser customUser, int[] dels, MultipartFile[] fileList) {
 		if(post == null || customUser == null){
 			return;
 		}
@@ -152,5 +152,21 @@ public class PostService {
 		dbPost.setPo_title(po_title);
 		dbPost.setPo_content(po_content);
 		postDAO.updatePost(dbPost);
+
+		uploadFileList(post.getPo_num(), fileList);
+		deleteFileList(post.getPo_num(), dels);
+	}
+
+	private void deleteFileList(int po_num, int[] dels) {
+		if(dels == null || dels.length == 0){
+			return;
+		}
+		for(int del : dels){
+			FileVO file = postDAO.selectFile(del);
+			if(file == null || file.getFi_po_num() != po_num){
+				continue;
+			}
+			deleteFile(file);
+		}
 	}
 }

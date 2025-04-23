@@ -84,7 +84,9 @@ public class PostController {
 		return "redirect:/post/detail/"+num;
 	}
 	@GetMapping("/post/update/{po_num}")
-	public String postUpdate(Model model, @PathVariable int po_num, @AuthenticationPrincipal CustomUser customUser) {
+	public String postUpdate(Model model, 
+		@PathVariable int po_num, 
+		@AuthenticationPrincipal CustomUser customUser) {
 		PostVO post = postService.getPost(po_num);
 		
 		//로그인 안한 사용자이거나 없는 게시글인 경우
@@ -96,13 +98,20 @@ public class PostController {
 		if(!user.getMe_id().equals(post.getPo_me_id())){
 			return "redirect:/post/detail/"+po_num;
 		}
+		List<FileVO> list = postService.getFileList(po_num);
 		model.addAttribute("post", post);
+		model.addAttribute("list", list);
 		return "post/update";
 	}
 	@PostMapping("/post/update/{po_num}")
-	public String postUpdatePost(@PathVariable int po_num, @AuthenticationPrincipal CustomUser customUser, PostVO post ) {
+	public String postUpdatePost(@PathVariable int po_num, 
+		@AuthenticationPrincipal CustomUser customUser, 
+		PostVO post ,
+		int [] dels,
+		MultipartFile [] fileList) {
+
 		post.setPo_num(po_num);
-		postService.updatePost(post, customUser);
+		postService.updatePost(post, customUser, dels, fileList);
 		return "redirect:/post/detail/"+po_num;
 	}
 	

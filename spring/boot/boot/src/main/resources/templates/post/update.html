@@ -11,7 +11,7 @@
 </head>
 <body>
 	<main layout:fragment="content" class="container">
-		<h1>게시글 등록</h1>
+		<h1>게시글 수정</h1>
 		<form th:object="${post}" th:action="@{/post/update/{num}(num=${po_num})}" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<label>제목</label>
@@ -21,14 +21,24 @@
 				<label>내용</label>
 				<textarea class="form-control" rows="15" th:field="*{po_content}"></textarea>
 			</div>
-			<div class="mb-3 form-group">
+			<div class="mb-3 form-group" id="att">
 				<label>첨부파일</label>
-				<input type="file" name="fileList" class="form-control mb-2">
-				<input type="file" name="fileList" class="form-control mb-2">
-				<input type="file" name="fileList" class="form-control mb-2">
+				<div class="form-control d-flex justify-content-between mb-2" th:each="file : ${list}">
+					<span th:text="${file.fi_ori_name}"></span>
+					<span class="btn-del" th:attr="data-target=${file.fi_num}">&times;</span>
+				</div>
+				<input type="file" name="fileList" class="form-control mb-2" th:each="num : ${#numbers.sequence(1, 3 - list.size())}">
 			</div>
 			<button class="btn btn-outline-success col-12">게시글 수정</button>
 		</form>
+		<script>
+			$(".btn-del").click(function(){
+				let fi_num = $(this).data("target");
+				$("#att").append(`<input type="hidden" name="dels" value="${fi_num}"/>`);
+				$("#att").append(`<input type="file" name="fileList" class="form-control mb-2"/>`);
+				$(this).parent().remove();
+			})
+		</script>
 	</main>
 </body>
 </html>
