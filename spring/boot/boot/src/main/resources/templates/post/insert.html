@@ -12,7 +12,7 @@
 <body>
 	<main layout:fragment="content" class="container">
 		<h1>게시글 등록</h1>
-		<form th:action="@{/post/insert}" method="post">
+		<form th:action="@{/post/insert}" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<label>게시판</label>
 				<select name="po_bo_num" class="form-control">
@@ -32,7 +32,12 @@
 			</div>
 			<div id="comment">
 				<button type="button" class="btn btn-outline-success mb-2" id="btn-comment-insert">댓글 추가</button>
-				
+			</div>
+			<div class="mb-3 form-group">
+				<label>첨부파일</label>
+				<input type="file" name="fileList" class="form-control mb-2">
+				<input type="file" name="fileList" class="form-control mb-2">
+				<input type="file" name="fileList" class="form-control mb-2">
 			</div>
 			<button class="btn btn-outline-success col-12">게시글 등록</button>
 		</form>

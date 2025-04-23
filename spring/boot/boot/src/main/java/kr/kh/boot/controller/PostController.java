@@ -17,6 +17,7 @@ import kr.kh.boot.model.vo.MemberVO;
 import kr.kh.boot.model.vo.PostVO;
 import kr.kh.boot.service.PostService;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
 
@@ -55,14 +56,15 @@ public class PostController {
 		return "post/insert";
 	}
 	@PostMapping("/post/insert")
-	public String postInsertPost(PostVO post, @AuthenticationPrincipal CustomUser customUser) {
+	public String postInsertPost(PostVO post, @AuthenticationPrincipal CustomUser customUser, 
+		MultipartFile[] fileList) {
 		
 		//로그인한 회원 정보를 가져옴
 		if(customUser != null){
 			MemberVO user = customUser.getMember();
 			post.setPo_me_id(user.getMe_id());
 		}
-		if(postService.insertPost(post)){
+		if(postService.insertPost(post, fileList)){
 			return "redirect:/post/list/" + post.getPo_bo_num();
 		}
 		return "redirect:/post/insert";
