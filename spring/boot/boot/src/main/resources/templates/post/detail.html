@@ -42,10 +42,11 @@
 		<div class="d-flex justify-content-between">
 			<a th:href="@{/post/list/{num}(num=${post.po_bo_num})}" class="btn btn-outline-success">목록으로</a>
 			<th:block sec:authorize="isAuthenticated()">
-				<div th:if="${#authentication.principal.member.me_id == post.po_me_id}">
+				<div th:if="${#authentication.principal.member.me_id == post.po_me_id}" class="d-flex">
 					<form th:action="@{/post/delete/{num}(num=${post.po_num})}" method="post">
 						<button class="btn btn-outline-danger">삭제</button>
 					</form>
+					<a th:href="@{/post/update/{num}(num=${post.po_num})}" class="btn btn-outline-danger ml-2">수정</a>
 				</div>
 			</th:block>
 		</div>
