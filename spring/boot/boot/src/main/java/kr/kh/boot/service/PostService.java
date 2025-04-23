@@ -15,6 +15,9 @@ import kr.kh.boot.model.vo.CustomUser;
 import kr.kh.boot.model.vo.FileVO;
 import kr.kh.boot.model.vo.MemberVO;
 import kr.kh.boot.model.vo.PostVO;
+import kr.kh.boot.utils.Criteria;
+import kr.kh.boot.utils.PageMaker;
+import kr.kh.boot.utils.PostCriteria;
 import kr.kh.boot.utils.UploadFileUtils;
 
 @Service
@@ -26,8 +29,8 @@ public class PostService {
 	@Value("${spring.path.upload}")
 	String uploadPath;
 
-	public List<PostVO> getPostList(int bo_num) {
-		return postDAO.selectPostList(bo_num);
+	public List<PostVO> getPostList(Criteria cri) {
+		return postDAO.selectPostList(cri);
 	}
 
 	public List<BoardVO> getBoardList() {
@@ -168,5 +171,10 @@ public class PostService {
 			}
 			deleteFile(file);
 		}
+	}
+
+	public PageMaker getPageMaker(Criteria cri) {
+		int count = postDAO.selectCountPostList(cri);
+		return new PageMaker(3, cri, count);
 	}
 }

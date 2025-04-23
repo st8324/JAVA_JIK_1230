@@ -6,7 +6,16 @@
 		<if test="bo_num != 0">
 			and po_bo_num = #{bo_num}
 		</if>
+		<choose>
+			<when test="type == 2">
+				and po_me_id = #{search}
+			</when>
+			<otherwise>
+				and (po_title like concat('%', #{search}, '%') or po_content like concat('%', #{search}, '%') )
+			</otherwise>
+		</choose>
 		order by po_num desc
+		limit #{pageStart}, #{perPageNum}
 	</select>
 	<select id="selectBoardList" resultType="BoardVO">
 		select * from board 
@@ -41,5 +50,19 @@
 	</update>
 	<select id="selectFile" resultType="FileVO">
 		select * from file where fi_num = #{fi_num}
+	</select>
+	<select id="selectCountPostList" resultType="int">
+		select count(*) from post where po_del = 'N'
+		<if test="bo_num != 0">
+			and po_bo_num = #{bo_num}
+		</if>
+		<choose>
+			<when test="type == 2">
+				and po_me_id = #{search}
+			</when>
+			<otherwise>
+				and (po_title like concat('%', #{search}, '%') or po_content like concat('%', #{search}, '%') )
+			</otherwise>
+		</choose>
 	</select>
 </mapper>

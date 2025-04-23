@@ -17,6 +17,10 @@ import kr.kh.boot.model.vo.FileVO;
 import kr.kh.boot.model.vo.MemberVO;
 import kr.kh.boot.model.vo.PostVO;
 import kr.kh.boot.service.PostService;
+import kr.kh.boot.utils.Criteria;
+import kr.kh.boot.utils.PageMaker;
+import kr.kh.boot.utils.PostCriteria;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,15 +35,19 @@ public class PostController {
 	PostService postService;
 
 	@GetMapping("/post/list/{bo_num}")
-	public String postList(Model model, @PathVariable int bo_num) {
+	public String postList(Model model, @PathVariable int bo_num, PostCriteria cri) {
 		//등록된 전체 게시판을 가져옴
 		List<BoardVO> boardList = postService.getBoardList();
-
+		cri.setBo_num(bo_num);
+		cri.setPerPageNum(2);
 		//게시판 번호에 맞는 게시글 목록을 가져옴
-		List<PostVO> list = postService.getPostList(bo_num);
+		List<PostVO> list = postService.getPostList(cri);
+		PageMaker pm = postService.getPageMaker(cri);
+
 		model.addAttribute("list", list);
 		model.addAttribute("url", "/post/list");
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("pm", pm);
 		return "post/list";
 	}
 	

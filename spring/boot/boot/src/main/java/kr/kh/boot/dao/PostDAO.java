@@ -6,10 +6,11 @@ import kr.kh.boot.model.vo.BoardVO;
 import kr.kh.boot.model.vo.CommentVO;
 import kr.kh.boot.model.vo.FileVO;
 import kr.kh.boot.model.vo.PostVO;
+import kr.kh.boot.utils.Criteria;
 
 public interface PostDAO {
 
-	List<PostVO> selectPostList(int bo_num);
+	List<PostVO> selectPostList(Criteria cri);
 
 	List<BoardVO> selectBoardList();
 
@@ -30,5 +31,7 @@ public interface PostDAO {
 	void updatePost(PostVO dbPost);
 
 	FileVO selectFile(int fi_num);
+
+	int selectCountPostList(Criteria cri);
 	
 }

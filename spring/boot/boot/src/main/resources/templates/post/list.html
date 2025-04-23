@@ -19,6 +19,14 @@
 		<div>
 			<a th:href="@{/post/insert}" class="btn btn-outline-success mb-2">게시글 등록</a>
 		</div>
+		<form class="mb-3 input-group" th:action="@{/post/list/{num}(num=${bo_num})}">
+			<select name="type" class="form-control col-3">
+				<option value="1" th:selected="${pm.cri.type == '1'}">제목+내용</option>
+				<option value="2" th:selected="${pm.cri.type == '2'}">작성자</option>
+			</select>
+			<input type="text" name="search" class="form-control col-7" th:value="${pm.cri.search}">
+			<button class="form-control bnt btn-outline-success col-2">검색</button>
+		</form>
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
@@ -46,6 +54,23 @@
 				</tr>
 			</tbody>
 		</table>
+		<ul class="pagination justify-content-center" th:if="${pm.totalCount != 0}">
+			<li class="page-item">
+				<a class="page-link" th:href="@{/post/list/{bo_num}(bo_num=${bo_num}, page=1, search=${pm.cri.search}, type=${pm.cri.type})}">처음</a>
+			</li>
+			<li class="page-item" th:if="${pm.prev}">
+				<a class="page-link" th:href="@{/post/list/{bo_num}(bo_num=${bo_num}, page=${pm.startPage -1 }, search=${pm.cri.search}, type=${pm.cri.type})}">이전</a>
+			</li>
+			<li class="page-item" th:each="i : ${#numbers.sequence(pm.startPage, pm.endPage)}" th:classappend="${pm.cri.page == i ? 'active' : ''}" >
+				<a class="page-link" th:href="@{/post/list/{bo_num}(bo_num=${bo_num}, page=${i}, search=${pm.cri.search}, type=${pm.cri.type})}" th:text="${i}">1</a>
+			</li>
+			<li class="page-item" th:if="${pm.next}">
+				<a class="page-link" th:href="@{/post/list/{bo_num}(bo_num=${bo_num}, page=${pm.endPage+1}, search=${pm.cri.search}, type=${pm.cri.type})}">다음</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" th:href="@{/post/list/{bo_num}(bo_num=${bo_num}, page=${pm.finalPage}, search=${pm.cri.search}, type=${pm.cri.type})}">끝</a>
+			</li>
+		</ul>
 	</main>
 </body>
 </html>
