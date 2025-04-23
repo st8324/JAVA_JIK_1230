@@ -30,4 +30,10 @@
 		insert into file(fi_po_num, fi_name, fi_ori_name)
 		value(#{fi_po_num}, #{fi_name}, #{fi_ori_name})
 	</insert>
+	<delete id="deleteFile">
+		delete from file where fi_num = #{fi_num}
+	</delete>
+	<update id="deletePost">
+		update post set po_del = 'Y' where po_num = #{po_num}
+	</update>
 </mapper>

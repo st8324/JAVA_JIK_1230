@@ -22,5 +22,9 @@ public interface PostDAO {
 	void insertComment(CommentVO comment);
 
 	void insertFile(FileVO file);
+
+	void deleteFile(int fi_num);
+
+	boolean deletePost(int po_num);
 	
 }

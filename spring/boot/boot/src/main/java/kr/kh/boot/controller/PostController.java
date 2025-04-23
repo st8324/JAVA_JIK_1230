@@ -1,5 +1,6 @@
 package kr.kh.boot.controller;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import kr.kh.boot.model.vo.PostVO;
 import kr.kh.boot.service.PostService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -69,4 +72,16 @@ public class PostController {
 		}
 		return "redirect:/post/insert";
 	}
+	@PostMapping("/post/delete/{num}")
+	public String postDelete(@PathVariable int num, @AuthenticationPrincipal CustomUser customUser) {
+		if(customUser == null){
+			return "redirect:/post/detail/"+num;
+		}
+		MemberVO user = customUser.getMember();
+		if(postService.deletePost(num, user)){
+			return "redirect:/post/list/0";
+		}
+		return "redirect:/post/detail/"+num;
+	}
+	
 }
