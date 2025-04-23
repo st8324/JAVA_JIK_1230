@@ -20,5 +20,7 @@ public interface PostDAO {
 	boolean insertPost(PostVO post);
 
 	void insertComment(CommentVO comment);
+
+	void insertFile(FileVO file);
 	
 }

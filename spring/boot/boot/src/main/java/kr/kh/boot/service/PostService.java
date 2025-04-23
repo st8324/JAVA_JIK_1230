@@ -91,6 +91,7 @@ public class PostService {
 		try {
 			String fi_name = UploadFileUtils.uploadFile(uploadPath, fi_ori_name, file.getBytes());
 			FileVO fileVO = new FileVO(po_num, fi_ori_name, fi_name);
+			postDAO.insertFile(fileVO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

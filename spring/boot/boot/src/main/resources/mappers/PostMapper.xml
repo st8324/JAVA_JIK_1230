@@ -26,4 +26,8 @@
 		select #{co_po_num}, #{co_me_id}, #{co_content}, ifnull(max(co_num), 0) + 1, ifnull(max(co_num), 0) + 1
 		from comment
 	</insert>
+	<insert id="insertFile">
+		insert into file(fi_po_num, fi_name, fi_ori_name)
+		value(#{fi_po_num}, #{fi_name}, #{fi_ori_name})
+	</insert>
 </mapper>

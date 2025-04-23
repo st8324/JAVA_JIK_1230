@@ -1,8 +1,10 @@
 package kr.kh.boot.model.vo;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class FileVO {
 	int fi_num;
 	String fi_name;
