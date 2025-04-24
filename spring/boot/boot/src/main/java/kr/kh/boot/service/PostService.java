@@ -13,6 +13,7 @@ import kr.kh.boot.model.vo.BoardVO;
 import kr.kh.boot.model.vo.CommentVO;
 import kr.kh.boot.model.vo.CustomUser;
 import kr.kh.boot.model.vo.FileVO;
+import kr.kh.boot.model.vo.LikeVO;
 import kr.kh.boot.model.vo.MemberVO;
 import kr.kh.boot.model.vo.PostVO;
 import kr.kh.boot.utils.Criteria;
@@ -176,5 +177,53 @@ public class PostService {
 	public PageMaker getPageMaker(Criteria cri) {
 		int count = postDAO.selectCountPostList(cri);
 		return new PageMaker(3, cri, count);
+	}
+
+	public int like(LikeVO likeVO, CustomUser customUser) {
+		if(likeVO == null){
+			throw new RuntimeException("추천 정보가 없습니다.");
+		}
+		if(customUser == null){
+			throw new RuntimeException("로그인이 필요한 서비스입니다.");
+		}
+		MemberVO user = customUser.getMember();
+		likeVO.setLi_me_id(user.getMe_id());
+
+		LikeVO dbLikeVO = postDAO.selectLike(likeVO);
+		try{
+			//없으면 추가
+			if(dbLikeVO == null){
+				postDAO.insertLike(likeVO);
+				return likeVO.getLi_state();
+			}
+			//있으면
+			//취소인 경우 : 삭제
+			if(dbLikeVO.getLi_state() == likeVO.getLi_state()){
+				postDAO.deleteLike(dbLikeVO.getLi_num());
+				return 0;
+			}
+			//취소가 아닌 경우 : 수정
+			likeVO.setLi_num(dbLikeVO.getLi_num());
+			postDAO.updateLike(likeVO);
+			return likeVO.getLi_state();
+		}catch(Exception e){
+			throw new RuntimeException("예외 발생");
+		}finally{
+			//게시글 추천/비추천 수 수정
+			postDAO.updatePostLike(likeVO.getLi_po_num());
+
+		}
+		
+		
+	}
+
+	public LikeVO getLike(int po_num, CustomUser customUser) {
+		if(customUser == null ){
+			return null;
+		}
+		LikeVO like = new LikeVO();
+		like.setLi_po_num(po_num);
+		like.setLi_me_id(customUser.getMember().getMe_id());
+		return postDAO.selectLike(like);
 	}
 }

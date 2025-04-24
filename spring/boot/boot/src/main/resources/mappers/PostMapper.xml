@@ -65,4 +65,28 @@
 			</otherwise>
 		</choose>
 	</select>
+
+	<!-- 추천 관련 쿼리  -->
+  <select id="selectLike" resultType="LikeVO">
+		select * from `like` where li_me_id = #{li_me_id} and li_po_num = #{li_po_num}
+	</select>
+
+	<insert id="insertLike" >
+		insert into `like`(li_me_id, li_po_num, li_state) value(#{li_me_id}, #{li_po_num}, #{li_state})
+	</insert>
+
+	<delete id="deleteLike">
+		delete from `like` where li_num = #{li_num}
+	</delete>
+	
+	<update id="updateLike">
+		update `like` set li_state = #{li_state} where li_num = #{li_num}
+	</update>
+	<update id="updatePostLike">
+		update post set 
+			po_up = (select count(*) from `like` where li_state = 1 and li_po_num = #{po_num}),
+			po_down = (select count(*) from `like` where li_state = -1 and li_po_num = #{po_num})
+		where po_num = #{po_num}
+	</update>
+	
 </mapper>

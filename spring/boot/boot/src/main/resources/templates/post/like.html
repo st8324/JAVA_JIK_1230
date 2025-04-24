@@ -1,0 +1,22 @@
+<!DOCTYPE html >
+<html 
+	lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>부트</title>
+</head>
+<body>
+	
+	
+	<button class="btn mr-2 btn-like" data-state="1" 
+		th:classappend="${(like != null && like.li_state == 1) ? 'btn-success' : 'btn-outline-success'}">추천</button>
+	<button class="btn btn-like" data-state="-1"
+		th:classappend="${like != null && like.li_state == -1 ? 'btn-danger' : 'btn-outline-danger'}">비추천</button>
+	
+
+</body>
+</html>
