@@ -15,12 +15,12 @@
 		from comment
 	</insert>
 	<select id="selectCommentList" resultType="CommentVO">
-		select * from comment where co_po_num = #{po_num} and co_del = "N"
+		select * from comment where co_po_num = #{po_num} 
 		order by co_ori_num desc, co_num
 		limit #{pageStart}, #{perPageNum}
 	</select>
 	<select id="selectCountCommentList" resultType="int">
-		select count(*) from comment where co_po_num = #{po_num} and co_del = "N"
+		select count(*) from comment where co_po_num = #{po_num} 
 	</select>
 	<update id="deleteComment">
 		update comment set co_del = "Y" where co_num = #{co_num}

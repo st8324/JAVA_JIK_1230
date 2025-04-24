@@ -12,13 +12,14 @@
 <body>
 	<div class="comment-list form-group">
 		<div class="comment-item mb-3"  th:each="comment : ${list}" th:classappend="${comment.co_num != comment.co_ori_num ? 'ml-5' : ''}">
-			<div class="form-control" style="height: auto;">
+			<div class="form-control" style="height: auto;"  th:if="${comment.co_del == 'N'}">
 				<div th:text="${comment.co_me_id}">아이디</div>
 				<div th:text="${comment.co_content}">내용</div>
 				<div sec:authorize="isAuthenticated()" th:if="${#authentication.principal.member.me_id == comment.co_me_id}">
 					<button class="btn btn-outline-danger" th:onclick="|deleteComment(${comment.co_num})|">삭제</button>
 				</div>
 			</div>
+			<div class="form-control" th:unless="${comment.co_del == 'N'}">삭제된 댓글입니다.</div>
 		</div>
 	</div>
 	<div class="comment-pagination" th:if="${pm.totalCount != 0}">
