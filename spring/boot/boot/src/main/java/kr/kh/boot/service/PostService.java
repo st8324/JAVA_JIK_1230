@@ -226,4 +226,8 @@ public class PostService {
 		like.setLi_me_id(customUser.getMember().getMe_id());
 		return postDAO.selectLike(like);
 	}
+
+	public void updateView(int po_num) {
+		postDAO.updateView(po_num);
+	}
 }

@@ -55,6 +55,7 @@ public class PostController {
 	
 	@GetMapping("/post/detail/{po_num}")
 	public String getMethodName(Model model, @PathVariable int po_num) {
+		postService.updateView(po_num);
 		PostVO post = postService.getPost(po_num);
 		List<FileVO> list = postService.getFileList(po_num);
 		model.addAttribute("post", post);

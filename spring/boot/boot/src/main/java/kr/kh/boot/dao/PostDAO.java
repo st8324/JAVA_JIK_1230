@@ -44,5 +44,7 @@ public interface PostDAO {
 	void updateLike(LikeVO likeVO);
 
 	void updatePostLike(int po_num);
+
+	void updateView(int po_num);
 	
 }
