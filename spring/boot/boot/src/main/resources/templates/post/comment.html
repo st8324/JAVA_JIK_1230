@@ -18,8 +18,24 @@
 			</div>
 		</div>
 	</div>
-	<div class="comment-pagination">
-
+	<div class="comment-pagination" th:if="${pm.totalCount != 0}">
+		<ul class="pagination justify-content-center">
+			<li class="page-item">
+				<a class="page-link" href="javascipt:void(0);" th:onclick="displayComments(1)">처음</a>
+			</li>
+			<li class="page-item" th:if="${pm.prev}">
+				<a class="page-link" href="javascipt:void(0);" th:onclick="|displayComments(${pm.startPage - 1})|">이전</a>
+			</li>
+			<li class="page-item" th:each="i : ${#numbers.sequence(pm.startPage, pm.endPage)}" th:classappend="${pm.cri.page == i ? 'active' : ''}" >
+				<a class="page-link" href="javascipt:void(0);" th:text="${i}" th:onclick="|displayComments(${i})|">1</a>
+			</li>
+			<li class="page-item" th:if="${pm.next}">
+				<a class="page-link" href="javascipt:void(0);" th:onclick="|displayComments(${pm.endPage+1})|">다음</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="javascipt:void(0);" th:onclick="|displayComments(${pm.finalPage})|">끝</a>
+			</li>
+		</ul>
 	</div>
 </body>
 </html>
