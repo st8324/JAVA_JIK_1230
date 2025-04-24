@@ -55,6 +55,50 @@
 				</div>
 			</th:block>
 		</div>
+		<hr>
+		<div class="comment-container">
+			<div class="comment-list form-group">
+				<div class="comment-item form-control" style="height: auto;">
+					<div>아이디</div>
+					<div>내용</div>
+				</div>
+			</div>
+			<form class="comment-insert-wrap input-group">
+				<textarea name="" class="form-control comment-content"></textarea>
+				<div class="input-group-append">
+					<button class="btn btn-outline-success">등록</button>
+				</div>
+			</form>
+		</div>
+		<script th:inline="javascript">
+			$(".comment-insert-wrap").submit(function(e){
+				e.preventDefault();
+				const content = $(".comment-content").val();
+				const comment = {
+					co_po_num : '[[${post.po_num}]]',
+					co_content : content
+				}
+				$.ajax({
+					url : "/comment/insert",
+					method : "post",
+					data : JSON.stringify(comment),
+					contentType : "application/json",
+					success : function(data){
+						if(data){
+							alert("댓글 등록!");
+							$(".comment-content").val('');
+							displayComments();
+						}else{
+							alert("댓글 등록 실패!")
+						}
+					}
+				})
+			})
+			function displayComments(){
+
+			}
+		</script>
+
 		<script th:inline="javascript">
 			displayLikeBtns();
 			

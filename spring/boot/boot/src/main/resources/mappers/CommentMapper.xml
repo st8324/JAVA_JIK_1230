@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.boot.dao.CommentDAO">
+	<insert id="insertComment">
+		insert into comment(co_me_id, co_content, co_po_num, co_num, co_ori_num)
+		select #{co_me_id}, #{co_content}, #{co_po_num}, ifnull(max(co_num),0) + 1,
+		<choose>
+			<when test="co_ori_num == 0">
+				ifnull(max(co_num),0) + 1
+			</when>
+			<otherwise>
+				#{co_ori_num}
+			</otherwise>
+		</choose>
+		from comment
+	</insert>
+</mapper>
