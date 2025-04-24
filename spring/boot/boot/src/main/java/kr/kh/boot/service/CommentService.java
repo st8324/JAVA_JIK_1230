@@ -39,4 +39,8 @@ public class CommentService {
 		int count = commentDAO.selectCountCommentList(cri);
 		return new PageMaker(3, cri, count);
 	}
+
+	public boolean deleteComment(int co_num) {
+		return commentDAO.deleteComment(co_num);
+	}
 }

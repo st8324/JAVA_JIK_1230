@@ -15,6 +15,9 @@
 			<div class="form-control" style="height: auto;">
 				<div th:text="${comment.co_me_id}">아이디</div>
 				<div th:text="${comment.co_content}">내용</div>
+				<div sec:authorize="isAuthenticated()" th:if="${#authentication.principal.member.me_id == comment.co_me_id}">
+					<button class="btn btn-outline-danger" th:onclick="|deleteComment(${comment.co_num})|">삭제</button>
+				</div>
 			</div>
 		</div>
 	</div>

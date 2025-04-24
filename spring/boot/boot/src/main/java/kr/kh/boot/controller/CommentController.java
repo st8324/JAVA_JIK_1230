@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.kh.boot.service.CommentService;
@@ -38,5 +39,10 @@ public class CommentController {
 		model.addAttribute("list", list);
 		model.addAttribute("pm", pm);
 		return "post/comment";
+	}
+	@PostMapping("/delete")
+	@ResponseBody
+	public boolean delete(@RequestParam int co_num) {
+		return commentService.deleteComment(co_num);
 	}
 }

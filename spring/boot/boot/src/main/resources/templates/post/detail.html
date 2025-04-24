@@ -114,6 +114,17 @@
 					}
 				})
 			}
+			function deleteComment(num){
+				$.ajax({
+					url : "/comment/delete",
+					method : "post",
+					data : {co_num : num},
+					success : function(data){
+						alert(data ? "댓글 삭제!" : "댓글 삭제 실패!");
+						displayComments(cri.page);
+					}
+				})
+			}
 		</script>
 
 		<script th:inline="javascript">
