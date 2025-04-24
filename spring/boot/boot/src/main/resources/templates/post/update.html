@@ -27,7 +27,7 @@
 					<span th:text="${file.fi_ori_name}"></span>
 					<span class="btn-del" th:attr="data-target=${file.fi_num}">&times;</span>
 				</div>
-				<input type="file" name="fileList" class="form-control mb-2" th:each="num : ${#numbers.sequence(1, 3 - list.size())}">
+				<input type="file" name="fileList" class="form-control mb-2" th:if="${list.size() != 3}" th:each="num : ${#numbers.sequence(1, 3 - list.size())}">
 			</div>
 			<button class="btn btn-outline-success col-12">게시글 수정</button>
 		</form>
