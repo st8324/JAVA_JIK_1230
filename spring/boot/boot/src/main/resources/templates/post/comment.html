@@ -1,0 +1,25 @@
+<!DOCTYPE html >
+<html 
+	lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>부트</title>
+</head>
+<body>
+	<div class="comment-list form-group">
+		<div class="comment-item mb-3"  th:each="comment : ${list}" th:classappend="${comment.co_num != comment.co_ori_num ? 'ml-5' : ''}">
+			<div class="form-control" style="height: auto;">
+				<div th:text="${comment.co_me_id}">아이디</div>
+				<div th:text="${comment.co_content}">내용</div>
+			</div>
+		</div>
+	</div>
+	<div class="comment-pagination">
+
+	</div>
+</body>
+</html>

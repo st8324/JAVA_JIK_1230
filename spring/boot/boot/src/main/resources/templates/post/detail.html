@@ -57,10 +57,12 @@
 		</div>
 		<hr>
 		<div class="comment-container">
-			<div class="comment-list form-group">
-				<div class="comment-item form-control" style="height: auto;">
-					<div>아이디</div>
-					<div>내용</div>
+			<div class="comment-wrap">
+				<div class="comment-list form-group">
+					<div class="comment-item form-control" style="height: auto;">
+						<div>아이디</div>
+						<div>내용</div>
+					</div>
 				</div>
 			</div>
 			<form class="comment-insert-wrap input-group">
@@ -71,6 +73,12 @@
 			</form>
 		</div>
 		<script th:inline="javascript">
+			let cri = {
+				page : 1,
+				po_num : '[[${post.po_num}]]'
+			}
+			displayComments();
+
 			$(".comment-insert-wrap").submit(function(e){
 				e.preventDefault();
 				const content = $(".comment-content").val();
@@ -95,7 +103,15 @@
 				})
 			})
 			function displayComments(){
-
+				$.ajax({
+					url : "/comment/list",
+					method : "post",
+					data : JSON.stringify(cri),
+					contentType : "application/json",
+					success : function(data){
+						$(".comment-wrap").html(data);
+					}
+				})
 			}
 		</script>
 
