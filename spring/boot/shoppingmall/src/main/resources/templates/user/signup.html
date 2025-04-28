@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/layout.html}">
+<head>
+<meta charset="UTF-8">
+<title>쇼핑몰</title>
+<style>
+	.box input:focus{outline: 0; box-shadow: none; z-index: 10;}
+	.box input+input{margin-top: -1px;}
+	.box input:first-of-type{ border-radius: 5px 5px 0 0 !important;}
+	.box input:last-of-type{ border-radius: 0 0 5px 5px !important;}
+	.error{color: red;}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+</head>
+<body >
+	<main layout:fragment="content" class="container">
+		<form th:action="@{/signup}" method="post" id="signup-form">
+			<div class="d-flex flex-column mt-3 mb-3 form-group box">
+				<input type="text" name="me_id" 
+					class="form-control rounded-0"
+					placeholder="아이디">
+				<input type="password" name="me_pw" id="me_pw" 
+					class="form-control rounded-0 "
+					placeholder="비번">
+				<input type="password" name="me_pw2"
+					class="form-control rounded-0 "
+					placeholder="비번 확인">
+			</div>
+			<div>
+				<label for="me_id" id="me_id-error" class="error"></label>
+				<label for="me_pw" id="me_pw-error" class="error"></label>
+				<label for="me_pw2" id="me_pw2-error" class="error"></label>
+			</div>
+
+			<div class="d-flex flex-column mt-3 mb-3 form-group box">
+				<input type="email" name="me_email" 
+					class="form-control rounded-0"
+					placeholder="이메일">
+				<input type="text" name="me_number"
+					class="form-control rounded-0 "
+					placeholder="전화번호">
+			</div>
+			<button class="btn btn-success col-12 mb-3">회원 가입</button>
+		</form>
+		<script>
+			$("#signup-form").validate({
+				rules : {
+					me_id : {
+						required : true
+					},
+					me_pw : {
+						required : true
+					},
+					me_pw2 : {
+						equalTo : me_pw
+					}
+				},
+				messages : {
+					me_id : {
+						required : "·아이디는 필수 항목입니다."
+					},
+					me_pw : {
+						required : "·비번은 필수 항목입니다."
+					},
+					me_pw2 : {
+						equalTo : "·비번과 비번 확인이 같지 않습니다."
+					}
+				},
+				submitHandler : function(){
+					return false;
+				}
+			});
+		</script>
+	</main>
+</body>
+</html>
