@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/layout.html}">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>쇼핑몰</title>
+<meta charset="UTF-8">
+<title>쇼핑몰</title>
 </head>
-<body>
-	<h1>메인 페이지</h1>
+<body >
+	<main layout:fragment="content">
+		<h1>메인</h1>
+	</main>
 </body>
 </html>
