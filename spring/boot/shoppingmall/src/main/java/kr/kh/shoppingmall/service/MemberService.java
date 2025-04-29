@@ -45,7 +45,11 @@ public class MemberService {
 		if(memberDAO.selectMember(member.getMe_id()) != null)	{
 			return false;
 		}
-		return memberDAO.insertMember(member);
+		try{
+			return memberDAO.insertMember(member);
+		}catch(Exception e){
+			return false;
+		}
 	}
 
 	public boolean checkId(String id) {
