@@ -16,11 +16,27 @@ layout:decorate="~{layout/admin_layout.html}">
 			<button class="btn btn-warning form-control col-2">수정</button>
 			<button class="btn btn-danger form-control col-2">삭제</button>
 		</div>
-		<form class="input-group mt-5" th:action="@{/admin/category/insert}" method="post">
+		<form class="input-group mt-5" th:action="@{/admin/category/insert}" method="post" id="insertForm">
 			<input type="text" name="ca_name" class="form-control col-4" placeholder="카테고리명">
 			<input type="text" name="ca_code" class="form-control col-4" placeholder="카테고리코드">
 			<button class="btn btn-success form-control col-4">등록</button>
 		</form>
+		<script>
+			$("#insertForm").submit(function(e){
+				e.preventDefault();
+				let $this = $(this);
+				$.ajax({
+					async : true,
+					url : "/admin/category/insert",
+					method : "get",
+					data : $this.serialize(),
+					success : function(data){
+						alert(data);
+						location.reload();
+					}
+				})
+			})
+		</script>
 	</main>
 </body>
 </html>

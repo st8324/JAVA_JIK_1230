@@ -4,4 +4,13 @@
   <select id="selectCategoryList" resultType="CategoryVO">
 		select * from category
 	</select>
+	<select id="selectCategoryByName" resultType="CategoryVO">
+		select * from category where ca_name = #{ca_name}
+	</select>
+	<select id="selectCategoryByCode" resultType="CategoryVO">
+		select * from category where ca_code = #{ca_code}
+	</select>
+	<insert id="insertCategory">
+		insert into category(ca_name, ca_code) value(#{ca_name}, #{ca_code})
+	</insert>
 </mapper>
