@@ -57,7 +57,8 @@ layout:decorate="~{layout/layout.html}">
 				rules : {
 					me_id : {
 						required : true,
-						regex : /^[a-zA-Z0-9]{3,12}$/
+						regex : /^[a-zA-Z0-9]{3,12}$/,
+						duplicate : true
 					},
 					me_pw : {
 						required : true,
@@ -78,7 +79,8 @@ layout:decorate="~{layout/layout.html}">
 				messages : {
 					me_id : {
 						required : "·아이디는 필수 항목입니다.",
-						regex : "·아이디는 영어, 숫자로 이루어져 있으며, 3~12자입니다."
+						regex : "·아이디는 영어, 숫자로 이루어져 있으며, 3~12자입니다.",
+						duplicate : "이미 사용중인 아이디입니다."
 					},
 					me_pw : {
 						required : "·비번은 필수 항목입니다.",
@@ -107,6 +109,31 @@ layout:decorate="~{layout/layout.html}">
 			$.validator.addMethod("phone", function(value, element){
 				return this.optional(element) || /^0\d{1,2}-\d{3,4}-\d{4}$/.test(value);
 			}, "전화번호 형식에 맞지 않습니다.(예:010-1234-5678)");
+			$.validator.addMethod("duplicate", function(value, element){
+				return this.optional(element) || checkId(value);
+			}, "이미 사용중인 아이디입니다.");
+			/**
+			 * 아이디가 주어지면 사용 가능여부를 반환하는 함수
+			 * @params id 중복 검사를 할 아이디
+			 * @return 사용 가능 여부. true 사용 가능, false 이미 사용 중
+			*/
+			function checkId(id){
+				var res = false;
+				$.ajax({
+					async : false,
+					url : "/check/id",
+					method : "get",
+					data : { id },
+					//contentType : "생략" //객체로 보내기 때문에
+					//dataType : "생략" //서버에서 true, false로 보내주기 때문에
+					success : function(data){
+						res = data;
+					},
+					error : function(){
+					}
+				})
+				return res;
+			}
 		</script>
 	</main>
 </body>
