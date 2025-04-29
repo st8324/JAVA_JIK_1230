@@ -13,4 +13,10 @@
 	<insert id="insertCategory">
 		insert into category(ca_name, ca_code) value(#{ca_name}, #{ca_code})
 	</insert>
+	<update id="updateCategory">
+		update category set ca_name = #{ca_name} where ca_num = #{ca_num}
+	</update>
+	<delete id="deleteCategory">
+		delete from category where ca_num = #{ca_num}
+	</delete>
 </mapper>

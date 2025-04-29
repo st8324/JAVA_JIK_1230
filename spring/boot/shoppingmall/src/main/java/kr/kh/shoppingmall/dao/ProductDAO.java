@@ -13,5 +13,9 @@ public interface ProductDAO {
 	CategoryVO selectCategoryByCode(String ca_code);
 
 	void insertCategory(CategoryVO category);
+
+	boolean updateCategory(CategoryVO category);
+
+	boolean deleteCategory(int ca_num);
 	
 }

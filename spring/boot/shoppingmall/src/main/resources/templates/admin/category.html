@@ -10,18 +10,20 @@ layout:decorate="~{layout/admin_layout.html}">
 <body >
 	<main layout:fragment="content" class="container">
 		<h1>카테고리 관리</h1>
-		<div class="input-group mt-3" th:each="category : ${list}">
+		<form class="input-group mt-3 update-form" th:each="category : ${list}">
+			<input type="hidden" name="ca_num" th:value="${category.ca_num}">
 			<input type="text" name="ca_name" class="form-control col-4" placeholder="카테고리명" th:value="${category.ca_name}">
 			<input type="text" name="ca_code" class="form-control col-4" readonly th:value="${category.ca_code}">
-			<button class="btn btn-warning form-control col-2">수정</button>
-			<button class="btn btn-danger form-control col-2">삭제</button>
-		</div>
-		<form class="input-group mt-5" th:action="@{/admin/category/insert}" method="post" id="insertForm">
+			<button class="btn btn-warning form-control col-2" type="submit">수정</button>
+			<button class="btn btn-danger form-control col-2 btn-del" type="button" th:data-num="${category.ca_num}">삭제</button>
+		</form>
+		<form class="input-group mt-5" id="insertForm">
 			<input type="text" name="ca_name" class="form-control col-4" placeholder="카테고리명">
 			<input type="text" name="ca_code" class="form-control col-4" placeholder="카테고리코드">
 			<button class="btn btn-success form-control col-4">등록</button>
 		</form>
 		<script>
+			//카테고리 등록
 			$("#insertForm").submit(function(e){
 				e.preventDefault();
 				let $this = $(this);
@@ -30,6 +32,36 @@ layout:decorate="~{layout/admin_layout.html}">
 					url : "/admin/category/insert",
 					method : "get",
 					data : $this.serialize(),
+					success : function(data){
+						alert(data);
+						location.reload();
+					}
+				})
+			})
+			//카테고리 수정
+			$(".update-form").submit(function(e){
+				e.preventDefault();
+				let $this = $(this);
+				$.ajax({
+					async : true,
+					url : "/admin/category/update",
+					method : "get",
+					data : $this.serialize(),
+					success : function(data){
+						alert(data);
+						//location.reload();
+					}
+				})
+			})
+			//카테고리 삭제
+			$(".btn-del").click(function(e){
+				e.preventDefault();
+				let $this = $(this);
+				$.ajax({
+					async : true,
+					url : "/admin/category/delete",
+					method : "get",
+					data : {num : $this.data("num")},
 					success : function(data){
 						alert(data);
 						location.reload();
