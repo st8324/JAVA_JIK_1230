@@ -19,4 +19,8 @@
 	<delete id="deleteCategory">
 		delete from category where ca_num = #{ca_num}
 	</delete>
+
+	<select id="selectProductList" resultType="ProductVO">
+		select * from product where pr_ca_num = #{pr_ca_num} and pr_del = "N"
+	</select>
 </mapper>

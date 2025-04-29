@@ -3,6 +3,7 @@ package kr.kh.shoppingmall.dao;
 import java.util.List;
 
 import kr.kh.shoppingmall.model.vo.CategoryVO;
+import kr.kh.shoppingmall.model.vo.ProductVO;
 
 public interface ProductDAO {
 
@@ -17,5 +18,7 @@ public interface ProductDAO {
 	boolean updateCategory(CategoryVO category);
 
 	boolean deleteCategory(int ca_num);
+
+	List<ProductVO> selectProductList(int pr_ca_num);
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.shoppingmall.dao.ProductDAO;
 import kr.kh.shoppingmall.model.vo.CategoryVO;
+import kr.kh.shoppingmall.model.vo.ProductVO;
 
 @Service
 public class ProductService {
@@ -57,5 +58,9 @@ public class ProductService {
 		}catch(Exception e){
 			return "제품이 등록된 카테고리는 삭제할 수 없습니다.";
 		}
+	}
+
+	public List<ProductVO> getProductList(int ca_num) {
+		return productDAO.selectProductList(ca_num);
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import kr.kh.shoppingmall.model.vo.UserRole;
 import kr.kh.shoppingmall.service.MemberDetailService;
 
 @Configuration
@@ -26,6 +27,9 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(
 			requests->
 				requests
+					.requestMatchers("/admin/**")
+					.hasAnyAuthority(UserRole.ADMIN.name()) //권한이 ADMIN인 회원
+					//.hasAnyRole(UserRole.ADMIN.name()) //권한이 ROLE_ADMIN인 회원
 					.anyRequest()
 					.permitAll()
 			)
