@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/admin_layout.html}">
+<head>
+<meta charset="UTF-8">
+<title>쇼핑몰</title>
+</head>
+<body >
+	<main layout:fragment="content" class="container">
+		<h1>카테고리 관리</h1>
+		<div class="input-group mt-3" th:each="category : ${list}">
+			<input type="text" name="ca_name" class="form-control col-4" placeholder="카테고리명" th:value="${category.ca_name}">
+			<input type="text" name="ca_code" class="form-control col-4" readonly th:value="${category.ca_code}">
+			<button class="btn btn-warning form-control col-2">수정</button>
+			<button class="btn btn-danger form-control col-2">삭제</button>
+		</div>
+		<form class="input-group mt-5" th:action="@{/admin/category/insert}" method="post">
+			<input type="text" name="ca_name" class="form-control col-4" placeholder="카테고리명">
+			<input type="text" name="ca_code" class="form-control col-4" placeholder="카테고리코드">
+			<button class="btn btn-success form-control col-4">등록</button>
+		</form>
+	</main>
+</body>
+</html>
