@@ -18,7 +18,14 @@ public class SecurityConfig {
 				requests
 					.anyRequest()
 					.permitAll()
-		);
+			)
+			.formLogin(form -> 
+				form
+					.loginPage("/login")
+					.permitAll()
+					.loginProcessingUrl("/loginPost")
+					.defaultSuccessUrl("/")
+			);
 
 		return http.build();
 	}

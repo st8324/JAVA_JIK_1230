@@ -41,4 +41,9 @@ public class MainController {
 		return memberService.checkId(id);
 	}
 	
+	@GetMapping("/login")
+	public String login() {
+		return "user/login";
+	}
+	
 }
