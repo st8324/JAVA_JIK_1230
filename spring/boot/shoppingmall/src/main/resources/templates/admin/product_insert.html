@@ -12,7 +12,7 @@ layout:decorate="~{layout/admin_layout.html}">
 <body >
 	<main layout:fragment="content" class="container mb-5">
 		<h1 class="my-3">제품 등록</h1>
-		<form th:action="@{/admin/product/insert}" method="post" enctype="multipart/form-data">
+		<form th:action="@{/admin/product/insert}" method="post" enctype="multipart/form-data" id="insertForm">
 			<div class="form-group">
 				<label for="category">카테고리</label>
 				<select name="pr_ca_num" id="category" class="form-control">
@@ -43,16 +43,82 @@ layout:decorate="~{layout/admin_layout.html}">
 			</div>
 			<div class="form-group">
 				<label for="content">제품 상세</label>
-				<textarea name="pr_content" id="content" class="form-control"></textarea>
+				<textarea name="pr_content" id="content" class="form-control" style="display: block !important;;"></textarea>
 			</div>
 			<button class="btn btn-success col-12">제품 등록</button>
 		</form>
+		
+		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
 		<script>
+		
       $('#content').summernote({
         placeholder: '제품 상세 설명을 입력하세요.',
         tabsize: 2,
         height: 400
       });
+			$("[name=pr_content]").show();
+			$(document).ready(function(){
+				$("#insertForm").validate({
+					ignore : "",
+					rules : {
+						pr_title : {
+							required : true
+						},
+						pr_ca_num : {
+							nzero : true
+						},
+						pr_amount : {
+							digits : true
+						},
+						pr_price : {
+							digits : true,
+							nzero : true
+						},
+						pr_content : {
+							summernote : true
+						},
+						thumb : {
+							required : true
+						}
+					},
+					messages : {
+						pr_title : {
+							required : "필수 항목입니다."
+						},
+						pr_ca_num : {
+							nzero : "카테고리를 선택하세요."
+						},
+						pr_amount : {
+							digits : "수량은 숫자만 입력하세요."
+						},
+						pr_price : {
+							digits : "가격은 숫자만 입력하세요.",
+							nzero : "가격은 0보다 커야 합니다."
+						},
+						pr_content : {
+							summernote : "제품 설명을 입력하세요."
+						},
+						thumb : {
+							required : "썸네일을 선택하세요."
+						}
+					}
+				});
+			})
+			
+			$.validator.addMethod("nzero", function(value, element){
+				return this.optional(element) || $(element).val() != 0;
+			}, "값에 0이 올 수 없습니다.");
+			$.validator.addMethod("summernote", function(value, element){
+				return this.optional(element) || false ;
+			}, "내용을 입력하세요.");
+
+			function summernoteEmpty(){
+				console.log(1);
+				var content = $('#content').summernote('code');
+				return content.trim() !== '';
+			}
+			
     </script>
 	</main>
 </body>
