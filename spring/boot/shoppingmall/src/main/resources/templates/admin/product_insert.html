@@ -8,6 +8,11 @@ layout:decorate="~{layout/admin_layout.html}">
 <title>쇼핑몰</title>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+<style>
+	.error{color: red;}
+</style>
 </head>
 <body >
 	<main layout:fragment="content" class="container mb-5">
@@ -15,7 +20,7 @@ layout:decorate="~{layout/admin_layout.html}">
 		<form th:action="@{/admin/product/insert}" method="post" enctype="multipart/form-data" id="insertForm">
 			<div class="form-group">
 				<label for="category">카테고리</label>
-				<select name="pr_ca_num" id="category" class="form-control">
+				<select name="pr_ca_num" id="category" class="form-control mb-2">
 					<option value="0">카테고리를 선택하세요.</option>
 					<option 
 						th:each="category : ${categoryList}" 
@@ -27,29 +32,29 @@ layout:decorate="~{layout/admin_layout.html}">
 			</div>
 			<div class="form-group">
 				<label for="title">제품명</label>
-				<input type="text" name="pr_title" id="title" class="form-control">
+				<input type="text" name="pr_title" id="title" class="form-control mb-2">
 			</div>
 			<div class="form-group">
 				<label for="amount">수량</label>
-				<input type="text" name="pr_amount" id="amount" class="form-control" value="0">
+				<input type="text" name="pr_amount" id="amount" class="form-control mb-2" value="0">
 			</div>
 			<div class="form-group">
 				<label for="price">가격</label>
-				<input type="text" name="pr_price" id="price" class="form-control" value="0">
+				<input type="text" name="pr_price" id="price" class="form-control mb-2" value="0">
 			</div>
 			<div class="form-group">
 				<label for="thumb">썸네일</label>
-				<input type="file" name="thumb" id="thumb" class="form-control">
+				<input type="file" name="thumb" id="thumb" class="form-control mb-2">
 			</div>
 			<div class="form-group">
 				<label for="content">제품 상세</label>
-				<textarea name="pr_content" id="content" class="form-control" style="display: block !important;;"></textarea>
+				<textarea name="pr_content" id="content" class="form-control"></textarea>
 			</div>
+			<label id="content-error" class="error" for="content"></label>
 			<button class="btn btn-success col-12">제품 등록</button>
 		</form>
 		
-		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+		
 		<script>
 		
       $('#content').summernote({
@@ -57,66 +62,64 @@ layout:decorate="~{layout/admin_layout.html}">
         tabsize: 2,
         height: 400
       });
-			$("[name=pr_content]").show();
-			$(document).ready(function(){
-				$("#insertForm").validate({
-					ignore : "",
-					rules : {
-						pr_title : {
-							required : true
-						},
-						pr_ca_num : {
-							nzero : true
-						},
-						pr_amount : {
-							digits : true
-						},
-						pr_price : {
-							digits : true,
-							nzero : true
-						},
-						pr_content : {
-							summernote : true
-						},
-						thumb : {
-							required : true
-						}
-					},
-					messages : {
-						pr_title : {
-							required : "필수 항목입니다."
-						},
-						pr_ca_num : {
-							nzero : "카테고리를 선택하세요."
-						},
-						pr_amount : {
-							digits : "수량은 숫자만 입력하세요."
-						},
-						pr_price : {
-							digits : "가격은 숫자만 입력하세요.",
-							nzero : "가격은 0보다 커야 합니다."
-						},
-						pr_content : {
-							summernote : "제품 설명을 입력하세요."
-						},
-						thumb : {
-							required : "썸네일을 선택하세요."
-						}
-					}
-				});
-			})
 			
+			$("#insertForm").validate({
+				ignore : "",//안보이는 요소도 체크 함
+				rules : {
+					pr_title : {
+						required : true
+					},
+					pr_ca_num : {
+						nzero : true
+					},
+					pr_amount : {
+						digits : true
+					},
+					pr_price : {
+						digits : true,
+						nzero : true
+					},
+					pr_content : {
+						summernoteCheck : true
+					},
+					thumb : {
+						required : true
+					}
+				},
+				messages : {
+					pr_title : {
+						required : "필수 항목입니다."
+					},
+					pr_ca_num : {
+						nzero : "카테고리를 선택하세요."
+					},
+					pr_amount : {
+						digits : "수량은 숫자만 입력하세요."
+					},
+					pr_price : {
+						digits : "가격은 숫자만 입력하세요.",
+						nzero : "가격은 0보다 커야 합니다."
+					},
+					pr_content : {
+						summernoteCheck : "제품 설명을 입력하세요."
+					},
+					thumb : {
+						required : "썸네일을 선택하세요."
+					}
+				}
+			});
+			
+			$.validator.addMethod("summernoteCheck", function(value, element){
+				return summernoteEmpty();
+			}, "내용을 입력하세요.");
+
 			$.validator.addMethod("nzero", function(value, element){
 				return this.optional(element) || $(element).val() != 0;
 			}, "값에 0이 올 수 없습니다.");
-			$.validator.addMethod("summernote", function(value, element){
-				return this.optional(element) || false ;
-			}, "내용을 입력하세요.");
 
 			function summernoteEmpty(){
-				console.log(1);
 				var content = $('#content').summernote('code');
-				return content.trim() !== '';
+				return  $(content).text().trim() !== '';
 			}
 			
     </script>
