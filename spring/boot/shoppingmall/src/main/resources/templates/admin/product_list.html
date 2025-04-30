@@ -54,6 +54,9 @@ layout:decorate="~{layout/admin_layout.html}">
 						</form>
 					</td>
 				</tr>
+				<tr th:if="${productList.size() == 0}">
+					<td colspan="7" class="text-center">등록된 제품이 없습니다.</td>
+				</tr>
 			</tbody>
 		</table>
 	</main>
