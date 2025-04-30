@@ -46,4 +46,7 @@
 		right join category on pr_ca_num = ca_num
 		where ca_num = #{pr_ca_num}
 	</select>
+	<select id="selectProduct" resultType="ProductVO">
+		select * from product where pr_del = "N" and pr_code = #{pr_code}
+	</select>
 </mapper>

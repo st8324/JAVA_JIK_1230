@@ -100,4 +100,13 @@ public class ProductService {
 		int index = fileName.lastIndexOf(".");
 		return index < 0 ? null : fileName.substring(index);
 	}
+
+	public void deleteProduct(String pr_code) {
+		ProductVO product = productDAO.selectProduct(pr_code);
+		if(product == null){
+			return;
+		}
+		product.setPr_del("Y");
+		productDAO.updateProduct(product);
+	}
 }

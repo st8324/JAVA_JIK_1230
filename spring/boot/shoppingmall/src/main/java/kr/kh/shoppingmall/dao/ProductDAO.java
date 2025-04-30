@@ -26,5 +26,7 @@ public interface ProductDAO {
 	boolean updateProduct(ProductVO product);
 
 	String selectNextPrCode(int pr_ca_num);
+
+	ProductVO selectProduct(String pr_code);
 	
 }

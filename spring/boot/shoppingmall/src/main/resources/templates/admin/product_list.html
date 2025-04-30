@@ -46,7 +46,13 @@ layout:decorate="~{layout/admin_layout.html}">
 					<td th:text="${product.pr_title}"></td>
 					<td th:text="${product.pr_price}"></td>
 					<td th:text="${product.pr_amount}"></td>
-					<td></td>
+					<td class="clearfix">
+						<a href="" class="btn btn-warning float-left">수정</a>
+						<form th:action="@{/admin/product/delete/{ca_num}/{pr_code}(ca_num=${product.pr_ca_num},pr_code=${product.pr_code})}" 
+							method="post" class="float-right">
+							<button class="btn btn-danger">삭제</button>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
