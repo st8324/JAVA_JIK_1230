@@ -13,6 +13,17 @@ layout:decorate="~{layout/admin_layout.html}">
 		<div class="mb-3 d-flex justify-content-end">
 			<a th:href="@{/admin/product/insert/0}" class="btn btn-success">제품 등록</a>
 		</div>
+		<div class="my-3 d-flex flex-wrap">
+			<a th:href="@{/admin/product/0}" 
+				class="btn mr-1"
+				th:classappend="${0 == ca_num? 'btn-success' : 'btn-outline-success'}">전체</a>
+			<a 
+				th:href="@{/admin/product/{num}(num=${category.ca_num})}" 
+				class="btn mr-1" 
+				th:each="category : ${categoryList}"
+				th:text="${category.ca_name}"
+				th:classappend="${category.ca_num == ca_num? 'btn-success' : 'btn-outline-success'}"></a>
+		</div>
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
