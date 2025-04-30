@@ -20,5 +20,11 @@ public interface ProductDAO {
 	boolean deleteCategory(int ca_num);
 
 	List<ProductVO> selectProductList(int pr_ca_num);
+
+	boolean insertProduct(ProductVO product);
+
+	boolean updateProduct(ProductVO product);
+
+	String selectNextPrCode(int pr_ca_num);
 	
 }

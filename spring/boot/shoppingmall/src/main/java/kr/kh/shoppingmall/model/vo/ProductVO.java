@@ -9,7 +9,7 @@ public class ProductVO {
 	String pr_content;
 	int pr_price;
 	String pr_thumb;
-	String pr_del;
+	String pr_del = "N";
 	int pr_amount;
 	int pr_ca_num;
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/admin_layout.html}">
+<head>
+<meta charset="UTF-8">
+<title>쇼핑몰</title>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>
+</head>
+<body >
+	<main layout:fragment="content" class="container mb-5">
+		<h1 class="my-3">제품 등록</h1>
+		<form th:action="@{/admin/product/insert}" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label for="category">카테고리</label>
+				<select name="pr_ca_num" id="category" class="form-control">
+					<option value="0">카테고리를 선택하세요.</option>
+					<option 
+						th:each="category : ${categoryList}" 
+						th:value="${category.ca_num}" 
+						th:text="${category.ca_name}" 
+						th:selected="${category.ca_num == ca_num}"
+					></option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="title">제품명</label>
+				<input type="text" name="pr_title" id="title" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="amount">수량</label>
+				<input type="text" name="pr_amount" id="amount" class="form-control" value="0">
+			</div>
+			<div class="form-group">
+				<label for="price">가격</label>
+				<input type="text" name="pr_price" id="price" class="form-control" value="0">
+			</div>
+			<div class="form-group">
+				<label for="thumb">썸네일</label>
+				<input type="file" name="thumb" id="thumb" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="content">제품 상세</label>
+				<textarea name="pr_content" id="content" class="form-control"></textarea>
+			</div>
+			<button class="btn btn-success col-12">제품 등록</button>
+		</form>
+		<script>
+      $('#content').summernote({
+        placeholder: '제품 상세 설명을 입력하세요.',
+        tabsize: 2,
+        height: 400
+      });
+    </script>
+	</main>
+</body>
+</html>

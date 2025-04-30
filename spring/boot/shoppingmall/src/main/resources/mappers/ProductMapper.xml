@@ -21,6 +21,29 @@
 	</delete>
 
 	<select id="selectProductList" resultType="ProductVO">
-		select * from product where pr_ca_num = #{pr_ca_num} and pr_del = "N"
+		select * from product where pr_del = "N"
+		<if test="pr_ca_num != 0">
+			and pr_ca_num = #{pr_ca_num} 
+		</if>
+	</select>
+	<insert id="insertProduct">
+		insert into product(pr_code, pr_title, pr_content, pr_price, pr_thumb, pr_amount, pr_ca_num)
+		value(#{pr_code}, #{pr_title}, #{pr_content}, #{pr_price}, #{pr_thumb}, #{pr_amount}, #{pr_ca_num})
+	</insert>
+	<update id="updateProduct">
+		update product set 
+			pr_title = #{pr_title}, 
+			pr_content = #{pr_content}, 
+			pr_price = #{pr_price}, 
+			pr_thumb = #{pr_thumb}, 
+			pr_amount = #{pr_amount},
+			pr_del = #{pr_del}
+		where pr_code = #{pr_code}
+	</update>
+	<select id="selectNextPrCode" resultType="String">
+		select concat(ca_code, lpad(count(pr_code)+1, 3, "0"))
+		from product 
+		right join category on pr_ca_num = ca_num
+		where ca_num = #{pr_ca_num}
 	</select>
 </mapper>

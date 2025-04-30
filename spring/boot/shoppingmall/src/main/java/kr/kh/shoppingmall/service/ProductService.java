@@ -3,17 +3,23 @@ package kr.kh.shoppingmall.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.shoppingmall.dao.ProductDAO;
 import kr.kh.shoppingmall.model.vo.CategoryVO;
 import kr.kh.shoppingmall.model.vo.ProductVO;
+import kr.kh.shoppingmall.utils.UploadFileUtils;
 
 @Service
 public class ProductService {
 
 	@Autowired
 	ProductDAO productDAO;
+
+	@Value("${spring.path.upload}")
+	String uploadPath;
 
 	public List<CategoryVO> getCategory() {
 		return productDAO.selectCategoryList();
@@ -62,5 +68,36 @@ public class ProductService {
 
 	public List<ProductVO> getProductList(int ca_num) {
 		return productDAO.selectProductList(ca_num);
+	}
+
+	public boolean insertProduct(ProductVO product, MultipartFile thumb) {
+		if(product == null || thumb == null || thumb.getOriginalFilename().isEmpty()){
+			return false;
+		}
+		String pr_code = productDAO.selectNextPrCode(product.getPr_ca_num());
+		product.setPr_code(pr_code);
+		boolean res = productDAO.insertProduct(product);
+		if(!res){
+			return false;
+		}
+		//썸네일 작업
+		String fileName = thumb.getOriginalFilename();
+		String suffix = getSuffix(fileName);
+		String newFileName = product.getPr_code() + suffix;
+		String thumbnail;
+		try {
+			thumbnail = UploadFileUtils.uploadFile(uploadPath, newFileName, thumb.getBytes(),"product");
+			product.setPr_thumb(thumbnail);
+			productDAO.updateProduct(product);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	private String getSuffix(String fileName) {
+		
+		int index = fileName.lastIndexOf(".");
+		return index < 0 ? null : fileName.substring(index);
 	}
 }
