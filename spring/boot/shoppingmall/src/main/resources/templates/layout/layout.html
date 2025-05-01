@@ -24,9 +24,11 @@
   
   <script th:inline="javascript">
     $(document).ready(function(){
+      var ca_num = [[${ca_num}]];
+      ca_num = ca_num == null ? 0 : ca_num;
       $.ajax({
         async : true,
-        url : '/category/'+ [[${ca_num}]],
+        url : '/category/'+ ca_num,
         method : 'get',
         success : function(data){
           $("#header").html(data);
