@@ -22,11 +22,11 @@
   <!-- 고정 푸터 -->
   <div th:replace="~{layout/footer.html :: footer}"></div> <!-- 푸터 불러오기 -->
   
-  <script>
+  <script th:inline="javascript">
     $(document).ready(function(){
       $.ajax({
         async : true,
-        url : '/category',
+        url : '/category/'+ [[${ca_num}]],
         method : 'get',
         success : function(data){
           $("#header").html(data);

@@ -10,11 +10,11 @@ layout:decorate="~{layout/layout.html}">
 <body >
 	<main layout:fragment="content" class="container">
 		<h1 class="my-3">제품 목록</h1>
-		<div class="product-list d-flex flex-wrap justify-content-between">
-			<a class="card my-3" style="width:300px; cursor: pointer;"  
+		<div class="product-list d-flex flex-wrap">
+			<a class="card my-3 col-3 offset-1" style="cursor: pointer;"  
 				th:each="product : ${productList}"
 				th:href="@{/product/detail(prcode=${product.pr_code})}">
-				<img class="card-img-top" src="/img/bird.jpg" alt="Card image" style="width:100%" height="400px">
+				<img class="card-img-top" th:src="@{/file/{path}(path=${product.pr_thumb})}" alt="Card image" style="width:100%" height="400px">
 				<div class="card-body">
 					<p class="card-text" th:text="${product.pr_title}"></p>
 				</div>
