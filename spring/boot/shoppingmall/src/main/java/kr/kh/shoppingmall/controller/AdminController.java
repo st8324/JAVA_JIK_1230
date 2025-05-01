@@ -70,7 +70,7 @@ public class AdminController {
 	@PostMapping("/product/insert")
 	public String productInsertPost(ProductVO product, MultipartFile thumb) {
 		if(productService.insertProduct(product, thumb)){
-			return "redirect:/admin/product";//+product.getPr_ca_num();
+			return "redirect:/admin/product/"+product.getPr_ca_num();
 		}
 		return "redirect:/admin/product/insert/" +product.getPr_ca_num();
 	}
