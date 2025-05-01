@@ -109,4 +109,17 @@ public class ProductService {
 		product.setPr_del("Y");
 		productDAO.updateProduct(product);
 	}
+
+	public ProductVO getProduct(String pr_code, boolean isdel) {
+		ProductVO product = productDAO.selectProduct(pr_code);
+		//삭제된 제품도 OK
+		if(isdel){
+			return product;
+		}
+		//삭제 안된 제품만 OK 
+		else if(product.getPr_del().equals("N")){
+			return product;
+		}
+		return null;
+	}
 }

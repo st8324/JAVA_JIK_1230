@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import kr.kh.shoppingmall.model.vo.CategoryVO;
 import kr.kh.shoppingmall.model.vo.ProductVO;
-import kr.kh.shoppingmall.service.AdminService;
 import kr.kh.shoppingmall.service.ProductService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -81,4 +79,12 @@ public class AdminController {
 		productService.deleteProduct(pr_code);
 		return "redirect:/admin/product/" + ca_num;
 	}
+	@GetMapping("/product/update/{ca_num}/{pr_code}")
+	public String productUpdate(Model model, @PathVariable String pr_code, @PathVariable int ca_num) {
+		ProductVO product = productService.getProduct(pr_code, false);
+
+		model.addAttribute("product", product);
+		return "admin/product_update";
+	}
+	
 }
