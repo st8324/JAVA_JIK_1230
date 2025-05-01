@@ -36,5 +36,7 @@ public interface ProductDAO {
 	boolean insertBuy(BuyVO buy);
 
 	void insertBuyList(List<BuyListVO> list);
+
+	void updateProductAmount(BuyListVO bl);
 	
 }

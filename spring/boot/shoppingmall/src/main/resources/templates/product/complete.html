@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/layout.html}">
+<head>
+<meta charset="UTF-8">
+<title>쇼핑몰</title>
+</head>
+<body >
+	<main layout:fragment="content" class="container">
+		<h1>구매 완료</h1>
+		<div>구매 번호는 <span th:text="${bu_num}"></span>입니다.</div>
+	</main>
+</body>
+</html>

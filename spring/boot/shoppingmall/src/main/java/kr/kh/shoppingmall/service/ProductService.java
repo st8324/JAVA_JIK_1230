@@ -175,8 +175,9 @@ public class ProductService {
 		}
 		setBu_num(buy.getBu_num(), buy.getList());
 		productDAO.insertBuyList(buy.getList());
-		//productDAO.updateProductAmount(buy.getList());
-		System.out.println(buy);
+		for(BuyListVO bl : buy.getList()){
+			productDAO.updateProductAmount(bl);
+		}
 		return true;
 	}
 

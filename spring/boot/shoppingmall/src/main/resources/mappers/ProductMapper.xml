@@ -65,4 +65,7 @@
 			(#{item.bl_bu_num}, #{item.bl_amount}, #{item.bl_pr_code}, #{item.bl_price})
 		</foreach>
 	</insert>
+	<update id="updateProductAmount" parameterType="list">
+		update product set pr_amount = pr_amount - #{bl_amount} where pr_code = #{bl_pr_code}
+	</update>
 </mapper>

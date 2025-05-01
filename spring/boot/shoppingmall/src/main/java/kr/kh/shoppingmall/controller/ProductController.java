@@ -57,14 +57,19 @@ public class ProductController {
 	}
 
 	@PostMapping("/buy")
-	public String buy(BuyVO buy, @AuthenticationPrincipal CustomUser customUser, HttpServletRequest request) {
+	public String buy(Model model, BuyVO buy, @AuthenticationPrincipal CustomUser customUser, HttpServletRequest request) {
 		String prevUrl = request.getHeader("Referer");
 		if(productService.buy(buy, customUser)){
-			return "product/complete";
+			return "redirect:/product/buy/complete/"+buy.getBu_num();
 		}
 		//실패하면 이전 URL로
 		return "redirect:"+prevUrl;
 	}
+	@GetMapping("/buy/complete/{bu_num}")
+	public String buyComplete(@PathVariable int bu_num) {
+		return "product/complete";
+	}
+	
 	
 	
 	
