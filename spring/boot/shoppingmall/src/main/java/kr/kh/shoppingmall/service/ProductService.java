@@ -122,4 +122,25 @@ public class ProductService {
 		}
 		return null;
 	}
+
+	public boolean updateProduct(ProductVO product, MultipartFile thumb) {
+		if(product == null){
+			return false;
+		}
+		//썸네일 작업
+		try {
+			String fileName = thumb.getOriginalFilename();
+			if(thumb != null && fileName.length() != 0){
+				String suffix = getSuffix(fileName);
+				String newFileName = product.getPr_code() + suffix;
+				String thumbnail;
+				thumbnail = UploadFileUtils.uploadFile(uploadPath, newFileName, thumb.getBytes(),"product");
+				product.setPr_thumb(thumbnail);
+			}
+			return productDAO.updateProduct(product);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

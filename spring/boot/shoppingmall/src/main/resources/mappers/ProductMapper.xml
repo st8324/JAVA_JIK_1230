@@ -35,7 +35,14 @@
 			pr_title = #{pr_title}, 
 			pr_content = #{pr_content}, 
 			pr_price = #{pr_price}, 
-			pr_thumb = #{pr_thumb}, 
+			<choose>
+				<when test="pr_thumb == null">
+					pr_thumb = pr_thumb,
+				</when>
+				<otherwise>
+					pr_thumb = #{pr_thumb}, 
+				</otherwise>
+			</choose>
 			pr_amount = #{pr_amount},
 			pr_del = #{pr_del}
 		where pr_code = #{pr_code}

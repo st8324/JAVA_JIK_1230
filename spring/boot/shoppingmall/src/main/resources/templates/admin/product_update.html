@@ -27,33 +27,33 @@ layout:decorate="~{layout/admin_layout.html}">
 				<input readonly class="form-control mb-2" th:field="*{pr_ca_num}">
 			</div>
 			<div class="form-group">
-				<label for="title">제품명</label>
-				<input type="text" name="pr_title" id="title" class="form-control mb-2">
+				<label for="pr_title">제품명</label>
+				<input type="text" class="form-control mb-2" th:field="*{pr_title}">
 			</div>
 			<div class="form-group">
-				<label for="amount">수량</label>
-				<input type="text" name="pr_amount" id="amount" class="form-control mb-2" value="0">
+				<label for="pr_amount">수량</label>
+				<input type="text" class="form-control mb-2" th:field="*{pr_amount}">
 			</div>
 			<div class="form-group">
-				<label for="price">가격</label>
-				<input type="text" name="pr_price" id="price" class="form-control mb-2" value="0">
+				<label for="pr_price">가격</label>
+				<input type="text" class="form-control mb-2" th:field="*{pr_price}">
 			</div>
 			<div class="form-group">
 				<label for="thumb">썸네일</label>
 				<input type="file" name="thumb" id="thumb" class="form-control mb-2">
 			</div>
 			<div class="form-group">
-				<label for="content">제품 상세</label>
-				<textarea name="pr_content" id="content" class="form-control"></textarea>
+				<label for="pr_content">제품 상세</label>
+				<textarea class="form-control" th:field="*{pr_content}"></textarea>
 			</div>
-			<label id="content-error" class="error" for="content"></label>
-			<button class="btn btn-success col-12">제품 등록</button>
+			<label id="pr_content-error" class="error" for="pr_content"></label>
+			<button class="btn btn-success col-12">제품 수정</button>
 		</form>
 		
 		
 		<script>
 		
-      $('#content').summernote({
+      $('#pr_content').summernote({
         placeholder: '제품 상세 설명을 입력하세요.',
         tabsize: 2,
         height: 400
@@ -77,9 +77,6 @@ layout:decorate="~{layout/admin_layout.html}">
 					},
 					pr_content : {
 						summernoteCheck : true
-					},
-					thumb : {
-						required : true
 					}
 				},
 				messages : {
@@ -98,9 +95,6 @@ layout:decorate="~{layout/admin_layout.html}">
 					},
 					pr_content : {
 						summernoteCheck : "제품 설명을 입력하세요."
-					},
-					thumb : {
-						required : "썸네일을 선택하세요."
 					}
 				}
 			});
@@ -114,8 +108,13 @@ layout:decorate="~{layout/admin_layout.html}">
 			}, "값에 0이 올 수 없습니다.");
 
 			function summernoteEmpty(){
-				var content = $('#content').summernote('code');
-				return  $(content).text().trim() !== '';
+				var content = $('#pr_content').summernote('code');
+				var $content = $(content);
+				//써머노트를 이용하여 작성한 경우 tag가 포함되어 있음. tag를 제외한 순수한 텍스트를 가져옴
+				var tagContent = $content.text().trim();
+				//써머노트를 이용하지 않은 경우 tag가 포함되어 있지 않음. 순수한 텍스트를 가져옴. 처음부터 써머노트를 이용하면 필요없는 작업
+				var nonTagContent = $content.length == 0 ? content.trim() : '';
+				return   tagContent !== '' || nonTagContent !== '';
 			}
 			
     </script>
