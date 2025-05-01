@@ -18,11 +18,11 @@ layout:decorate="~{layout/layout.html}">
 				<div class="product-info col-6">
 					<h1 th:text="${product.pr_title}">제목</h1>
 					<h3 class="product-price" th:text="${#numbers.formatInteger(product.pr_price, 3, 'COMMA')} + '원'"></h3>
-					<form >
+					<form th:action="@{/product/buy}" method="post">
 						<div class="d-flex">
-							<input type="hidden" name="code" th:value="${product.pr_code}">
-							<button type="button" class="btn btn-outline-success btn-add" data-amount="-1">-</button>
-							<input type="text" class="form-control" value="0" name="amount">
+							<input type="hidden" name="list[0].bl_pr_code" th:value="${product.pr_code}">
+							<button type="button" class="btn btn-outline-success btn-add" th:data-code="${product.pr_code}" data-amount="-1">-</button>
+							<input type="text" class="form-control" value="0" name="list[0].bl_amount" id="amount">
 							<button type="button" class="btn btn-outline-success btn-add" th:data-code="${product.pr_code}" data-amount="1">+</button>
 						</div>
 						<button class="btn btn-danger col-12 mt-3">구매하기</button>
@@ -33,23 +33,26 @@ layout:decorate="~{layout/layout.html}">
 		</div>
 		<script>
 			$(".btn-add").click(function(){
-				var curAmount = $("[name=amount]").val();
+				var curAmount = $("#amount").val();
 				var amount = $(this).data("amount");
 				var code = $(this).data("code");
+				var maxAmount = getAmount(code);
+
 				curAmount = parseInt(curAmount) + parseInt(amount);
+				if(maxAmount == 0){
+					alert("품절된 상품입니다.");
+					curAmount = 0;
+				}
 				if(curAmount < 0){
 					alert("수량은 0이상입니다.");
 					curAmount = 0;
 				}
-				if(code){
-					var maxAmount = getAmount(code);;
-					if(maxAmount < curAmount){
-						alert(`재고량은 ${maxAmount}개 입니다.`);
-						curAmount = maxAmount;
-					}
+				if(maxAmount < curAmount){
+					alert(`재고량은 ${maxAmount}개 입니다.`);
+					curAmount = maxAmount;
 				}
-				
-				$("[name=amount]").val(curAmount);
+			
+				$("#amount").val(curAmount);
 			});
 			function getAmount(code){
 				var amount = 0;

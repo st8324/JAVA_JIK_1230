@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.shoppingmall.dao.ProductDAO;
+import kr.kh.shoppingmall.model.vo.BuyListVO;
+import kr.kh.shoppingmall.model.vo.BuyVO;
 import kr.kh.shoppingmall.model.vo.CategoryVO;
 import kr.kh.shoppingmall.model.vo.ProductVO;
+import kr.kh.shoppingmall.utils.CustomUser;
 import kr.kh.shoppingmall.utils.UploadFileUtils;
 
 @Service
@@ -157,5 +160,51 @@ public class ProductService {
 		}
 		dbProduct.setPr_amount(dbProduct.getPr_amount()+product.getPr_amount());
 		return productDAO.updateProduct(dbProduct);
+	}
+
+	public boolean buy(BuyVO buy, CustomUser customUser) {
+		if(customUser == null || buy == null){
+			return false;
+		}
+		int totalPrice = calclateTotalPrice(buy.getList());
+		buy.setBu_total_price(totalPrice);
+		buy.setBu_me_id(customUser.getUsername());
+		boolean res = productDAO.insertBuy(buy);
+		if(!res){
+			return false;
+		}
+		setBu_num(buy.getBu_num(), buy.getList());
+		productDAO.insertBuyList(buy.getList());
+		//productDAO.updateProductAmount(buy.getList());
+		System.out.println(buy);
+		return true;
+	}
+
+	private void setBu_num(int bu_num, List<BuyListVO> list) {
+		if(list == null || list.size() == 0){
+			return;
+		}
+		for(BuyListVO bl : list){
+			bl.setBl_bu_num(bu_num);
+		}
+	}
+
+	private int calclateTotalPrice(List<BuyListVO> list) {
+		if(list == null || list.size() == 0){
+			return 0;
+		}
+		int total = 0;
+		for(BuyListVO bl : list){
+			//제품 정보 가져옴
+			ProductVO product = productDAO.selectProduct(bl.getBl_pr_code());
+			if(product == null){
+				continue;
+			}
+			//제품 구매 가격 = 제품 가격 * 구매 수량
+			bl.setBl_price(product.getPr_price() * bl.getBl_amount());
+			//총 가격 = 총가격 + 제품 구매 가격
+			total += bl.getBl_price();
+		}
+		return total;
 	}
 }

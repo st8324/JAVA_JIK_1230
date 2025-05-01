@@ -56,4 +56,13 @@
 	<select id="selectProduct" resultType="ProductVO">
 		select * from product where pr_code = #{pr_code}
 	</select>
+	<insert id="insertBuy" useGeneratedKeys="true" keyProperty="bu_num">
+		insert into buy(bu_total_price, bu_me_id) value(#{bu_total_price}, #{bu_me_id})
+	</insert>
+	<insert id="insertBuyList" parameterType="list" useGeneratedKeys="true" keyProperty="bl_num">
+		insert into buy_list(bl_bu_num, bl_amount, bl_pr_code, bl_price) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.bl_bu_num}, #{item.bl_amount}, #{item.bl_pr_code}, #{item.bl_price})
+		</foreach>
+	</insert>
 </mapper>
