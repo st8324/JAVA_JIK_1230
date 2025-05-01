@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -38,5 +42,12 @@ public class ProductController {
 		model.addAttribute("product", product);
 		return "product/detail";
 	}
+	@PostMapping("/amount/check")
+	@ResponseBody
+	public int amountCheck(@RequestParam String code) {
+		ProductVO product = productService.getProduct(code, false);
+		return product.getPr_amount();
+	}
+	
 	
 }

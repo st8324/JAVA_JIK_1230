@@ -18,10 +18,53 @@ layout:decorate="~{layout/layout.html}">
 				<div class="product-info col-6">
 					<h1 th:text="${product.pr_title}">제목</h1>
 					<h3 class="product-price" th:text="${#numbers.formatInteger(product.pr_price, 3, 'COMMA')} + '원'"></h3>
+					<form >
+						<div class="d-flex">
+							<input type="hidden" name="code" th:value="${product.pr_code}">
+							<button type="button" class="btn btn-outline-success btn-add" data-amount="-1">-</button>
+							<input type="text" class="form-control" value="0" name="amount">
+							<button type="button" class="btn btn-outline-success btn-add" th:data-code="${product.pr_code}" data-amount="1">+</button>
+						</div>
+						<button class="btn btn-danger col-12 mt-3">구매하기</button>
+					</form>
 				</div>				
 			</div>
 			<div class="product-body my-3 " th:utext="${product.pr_content}">내용</div>
 		</div>
+		<script>
+			$(".btn-add").click(function(){
+				var curAmount = $("[name=amount]").val();
+				var amount = $(this).data("amount");
+				var code = $(this).data("code");
+				curAmount = parseInt(curAmount) + parseInt(amount);
+				if(curAmount < 0){
+					alert("수량은 0이상입니다.");
+					curAmount = 0;
+				}
+				if(code){
+					var maxAmount = getAmount(code);;
+					if(maxAmount < curAmount){
+						alert(`재고량은 ${maxAmount}개 입니다.`);
+						curAmount = maxAmount;
+					}
+				}
+				
+				$("[name=amount]").val(curAmount);
+			});
+			function getAmount(code){
+				var amount = 0;
+				$.ajax({
+					async : false,
+					url : "/product/amount/check",
+					method : "post",
+					data : { code },
+					success : function(data){
+						amount = data;
+					}
+				})
+				return amount;
+			}
+		</script>
 	</main>
 </body>
 </html>
