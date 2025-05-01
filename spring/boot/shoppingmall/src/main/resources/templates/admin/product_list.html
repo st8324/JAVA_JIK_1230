@@ -49,9 +49,10 @@ layout:decorate="~{layout/admin_layout.html}">
 					<td class="clearfix">
 						<a th:href="@{/admin/product/update/{ca_num}/{pr_code}(ca_num=${ca_num},pr_code=${product.pr_code})}" class="btn btn-warning float-left">수정</a>
 						<form th:action="@{/admin/product/delete/{ca_num}/{pr_code}(ca_num=${ca_num},pr_code=${product.pr_code})}" 
-							method="post" class="float-right">
+							method="post" class="float-left ml-2">
 							<button class="btn btn-danger">삭제</button>
 						</form>
+						<button class="float-left btn btn-dark ml-2 btn-add" th:data-code="${product.pr_code}">입고</button>
 					</td>
 				</tr>
 				<tr th:if="${productList.size() == 0}">
@@ -59,6 +60,45 @@ layout:decorate="~{layout/admin_layout.html}">
 				</tr>
 			</tbody>
 		</table>
+		<script>
+			$(".btn-add").click(function(){
+
+				var	amount = parseInt(prompt("입고 수량을 입력하세요."));
+
+				if(isNaN(amount)){
+					alert("숫자만 입력하세요.");
+					return;
+				}
+				var code = $(this).data("code");
+				if(amount < 0){
+					alert("입고 수량은 0이상이어야 합니다.")
+					return;
+				}
+				console.log({
+						pr_code : code,
+						pr_amount : amount
+					})
+				$.ajax({
+					async : true,
+					url : "/admin/product/amount",
+					method : "post",
+					data : JSON.stringify({
+						pr_code : code,
+						pr_amount : amount
+					}),
+					contentType : "application/json; charset=utf-8",
+					success : function(data){
+						if(data){
+							alert("입고했습니다.");
+							location.reload();
+						}
+						else{
+							alert("입고에 실패했습니다.");
+						}
+					}
+				})
+			})
+		</script>
 	</main>
 </body>
 </html>

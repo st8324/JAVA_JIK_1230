@@ -24,14 +24,16 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-		http.authorizeHttpRequests(
-			requests->
-				requests
-					.requestMatchers("/admin/**")
-					.hasAnyAuthority(UserRole.ADMIN.name()) //권한이 ADMIN인 회원
-					//.hasAnyRole(UserRole.ADMIN.name()) //권한이 ROLE_ADMIN인 회원
-					.anyRequest()
-					.permitAll()
+		http
+			.csrf(csrf->csrf.disable())
+			.authorizeHttpRequests(
+				requests->
+					requests
+						.requestMatchers("/admin/**")
+						.hasAnyAuthority(UserRole.ADMIN.name()) //권한이 ADMIN인 회원
+						//.hasAnyRole(UserRole.ADMIN.name()) //권한이 ROLE_ADMIN인 회원
+						.anyRequest()
+						.permitAll()
 			)
 			.formLogin(form -> 
 				form

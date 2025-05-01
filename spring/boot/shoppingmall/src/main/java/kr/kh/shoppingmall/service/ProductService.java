@@ -143,4 +143,19 @@ public class ProductService {
 			return false;
 		}
 	}
+
+	public boolean updateAmount(ProductVO product) {
+		if(product == null){
+			return false;
+		}
+		ProductVO dbProduct = productDAO.selectProduct(product.getPr_code());
+		if(dbProduct == null){
+			return false;
+		}
+		if(product.getPr_amount() < 0 ){
+			return false;
+		}
+		dbProduct.setPr_amount(dbProduct.getPr_amount()+product.getPr_amount());
+		return productDAO.updateProduct(dbProduct);
+	}
 }
