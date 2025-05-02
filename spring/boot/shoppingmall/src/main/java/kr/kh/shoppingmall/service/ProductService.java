@@ -238,4 +238,11 @@ public class ProductService {
 		dbCart.setCt_amount(cart.getCt_amount());
 		return productDAO.updateCart(dbCart);
 	}
+
+	public List<CartVO> getCartList(CustomUser customUser) {
+		if(customUser == null){
+			return null;
+		}
+		return productDAO.selectCartList(customUser.getUsername());
+	}
 }

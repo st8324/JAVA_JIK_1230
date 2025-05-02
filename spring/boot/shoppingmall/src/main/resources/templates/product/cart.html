@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/layout.html}">
+<head>
+<meta charset="UTF-8">
+<title>쇼핑몰</title>
+</head>
+<body >
+	<main layout:fragment="content" class="container">
+		<h1>장바구니</h1>
+		<table class="table table-hover" >
+			<tbody>
+				<tr th:each="cart : ${cartList}">
+					<th>
+						<input type="checkbox" class="ct_check">
+					</th>
+					<th>
+						<img th:src="@{/file/{path}(path=${cart.product.pr_thumb})}" alt="이미지 없음" width="80" height="80">
+					</th>
+					<th>[[${cart.product.pr_title}]]</th>
+					<th>
+						<button>-</button>
+						<input type="text">
+						<button>+</button>
+					</th>
+					<th>
+						[[${#numbers.formatInteger(cart.product.pr_price * cart.ct_amount, 3, 'COMMA')}]]원
+					</th>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+				
+				</tr>
+			</tfoot>
+		</table>
+
+	</main>
+</body>
+</html>

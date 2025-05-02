@@ -49,5 +49,7 @@ public interface ProductDAO {
 	boolean insertCart(CartVO cart);
 
 	boolean updateCart(CartVO cart);
+
+	List<CartVO> selectCartList(String ct_me_id);
 	
 }

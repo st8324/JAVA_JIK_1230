@@ -18,7 +18,13 @@
 			<collection property="product" ofType="ProductVO" select="selectProduct" column="bl_pr_code" />
 		</collection>
 	</resultMap>
-
+	<resultMap id="CartMap" type="CartVO">
+		<id property="ct_num" column="ct_num" />
+		<result property="ct_amount" column="ct_amount" />
+		<result property="ct_me_id" column="ct_me_id" />
+		<result property="ct_pr_code" column="ct_pr_code" />
+		<collection property="product" ofType="ProductVO" select="selectProduct" column="ct_pr_code" />
+	</resultMap>
   <select id="selectCategoryList" resultType="CategoryVO">
 		select * from category order by ca_name
 	</select>
@@ -105,4 +111,9 @@
 	<update id="updateCart">
 		update cart set ct_amount = #{ct_amount} where ct_num = #{ct_num}
 	</update>
+	<select id="selectCartList" resultMap="CartMap">
+		select * from cart 
+		join product on ct_pr_code = pr_code
+		where ct_me_id = #{ct_me_id}
+	</select>
 </mapper>

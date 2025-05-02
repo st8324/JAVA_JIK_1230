@@ -81,6 +81,13 @@ public class ProductController {
 	public boolean cartInsert(@RequestBody CartVO cart, @AuthenticationPrincipal CustomUser customUser) {
 		return productService.insertCart(cart, customUser);
 	}
+	@GetMapping("/cart")
+	public String cart(Model model, @AuthenticationPrincipal CustomUser customUser) {
+		List<CartVO> cartList = productService.getCartList(customUser);
+		System.out.println(cartList);
+		model.addAttribute("cartList", cartList);
+		return "product/cart";
+	}
 	
 	
 }
