@@ -25,13 +25,61 @@ layout:decorate="~{layout/layout.html}">
 							<input type="text" class="form-control" value="0" name="list[0].bl_amount" id="amount">
 							<button type="button" class="btn btn-outline-success btn-add" th:data-code="${product.pr_code}" data-amount="1">+</button>
 						</div>
-						<button class="btn btn-danger col-12 mt-3">구매하기</button>
+						<div class="input-group">
+							<div class="col-6 pr-1 pl-0">
+								<button class="btn btn-danger col-12 mt-3">구매하기</button>
+							</div>
+							<div class="col-6 pl-1 pr-0">
+								<button class="btn btn-warning col-12 mt-3 btn-cart" type="button">장바구니</button>
+							</div>
+						</div>
 					</form>
 				</div>				
 			</div>
 			<div class="product-body my-3 " th:utext="${product.pr_content}">내용</div>
 		</div>
 		<script th:inline="javascript">
+			$(".btn-cart").click(function(){
+				let code = [[${product.pr_code}]];
+				let maxAmount = getAmount(code);
+				let amount = $("#amount").val();
+
+				if([[${#authentication.principal == 'anonymousUser'}]]){
+					alert("로그인이 필요한 서비스입니다.");
+					return;
+				}
+
+				if(maxAmount == 0){
+					alert("품절된 상품입니다.");
+					return;
+				}
+				if(amount == 0){
+					alert("장바구니에 담으려면 수량은 1이상이어야 합니다.");
+					return;
+				}
+				$.ajax({
+					async : false,
+					url : "/product/cart/insert",
+					method : "post",
+					contentType : "application/json; charset=utf-8",
+					data : JSON.stringify({
+						ct_pr_code : code,
+						ct_amount : amount
+					}),
+					success : function(data){
+						if(data){
+							if(confirm("장바구니에 담았습니다.\n장바구니 페이지로 이동하시겠습니까?")){
+								location.href = "/product/cart";
+							}
+						}
+						else{
+							alert("장바구니 담기에 실패했습니다.");
+						}
+					}
+				})
+			})
+
+
 			$("#buyForm").submit(function(e){
 				e.preventDefault();
 				if([[${#authentication.principal == 'anonymousUser'}]]){

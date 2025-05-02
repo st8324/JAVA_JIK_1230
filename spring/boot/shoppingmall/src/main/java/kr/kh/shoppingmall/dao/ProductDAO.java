@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.shoppingmall.model.vo.BuyListVO;
 import kr.kh.shoppingmall.model.vo.BuyVO;
+import kr.kh.shoppingmall.model.vo.CartVO;
 import kr.kh.shoppingmall.model.vo.CategoryVO;
 import kr.kh.shoppingmall.model.vo.ProductVO;
 
@@ -42,5 +43,11 @@ public interface ProductDAO {
 	List<BuyVO> selectBuyList(String bu_me_id);
 
 	boolean updateBuy(int bu_num, String bu_me_id);
+
+	CartVO selectCart(CartVO cart);
+
+	boolean insertCart(CartVO cart);
+
+	boolean updateCart(CartVO cart);
 	
 }

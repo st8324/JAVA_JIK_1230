@@ -95,6 +95,14 @@
 	<update id="updateBuy">
 		update buy set bu_state = "구매확정", bu_final_date = now()
 		where bu_num = #{bu_num} and bu_me_id = #{bu_me_id}
-
+	</update>
+	<select id="selectCart" resultType="CartVO">
+		select * from cart where ct_me_id = #{ct_me_id} and ct_pr_code = #{ct_pr_code}
+	</select>
+	<insert id="insertCart">
+		insert into cart(ct_me_id, ct_pr_code, ct_amount) value(#{ct_me_id}, #{ct_pr_code}, #{ct_amount})
+	</insert>
+	<update id="updateCart">
+		update cart set ct_amount = #{ct_amount} where ct_num = #{ct_num}
 	</update>
 </mapper>
