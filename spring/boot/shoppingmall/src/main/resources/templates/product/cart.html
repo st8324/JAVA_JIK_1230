@@ -13,34 +13,49 @@ layout:decorate="~{layout/layout.html}">
 		<label>
 			<input type="checkbox" id="all" checked> 전체 선택
 		</label>
-		<table class="table table-hover" >
-			<tbody>
-				<tr th:each="cart : ${cartList}">
-					<th>
-						<input type="checkbox" class="ct-check" checked th:value="${cart.ct_pr_code}">
-					</th>
-					<th>
-						<img th:src="@{/file/{path}(path=${cart.product.pr_thumb})}" alt="이미지 없음" width="80" height="80">
-					</th>
-					<th>[[${cart.product.pr_title}]]</th>
-					<th class="d-flex">
-						<button class="btn btn-success rounded-circle btn-add" data-state="-1">-</button>
-						<input type="text" style="width: 50px;" th:value="${cart.ct_amount}" class="ct-amount" th:data-price="${cart.product.pr_price}">
-						<button class="btn btn-success rounded-circle btn-add" data-state="1">+</button>
-					</th>
-					<th class="ct-price" th:data-price="${cart.product.pr_price * cart.ct_amount}">
-						[[${#numbers.formatInteger(cart.product.pr_price * cart.ct_amount, 3, 'COMMA')}]]원
-					</th>
-				</tr>
-			</tbody>
-			<tfoot>
-				<tr>
-					<th colspan="4">총 주문 금액</th>
-					<th class="total-price"></th>
-				</tr>
-			</tfoot>
-		</table>
+		<form th:action="@{/product/buy}" method="post" id="buyForm">
+			<table class="table table-hover" >
+				<tbody>
+					<tr th:each="cart : ${cartList}">
+						<th>
+							<input type="checkbox" class="ct-check" checked th:value="${cart.ct_pr_code}">
+						</th>
+						<th>
+							<img th:src="@{/file/{path}(path=${cart.product.pr_thumb})}" alt="이미지 없음" width="80" height="80">
+						</th>
+						<th>[[${cart.product.pr_title}]]</th>
+						<th class="d-flex">
+							<button class="btn btn-success rounded-circle btn-add" data-state="-1">-</button>
+							<input type="text" style="width: 50px;" th:value="${cart.ct_amount}" class="ct-amount" th:data-price="${cart.product.pr_price}">
+							<button class="btn btn-success rounded-circle btn-add" data-state="1">+</button>
+						</th>
+						<th class="ct-price" th:data-price="${cart.product.pr_price * cart.ct_amount}">
+							[[${#numbers.formatInteger(cart.product.pr_price * cart.ct_amount, 3, 'COMMA')}]]원
+						</th>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th colspan="4">총 주문 금액</th>
+						<th class="total-price"></th>
+					</tr>
+				</tfoot>
+			</table>
+			<button class="btn btn-danger">구매하기</button>
+		</form>
 		<script>
+			$("#buyForm").submit(function(e){
+				
+				setNames();
+			})
+
+			function setNames(){
+				$(".ct-check:checked").each(function(index){
+					$(this).parents("tr").find(".ct-amount").attr("name", `list[${index}].bl_amount`);
+					$(this).attr("name",`list[${index}].bl_pr_code`);
+				})
+			}
+
 			getTotalPrice();
 			//선택한 제품들의 전체 금액을 계산하는 함수
 			function getTotalPrice(){

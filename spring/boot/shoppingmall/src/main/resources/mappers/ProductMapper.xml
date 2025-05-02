@@ -116,4 +116,7 @@
 		join product on ct_pr_code = pr_code
 		where ct_me_id = #{ct_me_id}
 	</select>
+	<delete id="deleteCart">
+		delete from cart where ct_me_id = #{me_id} and ct_pr_code = #{ct_pr_code}
+	</delete>
 </mapper>

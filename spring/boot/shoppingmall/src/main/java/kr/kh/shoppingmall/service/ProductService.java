@@ -177,8 +177,12 @@ public class ProductService {
 		setBu_num(buy.getBu_num(), buy.getList());
 		productDAO.insertBuyList(buy.getList());
 		for(BuyListVO bl : buy.getList()){
+			//수량 업데이트
 			productDAO.updateProductAmount(bl);
+			//장바구니에 있는 제품들은 제거 
+			productDAO.deleteCart(bl.getBl_pr_code(), buy.getBu_me_id());
 		}
+
 		return true;
 	}
 
