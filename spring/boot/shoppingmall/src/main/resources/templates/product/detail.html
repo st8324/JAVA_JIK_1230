@@ -33,6 +33,7 @@ layout:decorate="~{layout/layout.html}">
 		</div>
 		<script th:inline="javascript">
 			$("#buyForm").submit(function(e){
+				e.preventDefault();
 				if([[${#authentication.principal == 'anonymousUser'}]]){
 					alert("로그인이 필요한 서비스입니다.");
 					return false;

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/layout.html}">
+<head>
+<meta charset="UTF-8">
+<title>쇼핑몰</title>
+</head>
+<body >
+	<main layout:fragment="content" class="container">
+		<h1>마이 페이지</h1>
+		<div th:each="buy : ${buyList}" class="mb-3">
+			<div class="input-group">
+				<div class="form-control col-9">구매일 : [[${#dates.format(buy.bu_date, 'yyyy-MM-dd HH:mm:ss')}]]</div>
+				<div class="form-control col-3">[[${buy.bu_state}]]</div>
+			</div>
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>코드</th>
+						<th>분류</th>
+						<th>썸네일</th>
+						<th>제품명</th>
+						<th>가격</th>
+						<th>수량</th>
+						<th>총 가격</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="bl : ${buy.list}">
+						<td th:text="${bl.bl_pr_code}"></td>
+						<td th:text="${bl.product.pr_ca_num}"></td>
+						<td>
+							<img th:src="'/file/'+${bl.product.pr_thumb}" alt="이미지 없음" height="50" width="50">
+						</td>
+						<td th:text="${bl.product.pr_title}"></td>
+						<td th:text="${#numbers.formatInteger(bl.product.pr_price, 3, 'COMMA')} + '원'"></td>
+						<td th:text="${bl.bl_amount}"></td>
+						<td th:if="${bl.bl_price!=0}" th:text="${#numbers.formatInteger(bl.bl_price, 3, 'COMMA')} + '원'"></td>
+						<td th:unless="${bl.bl_price!=0}">0원</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="6" class="text-center">합 계</td>
+						<td th:if="${buy.bu_total_price!=0}">[[${#numbers.formatInteger(buy.bu_total_price, 3, 'COMMA')}]]원</td>
+						<td th:unless="${buy.bu_total_price!=0}">0원</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		
+	</main>
+</body>
+</html>

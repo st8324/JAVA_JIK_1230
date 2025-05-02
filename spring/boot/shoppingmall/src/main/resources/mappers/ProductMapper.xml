@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.shoppingmall.dao.ProductDAO">
+
+	<resultMap id="BuyMap" type="BuyVO">
+		<id property="bu_num" column="bu_num" />
+		<result property="bu_date" column="bu_date" />
+		<result property="bu_state" column="bu_state" />
+		<result property="bu_total_price" column="bu_total_price" />
+		<result property="bu_final_date" column="bu_final_date" />
+		<result property="bu_me_id" column="bu_me_id" />
+		<collection property="list" ofType="BuyListVO" >
+			<id property="bl_num" column="bl_num"/>
+			<result property="bl_amount" column="bl_amount" />
+			<result property="bl_price" column="bl_price" />
+			<result property="bl_bu_num" column="bl_bu_num" />
+			<result property="bl_pr_code" column="bl_pr_code" />
+			<collection property="product" ofType="ProductVO" select="selectProduct" column="bl_pr_code" />
+		</collection>
+	</resultMap>
+
   <select id="selectCategoryList" resultType="CategoryVO">
 		select * from category order by ca_name
 	</select>
@@ -68,4 +86,10 @@
 	<update id="updateProductAmount" parameterType="list">
 		update product set pr_amount = pr_amount - #{bl_amount} where pr_code = #{bl_pr_code}
 	</update>
+	<select id="selectBuyList" resultMap="BuyMap">
+		select * from buy 
+		join buy_list on bu_num = bl_bu_num
+		where bu_me_id = #{bu_me_id} 
+		order by bu_num desc
+	</select>
 </mapper>

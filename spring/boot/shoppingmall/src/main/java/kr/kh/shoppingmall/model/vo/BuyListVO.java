@@ -9,4 +9,5 @@ public class BuyListVO {
 	int bl_price;
 	int bl_bu_num;
 	String bl_pr_code;
+	ProductVO product;
 }
