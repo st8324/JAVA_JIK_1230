@@ -11,9 +11,12 @@ layout:decorate="~{layout/layout.html}">
 	<main layout:fragment="content" class="container">
 		<h1>마이 페이지</h1>
 		<div th:each="buy : ${buyList}" class="mb-3">
-			<div class="input-group">
-				<div class="form-control col-9">구매일 : [[${#dates.format(buy.bu_date, 'yyyy-MM-dd HH:mm:ss')}]]</div>
-				<div class="form-control col-3">[[${buy.bu_state}]]</div>
+			<div class="input-group" >
+				<div class="form-control col-9" >구매일 : [[${#dates.format(buy.bu_date, 'yyyy-MM-dd HH:mm:ss')}]]</div>
+				<div class="form-control col-3 p-0" >
+					<button class="btn btn-success col-12 btn-complete" th:if="${buy.bu_state == '구매'}" th:data-num="${buy.bu_num}">구매 확정 하기</button>
+					<span th:if="${buy.bu_state != '구매'}">[[${buy.bu_state}]]</span>
+				</div>
 			</div>
 			<table class="table table-bordered table-hover">
 				<thead>
@@ -50,7 +53,27 @@ layout:decorate="~{layout/layout.html}">
 				</tfoot>
 			</table>
 		</div>
-		
+		<script>
+			$(".btn-complete").click(function(){
+				let $this = $(this);
+				let num = $this.data("num");
+				$.ajax({
+					async: true,
+					url : "/product/final/complete",
+					method : "post",
+					data : {num},
+					success : function(data){
+						if(data){
+							alert("구매 확정했습니다.");
+							$this.after("<span>구매확정</span>")
+							$this.remove();
+						}else{
+							alert("시스템 오류입니다. 고객 센터에 문의하세요.");
+						}
+					}
+				})
+			})
+		</script>
 	</main>
 </body>
 </html>

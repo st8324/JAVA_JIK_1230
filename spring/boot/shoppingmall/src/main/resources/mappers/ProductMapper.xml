@@ -92,4 +92,9 @@
 		where bu_me_id = #{bu_me_id} 
 		order by bu_num desc
 	</select>
+	<update id="updateBuy">
+		update buy set bu_state = "구매확정", bu_final_date = now()
+		where bu_num = #{bu_num} and bu_me_id = #{bu_me_id}
+
+	</update>
 </mapper>

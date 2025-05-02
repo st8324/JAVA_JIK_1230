@@ -69,6 +69,11 @@ public class ProductController {
 	public String buyComplete(@PathVariable int bu_num) {
 		return "product/complete";
 	}
+	@PostMapping("/final/complete")
+	@ResponseBody
+	public boolean productFinalComplete(@RequestParam int num, @AuthenticationPrincipal CustomUser customUser) {
+		return productService.updateBuy(num, customUser);
+	}
 	
 	
 	

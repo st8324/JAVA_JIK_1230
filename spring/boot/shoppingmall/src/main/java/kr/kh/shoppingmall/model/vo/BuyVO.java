@@ -11,7 +11,7 @@ public class BuyVO {
 	Date bu_date;
 	String bu_state;
 	int bu_total_price;
-	Date bu_final_Date;
+	Date bu_final_date;
 	String bu_me_id;
 	List<BuyListVO> list;
 
