@@ -88,6 +88,11 @@ public class ProductController {
 		model.addAttribute("cartList", cartList);
 		return "product/cart";
 	}
+	@PostMapping("/cart/update")
+	@ResponseBody
+	public String cartUPdate(@RequestBody CartVO cart, @AuthenticationPrincipal CustomUser customUser) {
+		return productService.updateCart(cart, customUser);
+	}
 	
 	
 }

@@ -10,33 +10,116 @@ layout:decorate="~{layout/layout.html}">
 <body >
 	<main layout:fragment="content" class="container">
 		<h1>장바구니</h1>
+		<label>
+			<input type="checkbox" id="all" checked> 전체 선택
+		</label>
 		<table class="table table-hover" >
 			<tbody>
 				<tr th:each="cart : ${cartList}">
 					<th>
-						<input type="checkbox" class="ct_check">
+						<input type="checkbox" class="ct-check" checked th:value="${cart.ct_pr_code}">
 					</th>
 					<th>
 						<img th:src="@{/file/{path}(path=${cart.product.pr_thumb})}" alt="이미지 없음" width="80" height="80">
 					</th>
 					<th>[[${cart.product.pr_title}]]</th>
-					<th>
-						<button>-</button>
-						<input type="text">
-						<button>+</button>
+					<th class="d-flex">
+						<button class="btn btn-success rounded-circle btn-add" data-state="-1">-</button>
+						<input type="text" style="width: 50px;" th:value="${cart.ct_amount}" class="ct-amount" th:data-price="${cart.product.pr_price}">
+						<button class="btn btn-success rounded-circle btn-add" data-state="1">+</button>
 					</th>
-					<th>
+					<th class="ct-price" th:data-price="${cart.product.pr_price * cart.ct_amount}">
 						[[${#numbers.formatInteger(cart.product.pr_price * cart.ct_amount, 3, 'COMMA')}]]원
 					</th>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-				
+					<th colspan="4">총 주문 금액</th>
+					<th class="total-price"></th>
 				</tr>
 			</tfoot>
 		</table>
+		<script>
+			getTotalPrice();
+			//선택한 제품들의 전체 금액을 계산하는 함수
+			function getTotalPrice(){
+				var total = 0;
+				$(".ct-check:checked").each(function(){
+					var $price = $(this).parents("tr").find(".ct-price");
+					var price = $price.data("price");
+					total += price;
+				})
+				$(".total-price").text(`${total.toLocaleString()}원`);
+			}
+			$(".ct-check").change(function(){
+				getTotalPrice();
+				if($('.ct-check:not(:checked)').length != 0){
+					$("#all").prop("checked", false);
+				}else{
+					$("#all").prop("checked", true);
+				}
+			})
+			$("#all").change(function(){
+				let state = $(this).is(":checked");
+				$(".ct-check").prop("checked", state);
+				getTotalPrice();
+			})
+			$(".btn-add").click(function(){
+				let obj = getBuyListObject($(this).parents("tr"));
+				let amount = parseInt(obj.bl_amount);
+				let state = parseInt($(this).data("state"));
+				amount += state;
+				if(amount <= 0){
+					alert("최소 1개이상은 선택해야 합니다.")
+					 return;
+				}
+				let $this = $(this);
+				$.ajax({
+					async : false,
+					url : "/product/cart/update",
+					method : "post",
+					contentType : "application/json; charset=utf-8",
+					data : JSON.stringify({
+						ct_pr_code : obj.bl_pr_code,
+						ct_amount : amount
+					}),
+					success : function(data){
+						let res = parseInt(data);
+						console.log(res)
+						if(isNaN(res)){
+							alert(data);
+						}else{
+							if(res < amount){
+								alert(`현재 재고량은 ${res}개 입니다.`);
+							}
+							$this.siblings("input").val(res);
+							calculateTotalPrice($this);
+							getTotalPrice();
+						}
+					}
+				})
+			})
+			function calculateTotalPrice(obj){
+				let $tr = obj.parents("tr");
+				let $total = $tr.find(".ct-price");
+				let pr_price = obj.siblings("input").data("price");
+				let ct_amount = obj.siblings("input").val();
+				let totalPrice = parseInt(pr_price) * ct_amount;
+				
+				$total.data("price", totalPrice);
+				
+			}
 
+			function getBuyListObject($tr){
+				let bl_pr_code = $tr.find(".ct-check").val();
+				let bl_amount = $tr.find(".ct-amount").val();;
+				return {
+					bl_pr_code,
+					bl_amount
+				}
+			}
+		</script>
 	</main>
 </body>
 </html>

@@ -245,4 +245,24 @@ public class ProductService {
 		}
 		return productDAO.selectCartList(customUser.getUsername());
 	}
+
+	public String updateCart(CartVO cart, CustomUser customUser) {
+		if(cart == null || customUser == null){
+			return "장바구니 변경에 실패했습니다.";
+		}
+		String id = customUser.getUsername();
+		cart.setCt_me_id(id);
+		CartVO dbCart = productDAO.selectCart(cart);
+		//수량 체크를 위해
+		ProductVO product = productDAO.selectProduct(cart.getCt_pr_code());
+		//제고량이 적은 경우
+		if(product.getPr_amount() < cart.getCt_amount()){
+			return "" + product.getPr_amount();
+		}
+		dbCart.setCt_amount(cart.getCt_amount());
+		if(productDAO.updateCart(dbCart)){
+			return ""+dbCart.getCt_amount();
+		}
+		return "제고량 수정에 실패했습니다.";
+	}
 }
