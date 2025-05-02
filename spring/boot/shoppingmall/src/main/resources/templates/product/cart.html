@@ -25,9 +25,9 @@ layout:decorate="~{layout/layout.html}">
 						</th>
 						<th>[[${cart.product.pr_title}]]</th>
 						<th class="d-flex">
-							<button class="btn btn-success rounded-circle btn-add" data-state="-1">-</button>
+							<button class="btn btn-success rounded-circle btn-add" data-state="-1" type="button">-</button>
 							<input type="text" style="width: 50px;" th:value="${cart.ct_amount}" class="ct-amount" th:data-price="${cart.product.pr_price}">
-							<button class="btn btn-success rounded-circle btn-add" data-state="1">+</button>
+							<button class="btn btn-success rounded-circle btn-add" data-state="1" type="button">+</button>
 						</th>
 						<th class="ct-price" th:data-price="${cart.product.pr_price * cart.ct_amount}">
 							[[${#numbers.formatInteger(cart.product.pr_price * cart.ct_amount, 3, 'COMMA')}]]원
