@@ -18,7 +18,7 @@ layout:decorate="~{layout/layout.html}">
 				<div class="product-info col-6">
 					<h1 th:text="${product.pr_title}">제목</h1>
 					<h3 class="product-price" th:text="${#numbers.formatInteger(product.pr_price, 3, 'COMMA')} + '원'"></h3>
-					<form th:action="@{/product/buy}" method="post">
+					<form th:action="@{/product/buy}" method="post" id="buyForm">
 						<div class="d-flex">
 							<input type="hidden" name="list[0].bl_pr_code" th:value="${product.pr_code}">
 							<button type="button" class="btn btn-outline-success btn-add" th:data-code="${product.pr_code}" data-amount="-1">-</button>
@@ -31,7 +31,17 @@ layout:decorate="~{layout/layout.html}">
 			</div>
 			<div class="product-body my-3 " th:utext="${product.pr_content}">내용</div>
 		</div>
-		<script>
+		<script th:inline="javascript">
+			$("#buyForm").submit(function(e){
+				if([[${#authentication.principal == 'anonymousUser'}]]){
+					alert("로그인이 필요한 서비스입니다.");
+					return false;
+				}
+				if($("#amount").val() == 0){
+					alert("구매하려면 수량은 1이상이어야 합니다.");
+					return false;
+				}
+			})
 			$(".btn-add").click(function(){
 				var curAmount = $("#amount").val();
 				var amount = $(this).data("amount");
